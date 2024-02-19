@@ -1,2 +1,2 @@
-# ShineBlazorComponents
-A blazor components library
+# Shine Blazor UI
+A blazor components library.
