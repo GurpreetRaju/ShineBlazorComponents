@@ -1,0 +1,32 @@
+@using Shine.Components.Common;
+
+@inherits ListItem<Carousel>
+
+<div @key="Id" class="@CssClasses" style="@CssStyles">
+    @ChildContent
+    @if (!string.IsNullOrWhiteSpace(Caption))
+    {
+        <div class="w3-display-bottomleft w3-container w3-padding-16 w3-black">
+            @Caption
+        </div>
+    }
+</div>
+
+@code {
+    /// <summary>
+    /// Caption for the slide.
+    /// </summary>
+    [Parameter]
+    public string Caption { get; set; }
+
+    /// <inheritdoc/>
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Hide();
+    }
+
+    /// <inheritdoc/>
+    protected override string CssClasses => JoinClasses(IsVisibile ? "w3-show" : "w3-hide", base.CssClasses);
+}

@@ -1,0 +1,85 @@
+﻿
+@inherits ShineComponentBase
+
+<div class="@CssClasses" style="@CssStyles">
+    @if (Header != null)
+    {
+        <header class="w3-container w3-blue">
+            @Header
+        </header>
+    }
+    @if (!string.IsNullOrWhiteSpace(ImageSource))
+    {
+        <div class="w3-display-container @ImageContainerClasses">
+            <img src="@ImageSource" alt="@ImageAltText">
+            @if (!string.IsNullOrWhiteSpace(ImageCaption))
+            {
+                <div class="w3-xlarge w3-display-bottomleft w3-padding">
+                    @ImageCaption
+                </div>
+            }
+        </div>
+    }
+    @if (Body != null)
+    {
+        <div class="w3-container">
+            @Body
+        </div>
+    }
+    @if (Footer != null)
+    {
+        <footer class="w3-container w3-blue">
+            @Footer    
+        </footer>
+    }
+</div>
+
+@code {
+
+    /// <summary>
+    /// Header content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment Header { get; set; }
+
+    /// <summary>
+    /// Body content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment Body { get; set; }
+
+    /// <summary>
+    /// Footer content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment Footer { get; set; }
+
+    /// <summary>
+    /// Image source.
+    /// </summary>
+    [Parameter]
+    public string ImageSource { get; set; }
+
+    /// <summary>
+    /// Image alt text.
+    /// </summary>
+    [Parameter]
+    public string ImageAltText { get; set; }
+
+    /// <summary>
+    /// Image caption.
+    /// </summary>
+    [Parameter]
+    public string ImageCaption { get; set; }
+
+    /// <summary>
+    /// Classes to add to the Image container..
+    /// </summary>
+    [Parameter]
+    public string ImageContainerClasses { get; set; }
+
+    /// <summary>
+    /// CSS classes for the component including classes extracted from the class attribute added to the component.
+    /// </summary>
+    protected override string CssClasses => JoinClasses("w3-panel w3-card", base.CssClasses);
+}

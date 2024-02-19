@@ -1,0 +1,31 @@
+
+@inherits ShineComponentBase
+
+<a href="@Url" class="@CssClasses" style="@CssStyles">
+    @ChildContent
+</a>
+
+@code {
+
+    /// <summary>
+    /// Child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Navigation url.
+    /// </summary>
+    [Parameter]
+    public string Url { get; set; }
+
+    /// <summary>
+    /// Whether the navigation bar orientation is vertical.
+    /// </summary>
+    [Parameter]
+    public bool IsVertical { get; set; }
+
+    /// <inheritdoc/>
+    protected override string CssClasses => JoinClasses(IsVertical ? "w3-bar-block" : "w3-bar", base.CssClasses);
+
+}

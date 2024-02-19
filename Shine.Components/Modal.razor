@@ -1,0 +1,88 @@
+
+@inherits ShineComponentBase
+
+<button @onclick="Show" class="w3-button">@TriggerText</button>
+
+@if (m_show)
+{
+    <div id="@Id" class="@CssClasses" style="@CssStyles">
+        <div class="w3-modal-content w3-animate-top w3-card-4">
+            <header class="w3-container w3-padding">
+                <i @onclick="Hide" class="material-icons w3-right">close</i>
+                @if (string.IsNullOrEmpty(HeaderText))
+                {
+                    @Header
+                }
+                else
+                {
+                    <h2>@HeaderText</h2>
+                }
+            </header>
+            <div class="w3-container">
+                @Body
+            </div>
+            @if (Footer != null)
+            {
+                <footer class="w3-container">
+                    @Footer
+                </footer>
+            }
+        </div>
+    </div>
+}
+
+@code {
+
+    private readonly Guid Id = Guid.NewGuid();
+    private bool m_show = false;
+
+    /// <summary>
+    /// Trigger text.
+    /// </summary>
+    [Parameter]
+    public string TriggerText { get; set; }
+
+    /// <summary>
+    /// Header text.
+    /// </summary>
+    [Parameter]
+    public string HeaderText { get; set; }
+
+    /// <summary>
+    /// Header.
+    /// </summary>
+    [Parameter]
+    public RenderFragment Header { get; set; }
+
+    /// <summary>
+    /// Child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment Body { get; set; }
+
+    /// <summary>
+    /// Child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment Footer { get; set; }
+
+    /// <summary>
+    /// Show the modal.
+    /// </summary>
+    protected async Task Show()
+    {
+        m_show = true;
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    /// <summary>
+    /// Hide the modal.
+    /// </summary>
+    protected async Task Hide()
+    {
+        m_show = false;
+
+        await InvokeAsync(StateHasChanged);
+    }
+}

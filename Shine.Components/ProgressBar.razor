@@ -1,0 +1,57 @@
+@inherits ShineComponentBase
+
+<div class="@CssClasses" style="@CssStyles">
+    <div class="w3-container w3-padding w3-green" style="@BarWidthStyle">
+        @if (ShowProgress)
+        {
+            @progress
+        }
+        @ChildContent
+    </div>
+</div>
+
+@code{
+
+    private int progress;
+
+    /// <summary>
+    /// The progress value.
+    /// </summary>
+    [Parameter]
+    public int ProgressValue { get; set; }
+
+    /// <summary>
+    /// The max value. Default: 100.
+    /// </summary>
+    [Parameter]
+    public int MaxValue { get; set; } = 100;
+
+    /// <summary>
+    /// Whether to show the progress on the bar.
+    /// </summary>
+    [Parameter]
+    public bool ShowProgress { get; set; }
+
+    /// <summary>
+    /// The child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent{ get; set; }
+
+    /// <inheritdoc/>
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        var max = Math.Max(MaxValue, ProgressValue);
+        progress = (max / MaxValue) * 100;
+    }
+
+    /// <inheritdoc/>
+    protected override string CssClasses => JoinClasses("w3-light-grey", base.CssClasses);
+
+    /// <summary>
+    /// Bar width style.
+    /// </summary>
+    private string BarWidthStyle => $"width:{progress}%";
+}

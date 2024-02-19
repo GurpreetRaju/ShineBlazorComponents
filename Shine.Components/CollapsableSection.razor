@@ -1,0 +1,41 @@
+@inherits ShineComponentBase
+
+<div class="@CssClasses">
+    <div @onclick="ToggleState" class="w3-block w3-padding">
+        @HeaderContent
+    </div>
+
+    <div class="@JoinClasses("w3-block w3-padding", m_state ? "w3-show" : "w3-hide")">
+        @ChildContent
+    </div>
+</div>
+
+@code{
+
+    private bool m_state;
+
+    /// <summary>
+    /// Trigger content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment HeaderContent { get; set; }
+
+    /// <summary>
+    /// Trigger content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Css classes.
+    /// </summary>
+    protected override string CssClasses => JoinClasses("w3-block", base.CssClasses);
+
+    /// <summary>
+    /// Toggle the section content display state.
+    /// </summary>
+    private void ToggleState()
+    {
+        m_state = !m_state;
+    }
+}

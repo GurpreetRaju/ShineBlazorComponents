@@ -1,0 +1,61 @@
+﻿
+@typeparam TItem
+@inherits InputBase<TItem>
+
+@{
+    var messages = ValidationMessages;
+    bool invalid = messages.Any();
+}
+<div class="w3-row">
+    <div class="w3-col @LabelColWidthClass">
+        @RenderLabel
+    </div>
+    <div class="w3-col @InputColWidthClass">
+        @RenderSelect(invalid)
+    </div>
+</div>
+
+@if (invalid)
+{
+    foreach (var message in messages)
+    {
+        <div class="w3-text-red">@message</div>
+    }
+}
+
+@code{
+    /// <summary>
+    /// Renders the label.
+    /// </summary>
+    protected RenderFragment RenderLabel => (__builder) =>
+    {
+        @if (LabelContent == null)
+        {
+            <label for="@Id">@Label</label>
+        }
+        else
+        {
+            @LabelContent
+        }
+    };
+
+    /// <summary>
+    /// Renders the input.
+    /// </summary>
+    protected RenderFragment RenderSelect(bool invalid) => (__builder) =>
+    {
+        <select class="@JoinClasses(CssClasses, invalid ? " w3-border-red" : null)"
+                id="@Id" required="@Required" disabled="@ReadOnly"
+                @onchange="@OnValueChanged">
+
+            <option value="" disabled>--</option>
+            @foreach (var item in Items)
+            {
+                <option value="@item" selected="@(item.Equals(Value))">
+                    @(DisplayFunc == null ? item : DisplayFunc.Invoke(item))
+                </option>
+            }
+
+        </select>
+    };
+}

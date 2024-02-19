@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+@inherits InputBase<bool>
+
+@{
+    var messages = ValidationMessages;
+    bool invalid = messages.Any();
+}
+<div class="w3-row">
+    <div class="w3-col @LabelColWidthClass">
+        @if (LabelContent == null)
+        {
+            <label for="@Id">@Label</label>
+        }
+        else
+        {
+            @LabelContent
+        }
+    </div>
+    <div class="w3-col @InputColWidthClass">
+        @if (Switch)
+        {
+            <div class="switch" @onclick=ToggleValue>
+                <input class="@CssClasses" type="checkbox" checked="@Value" disabled="@ReadOnly" required="@Required" />
+                <span class="slider round"></span>
+            </div>
+        }
+        else
+        {
+            <input class="@CssClasses" type="checkbox" checked="@Value" @onclick="ToggleValue" disabled="@ReadOnly" required="@Required" />
+        }
+    </div>
+</div>
+
+@if (invalid)
+{
+    foreach (var message in messages)
+    {
+        <div class="w3-text-red">@message</div>
+    }
+}
+
+@code{
+
+    /// <summary>
+    /// Display Switch.
+    /// </summary>
+    [Parameter]
+    public bool Switch { get; set; }
+
+    /// <summary>
+    /// Toggle the value.
+    /// </summary>
+    private void ToggleValue()
+    {
+        Value = !Value; 
+        ValueChanged.InvokeAsync(Value);
+    }
+
+}

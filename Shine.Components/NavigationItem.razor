@@ -1,0 +1,17 @@
+@inherits ShineComponentBase
+
+<div class="@CssClasses" style="@CssStyles">
+    @ChildContent
+</div>
+
+@code {
+
+    /// <summary>
+    /// Child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <inheritdoc/>
+    protected override string CssClasses => JoinClasses("w3-bar-item w3-button w3-mobile", base.CssClasses);
+}

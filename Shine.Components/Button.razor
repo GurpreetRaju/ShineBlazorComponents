@@ -1,0 +1,93 @@
+
+@inherits ShineComponentBase
+
+<button type="@ButtonType.ToString().ToLower()" 
+        class="@CssClasses"
+        style="@CssStyles"
+        @onclick="Clicked"
+        @attributes="AdditionalAttributes">
+    @ChildContent
+</button>
+
+
+@code {
+
+    /// <summary>
+    /// The child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// The button size.
+    /// </summary>
+    [Parameter]
+    public Size Size { get; set; } = Size.Medium;
+
+    /// <summary>
+    /// The button type.
+    /// </summary>
+    [Parameter]
+    public ButtonType ButtonType { get; set; }
+
+    /// <summary>
+    /// The button style.
+    /// </summary>
+    [Parameter]
+    public ButtonStyle ButtonStyle { get; set; }
+
+    /// <summary>
+    /// The outline.
+    /// </summary>
+    [Parameter]
+    public bool Outline { get; set; }
+
+    /// <summary>
+    /// Event callback to invoke on clicked.
+    /// </summary>
+    [Parameter]
+    public EventCallback<MouseEventArgs> Clicked { get; set; }
+
+    /// <summary>
+    /// Gets the button size class.
+    /// </summary>
+    /// <returns></returns>
+    protected string GetButtonSizeClass()
+    {
+        return Size switch
+        {
+            Size.Tiny => "w3-tiny",
+            Size.Small => "w3-small",
+            Size.Medium => "w3-medium",
+            Size.Large => "w3-large",
+            Size.XLarge => "w3-xlarge",
+            Size.XXLarge => "w3-xxlarge",
+            Size.XXXLarge => "w3-xxxlarge",
+            Size.Jumbo => "w3-jumbo",
+            _ => null
+        };
+    }
+
+    /// <summary>
+    /// Gets the button style class.
+    /// </summary>
+    /// <returns></returns>
+    protected string GetButtonStyleClass()
+    {
+        return ButtonStyle switch
+        {
+            ButtonStyle.Circle => "w3-circle",
+            ButtonStyle.Outline => "w3-outline",
+            ButtonStyle.FullWidth => "w3-block",
+            ButtonStyle.OutlineAndFullWidth => "w3-outline w3-block",
+            ButtonStyle.None => null,
+            _ => null
+        };
+    }
+
+    /// <summary>
+    /// CSS classes for the component including classes extracted from the class attribute added to the component.
+    /// </summary>
+    protected override string CssClasses => JoinClasses("w3-button", GetButtonSizeClass(), GetButtonStyleClass(), base.CssClasses);
+}
+
