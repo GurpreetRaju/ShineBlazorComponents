@@ -1,10 +1,10 @@
-@inherits ShineComponentBase
+@inherits BackgroundComponentBase
 
-<div class="@CssClasses" style="@CssStyles">
-    <div class="w3-container w3-padding w3-green" style="@BarWidthStyle">
+<div class="progress" role="progressbar" aria-valuenow="@_progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="@CssClasses" style="@CssStyles">
         @if (ShowProgress)
         {
-            @progress
+            @ProgressValue
         }
         @ChildContent
     </div>
@@ -12,7 +12,7 @@
 
 @code{
 
-    private int progress;
+    private int _progress;
 
     /// <summary>
     /// The progress value.
@@ -33,10 +33,25 @@
     public bool ShowProgress { get; set; }
 
     /// <summary>
+    /// Whether to show the striped bar.
+    /// </summary>
+    [Parameter]
+    public bool IsStriped { get; set; }
+
+    /// <summary>
     /// The child content.
     /// </summary>
     [Parameter]
     public RenderFragment ChildContent{ get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "progress-bar";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("progress-bar-striped", IsStriped);
+
+    /// <inheritdoc/>
+    protected override CssStyleBuilder StyleBuilder => base.StyleBuilder.AddStyle($"width:{_progress}%");
 
     /// <inheritdoc/>
     protected override void OnParametersSet()
@@ -44,14 +59,6 @@
         base.OnParametersSet();
 
         var max = Math.Max(MaxValue, ProgressValue);
-        progress = (max / MaxValue) * 100;
+        _progress = (max / MaxValue) * 100;
     }
-
-    /// <inheritdoc/>
-    protected override string CssClasses => JoinClasses("w3-light-grey", base.CssClasses);
-
-    /// <summary>
-    /// Bar width style.
-    /// </summary>
-    private string BarWidthStyle => $"width:{progress}%";
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Shine.Components.Base;
 
 namespace Shine.Components.Common
 {

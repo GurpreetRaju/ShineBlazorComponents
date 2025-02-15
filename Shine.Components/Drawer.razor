@@ -1,0 +1,97 @@
+@inherits BackgroundComponentBase
+
+<div class="@CssClasses" style="@CssStyles">
+    <div class="drawer-trigger">
+        <Button ButtonType="ButtonType.Button" Variant="ButtonVariant.Link" Clicked="ToggleCollapse">
+            @if (Collapsed)
+            {
+                <i class="bi bi-arrow-right"></i>
+            }
+            else
+            {
+                <i class="bi bi-arrow-left"></i>
+            }
+        </Button>
+    </div>
+    <div class="drawer-content">
+        @ChildContent
+    </div>
+    <div class="drawer-collapsed-content">
+        @CollapsedContent
+    </div>
+</div>
+
+@code {
+
+    /// <summary>
+    /// The drawer content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// The drawer collapsed content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment CollapsedContent { get; set; }
+
+    /// <summary>
+    /// Whether the drawer is collapsed.
+    /// </summary>
+    [Parameter]
+    public bool Collapsed { get; set; }
+
+    /// <summary>
+    /// Event callback when <see cref="Collapsed"/> changes.
+    /// </summary>
+    [Parameter]
+    public EventCallback<bool> CollapsedChanged { get; set; }
+
+    /// <summary>
+    /// Drawer width when collapsed. Default: 4.5rem.
+    /// </summary>
+    [Parameter]
+    public string CollapsedWidth { get; set; } = "4.5rem";
+
+    /// <summary>
+    /// Drawer width when expanded. Default: auto.
+    /// </summary>
+    [Parameter]
+    public string Width { get; set; } = "auto";
+
+    /// <summary>
+    /// Mex width. Default: 16rem.
+    /// </summary>
+    [Parameter]
+    public string MaxWidth { get; set; } = "16rem";
+
+    /// <summary>
+    /// Whether to drop shadow. Default: true.
+    /// </summary>
+    [Parameter]
+    public bool HasShadow { get; set; } = true;
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "drawer";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder
+        .WithClass("drawer-collapse", Collapsed)
+        .WithClass("shadow", HasShadow);
+
+    /// <inheritdoc/>
+    protected override CssStyleBuilder StyleBuilder => base.StyleBuilder
+        .AddStyle("max-width", MaxWidth)
+        .AddStyle("width", CollapsedWidth, Width, Collapsed);
+
+    /// <summary>
+    /// Toggle the collapsed state.
+    /// </summary>
+    private void ToggleCollapse()
+    {
+        Collapsed = !Collapsed;
+        CollapsedChanged.InvokeAsync(Collapsed);
+
+        InvokeAsync(StateHasChanged);
+    }
+}

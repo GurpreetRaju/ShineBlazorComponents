@@ -1,0 +1,20 @@
+﻿@inherits ShineComponentBase
+
+<div class="@CssClasses" style="@CssStyles" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+
+@code {
+
+    /// <summary>
+    /// The size.
+    /// </summary>
+    [Parameter]
+    public bool SmallSize { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "spinner-border";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("spinner-border-sm", SmallSize);
+}

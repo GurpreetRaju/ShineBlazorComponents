@@ -1,0 +1,38 @@
+@using Microsoft.JSInterop
+
+@inherits ShineComponentBase
+
+@inject IJSRuntime JSRuntime
+
+<Button ButtonType="ButtonType.Button"
+        Variant="ButtonVariant.Link"
+        Clicked="CopyTextToClipboard"
+        class="@CssClasses"
+        style="@CssStyles"
+        @attributes="@AdditionalAttributes">
+    <i class="bi bi-clipboard"></i>
+</Button>
+
+@code {
+
+    /// <summary>
+    /// The text to copy.
+    /// </summary>
+    [Parameter] 
+    public string Text { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "clipboard";
+
+    /// <summary>
+    /// Copy the text to clipboard.
+    /// </summary>
+    /// <returns></returns>
+    private async Task CopyTextToClipboard()
+    {
+        if (string.IsNullOrEmpty(Text))
+            return;
+
+        await JSRuntime.InvokeVoidAsync("clipboardCopy.copyText", Text);
+    }
+}

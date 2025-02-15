@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+@inherits FormControl<bool>
+
+@RenderBase
+
+@code {
+    /// <summary>
+    /// Display Switch.
+    /// </summary>
+    [Parameter]
+    public bool Switch { get; set; }
+
+    /// <summary>
+    /// Text.
+    /// </summary>
+    [Parameter]
+    public string Text { get; set; }
+
+    /// <inheritdoc/>
+    protected override RenderFragment RenderControl => __builder =>
+    {
+        <Checkbox Value="Value"
+                  ValueChanged="v => HandleValueChanged(v)"
+                  Switch="Switch"
+                  Text="@Text"
+                  Disabled="Disabled" 
+                  Required="Required"
+                  CultureInfo="CultureInfo"
+                  Converter="Converter"
+                  class="@ControlClass"
+                  style="@ControlStyle" />
+    };
+}

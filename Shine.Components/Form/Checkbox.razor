@@ -1,47 +1,19 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
 
-@inherits InputBase<bool>
+@inherits InputControlBase<bool>
 
-@{
-    var messages = ValidationMessages;
-    bool invalid = messages.Any();
-}
-<div class="w3-row">
-    <div class="w3-col @LabelColWidthClass">
-        @if (LabelContent == null)
-        {
-            <label for="@Id">@Label</label>
-        }
-        else
-        {
-            @LabelContent
-        }
-    </div>
-    <div class="w3-col @InputColWidthClass">
-        @if (Switch)
-        {
-            <div class="switch" @onclick=ToggleValue>
-                <input class="@CssClasses" type="checkbox" checked="@Value" disabled="@ReadOnly" required="@Required" />
-                <span class="slider round"></span>
-            </div>
-        }
-        else
-        {
-            <input class="@CssClasses" type="checkbox" checked="@Value" @onclick="ToggleValue" disabled="@ReadOnly" required="@Required" />
-        }
-    </div>
+<div class="@CssClasses" style="@CssStyles">
+    <input type="checkbox"
+           checked="@Value"
+           role="@(Switch ? "switch" : null)"
+           disabled="@Disabled"
+           required="@Required"
+           @onchange="@((args) => HandleValueChanged(args.Value))"
+           class="form-check-input" />
+    <label for="@Id">@Text</label>
 </div>
 
-@if (invalid)
-{
-    foreach (var message in messages)
-    {
-        <div class="w3-text-red">@message</div>
-    }
-}
-
 @code{
-
     /// <summary>
     /// Display Switch.
     /// </summary>
@@ -49,12 +21,15 @@
     public bool Switch { get; set; }
 
     /// <summary>
-    /// Toggle the value.
+    /// Text.
     /// </summary>
-    private void ToggleValue()
-    {
-        Value = !Value; 
-        ValueChanged.InvokeAsync(Value);
-    }
+    [Parameter]
+    public string Text { get; set; }
 
+    /// <inheritdoc/>
+    protected override string ComponentName => "form-check";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder
+        .WithClass("form-switch", Switch);
 }

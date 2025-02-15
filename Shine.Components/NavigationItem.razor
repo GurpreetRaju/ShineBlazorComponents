@@ -1,17 +1,43 @@
-@inherits ShineComponentBase
+@inherits BackgroundComponentBase
 
-<div class="@CssClasses" style="@CssStyles">
-    @ChildContent
-</div>
+<li class="@CssClasses" style="@CssStyles">
+    <a class="@NavLinkCssBuilder.Build()" aria-current="page" href="@Url" aria-disabled="@Disabled">
+        @ChildContent
+    </a>
+</li>
 
 @code {
-
     /// <summary>
     /// Child content.
     /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
+    /// Navigation url.
+    /// </summary>
+    [Parameter]
+    public string Url { get; set; }
+
+    /// <summary>
+    /// Whether the nav item is active.
+    /// </summary>
+    [Parameter]
+    public bool IsActive { get; set; }
+
+    /// <summary>
+    /// Whether the nav item is disabled.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; }
+
     /// <inheritdoc/>
-    protected override string CssClasses => JoinClasses("w3-bar-item w3-button w3-mobile", base.CssClasses);
+    protected override string ComponentName => "nav-item";
+
+    /// <summary>
+    /// Navigation link css builder.
+    /// </summary>
+    protected virtual CssClassBuilder NavLinkCssBuilder => CssClassBuilder.Create("nav-link")
+        .WithClass("active", IsActive)
+        .WithClass("disabled", Disabled);
 }

@@ -1,14 +1,10 @@
 ﻿namespace Shine.Components
 {
     /// <summary>
-    /// W3 Size.
+    /// Size.
     /// </summary>
     public enum Size
     {
-        /// <summary>
-        /// Tiny.
-        /// </summary>
-        Tiny,
         /// <summary>
         /// Small.
         /// </summary>
@@ -20,38 +16,72 @@
         /// <summary>
         /// Large.
         /// </summary>
-        Large,
-        /// <summary>
-        /// X-Large.
-        /// </summary>
-        XLarge,
-        /// <summary>
-        /// XX-Large.
-        /// </summary>
-        XXLarge,
-        /// <summary>
-        /// XXX-Large.
-        /// </summary>
-        XXXLarge,
-        /// <summary>
-        /// Jumbo.
-        /// </summary>
-        Jumbo
+        Large
     }
 
-    public enum ButtonStyle
+    /// <summary>
+    /// The button variant.
+    /// </summary>
+    public enum ButtonVariant
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None,
-        Circle,
-        FullWidth,
-        Outline,
-        OutlineAndFullWidth,
+        /// <summary>
+        /// Primary.
+        /// </summary>
+        Primary,
+        /// <summary>
+        /// Secondary.
+        /// </summary>
+        Secondary,
+        /// <summary>
+        /// Information.
+        /// </summary>
+        Info,
+        /// <summary>
+        /// Success.
+        /// </summary>
+        Success,
+        /// <summary>
+        /// Warning.
+        /// </summary>
+        Warning,
+        /// <summary>
+        /// Danger.
+        /// </summary>
+        Danger,
+        /// <summary>
+        /// Light.
+        /// </summary>
+        Light,
+        /// <summary>
+        /// Dark.
+        /// </summary>
+        Dark,
+        /// <summary>
+        /// Link.
+        /// </summary>
+        Link
     }
 
+    /// <summary>
+    /// Button _type.
+    /// </summary>
     public enum ButtonType
     {
+        /// <summary>
+        /// Button.
+        /// </summary>
         Button,
+        /// <summary>
+        /// Submit.
+        /// </summary>
         Submit,
+        /// <summary>
+        /// Reset.
+        /// </summary>
         Reset
     }
 }

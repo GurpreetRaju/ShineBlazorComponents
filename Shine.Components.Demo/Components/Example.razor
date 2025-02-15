@@ -1,0 +1,33 @@
+﻿
+<Card>
+    <Body>
+        <Content>
+            @ChildContent
+        </Content>
+        @if (Code != null)
+        {
+            <Content Border="Base.ComponentEdge.TopAndBottom" class="border-dark-subtle">
+                <Text Alignment="Base.Alignment.Start">HTML</Text>
+                <Clipboard Text="@Code" class="align-self-end"/>
+            </Content>
+            <Content>
+                <pre>@Code</pre>
+            </Content>
+        }
+    </Body>
+</Card>
+
+@code {
+
+    /// <summary>
+    /// The example.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// The code content.
+    /// </summary>
+    [Parameter]
+    public string Code { get; set; }
+}

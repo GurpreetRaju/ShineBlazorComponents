@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shine.Components", "Shine.Components\Shine.Components.csproj", "{1075B57D-22B9-456F-A2F2-5459B3CA673D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shine.Components.Demo", "Shine.Components.Demo\Shine.Components.Demo.csproj", "{DCFCBFD6-1695-4263-92D4-414C06364A08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1075B57D-22B9-456F-A2F2-5459B3CA673D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1075B57D-22B9-456F-A2F2-5459B3CA673D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1075B57D-22B9-456F-A2F2-5459B3CA673D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCFCBFD6-1695-4263-92D4-414C06364A08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCFCBFD6-1695-4263-92D4-414C06364A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCFCBFD6-1695-4263-92D4-414C06364A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCFCBFD6-1695-4263-92D4-414C06364A08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

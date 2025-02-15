@@ -1,0 +1,39 @@
+
+@inherits BackgroundComponentBase
+
+<nav class="@CssClasses" style="@CssStyles">
+    <div class="container-fluid">
+        <a href="" class="navbar-brand">
+            @BrandContent
+        </a>
+        @ChildContent
+    </div>
+</nav>
+
+@code {
+
+    /// <summary>
+    /// Brand content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment BrandContent { get; set; }
+
+    /// <summary>
+    /// Child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Whether to drop shadow. Default: true.
+    /// </summary>
+    [Parameter]
+    public bool HasShadow { get; set; } = true;
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "navbar";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("shadow", HasShadow);
+
+}

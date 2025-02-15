@@ -1,34 +1,26 @@
 ﻿
-@inherits ShineComponentBase
+@inherits BackgroundComponentBase
 
 <div class="@CssClasses" style="@CssStyles">
     @if (Header != null)
     {
-        <header class="w3-container w3-blue">
+        <header class="@CssClassBuilder.JoinClasses("card-header", HeaderClass)">
             @Header
         </header>
     }
     @if (!string.IsNullOrWhiteSpace(ImageSource))
     {
-        <div class="w3-display-container @ImageContainerClasses">
-            <img src="@ImageSource" alt="@ImageAltText">
-            @if (!string.IsNullOrWhiteSpace(ImageCaption))
-            {
-                <div class="w3-xlarge w3-display-bottomleft w3-padding">
-                    @ImageCaption
-                </div>
-            }
-        </div>
+        <img src="@ImageSource" alt="@ImageAltText">
     }
     @if (Body != null)
     {
-        <div class="w3-container">
+        <div class="@CssClassBuilder.JoinClasses("card-body", HeaderClass)">
             @Body
         </div>
     }
     @if (Footer != null)
     {
-        <footer class="w3-container w3-blue">
+        <footer class="@CssClassBuilder.JoinClasses("card-footer", HeaderClass)">
             @Footer    
         </footer>
     }
@@ -67,19 +59,23 @@
     public string ImageAltText { get; set; }
 
     /// <summary>
-    /// Image caption.
+    /// Classes to add to the card header.
     /// </summary>
     [Parameter]
-    public string ImageCaption { get; set; }
+    public string HeaderClass { get; set; }
 
     /// <summary>
-    /// Classes to add to the Image container..
+    /// Classes to add to the card body.
     /// </summary>
     [Parameter]
-    public string ImageContainerClasses { get; set; }
+    public string BodyClass { get; set; }
 
     /// <summary>
-    /// CSS classes for the component including classes extracted from the class attribute added to the component.
+    /// Classes to add to the card footer.
     /// </summary>
-    protected override string CssClasses => JoinClasses("w3-panel w3-card", base.CssClasses);
+    [Parameter]
+    public string FooterClass { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "card";
 }

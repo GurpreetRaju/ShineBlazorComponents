@@ -1,0 +1,47 @@
+﻿@typeparam TValue
+@inherits InputControlBase<TValue>
+
+@RenderBase
+
+@code {
+
+    /// <summary>
+    /// Renders the base.
+    /// </summary>
+    protected virtual RenderFragment RenderBase => __builder => 
+    {
+        <div class="@CssClasses" style="@CssStyles">
+            <label for="@Id" class="form-label">@Label</label>
+            @if (ReadOnly)
+            {
+                <Shine.Components.Text>@ValueAsString</Shine.Components.Text>
+            }
+            else
+            {
+                @RenderControl
+            }
+        </div>
+
+        @if (ValidationMessages.Any())
+        {
+            foreach (var message in ValidationMessages)
+            {
+                <span class="form-text text-danger">@message</span>
+            }
+        }
+    };
+
+    /// <summary>
+    /// Renders the control.
+    /// </summary>
+    protected virtual RenderFragment RenderControl => __builder =>
+    {
+        <input type="@InputType"
+               value="@ValueAsString"
+               required="@Required"
+               disabled="@Disabled"
+               class="@ControlCssBuilder.Build()"
+               style="@ControlStyle"
+               @onchange="(args) => HandleValueChanged(args.Value)" />
+    };
+}

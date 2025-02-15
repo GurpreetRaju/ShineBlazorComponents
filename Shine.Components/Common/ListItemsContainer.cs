@@ -1,4 +1,6 @@
-﻿namespace Shine.Components.Common
+﻿using Shine.Components.Base;
+
+namespace Shine.Components.Common
 {
     /// <summary>
     /// A base class for container component that holds child items.

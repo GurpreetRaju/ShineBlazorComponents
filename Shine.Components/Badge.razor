@@ -1,5 +1,5 @@
 
-@inherits ShineComponentBase
+@inherits BackgroundComponentBase
 
 <span class="@CssClasses" style="@CssStyles">@Value</span>
 
@@ -11,14 +11,6 @@
     [Parameter]
     public string Value { get; set; }
 
-    /// <summary>
-    /// Badge Size.
-    /// </summary>
-    [Parameter]
-    public Size Size { get; set; } = Size.Small;
-
-    /// <summary>
-    /// CSS Classes.
-    /// </summary>
-    protected override string CssClasses => JoinClasses("w3-badge", $"w3-{Size.ToString().ToLower()}", base.CssClasses);
+    /// <inheritdoc/>
+    protected override string ComponentName => "badge";
 }

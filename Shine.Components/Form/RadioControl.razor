@@ -1,48 +1,26 @@
-﻿@typeparam TItem
-@inherits InputBase<TItem>
+﻿@typeparam TValue
+@inherits FormSelect<TValue>
 
-@{
-    var messages = ValidationMessages;
-    bool invalid = messages.Any();
-}
-<div class="w3-row">
-    <div class="w3-col @LabelColWidthClass">
-        @RenderLabel
-    </div>
-    <div class="w3-col @InputColWidthClass">
+@RenderBase
+
+@code {
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder ControlCssBuilder => CssClassBuilder.Create("form-check")
+            .WithClass(ControlClass);
+
+    /// <summary>
+    /// Renders the radio control.
+    /// </summary>
+    protected override RenderFragment RenderControl => __builder =>
+    {
         @foreach (var item in Items)
         {
-            <div class="radio-item-wrapper">
-                <input type="radio" name="@Id" value="@item" class="@CssClasses" checked="@(item.Equals(Value))" 
-                       disabled="@ReadOnly" required="@Required" @onchange="@OnValueChanged">
-                <label>@(DisplayFunc == null ? item : DisplayFunc.Invoke(item))</label>
+            <div class="@ControlCssBuilder.Build()" style="@ControlStyle">
+                <input type="radio" name="@Id" value="@item" class="form-check-input" checked="@(item.Equals(Value))"
+                       disabled="@Disabled" required="@Required" @onchange="@((args) => HandleValueChanged(args.Value))">
+                <label class="form-check-label">@GetDisplayValue(item)</label>
             </div>
         }
-    </div>
-</div>
-
-@if (invalid)
-{
-    foreach (var message in messages)
-    {
-        <div class="w3-text-red">@message</div>
-    }
-}
-ss
-@code {
-    /// <summary>
-    /// Renders the label.
-    /// </summary>
-    protected RenderFragment RenderLabel => (__builder) =>
-    {
-        @if (LabelContent == null)
-        {
-            <label for="@Id">@Label</label>
-        }
-        else
-        {
-            @LabelContent
-        }
     };
-
 }

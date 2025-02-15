@@ -1,7 +1,57 @@
-@import url("material-icon.css");
-@import url("w3.css");
+@import url("../lib/bootstrap/css/bootstrap.min.css");
+@import url("../lib/bootstrap/css/bootstrap-grid.min.css");
+@import url("../lib/bootstrap/css/bootstrap-reboot.min.css");
+@import url("../lib/bootstrap/css/bootstrap-utilities.min.css");
+@import url("../lib/bootstrap/css/font/bootstrap-icons.css");
 
-body {
-
+/**  Custom variables  **/
+:root {
+    --sh-page-padding: 1rem;
+    --sh-content-padding: 1rem;
 }
 
+/** Drawer **/
+.drawer {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 100%;
+    transition: width 0.25s ease-in;
+}
+
+    .drawer .drawer-trigger {
+        display: flex;
+        justify-content: end;
+    }
+
+    .drawer .drawer-content {
+        display: block;
+        transition: display 0.5s ease-in;
+    }
+
+    .drawer .drawer-collapsed-content {
+        display: none;
+    }
+
+    .drawer.drawer-collapse .drawer-content {
+        display: none;
+        transition: display 0.5s ease-in;
+    }
+
+        .drawer.drawer-collapse .drawer-collapsed-content {
+            display: block;
+        }
+
+
+/**  Page  **/
+
+.page-container {
+    padding: var(--sh-page-padding);
+    overflow: auto;
+    height: 100%;
+}
+
+.sh-content {
+    padding: var(--sh-content-padding);
+}

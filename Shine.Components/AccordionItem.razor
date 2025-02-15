@@ -1,0 +1,59 @@
+@inherits ShineComponentBase
+
+<div class="@CssClasses">
+    <div @onclick="ToggleState" class="accordion-header">
+        @HeaderContent
+    </div>
+
+    <div class="@CollapseCssBuilder.Build()">
+        <div class="accordion-body">
+            @ChildContent
+        </div>
+    </div>
+</div>
+
+@code{
+
+    /// <summary>
+    /// Trigger content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment HeaderContent { get; set; }
+
+    /// <summary>
+    /// Trigger content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Whether the section is collapsed.
+    /// </summary>
+    [Parameter]
+    public bool Collapsed { get; set; }
+
+    /// <summary>
+    /// The event callback for <see cref="CollapsableSection"/>.
+    /// </summary>
+    [Parameter]
+    public EventCallback<bool> CollapsedChanged { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "accordion-item";
+
+    /// <summary>
+    /// Css classes.
+    /// </summary>
+    protected CssClassBuilder CollapseCssBuilder => CssClassBuilder.Create("accordion-collapse").WithClass("collapse").WithClass("show", !Collapsed);
+
+    /// <summary>
+    /// Toggle the section content display state.
+    /// </summary>
+    private void ToggleState()
+    {
+        Collapsed = !Collapsed;
+        CollapsedChanged.InvokeAsync(Collapsed);
+
+        InvokeAsync(StateHasChanged);
+    }
+}

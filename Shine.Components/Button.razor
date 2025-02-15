@@ -1,11 +1,12 @@
 
 @inherits ShineComponentBase
 
-<button type="@ButtonType.ToString().ToLower()" 
+<button type="@ButtonType.ToString().ToLower()"
         class="@CssClasses"
         style="@CssStyles"
         @onclick="Clicked"
-        @attributes="AdditionalAttributes">
+        @attributes="AdditionalAttributes"
+        disabled="@Disabled">
     @ChildContent
 </button>
 
@@ -19,22 +20,28 @@
     public RenderFragment ChildContent { get; set; }
 
     /// <summary>
+    /// Whether the button is disabled.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    /// <summary>
     /// The button size.
     /// </summary>
     [Parameter]
     public Size Size { get; set; } = Size.Medium;
 
     /// <summary>
-    /// The button type.
+    /// The button _type.
     /// </summary>
     [Parameter]
     public ButtonType ButtonType { get; set; }
 
     /// <summary>
-    /// The button style.
+    /// The button variant.
     /// </summary>
     [Parameter]
-    public ButtonStyle ButtonStyle { get; set; }
+    public ButtonVariant Variant { get; set; }
 
     /// <summary>
     /// The outline.
@@ -48,6 +55,14 @@
     [Parameter]
     public EventCallback<MouseEventArgs> Clicked { get; set; }
 
+    /// <inheritdoc/>
+    protected override string ComponentName => "btn";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder
+        .WithClass(GetButtonVariantClass())
+        .WithClass(GetButtonSizeClass());
+
     /// <summary>
     /// Gets the button size class.
     /// </summary>
@@ -56,38 +71,25 @@
     {
         return Size switch
         {
-            Size.Tiny => "w3-tiny",
-            Size.Small => "w3-small",
-            Size.Medium => "w3-medium",
-            Size.Large => "w3-large",
-            Size.XLarge => "w3-xlarge",
-            Size.XXLarge => "w3-xxlarge",
-            Size.XXXLarge => "w3-xxxlarge",
-            Size.Jumbo => "w3-jumbo",
+            Size.Small => "btn-sm",
+            Size.Large => "btn-lg",
             _ => null
         };
     }
 
     /// <summary>
-    /// Gets the button style class.
+    /// Gets the button variant class.
     /// </summary>
     /// <returns></returns>
-    protected string GetButtonStyleClass()
+    protected string GetButtonVariantClass()
     {
-        return ButtonStyle switch
-        {
-            ButtonStyle.Circle => "w3-circle",
-            ButtonStyle.Outline => "w3-outline",
-            ButtonStyle.FullWidth => "w3-block",
-            ButtonStyle.OutlineAndFullWidth => "w3-outline w3-block",
-            ButtonStyle.None => null,
-            _ => null
-        };
-    }
+        if (Variant == ButtonVariant.None) return string.Empty;
 
-    /// <summary>
-    /// CSS classes for the component including classes extracted from the class attribute added to the component.
-    /// </summary>
-    protected override string CssClasses => JoinClasses("w3-button", GetButtonSizeClass(), GetButtonStyleClass(), base.CssClasses);
+        string variantClass = "btn-";
+        if (Outline && Variant != ButtonVariant.Link)
+            variantClass += "outline-";
+
+        return variantClass += Variant.ToString().ToLowerInvariant();
+    }
 }
 

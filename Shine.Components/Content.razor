@@ -1,0 +1,17 @@
+@inherits ShineComponentBase
+
+<div class="@CssClasses" style="@CssStyles">
+    @ChildContent
+</div>
+
+@code {
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "sh-content";
+
+    /// <summary>
+    /// Child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

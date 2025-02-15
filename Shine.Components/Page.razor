@@ -1,0 +1,41 @@
+
+@inherits ShineComponentBase
+
+@if(!string.IsNullOrWhiteSpace(PageName))
+{
+    <PageTitle>@PageName</PageTitle>
+}
+
+<div class="@CssClasses" style="@CssStyles">
+    @if (ShowTitle)
+    {
+        <h4 class="page-title">@PageName</h4>
+    }
+    <div class="container-fluid">
+        @ChildContent
+    </div>
+</div>
+
+@code {
+
+    /// <summary>
+    /// The child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Page name.
+    /// </summary>
+    [Parameter]
+    public string PageName { get; set; }
+
+    /// <summary>
+    /// Show the page title. Default: true.
+    /// </summary>
+    [Parameter]
+    public bool ShowTitle { get; set; } = true;
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "page-container";
+}

@@ -1,0 +1,28 @@
+﻿<NavMenu IsVertical="true">
+    <NavigationItems>
+        <NavigationItem Url="">
+            Home
+        </NavigationItem>
+        <NavigationItem Url="form">
+            Form
+        </NavigationItem>
+        <NavigationItem Url="collapsable-containers">
+            Collapsabe Containers
+        </NavigationItem>
+        <NavigationItem Url="carousel">
+            Carousel
+        </NavigationItem>
+        <NavigationItem Url="modal">
+            Modal
+        </NavigationItem>
+    </NavigationItems>
+</NavMenu>
+
+@code {
+    private bool collapseNavMenu;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

@@ -1,0 +1,52 @@
+﻿@using Shine.Components.Services
+@inherits ShineComponentBase
+
+@if (ToastInfo != null)
+{
+    <div @key="_id" class="@CssClasses" role="alert" aria-live="assertive" aria-atomic="true">
+        @if (!string.IsNullOrEmpty(ToastInfo.Title))
+        {
+            <div class="toast-header">
+                <strong class="me-auto">@ToastInfo.Title</strong>
+                <button type="button" class="btn-close" @onclick="RemoveToast"></button>
+            </div>
+        }
+        <div class="toast-body">
+            @ToastInfo.Message
+            @if (string.IsNullOrEmpty(ToastInfo.Title))
+            {
+                <button type="button" class="btn-close" @onclick="RemoveToast"></button>
+            }
+        </div>
+    </div>
+}
+
+@code {
+    private Guid _id = Guid.NewGuid();
+
+    /// <summary>
+    /// The toast info.
+    /// </summary>
+    [Parameter]
+    public ToastInfo ToastInfo { get; set; }
+
+    /// <summary>
+    /// The toast service.
+    /// </summary>
+    [Inject]
+    private ToastService ToastService { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "toast";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithBackground(ToastInfo?.Color ?? Color.None);
+
+    /// <summary>
+    /// Remove the toast.
+    /// </summary>
+    private void RemoveToast()
+    {
+        ToastService.RemoveToast(ToastInfo);
+    }
+}

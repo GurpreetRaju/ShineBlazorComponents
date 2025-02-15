@@ -1,6 +1,6 @@
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 
-@inherits ShineComponentBase
+@inherits BackgroundComponentBase
 
 @typeparam TItem
 
@@ -10,15 +10,16 @@
         Items="@Items"
         ItemsProvider="@ItemsProvider"
         Placeholder="@Placeholder">
-
+        <li class="@ItemCssBuilder.Build()">
         @if (ItemTemplate != null)
-        {
-            <li>@ItemTemplate.Invoke(listItem)</li>
-        }
-        else
-        {
-            <li>@listItem</li>
-        }
+            {
+                @ItemTemplate.Invoke(listItem)
+            }
+            else
+            {
+                @listItem
+            }
+        </li>
     </Virtualize>
 </ul>
 
@@ -49,23 +50,17 @@
     public RenderFragment<PlaceholderContext> Placeholder { get; set; }
 
     /// <summary>
-    /// Whether to add borders to the list.
+    /// The css class for items.
     /// </summary>
     [Parameter]
-    public bool HasBorder { get; set; }
+    public string ItemClass { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "list-group";
 
     /// <summary>
-    /// Whether to add shadow to the list.
+    /// CSS classes for items.
     /// </summary>
-    [Parameter]
-    public bool HasShadow { get; set; }
-
-    /// <summary>
-    /// CSS classes for the component including classes extracted from the class attribute added to the component.
-    /// </summary>
-    protected override string CssClasses => JoinClasses("w3-ul", 
-                                                        HasShadow ? "w3-card" : null, 
-                                                        HasBorder ? "w3-border" : null, 
-                                                        base.CssClasses);
+    protected CssClassBuilder ItemCssBuilder => CssClassBuilder.Create("list-group-item").WithClass(ItemClass);
 
 }

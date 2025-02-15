@@ -1,61 +1,37 @@
-﻿
-@typeparam TItem
-@inherits InputBase<TItem>
+﻿@typeparam TValue
+@inherits FormControl<TValue>
 
-@{
-    var messages = ValidationMessages;
-    bool invalid = messages.Any();
-}
-<div class="w3-row">
-    <div class="w3-col @LabelColWidthClass">
-        @RenderLabel
-    </div>
-    <div class="w3-col @InputColWidthClass">
-        @RenderSelect(invalid)
-    </div>
-</div>
-
-@if (invalid)
-{
-    foreach (var message in messages)
-    {
-        <div class="w3-text-red">@message</div>
-    }
-}
+@RenderBase
 
 @code{
     /// <summary>
-    /// Renders the label.
+    /// Items.
     /// </summary>
-    protected RenderFragment RenderLabel => (__builder) =>
-    {
-        @if (LabelContent == null)
-        {
-            <label for="@Id">@Label</label>
-        }
-        else
-        {
-            @LabelContent
-        }
-    };
+    [Parameter]
+    public IEnumerable<TValue> Items { get; set; } = Enumerable.Empty<TValue>();
 
-    /// <summary>
-    /// Renders the input.
-    /// </summary>
-    protected RenderFragment RenderSelect(bool invalid) => (__builder) =>
-    {
-        <select class="@JoinClasses(CssClasses, invalid ? " w3-border-red" : null)"
-                id="@Id" required="@Required" disabled="@ReadOnly"
-                @onchange="@OnValueChanged">
+    /// <inheritdoc/>
+    protected override CssClassBuilder ControlCssBuilder => CssClassBuilder.Create("form-select")
+            .WithClass(ControlClass)
+            .WithClass("form-select-sm", Size == Size.Small)
+            .WithClass("form-select-lg", Size == Size.Large);
 
-            <option value="" disabled>--</option>
+    /// <inheritdoc/>h
+    protected override RenderFragment RenderControl => __builder =>
+    {
+        <select id="@Id" class="@ControlCssBuilder.Build()"
+                style="@ControlStyle"
+                required="@Required"
+                disabled="@Disabled"
+                @onchange="@((e) => HandleValueChanged(e.Value))">
+
+            <option value="" disabled="@Required">@Placeholder</option>
             @foreach (var item in Items)
             {
-                <option value="@item" selected="@(item.Equals(Value))">
-                    @(DisplayFunc == null ? item : DisplayFunc.Invoke(item))
+                <option value="@item" selected="@(item?.Equals(Value))">
+                    @GetDisplayValue(item)
                 </option>
             }
-
         </select>
     };
 }

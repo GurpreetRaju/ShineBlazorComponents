@@ -1,0 +1,42 @@
+@inherits ShineComponentBase
+
+<span class="@CssClasses" style="@CssStyles">@ChildContent</span>
+
+@code {
+
+    /// <summary>
+    /// The child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// The text alignment.
+    /// </summary>
+    [Parameter]
+    public Alignment Alignment { get; set; }
+
+    /// <summary>
+    /// The viewport size.
+    /// </summary>
+    [Parameter]
+    public ViewportSize? ViewportSize { get; set; }
+
+    /// <summary>
+    /// The text wrap.
+    /// </summary>
+    [Parameter]
+    public Wrap Wrap { get; set; }
+
+    /// <summary>
+    /// The text transform.
+    /// </summary>
+    [Parameter]
+    public Transform Transform { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "text";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithText(Alignment, ViewportSize, Wrap, Transform);
+}

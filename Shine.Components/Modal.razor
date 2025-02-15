@@ -1,32 +1,33 @@
+@inherits BackgroundComponentBase
 
-@inherits ShineComponentBase
-
-<button @onclick="Show" class="w3-button">@TriggerText</button>
+<Button Clicked="Show" class="@TriggerClass">@TriggerText</Button>
 
 @if (m_show)
 {
     <div id="@Id" class="@CssClasses" style="@CssStyles">
-        <div class="w3-modal-content w3-animate-top w3-card-4">
-            <header class="w3-container w3-padding">
-                <i @onclick="Hide" class="material-icons w3-right">close</i>
-                @if (string.IsNullOrEmpty(HeaderText))
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button @onclick="Hide" type="button" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                    @if (string.IsNullOrEmpty(HeaderText))
+                    {
+                        @Header
+                    }
+                    else
+                    {
+                        <h2 class="modal-title">@HeaderText</h2>
+                    }
+                </div>
+                <div class="modal-body">
+                    @Body
+                </div>
+                @if (Footer != null)
                 {
-                    @Header
+                    <div class="modal-footer">
+                        @Footer
+                    </div>
                 }
-                else
-                {
-                    <h2>@HeaderText</h2>
-                }
-            </header>
-            <div class="w3-container">
-                @Body
             </div>
-            @if (Footer != null)
-            {
-                <footer class="w3-container">
-                    @Footer
-                </footer>
-            }
         </div>
     </div>
 }
@@ -41,6 +42,12 @@
     /// </summary>
     [Parameter]
     public string TriggerText { get; set; }
+
+    /// <summary>
+    /// Trigger class.
+    /// </summary>
+    [Parameter]
+    public string TriggerClass { get; set; }
 
     /// <summary>
     /// Header text.
@@ -65,6 +72,9 @@
     /// </summary>
     [Parameter]
     public RenderFragment Footer { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "modal";
 
     /// <summary>
     /// Show the modal.

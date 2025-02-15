@@ -1,5 +1,5 @@
 
-@inherits ShineComponentBase
+@inherits BackgroundComponentBase
 
 <div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
     @ChildContent
@@ -8,10 +8,10 @@
 @code{
 
     /// <summary>
-    /// Alert Type.
+    /// Alert color.
     /// </summary>
     [Parameter]
-    public AlertType AlertType { get; set; }
+    public Color Color { get; set; }
 
     /// <summary>
     /// Child content.
@@ -19,33 +19,14 @@
     [Parameter]
     public RenderFragment ChildContent{ get; set; }
 
-    /// <summary>
-    /// Alert type class.
-    /// </summary>
-
-    private string AlertTypeClass
-    {
-        get
-        {
-            switch (AlertType)
-            {
-                case AlertType.Information:
-                    return "w3-indigo";
-                case AlertType.Success:
-                    return "w3-green";
-                case AlertType.Warning:
-                    return "w3-amber";
-                case AlertType.Danger:
-                    return "w3-red";
-                case AlertType.LightGrey:
-                default:
-                    return "w3-light-grey";
-            }
-        }
-    }
+    /// <inheritdoc/>
+    protected override string ComponentName => "alert";
 
     /// <summary>
-    /// CSS classes for the component including classes extracted from the class attribute added to the component.
+    /// Alert _type class.
     /// </summary>
-    protected override string CssClasses => JoinClasses("w3-panel", AlertTypeClass, base.CssClasses);
+    private string AlertTypeClass => $"alert-{Color.ToString().ToLowerInvariant()}";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass(AlertTypeClass);
 }

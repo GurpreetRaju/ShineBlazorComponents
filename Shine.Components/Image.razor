@@ -1,4 +1,3 @@
-
 @inherits ShineComponentBase
 
 <img src="@Source" alt="@Alt" class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes" />
@@ -18,60 +17,20 @@
     public string Alt { get; set; }
 
     /// <summary>
-    /// Image style flags.
+    /// Responsive.
     /// </summary>
     [Parameter]
-    public ImageStyle ImageStyleFlag { get; set; } = ImageStyle.None;
+    public bool Responsive { get; set; }
 
     /// <summary>
-    /// CSS classes for the component including classes extracted from the class attribute added to the component.
+    /// Thumbnail.
     /// </summary>
-    protected override string CssClasses => JoinClasses("w3-ul",
-                                                        GetImageStyleClasses(),
-                                                        base.CssClasses);
+    [Parameter]
+    public bool Thumbnail { get; set; }
 
-    /// <summary>
-    /// Gets the image style classes.
-    /// </summary>
-    protected virtual string GetImageStyleClasses()
-    {
-        if (ImageStyleFlag == ImageStyle.None) return null;
+    /// <inheritdoc/>
+    protected override string ComponentName => "img";
 
-        List<string> classes = new List<string>();
-
-        if (ImageStyleFlag.HasFlag(ImageStyle.Border))
-            classes.Add("w3-border w3-padding");
-
-        if (ImageStyleFlag.HasFlag(ImageStyle.Circle))
-            classes.Add("w3-circle");
-
-        if (ImageStyleFlag.HasFlag(ImageStyle.Grayscale))
-            classes.Add("w3-grayscale-max");
-
-        if (ImageStyleFlag.HasFlag(ImageStyle.HoverGrayscale))
-            classes.Add("w3-hover-grayscale");
-
-        if (ImageStyleFlag.HasFlag(ImageStyle.Opacity))
-            classes.Add("w3-opacity");
-
-        if (ImageStyleFlag.HasFlag(ImageStyle.HoverOpacity))
-            classes.Add("w3-hover-opacity");
-
-        if (ImageStyleFlag.HasFlag(ImageStyle.HoverOpacityOff))
-            classes.Add("w3-opacity w3-hover-opacity-off");
-
-        if (ImageStyleFlag.HasFlag(ImageStyle.Sepia))
-            classes.Add("w3-sepia-max");
-
-        if (ImageStyleFlag.HasFlag(ImageStyle.HoverSepia))
-            classes.Add("w3-hover-sepia");
-
-        if (ImageStyleFlag.HasFlag(ImageStyle.Responsive))
-            classes.Add("w3-image");
-
-        if (ImageStyleFlag.HasFlag(ImageStyle.RoundBorder))
-            classes.Add("w3-round");
-
-        return JoinClasses(classes.ToArray());
-    }
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("img-fluid", Responsive).WithClass("img-thumbnail", Thumbnail);
 }

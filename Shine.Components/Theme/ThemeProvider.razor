@@ -1,0 +1,52 @@
+﻿@using System.Text
+
+<HeadContent>
+    @((MarkupString)Build())
+</HeadContent>
+
+@code {
+    /// <summary>
+    /// The current theme.
+    /// </summary>
+    [Parameter]
+    public ThemeBase Theme { get; set; } = new DefaultTheme();
+
+    /// <summary>
+    /// Whether to use dark palette.
+    /// </summary>
+    [Parameter]
+    public bool DarkMode { get; set; }
+
+    /// <summary>
+    /// Adds the theme styles to head. Default: true.
+    /// </summary>
+    [Parameter]
+    public bool HeadOutlet { get; set; } = true;
+
+    /// <summary>
+    /// BuildStyles the theme.
+    /// </summary>
+    private string Build()
+    {
+        if (Theme == null)
+            return string.Empty;
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.AppendLine("<style class='theme-provider'>");
+        stringBuilder.Append(":root,");
+        if (DarkMode)
+            stringBuilder.Append(" [data-bs-theme=dark]");
+        else
+            stringBuilder.Append(" [data-bs-theme=light]");
+
+        stringBuilder.AppendLine("{");
+            
+        Theme.BuildStyles(stringBuilder, DarkMode);
+
+        stringBuilder.AppendLine("}");
+        stringBuilder.AppendLine("</style>");
+
+        return stringBuilder.ToString();
+    }
+}
