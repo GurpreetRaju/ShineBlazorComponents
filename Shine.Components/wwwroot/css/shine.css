@@ -8,12 +8,14 @@
 :root {
     --sh-page-padding: 1rem;
     --sh-content-padding: 1rem;
+    --sh-left-drawer-width: 0;
+    --sh-right-drawer-width: 0;
 }
 
 /** Drawer **/
 .drawer {
     padding: 1rem;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     flex-shrink: 0;
     height: 100%;
@@ -22,7 +24,10 @@
 
     .drawer .drawer-trigger {
         display: flex;
-        justify-content: end;
+    }
+
+    .drawer.right .drawer-trigger {
+        flex-direction: row-reverse;
     }
 
     .drawer .drawer-content {
@@ -42,6 +47,33 @@
         .drawer.drawer-collapse .drawer-collapsed-content {
             display: block;
         }
+
+
+/** Drawer Container **/
+.drawer-container {
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+    .drawer-container .drawer {
+        position: absolute;
+        top: 0;
+    }
+
+    .drawer-container .drawer.left {
+        left: 0;
+    }
+
+    .drawer-container .drawer.right {
+        right: 0;
+    }
+
+    .drawer-container .drawer-container-content {
+        margin-left: var(--sh-left-drawer-width);
+        margin-right: var(--sh-rightt-drawer-width);
+        width: calc(100% - var(--sh-left-drawer-width) - var(--sh-right-drawer-width));
+        transition: margin 0.25s ease-in;
+    }
 
 
 /**  Page  **/

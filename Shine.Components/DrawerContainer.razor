@@ -1,0 +1,62 @@
+@inherits ShineComponentBase
+
+<div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
+    <CascadingValue Value="this" IsFixed="true">
+        @LeftDrawer
+        <div class="drawer-container-content" style="@ContentStyleBuilder.Build()">
+            @Content
+        </div>
+        @RightDrawer
+    </CascadingValue>
+</div>
+
+
+@code {
+    private string _leftDrawer;
+    private string _rightDrawer;
+
+    /// <summary>
+    /// The content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment Content { get; set; }
+
+    /// <summary>
+    /// The left drawer.
+    /// </summary>
+    [Parameter]
+    public RenderFragment LeftDrawer { get; set; }
+
+    /// <summary>
+    /// The right drawer.
+    /// </summary>
+    [Parameter]
+    public RenderFragment RightDrawer { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "drawer-container";
+
+    protected virtual CssStyleBuilder ContentStyleBuilder => CssStyleBuilder.Create()
+        .AddStyle("--sh-left-drawer-width", _leftDrawer, LeftDrawer != null)
+        .AddStyle("--sh-right-drawer-width", _rightDrawer, RightDrawer != null);
+
+    /// <summary>
+    /// Register the drawer.
+    /// </summary>
+    internal void DrawerStateChanged(Drawer drawer, string width)
+    {
+        bool changed = false;
+        if (drawer.Position == Enumerations.DrawerPosition.Left)
+        {
+            changed = _leftDrawer != width;
+            _leftDrawer = width;
+        }
+        else
+        {
+            changed = _rightDrawer != width;
+            _rightDrawer = width;
+        }
+        if (changed)
+            InvokeAsync(StateHasChanged);
+    }
+}

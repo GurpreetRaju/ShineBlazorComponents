@@ -3,7 +3,7 @@
 @inherits ListItemsContainer
 
 <CascadingValue Value="@this">
-    <div id="@_id" class="@CssClasses" style="@CssStyles">
+    <div id="@_id" class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
         @if (ShowIndicators)
         {
             <div class="carousel-indicators">

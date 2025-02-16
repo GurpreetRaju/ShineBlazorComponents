@@ -3,7 +3,8 @@
 
 @if (ToastInfo != null)
 {
-    <div @key="_id" class="@CssClasses" role="alert" aria-live="assertive" aria-atomic="true">
+    <div @key="_id" role="alert" aria-live="assertive" aria-atomic="true"
+         class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
         @if (!string.IsNullOrEmpty(ToastInfo.Title))
         {
             <div class="toast-header">

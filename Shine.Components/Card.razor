@@ -1,7 +1,7 @@
 ﻿
 @inherits BackgroundComponentBase
 
-<div class="@CssClasses" style="@CssStyles">
+<div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
     @if (Header != null)
     {
         <header class="@CssClassBuilder.JoinClasses("card-header", HeaderClass)">

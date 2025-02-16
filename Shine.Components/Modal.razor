@@ -1,10 +1,10 @@
 @inherits BackgroundComponentBase
 
-<Button Clicked="Show" class="@TriggerClass">@TriggerText</Button>
+<Button Clicked="Show" Class="@TriggerClass">@TriggerText</Button>
 
 @if (m_show)
 {
-    <div id="@Id" class="@CssClasses" style="@CssStyles">
+    <div id="@Id" class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

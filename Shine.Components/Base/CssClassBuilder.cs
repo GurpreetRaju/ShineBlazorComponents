@@ -65,26 +65,28 @@ namespace Shine.Components.Base
         {
             if (edge != ComponentEdge.None)
             {
-                _classes.Add("border");
-
-                string cssClass = "border";
+                string cssClass;
                 string borderSize = string.Empty;
                 if (size.HasValue)
                 {
                     size = size > 5 ? 5 : size;
                     borderSize = "-" + size;
                 }
-                if (edge == ComponentEdge.StartAndEnd)
+                if (edge == ComponentEdge.TopAndBottom)
                 {
-                    cssClass += $"-top{borderSize} border-bottom{borderSize}";
+                    cssClass = $"border-top{borderSize} border-bottom{borderSize}";
                 }
-                else if (edge == ComponentEdge.TopAndBottom)
+                else if (edge == ComponentEdge.StartAndEnd)
                 {
-                    cssClass += $"-start{borderSize} border-end{borderSize}";
+                    cssClass = $"border-start{borderSize} border-end{borderSize}";
                 }
                 else if (edge != ComponentEdge.All)
                 {
-                    cssClass += "-" + edge.ToString().ToLowerInvariant() + borderSize;
+                    cssClass = "border-" + edge.ToString().ToLowerInvariant() + borderSize;
+                }
+                else
+                {
+                    cssClass = "border" + borderSize;
                 }
                 _classes.Add(cssClass);
 
@@ -176,7 +178,9 @@ namespace Shine.Components.Base
         /// <returns></returns>
         public string Build()
         {
-            return JoinClasses(_classes.ToArray());
+            var classs = JoinClasses(_classes.ToArray());
+
+            return classs;
         }
 
         /// <summary>

@@ -6,7 +6,7 @@
     <PageTitle>@PageName</PageTitle>
 }
 
-<div class="@CssClasses" style="@CssStyles">
+<div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
     @if (ShowTitle)
     {
         <h4 class="page-title">@PageName</h4>

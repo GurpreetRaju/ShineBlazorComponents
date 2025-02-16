@@ -1,9 +1,10 @@
+@using Shine.Components.Enumerations
 @inherits BackgroundComponentBase
 
-<div class="@CssClasses" style="@CssStyles">
+<div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
     <div class="drawer-trigger">
         <Button ButtonType="ButtonType.Button" Variant="ButtonVariant.Link" Clicked="ToggleCollapse">
-            @if (Collapsed)
+            @if (ShowRightArrow)
             {
                 <i class="bi bi-arrow-right"></i>
             }
@@ -22,6 +23,12 @@
 </div>
 
 @code {
+
+    /// <summary>
+    /// Parent container.
+    /// </summary>
+    [CascadingParameter]
+    public DrawerContainer Parent { get; set; }
 
     /// <summary>
     /// The drawer content.
@@ -54,16 +61,10 @@
     public string CollapsedWidth { get; set; } = "4.5rem";
 
     /// <summary>
-    /// Drawer width when expanded. Default: auto.
+    /// Drawer width when expanded. Default: 16rem.
     /// </summary>
     [Parameter]
-    public string Width { get; set; } = "auto";
-
-    /// <summary>
-    /// Mex width. Default: 16rem.
-    /// </summary>
-    [Parameter]
-    public string MaxWidth { get; set; } = "16rem";
+    public string Width { get; set; } = "16rem";
 
     /// <summary>
     /// Whether to drop shadow. Default: true.
@@ -71,18 +72,38 @@
     [Parameter]
     public bool HasShadow { get; set; } = true;
 
+    /// <summary>
+    /// The drawer position in <see cref="DrawerContainer"/>
+    /// </summary>
+    [Parameter]
+    public DrawerPosition Position { get; set; }
+
     /// <inheritdoc/>
     protected override string ComponentName => "drawer";
 
     /// <inheritdoc/>
     protected override CssClassBuilder CssBuilder => base.CssBuilder
         .WithClass("drawer-collapse", Collapsed)
-        .WithClass("shadow", HasShadow);
+        .WithClass("shadow", HasShadow)
+        .WithClass(Position.ToString().ToLowerInvariant());
 
     /// <inheritdoc/>
     protected override CssStyleBuilder StyleBuilder => base.StyleBuilder
-        .AddStyle("max-width", MaxWidth)
         .AddStyle("width", CollapsedWidth, Width, Collapsed);
+
+    /// <summary>
+    /// Whether to show the right arrow.
+    /// </summary>
+    protected bool ShowRightArrow => (Collapsed && Position == DrawerPosition.Left) 
+        || (!Collapsed && Position == DrawerPosition.Right);
+
+    /// <inheritdoc/>
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        NotifyStateChanged();
+    }
 
     /// <summary>
     /// Toggle the collapsed state.
@@ -92,6 +113,16 @@
         Collapsed = !Collapsed;
         CollapsedChanged.InvokeAsync(Collapsed);
 
+        NotifyStateChanged();
+
         InvokeAsync(StateHasChanged);
+    }
+
+    /// <summary>
+    /// Notify state changed.
+    /// </summary>
+    protected void NotifyStateChanged()
+    {
+        Parent?.DrawerStateChanged(this, Collapsed ? CollapsedWidth : Width);
     }
 }

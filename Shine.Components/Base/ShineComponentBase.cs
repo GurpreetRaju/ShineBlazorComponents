@@ -10,9 +10,6 @@ namespace Shine.Components.Base
     {
         private const string CssClassAttribute = "class";
         private const string CssStyleAttribute = "style";
-
-        private string m_classAttributeValue;
-        private string m_styleAttributeValue;
         
         /// <summary>
         /// The Border.
@@ -45,6 +42,18 @@ namespace Shine.Components.Base
         public uint? RadiusSize { get; set; }
 
         /// <summary>
+        /// The css classes.
+        /// </summary>
+        [Parameter]
+        public string Class { get; set; }
+
+        /// <summary>
+        /// The css styles.
+        /// </summary>
+        [Parameter]
+        public string Style { get; set; }
+
+        /// <summary>
         /// Captures the unmatched attributes.
         /// </summary>
         [Parameter(CaptureUnmatchedValues = true)]
@@ -58,12 +67,12 @@ namespace Shine.Components.Base
         /// <summary>
         /// CSS classes for the component including classes extracted from the class attribute added to the component.
         /// </summary>
-        protected string CssClasses => CssBuilder.WithClass(m_classAttributeValue).Build();
+        protected string CssClasses => CssBuilder.WithClass(Class).Build();
 
         /// <summary>
         /// CSS Styles including the styles extracted from the style attribute added to the component.
         /// </summary>
-        protected string CssStyles => StyleBuilder.AddStyle(m_styleAttributeValue).Build();
+        protected string CssStyles => StyleBuilder.AddStyle(Style).Build();
 
         /// <summary>
         /// Componenet Css Classes builder.
@@ -76,28 +85,6 @@ namespace Shine.Components.Base
         /// Componenet Css Classes builder.
         /// </summary>
         protected virtual CssStyleBuilder StyleBuilder => CssStyleBuilder.Create();
-
-        /// <summary>
-        /// Called when the component is initialized.
-        /// </summary>
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            if (AdditionalAttributes != null)
-            {
-                if (AdditionalAttributes.TryGetValue(CssClassAttribute, out object classValue) && classValue is string cssClass)
-                {
-                    m_classAttributeValue = cssClass;
-                    AdditionalAttributes.Remove(CssClassAttribute);
-                }
-                if (AdditionalAttributes.TryGetValue(CssStyleAttribute, out object styleValue) && styleValue is string styles)
-                {
-                    m_styleAttributeValue = styles;
-                    AdditionalAttributes.Remove(CssStyleAttribute);
-                }
-            }
-        }
 
         /// <inheritdoc/>
         public void Dispose()

@@ -39,19 +39,13 @@ h1:focus {
 
 @media (min-width: 767px) {
 
-    html, body, .layout-wrapper {
+    html, body, .layout-wrapper, .drawer-container .drawer-container-content {
         height: 100%;
+        overflow: hidden;
     }
 
     .layout-wrapper {
         display: flex;
         flex-direction: column;
-        overflow: hidden;
     }
-
-        .layout-wrapper .page-wrapper {
-            display: flex;
-            flex-grow: 1;
-            overflow: hidden;
-        }
 }

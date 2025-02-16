@@ -67,7 +67,7 @@
     }
 
     /// <summary>
-    /// Button _type.
+    /// Button Type.
     /// </summary>
     public enum ButtonType
     {

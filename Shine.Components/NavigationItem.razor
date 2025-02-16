@@ -1,6 +1,6 @@
 @inherits BackgroundComponentBase
 
-<li class="@CssClasses" style="@CssStyles">
+<li class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
     <a class="@NavLinkCssBuilder.Build()" aria-current="page" href="@Url" aria-disabled="@Disabled">
         @ChildContent
     </a>

@@ -9,14 +9,16 @@
             <Text Transform="Base.Transform.Uppercase" class="text-white">Shine</Text>
         </BrandContent>
     </AppBar>
-    <div class="page-wrapper">
-        <Drawer BackgroundColor="Base.Color.Light" Width="20rem">
-            <Navigation />
-        </Drawer>
-        <div class="flex-grow-1">
+    <DrawerContainer class="flex-grow-1">
+        <LeftDrawer>
+            <Drawer BackgroundColor="Base.Color.Light" Width="18rem" Position="Enumerations.DrawerPosition.Left">
+                <Navigation />
+            </Drawer>
+        </LeftDrawer>
+        <Content>
             @Body
-        </div>
-    </div>
+        </Content>
+    </DrawerContainer>
 </div>
 
 <div id="blazor-error-ui" data-nosnippet>
