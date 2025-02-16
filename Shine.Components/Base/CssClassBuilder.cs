@@ -61,9 +61,9 @@ namespace Shine.Components.Base
         /// <param name="radius">The border radius.</param>
         /// <param name="radiusSize">The border radius size (0-5). Optional.</param>
         /// <returns></returns>
-        public CssClassBuilder WithBorder(ComponentEdge edge, Color color, uint? size)
+        public CssClassBuilder WithBorder(BorderEdge edge, Color color, uint? size)
         {
-            if (edge != ComponentEdge.None)
+            if (edge != BorderEdge.None)
             {
                 string cssClass;
                 string borderSize = string.Empty;
@@ -72,15 +72,15 @@ namespace Shine.Components.Base
                     size = size > 5 ? 5 : size;
                     borderSize = "-" + size;
                 }
-                if (edge == ComponentEdge.TopAndBottom)
+                if (edge == BorderEdge.TopAndBottom)
                 {
                     cssClass = $"border-top{borderSize} border-bottom{borderSize}";
                 }
-                else if (edge == ComponentEdge.StartAndEnd)
+                else if (edge == BorderEdge.StartAndEnd)
                 {
                     cssClass = $"border-start{borderSize} border-end{borderSize}";
                 }
-                else if (edge != ComponentEdge.All)
+                else if (edge != BorderEdge.All)
                 {
                     cssClass = "border-" + edge.ToString().ToLowerInvariant() + borderSize;
                 }

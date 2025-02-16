@@ -1,8 +1,10 @@
 @inherits ShineComponentBase
 
 <div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
-    <div @onclick="ToggleState" class="accordion-header">
-        @HeaderContent
+    <div class="accordion-header">
+        <Button Class="@ButtonClasses" Clicked="ToggleState">
+            @HeaderContent
+        </Button>
     </div>
 
     <div class="@CollapseCssBuilder.Build()">
@@ -13,6 +15,12 @@
 </div>
 
 @code{
+
+    /// <summary>
+    /// The parent accordion.
+    /// </summary>
+    [CascadingParameter]
+    public Accordion Parent { get; set; }
 
     /// <summary>
     /// Trigger content.
@@ -47,6 +55,22 @@
     protected CssClassBuilder CollapseCssBuilder => CssClassBuilder.Create("accordion-collapse").WithClass("collapse").WithClass("show", !Collapsed);
 
     /// <summary>
+    /// The button classes.
+    /// </summary>
+    protected virtual string ButtonClasses => CssClassBuilder.JoinClasses("accordion-button", Collapsed ? "collapsed" : string.Empty);
+
+    /// <summary>
+    /// Collapse the accordion item.
+    /// </summary>
+    public void Collapse()
+    {
+        if (!Collapsed)
+        {
+            ToggleState();
+        }
+    }
+
+    /// <summary>
     /// Toggle the section content display state.
     /// </summary>
     private void ToggleState()
@@ -54,6 +78,27 @@
         Collapsed = !Collapsed;
         CollapsedChanged.InvokeAsync(Collapsed);
 
+        Parent?.AccordionStateChanged(this, Collapsed);
+
         InvokeAsync(StateHasChanged);
+    }
+
+    /// <inheritdoc/>
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Parent?.RegisterAccordionItem(this);
+    }
+
+    /// <inheritdoc/>
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        if (disposing)
+        {
+            Parent?.UnregisterAccordionItem(this);
+        }
     }
 }

@@ -2,9 +2,9 @@
 namespace Shine.Components.Base
 {
     /// <summary>
-    /// ComponentEdge.
+    /// Border Edge.
     /// </summary>
-    public enum ComponentEdge
+    public enum BorderEdge
     {
         /// <summary>
         /// None.

@@ -1,12 +1,57 @@
 ﻿@page "/collapsable-containers"
 
 <Page PageName="Collapsable Containers">
-    <AccordionItem>
-        <HeaderContent>I am the <b>header</b> content.</HeaderContent>
-        <ChildContent>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-        </ChildContent>
-    </AccordionItem>
+    <Example Header="Accordion Item" Code="@AccordionItemCode" Class="mb-3">
+        <AccordionItem>
+            <HeaderContent>
+                <div class="text-bg-primary flex-grow-1 p-2">Click to Toggle</div>
+            </HeaderContent>
+            <ChildContent>
+                <Content Border="Base.BorderEdge.All" Class="border-dark-subtle" BackgroundColor="Base.Color.Light">
+                    @CommonStrings.LoremIpsumText
+                </Content>
+            </ChildContent>
+        </AccordionItem>
+    </Example>
+
+    <Example Header="Accordion" Code="@AccordionItemCode">
+        <Accordion>
+            <AccordionItem>
+                <HeaderContent>
+                    Header Accordion 1
+                </HeaderContent>
+                <ChildContent>
+                    @CommonStrings.LoremIpsumText
+                </ChildContent>
+            </AccordionItem>
+            <AccordionItem>
+                <HeaderContent>
+                    Header Accordion 2
+                </HeaderContent>
+                <ChildContent>
+                    @CommonStrings.LoremIpsumText
+                </ChildContent>
+            </AccordionItem>
+        </Accordion>
+    </Example>
 </Page>
+
+@code {
+
+    private string AccordionItemCode => "<AccordionItem>\n"
+            + "\t<HeaderContent>\n"
+                + "\t\tHeader Accordion\n"
+            + "\t</HeaderContent>\n"
+            + "\t<ChildContent>\n"
+                + "\t\t<Content Border=\"Base.BorderEdge.All\" Class=\"border-dark-subtle\" BackgroundColor=\"Base.Color.Light\">\n"
+                    + $"\t\t\t@Text.\n"
+                + "\t\t</Content>\n"
+            + "\t</ChildContent>\n"
+        + "</AccordionItem>";
+
+    private string AccordionCode => "<Accordion>\n"
+        + AccordionItemCode + "\n"
+        + AccordionItemCode + "\n"
+        + "</Accordion>";
+
+}

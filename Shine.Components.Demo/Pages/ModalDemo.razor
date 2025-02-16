@@ -1,15 +1,31 @@
 ﻿@page "/modal"
 
 <Page PageName="Modal">
-    <Modal TriggerText="Show Modal">
-        <Header>I am the <b>header</b> content.</Header>
-        <Body>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-        </Body>
-        <Footer>
-            I am the footer.
-        </Footer>
-    </Modal>
+    <Example Header="Modal Dialog" Code="@ModalCode">
+        <Modal TriggerText="Show Modal" TriggerClass="btn-primary">
+            <Header>Header content.</Header>
+            <Body>
+                <Content>
+                    @CommonStrings.LoremIpsumText
+                </Content>
+            </Body>
+            <Footer>
+                This is footer.
+            </Footer>
+        </Modal>
+    </Example>
 </Page>
+
+@code{
+    public string ModalCode = "<Modal TriggerText=\"Show Modal\" TriggerClass=\"btn-primary\">\n"
+        + "\t<Header>Header content.</Header>\n"
+        + "\t<Body>\n"
+        + "\t\t<Content>\n"
+        + "\t\t\t@LoremIpsumText\n"
+        + "\t\t</Content>\n"
+        + "\t</Body>\n"
+        + "\t<Footer>\n"
+        + "\t\tThis is footer.\n"
+        + "\t</Footer>\n"
+        + "</Modal>";
+}

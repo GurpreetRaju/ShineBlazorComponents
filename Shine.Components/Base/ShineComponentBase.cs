@@ -15,7 +15,7 @@ namespace Shine.Components.Base
         /// The Border.
         /// </summary>
         [Parameter]
-        public ComponentEdge Border { get; set; } = ComponentEdge.None;
+        public BorderEdge Border { get; set; } = BorderEdge.None;
 
         /// <summary>
         /// The border color.

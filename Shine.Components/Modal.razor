@@ -2,13 +2,12 @@
 
 <Button Clicked="Show" Class="@TriggerClass">@TriggerText</Button>
 
-@if (m_show)
+@if (_show)
 {
     <div id="@Id" class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button @onclick="Hide" type="button" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
                     @if (string.IsNullOrEmpty(HeaderText))
                     {
                         @Header
@@ -17,6 +16,7 @@
                     {
                         <h2 class="modal-title">@HeaderText</h2>
                     }
+                    <Button @onclick="Hide" Variant="ButtonVariant.Link" aria-label="Close" Class="btn-close align-self-end"></Button>
                 </div>
                 <div class="modal-body">
                     @Body
@@ -35,7 +35,7 @@
 @code {
 
     private readonly Guid Id = Guid.NewGuid();
-    private bool m_show = false;
+    private bool _show = false;
 
     /// <summary>
     /// Trigger text.
@@ -77,11 +77,16 @@
     protected override string ComponentName => "modal";
 
     /// <summary>
+    /// Css builder.
+    /// </summary>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("fade").WithClass("show", _show);
+
+    /// <summary>
     /// Show the modal.
     /// </summary>
     protected async Task Show()
     {
-        m_show = true;
+        _show = true;
 
         await InvokeAsync(StateHasChanged);
     }
@@ -91,7 +96,7 @@
     /// </summary>
     protected async Task Hide()
     {
-        m_show = false;
+        _show = false;
 
         await InvokeAsync(StateHasChanged);
     }

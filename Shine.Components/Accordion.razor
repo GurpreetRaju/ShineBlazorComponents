@@ -1,0 +1,56 @@
+@inherits ShineComponentBase
+
+<div class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
+    <CascadingValue Value="this" IsFixed="true">
+        @ChildContent
+    </CascadingValue>
+</div>
+
+@code {
+    private List<AccordionItem> _children = new List<AccordionItem>();
+
+    /// <summary>
+    /// THe child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "accordion";
+
+    /// <summary>
+    /// Registers the accordion item.
+    /// </summary>
+    /// <param name="accordionItem"></param>
+    internal void RegisterAccordionItem(AccordionItem accordionItem)
+    {
+        _children.Add(accordionItem);
+    }
+
+    /// <summary>
+    /// Unregister the accordion item.
+    /// </summary>
+    /// <param name="accordionItem"></param>
+    internal void UnregisterAccordionItem(AccordionItem accordionItem)
+    {
+        _children.Remove(accordionItem);
+    }
+
+    /// <summary>
+    /// Called when collapse state of an accordion item changes.
+    /// </summary>
+    /// <param name="accordionItem"></param>
+    internal void AccordionStateChanged(AccordionItem accordionItem, bool collapsed)
+    {
+        if (!collapsed)
+        {
+            _children.ForEach(item =>
+            {
+                if (accordionItem != item)
+                {
+                    item.Collapse();
+                }
+            });
+        }
+    }
+}

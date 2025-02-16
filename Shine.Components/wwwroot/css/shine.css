@@ -7,7 +7,7 @@
 /**  Custom variables  **/
 :root {
     --sh-page-padding: 1rem;
-    --sh-content-padding: 1rem;
+    --sh-content-padding: 0.5rem 1rem;
     --sh-left-drawer-width: 0;
     --sh-right-drawer-width: 0;
 }
@@ -86,4 +86,10 @@
 
 .sh-content {
     padding: var(--sh-content-padding);
+}
+
+/** Modal **/
+
+.modal.show {
+    display: block;
 }

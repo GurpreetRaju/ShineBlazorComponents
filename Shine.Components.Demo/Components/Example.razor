@@ -1,21 +1,33 @@
-﻿<div class="border border-dark-subtle rounded">
-    <Content>
-        @ChildContent
-    </Content>
-    @if (Code != null)
-    {
-        <Content Border="Base.ComponentEdge.TopAndBottom"
-                 Class="d-flex align-items-center justify-content-between border-dark-subtle bg-light">
-            <Text Alignment="Base.Alignment.Start">HTML</Text>
-            <Clipboard Text="@Code" class="align-self-end"/>
-        </Content>
-        <Content Class="bg-light">
-            <pre style="text-wrap: auto;">@Code</pre>
-        </Content>
-    }
-</div>
+﻿@using Shine.Components.Base
 
+@inherits ShineComponentBase
+
+<div class="@CssClasses">
+    <h5>@Header</h5>
+    <div class="border border-dark-subtle rounded">
+        <Content>
+            @ChildContent
+        </Content>
+        @if (Code != null)
+        {
+            <Content Border="Base.BorderEdge.TopAndBottom"
+                     Class="d-flex align-items-center justify-content-between border-dark-subtle bg-light">
+                <Text Alignment="Base.Alignment.Start">HTML</Text>
+                <Clipboard Text="@Code" class="align-self-end" />
+            </Content>
+            <Content Class="bg-light">
+                <pre style="text-wrap: auto;">@Code</pre>
+            </Content>
+        }
+    </div>
+</div>
 @code {
+
+    /// <summary>
+    /// The header.
+    /// </summary>
+    [Parameter]
+    public string Header { get; set; }
 
     /// <summary>
     /// The example.
@@ -28,4 +40,7 @@
     /// </summary>
     [Parameter]
     public string Code { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "example";
 }
