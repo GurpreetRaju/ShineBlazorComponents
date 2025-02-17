@@ -1,10 +1,20 @@
 @typeparam TItem
 @inherits BackgroundComponentBase
 
-<li class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
-    @(ItemToText != null ?  ItemToText(Item) : Item)
-</li>
-
+@if (string.IsNullOrEmpty(Href))
+{
+    <li class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
+        @ItemText
+        @ChildContent
+    </li>
+}
+else
+{
+    <a href="@Href" class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
+        @ItemText
+        @ChildContent
+    </a>
+}
 
 @code {
 
@@ -15,11 +25,39 @@
     public TItem Item { get; set; }
 
     /// <summary>
+    /// The Href/link.
+    /// </summary>
+    [Parameter]
+    public string Href { get; set; }
+
+    /// <summary>
     /// The function to convert item to text.
     /// </summary>
     [CascadingParameter]
     protected Func<TItem, string> ItemToText { get; set; }
 
+    /// <summary>
+    /// The child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Variant.
+    /// </summary>
+    [Parameter]
+    public Color Color { get; set; }
+
     /// <inheritdoc/>
     protected override string ComponentName => "list-group-item";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder
+        .WithClass("list-group-item-action", Href != null)
+        .WithClass(() => $"list-group-item-{Color.ToString().ToLowerInvariant()}", Href != null);
+
+    /// <summary>
+    /// The item text.
+    /// </summary>
+    protected string ItemText => ItemToText != null ? ItemToText(Item) : Item?.ToString();
 }

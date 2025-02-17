@@ -1,25 +1,11 @@
-﻿<NavMenu IsVertical="true">
-    <NavigationItems>
-        <NavigationItem Url="">
-            Home
-        </NavigationItem>
-        <NavigationItem Url="form">
-            Form
-        </NavigationItem>
-        <NavigationItem Url="collapsable-containers">
-            Collapsabe Containers
-        </NavigationItem>
-        <NavigationItem Url="carousel">
-            Carousel
-        </NavigationItem>
-        <NavigationItem Url="modal">
-            Modal
-        </NavigationItem>
-        <NavigationItem Url="list-group">
-            List
-        </NavigationItem>
-    </NavigationItems>
-</NavMenu>
+﻿<Content><i class="bi bi-menu-button-wide-fill"></i> Components</Content>
+<ListGroup TItem="string" Class="ps-4" Element="Base.Element.Div">
+    <ListGroupItem TItem="string" Href="form">Form</ListGroupItem>
+    <ListGroupItem TItem="string" Href="collapsable-containers">Collapse</ListGroupItem>
+    <ListGroupItem TItem="string" Href="carousel">Carousel</ListGroupItem>
+    <ListGroupItem TItem="string" Href="modal">Modal</ListGroupItem>
+    <ListGroupItem TItem="string" Href="list-group">List</ListGroupItem>
+</ListGroup>
 
 @code {
     private bool collapseNavMenu;

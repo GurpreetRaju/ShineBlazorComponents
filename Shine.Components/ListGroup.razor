@@ -3,28 +3,22 @@
 @typeparam TItem
 @inherits BackgroundComponentBase
 
-<ul class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
-    <CascadingValue Value="this" IsFixed="true">
-        <CascadingValue Value="ItemToText" IsFixed="true">
-            @if (Virtualize)
-            {
-                <Virtualize TItem="TItem" Items="Items">
-                    <ItemContent>
-                        @RenderItem(context)
-                    </ItemContent>
-                </Virtualize>
-            }
-            else if (Items != null)
-            {
-                @foreach(var item in Items)
-                {
-                    @RenderItem(item)
-                }
-            }
-            @ChildContent
-        </CascadingValue>
+<CascadingValue Value="this" IsFixed="true">
+    <CascadingValue Value="ItemToText" IsFixed="true">
+        @if (Element == Element.Ul)
+        {
+            <ul class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
+                @RenderItems
+            </ul>
+        }
+        else
+        {
+            <div class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
+                @RenderItems
+            </div>
+        }
     </CascadingValue>
-</ul>
+</CascadingValue>
 
 @code {
 
@@ -58,8 +52,37 @@
     [Parameter]
     public bool Virtualize { get; set; }
 
+    /// <summary>
+    /// The html element tag.
+    /// </summary>
+    [Parameter]
+    public Element Element { get; set; } = Element.Ul;
+
     /// <inheritdoc/>
     protected override string ComponentName => "list-group";
+
+    /// <summary>
+    /// Render the items.
+    /// </summary>
+    protected virtual RenderFragment RenderItems => __builder =>
+    {
+        @if (Virtualize)
+        {
+            <Virtualize TItem="TItem" Items="Items">
+                <ItemContent>
+                    @RenderItem(context)
+                </ItemContent>
+            </Virtualize>
+        }
+        else if (Items != null)
+        {
+            @foreach (var item in Items)
+            {
+                @RenderItem(item)
+            }
+        }
+        @ChildContent
+    };
 
     /// <summary>
     /// Render the item.

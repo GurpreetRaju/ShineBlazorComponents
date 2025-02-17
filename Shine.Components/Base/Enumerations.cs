@@ -217,4 +217,19 @@ namespace Shine.Components.Base
         /// </summary>
         Capitalize
     }
+
+    /// <summary>
+    /// Elements.
+    /// </summary>
+    public enum Element
+    {
+        /// <summary>
+        /// Ul.
+        /// </summary>
+        Ul,
+        /// <summary>
+        /// Div.
+        /// </summary>
+        Div
+    }
 }

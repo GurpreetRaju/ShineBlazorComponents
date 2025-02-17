@@ -53,6 +53,21 @@ namespace Shine.Components.Base
         }
 
         /// <summary>
+        /// Adds the css class.
+        /// </summary>
+        /// <param name="classFunc">The function that provides the class to add.</param>
+        /// <param name="condition">The condition.</param>
+        /// <returns></returns>
+        public CssClassBuilder WithClass(Func<string> classFunc, bool condition = true)
+        {
+            if (condition && classFunc != null)
+            {
+                _classes.Add(classFunc());
+            }
+            return this;
+        }
+
+        /// <summary>
         /// Adds the border.
         /// </summary>
         /// <param name="edge">The specific component edge border.</param>
