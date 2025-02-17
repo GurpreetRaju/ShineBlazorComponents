@@ -1,0 +1,80 @@
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+
+@typeparam TItem
+@inherits BackgroundComponentBase
+
+<ul class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
+    <CascadingValue Value="this" IsFixed="true">
+        <CascadingValue Value="ItemToText" IsFixed="true">
+            @if (Virtualize)
+            {
+                <Virtualize TItem="TItem" Items="Items">
+                    <ItemContent>
+                        @RenderItem(context)
+                    </ItemContent>
+                </Virtualize>
+            }
+            else if (Items != null)
+            {
+                @foreach(var item in Items)
+                {
+                    @RenderItem(item)
+                }
+            }
+            @ChildContent
+        </CascadingValue>
+    </CascadingValue>
+</ul>
+
+@code {
+
+    /// <summary>
+    /// The child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Items to display.
+    /// </summary>
+    [Parameter]
+    public ICollection<TItem> Items { get; set; }
+
+    /// <summary>
+    /// The function to convert item to text.
+    /// </summary>
+    [Parameter]
+    public Func<TItem, string> ItemToText { get; set; }
+
+    /// <summary>
+    /// The item template.
+    /// </summary>
+    [Parameter]
+    public RenderFragment<TItem> ItemTemplate { get; set; }
+
+    /// <summary>
+    /// Whether to virtualize the items.
+    /// </summary>
+    [Parameter]
+    public bool Virtualize { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "list-group";
+
+    /// <summary>
+    /// Render the item.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <returns></returns>
+    protected virtual RenderFragment RenderItem(TItem item) => __builder =>
+    {
+        @if (ItemTemplate != null)
+        {
+            @ItemTemplate(item)
+        }
+        else 
+        {
+            <ListGroupItem Item="@item" />
+        }
+    };
+}

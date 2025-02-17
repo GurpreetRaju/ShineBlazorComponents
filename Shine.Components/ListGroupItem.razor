@@ -1,0 +1,25 @@
+@typeparam TItem
+@inherits BackgroundComponentBase
+
+<li class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
+    @(ItemToText != null ?  ItemToText(Item) : Item)
+</li>
+
+
+@code {
+
+    /// <summary>
+    /// The item.
+    /// </summary>
+    [Parameter]
+    public TItem Item { get; set; }
+
+    /// <summary>
+    /// The function to convert item to text.
+    /// </summary>
+    [CascadingParameter]
+    protected Func<TItem, string> ItemToText { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "list-group-item";
+}

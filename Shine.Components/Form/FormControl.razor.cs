@@ -27,7 +27,7 @@ namespace Shine.Components.Form
         /// Current edit context.
         /// </summary>
         [CascadingParameter]
-        public EditContext EditContext { get; set; }
+        protected EditContext EditContext { get; set; }
 
         /// <summary>
         /// The input type.

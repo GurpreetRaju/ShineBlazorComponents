@@ -22,7 +22,7 @@ namespace Shine.Components.Common
     /// <summary>
     /// A List item component.
     /// </summary>
-    public abstract class ListItemBase<TParent> : ShineComponentBase, IListItem where TParent : ListBase
+    public abstract class ListItemBase<TParent> : BackgroundComponentBase, IListItem where TParent : ListBase
     {
         /// <summary>
         /// Id of this item.
@@ -39,7 +39,7 @@ namespace Shine.Components.Common
         /// The Parent.
         /// </summary>
         [CascadingParameter]
-        public TParent Parent { get; set; }
+        protected TParent Parent { get; set; }
 
         /// <summary>
         /// Whether this item should be visible or not.

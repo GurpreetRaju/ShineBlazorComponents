@@ -5,7 +5,7 @@ namespace Shine.Components.Common
     /// <summary>
     /// A base class for container component that holds child items.
     /// </summary>
-    public abstract class ListBase : ShineComponentBase
+    public abstract class ListBase : BackgroundComponentBase
     {
         /// <summary>
         /// Children.

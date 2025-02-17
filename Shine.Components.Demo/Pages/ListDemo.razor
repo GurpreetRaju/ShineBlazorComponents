@@ -1,0 +1,46 @@
+﻿@page "/list-group"
+
+<Page PageName="List Group" ShowTitle="false">
+    <Example Header="List Group - Simple" Code="@ListCode">
+        <ListGroup Items="DummyDataProvider.GetFruits(5, 0)" ItemToText="t => t.Name"/>
+    </Example>
+    <Example Header="List Group - Custom Template" Code="@ListCustomCode">
+        <ListGroup Items="DummyDataProvider.GetFruits(5, 0)">
+            <ItemTemplate>
+                <li class="list-group-item">
+                    <div class="d-flex align-items-center" style="gap: 5px;">
+                        <span>@context.Name</span>
+                        <Badge BackgroundColor="Base.Color.Danger" Value="@context.Quantity" />
+                        <div class="flex-grow-1"></div>
+                        <span><i class="bi bi-currency-dollar mr-1"></i>@context.Price</span>
+                    </div>
+                </li>
+            </ItemTemplate>
+        </ListGroup>
+    </Example>
+</Page>
+
+@code {
+
+    /// <summary>
+    /// Dummy Data Provider.
+    /// </summary>
+    [Inject]
+    private DummyDataProvider DummyDataProvider { get; set; }
+
+    private string ListCode = "<ListGroup Items=\"Fruits\" ItemToText=\"f => f.Name\"/>";
+    
+    private string ListCustomCode = "<ListGroup Items=\"Fruits\">\n"
+        + "\t<ItemTemplate>\n"
+        + "\t\t<li class=\"list-group-item\">\n"
+        + "\t\t\t<div class=\"d-flex align-items-center\">\n"
+        + "\t\t\t\t<span>@context.Name</span>\n"
+        + "\t\t\t\t<Badge BackgroundColor=\"Base.Color.Danger\"  Value=\"@context.Quantity.ToString()\" />\n"
+        + "\t\t\t\t<div class=\"flex-grow-1\"></div>\n"
+        + "\t\t\t\t<span><i class=\"bi bi-currency-dollar mr-1\"></i>@context.Price</span>\n"
+        + "\t\t\t</div>\n"
+        + "\t\t</li>\n"
+        + "\t</ItemTemplate>\n"
+        + "</ListGroup>";
+
+}
