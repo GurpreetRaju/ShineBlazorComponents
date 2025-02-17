@@ -5,7 +5,7 @@ namespace Shine.Components.Common
     /// <summary>
     /// A base class for container component that holds child items.
     /// </summary>
-    public abstract class ListItemsContainer : ShineComponentBase
+    public abstract class ListBase : ShineComponentBase
     {
         /// <summary>
         /// Children.
@@ -16,7 +16,7 @@ namespace Shine.Components.Common
         /// Add child component.
         /// </summary>
         /// <param name="item">The child component.</param>
-        internal void AddChild(IListItem item)
+        internal virtual void AddChild(IListItem item)
         {
             Children.Add(item);
 

@@ -1,6 +1,6 @@
 @using Shine.Components.Common
 
-@inherits ListItem<Carousel>
+@inherits ListItemBase<Carousel>
 
 <div @key="Id" class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
     @ChildContent
@@ -15,4 +15,8 @@
 
     /// <inheritdoc/>
     protected override string ComponentName => "carousel-item";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("active", IsVisibile);
+
 }

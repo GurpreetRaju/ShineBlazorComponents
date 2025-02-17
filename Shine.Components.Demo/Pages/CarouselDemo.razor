@@ -1,24 +1,50 @@
 ﻿@page "/carousel"
 
-<Page PageName="Carousel">
-    <Carousel>
-        <CarouselItem>
-            <div class="container bg-red">
-                <h1><b>Slide 1</b></h1>
-                <h1><i>Lorem ipsum</i></h1>
-            </div>
-        </CarouselItem>
-        <CarouselItem>
-            <div class="container bg-blue">
-                <h1><b>Slide 2</b></h1>
-                <h1><i>Lorem ipsum</i></h1>
-            </div>
-        </CarouselItem>
-        <CarouselItem>
-            <div class="container bg-green">
-                <h1><b>Slide 3</b></h1>
-                <h1><i>Lorem ipsum</i></h1>
-            </div>
-        </CarouselItem>
-    </Carousel>
+<Page PageName="Carousel" ShowTitle="false">
+    <Example Header="Carousel" Code="@CarouselCode">
+        <Carousel Interval="3" Class="text-center">
+            <CarouselItem>
+                <div class="container text-bg-primary py-5">
+                    <h1><b>Slide 1</b></h1>
+                    <h1><i>Lorem ipsum</i></h1>
+                </div>
+            </CarouselItem>
+            <CarouselItem>
+                <div class="container text-bg-info py-5">
+                    <h1><b>Slide 2</b></h1>
+                    <h1><i>Lorem ipsum</i></h1>
+                </div>
+            </CarouselItem>
+            <CarouselItem>
+                <div class="container text-bg-warning py-5">
+                    <h1><b>Slide 3</b></h1>
+                    <h1><i>Lorem ipsum</i></h1>
+                </div>
+            </CarouselItem>
+        </Carousel>
+    </Example>
 </Page>
+
+@code {
+
+    private const string CarouselCode = "<Carousel Interval=\"3\" Class=\"text-center\">\n"
+        + "\t<CarouselItem>\n"
+        + "\t\t<div class=\"container text-bg-primary py-5\">\n"
+        + "\t\t\t<h1><b>Slide 1</b></h1>\n"
+        + "\t\t\t<h1><i>Lorem ipsum</i></h1>\n"
+        + "\t\t</div>\n"
+        + "\t</CarouselItem>\n"
+        + "\t<CarouselItem>\n"
+        + "\t\t<div class=\"container text-bg-info py-5\">\n"
+        + "\t\t\t<h1><b>Slide 2</b></h1>\n"
+        + "\t\t\t<h1><i>Lorem ipsum</i></h1>\n"
+        + "\t\t</div>\n"
+        + "\t</CarouselItem>\n"
+        + "\t<CarouselItem>\n"
+        + "\t\t<div class=\"container text-bg-warning py-5\">\n"
+        + "\t\t\t<h1><b>Slide 3</b></h1>\n"
+        + "\t\t\t<h1><i>Lorem ipsum</i></h1>\n"
+        + "\t\t</div>\n"
+        + "\t</CarouselItem>\n"
+        +"</Carousel>";
+}

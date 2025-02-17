@@ -1,6 +1,6 @@
 @using Shine.Components.Common
 
-@inherits ListItemsContainer
+@inherits ListBase
 
 <CascadingValue Value="@this">
     <div id="@_id" class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
@@ -9,7 +9,7 @@
             <div class="carousel-indicators">
                 @for (int childIndex = 0; childIndex < Children.Count; childIndex++)
                 {
-                    <button type="button" data-bs-target="@CarouselId" data-bs-slide-to="@childIndex"></button>
+                    <button type="button" @onclick="() => ShowCarouselItem(childIndex)"></button>
                 }
             </div>
         }
@@ -18,13 +18,11 @@
         </div>
         @if (ShowButtons)
         {
-            <button class="carousel-control-prev" type="button" data-bs-target="@CarouselId" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+            <button class="carousel-control-prev" type="button" @onclick="ShowPreviousCarouselItem">
+                <i class="bi bi-chevron-left"></i>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="@CarouselId" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+            <button class="carousel-control-next" type="button" @onclick="ShowNextCarouselItem">
+                <i class="bi bi-chevron-right"></i>
             </button>
         }
     </div>
@@ -32,6 +30,8 @@
 
 @code{
     private Guid _id = Guid.NewGuid();
+    private int m_currentVisibleItemIndex;
+    private Timer m_automaticSliderTimer;
 
     /// <summary>
     /// The child content.
@@ -51,6 +51,12 @@
     [Parameter]
     public bool ShowIndicators { get; set; } = true;
 
+    /// <summary>
+    /// Interval (in sec) for automatic slide change.
+    /// </summary>
+    [Parameter]
+    public int Interval { get; set; }
+
     /// <inheritdoc/>
     protected override string ComponentName => "carousel slide";
 
@@ -59,4 +65,109 @@
     /// </summary>
 
     private string CarouselId => "#" + _id;
+
+    /// <inheritdoc/>
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (firstRender && Children.Any())
+        {
+            Children[0].Show();
+
+            if (Interval > 0 && Children.Count > 1)
+            {
+                m_automaticSliderTimer = new Timer(OnAutomaticSliderTimerElapsed);
+                ResetTimer();
+            }
+        }
+    }
+
+    /// <inheritdoc/>
+    internal override void AddChild(IListItem item)
+    {
+        base.AddChild(item);
+
+        if (m_currentVisibleItemIndex != Children.IndexOf(item))
+            item.Hide();
+    }
+
+    /// <summary>
+    /// Set the item as current.
+    /// </summary>
+    /// <param name="nextVisibleChild">The new item to set visible.</param>
+    private void ShowCarouselItem(IListItem nextVisibleChild)
+    {
+        int nextVisibleItemIndex = Children.IndexOf(nextVisibleChild);
+
+        ShowCarouselItem(nextVisibleItemIndex);
+    }
+
+    /// <summary>
+    /// Show the next item.
+    /// </summary>
+    private void ShowNextCarouselItem()
+    {
+        var next = m_currentVisibleItemIndex + 1;
+        ShowCarouselItem(next >= Children.Count ? 0 : next);
+    }
+
+    /// <summary>
+    /// Show the previous item.
+    /// </summary>
+    private void ShowPreviousCarouselItem()
+    {
+        int prev = m_currentVisibleItemIndex - 1;
+        ShowCarouselItem(prev < 0 ? Children.Count - 1 : prev);
+    }
+
+    /// <summary>
+    /// Show the item.
+    /// </summary>
+    /// <param name="childIndex">The index of the new item to set visible.</param>
+    private void ShowCarouselItem(int childIndex)
+    {
+        if (m_currentVisibleItemIndex == childIndex || childIndex >= Children.Count || childIndex < 0) return;
+
+        var oldVisibleChild = Children[m_currentVisibleItemIndex];
+        var nextVisibleChild = Children[childIndex];
+
+        nextVisibleChild.Show();
+        oldVisibleChild.Hide();
+
+        m_currentVisibleItemIndex = childIndex;
+
+        ResetTimer();
+        InvokeAsync(StateHasChanged);
+    }
+
+    /// <summary>
+    /// Handles event when the <see cref="m_automaticSliderTimer"/> is elapsed.
+    /// </summary>
+    private void OnAutomaticSliderTimerElapsed(object state)
+    {
+        var nextSlideIndex = m_currentVisibleItemIndex + 1;
+        if (nextSlideIndex >= Children.Count)
+        {
+            nextSlideIndex = 0;
+        }
+
+        var oldVisibleChild = Children[m_currentVisibleItemIndex];
+        var nextVisibleChild = Children[nextSlideIndex];
+
+        nextVisibleChild.Show();
+        oldVisibleChild.Hide();
+
+        m_currentVisibleItemIndex = nextSlideIndex;
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    /// <summary>
+    /// Reset the timer.
+    /// </summary>
+    protected void ResetTimer()
+    {
+        m_automaticSliderTimer?.Change(Interval * 1000, Interval * 1000);
+    }
 }

@@ -22,7 +22,7 @@ namespace Shine.Components.Common
     /// <summary>
     /// A List item component.
     /// </summary>
-    public abstract class ListItem<TParent> : ShineComponentBase, IListItem where TParent : ListItemsContainer
+    public abstract class ListItemBase<TParent> : ShineComponentBase, IListItem where TParent : ListBase
     {
         /// <summary>
         /// Id of this item.
@@ -44,7 +44,7 @@ namespace Shine.Components.Common
         /// <summary>
         /// Whether this item should be visible or not.
         /// </summary>
-        protected bool IsVisibile { get; private set; } = true;
+        protected bool IsVisibile { get; set; } = true;
 
         /// <inheritdoc/>
         protected override void OnInitialized()
