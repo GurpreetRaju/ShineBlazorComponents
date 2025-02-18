@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Globalization;
 
-namespace Shine.Components.Form
+namespace Shine.Components.Common
 {
     /// <summary>
     /// The value converter.
@@ -32,7 +32,7 @@ namespace Shine.Components.Form
                     DateTime dateTime => dateTime.ToString(format, CultureInfo.InvariantCulture),
                     DateOnly dateOnly => dateOnly.ToString(format, CultureInfo.InvariantCulture),
                     DateTimeOffset dateoffset => dateoffset.ToString(format, CultureInfo.InvariantCulture),
-                    TimeOnly timeOnly => timeOnly.ToString(format, CultureInfo.InvariantCulture),                    
+                    TimeOnly timeOnly => timeOnly.ToString(format, CultureInfo.InvariantCulture),
                     _ => BindConverter.FormatValue(value, culture)?.ToString()
                 };
             }

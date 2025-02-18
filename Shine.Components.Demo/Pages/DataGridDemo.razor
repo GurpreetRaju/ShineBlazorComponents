@@ -1,0 +1,26 @@
+﻿@page "/data-grid"
+
+<Page PageName="Data Grid">
+    <Example Header="Data Grid" Code="@DataGridCode" Class="mb-3">
+        <DataGrid ItemsProvider="DummyDataProvider.GetFruits">
+            <Columns>
+                <DataGridColumn TItem="Data.FruitData" TValue="string" ColumnName="Id" Header="ID" DataExpression="x => x.Id" />
+                <DataGridColumn TItem="Data.FruitData" TValue="string" ColumnName="Name" Header="Name" DataExpression="x => x.Name" />
+                <DataGridColumn TItem="Data.FruitData" TValue="string" ColumnName="Price" Header="Price (CAD)" DataExpression="x => x.Price" />
+                <DataGridColumn TItem="Data.FruitData" TValue="string" ColumnName="Quantity" Header="Quantity" DataExpression="x => x.Quantity" />
+            </Columns>
+        </DataGrid>
+    </Example>
+</Page>
+
+@code {
+
+    private const string DataGridCode = "";
+
+    /// <summary>
+    /// Dummy data provider.
+    /// </summary>
+    [Inject]
+    private DummyDataProvider DummyDataProvider { get; set; }
+
+}

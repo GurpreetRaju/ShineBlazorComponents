@@ -36,7 +36,7 @@
     /// </summary>
     protected virtual RenderFragment RenderControl => __builder =>
     {
-        <input type="@InputType"
+        <input type="@GetInputType(InputType)"
                value="@ValueAsString"
                required="@Required"
                disabled="@Disabled"

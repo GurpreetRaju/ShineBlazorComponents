@@ -1,0 +1,118 @@
+﻿using Microsoft.AspNetCore.Components;
+using Shine.Components.Base;
+
+namespace Shine.Components
+{
+    /// <summary>
+    /// The data grid column.
+    /// </summary>
+    public abstract class ColumnBase<TItem> : ShineComponentBase
+    {
+        private SortDirection _direction = SortDirection.None;
+        private FilterCriteria _filter;
+
+        /// <summary>
+        /// The column Name.
+        /// </summary>
+        [Parameter]
+        public string ColumnName { get; set; }
+
+        /// <summary>
+        /// The header.
+        /// </summary>
+        [Parameter]
+        public string Header { get; set; }
+
+        /// <summary>
+        /// Whether user can sort by this column.
+        /// </summary>
+        [Parameter]
+        public bool CanSort { get; set; }
+
+        /// <summary>
+        /// A function to provide css class for a cell.
+        /// </summary>
+        [Parameter]
+        public Func<TItem, string> CellClassFunc { get; set; }
+
+        /// <summary>
+        /// The parent data grid.
+        /// </summary>
+        [CascadingParameter]
+        protected DataGrid<TItem> Parent { get; set; }
+
+        /// <summary>
+        /// The filter criteria provided by this column.
+        /// </summary>
+        public FilterCriteria FilterCriteria 
+        {
+            get => _filter;
+            protected set
+            {
+                if (_filter != value)
+                {
+                    _filter = value;
+                    OnFilterChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// The sort direction for this column.
+        /// </summary>
+        public SortDirection SortDirection 
+        { 
+            get => _direction;
+            protected set
+            {
+                if (_direction != value)
+                {
+                    _direction = value;
+                    OnSortDataChanged();
+                }
+            } 
+        }
+
+        /// <inheritdoc/>
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            Parent?.AddColumn(this);
+        }
+
+        /// <summary>
+        /// Called when the filter criteria changes.
+        /// </summary>
+        protected void OnFilterChanged()
+        {
+            InvokeAsync(StateHasChanged);
+
+            Parent?.ReloadData();
+        }
+
+        /// <summary>
+        /// Called when the sort data changes.
+        /// </summary>
+        protected void OnSortDataChanged()
+        {
+            InvokeAsync(StateHasChanged);
+            Parent?.SortDataChanged(ColumnName, SortDirection);
+        }
+
+        /// <summary>
+        /// Renders the cell.
+        /// </summary>
+        protected internal abstract object GetCellValue(TItem item);
+
+        /// <summary>
+        /// Gets the cell css class.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        protected internal virtual string GetCellClass(TItem item)
+        {
+            return CellClassFunc == null ? null : CellClassFunc(item);
+        }
+    }
+}

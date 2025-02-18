@@ -2,7 +2,7 @@
 using Shine.Components.Base;
 using System.Globalization;
 
-namespace Shine.Components.Form
+namespace Shine.Components.Common
 {
     /// <summary>
     /// Provides base functionality for a control.
@@ -68,10 +68,40 @@ namespace Shine.Components.Form
         public IEqualityComparer<TValue> EqualityComparer { get; set; }
 
         /// <summary>
+        /// The value for format.
+        /// </summary>
+        [Parameter]
+        public string Format { get; set; }
+
+        /// <summary>
         /// Error occured while parsing value.
         /// </summary>
         protected string ValueParsingError { get; private set; }
+
+        /// <summary>
+        /// The current value as string.
+        /// </summary>
+        protected string ValueAsString { get; set; }
+
+        #endregion
         
+        
+        #region Overrides
+
+        /// <inheritdoc/>
+        public override Task SetParametersAsync(ParameterView parameters)
+        {
+            if (parameters.TryGetValue(nameof(Value), out TValue newValue) && !Equals(Value, newValue))
+            {
+                EnsureDefaults();
+
+                Value = newValue;
+                ValueAsString = Converter.Convert(newValue, Format, CultureInfo);
+            }
+
+            return base.SetParametersAsync(parameters);
+        }
+
         #endregion
 
 
@@ -97,6 +127,7 @@ namespace Shine.Components.Form
             {
                 Value = parsedValue;
                 ValueChanged.InvokeAsync(Value);
+                ValueAsString = GetDisplayValue(Value);
             }
 
             InvokeAsync(StateHasChanged);
@@ -139,6 +170,13 @@ namespace Shine.Components.Form
         };
 
         /// <summary>
+        /// Gets the input type for control.
+        /// </summary>
+        /// <param name="inputType"></param>
+        /// <returns></returns>
+        protected virtual string GetInputType(InputType inputType) => inputType == InputType.DateTime ? "datetime-local" : inputType.ToString().ToLowerInvariant();
+
+        /// <summary>
         /// Determine if values are equal of <see cref="TValue"/> type.
         /// </summary>
         /// <param name="other"></param>
@@ -149,6 +187,15 @@ namespace Shine.Components.Form
             EqualityComparer ??= EqualityComparer<TValue>.Default;
 
             return EqualityComparer.Equals(Value, otherValue);
+        }
+
+        /// <summary>
+        /// Gets the display value.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual string GetDisplayValue(TValue value)
+        {
+            return Converter.Convert(value, Format, CultureInfo);
         }
 
         #endregion

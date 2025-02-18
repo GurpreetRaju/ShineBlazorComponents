@@ -1,0 +1,51 @@
+﻿@namespace Shine.Components
+
+@typeparam TItem
+@typeparam TValue
+
+@inherits ColumnBase<TItem>
+
+<th scope="col">
+    <div class="d-flex justify-content-between data-grid-header">
+        @Header
+        @if (CanSort)
+        {
+            <ul class="dropdown-menu">
+                @foreach (var sortOption in SortOptions)
+                {
+                    <li>
+                        <a class="@CssClassBuilder.JoinClasses("dropdown-item", SortDirection == sortOption ? "active" : null)"
+                           @onclick="() => HandleSortChanged(sortOption)">
+                        @sortOption
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+    @RenderFilter
+</th>
+
+
+@code {
+
+    /// <summary>
+    /// Renders the filter.
+    /// </summary>
+    private RenderFragment RenderFilter => __builder =>
+    {
+        @if (FilterData != null)
+        {
+            <div class="data-grid-filter">
+                @if (FilterTemplate == null)
+                {
+                    <InputEditor @bind-Value="FilterData.Value" />
+                }
+                else
+                {
+                    @FilterTemplate(FilterData)
+                }
+            </div>
+        }
+    };
+}

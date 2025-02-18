@@ -1,0 +1,54 @@
+@namespace Shine.Components
+
+@typeparam TItem
+@inherits ShineComponentBase
+
+@if (Columns != null)
+{
+    <CascadingValue Value="this">
+        <table class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
+            <thead>
+                <tr>
+                    @Columns
+                </tr>
+            </thead>
+            <tbody>
+                @if (IsLoading)
+                {
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                }
+                else if (CurrentItems.Count > 0)
+                {
+                    @foreach (var item in CurrentItems)
+                    {
+                        @RenderRow(item)
+                    }
+                }
+                else
+                {
+                    @NoItemTemplate
+                }
+            </tbody>
+        </table>
+    </CascadingValue>
+}
+
+@code {
+
+    /// <summary>
+    /// Render the row.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    protected virtual RenderFragment RenderRow(TItem item) => __builder =>
+    {
+        <tr class="@GetRowClass(item)">
+            @foreach (var column in ColumnDefinitions)
+            {
+                <td class="@column.GetCellClass(item)">@column.GetCellValue(item)</td>
+            }
+        </tr>
+    };
+}

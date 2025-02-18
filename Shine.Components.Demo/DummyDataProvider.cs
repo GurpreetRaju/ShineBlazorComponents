@@ -26,6 +26,22 @@ namespace Shine.Components.Demo
             DummyData.Fruits.Skip(skip).Take(take).ToList() ?? [];
 
         /// <summary>
+        /// Gets the fruits.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public Task<DataResponse<FruitData>> GetFruits(DataRequest request)
+        {
+            var response = new DataResponse<FruitData>();
+            var fruits = GetFruits(request.PageSize, request.PageSize * (request.PageNumber - 1));
+
+            response.Items.AddRange(fruits);
+            response.TotalCount = fruits.Count;
+
+            return Task.FromResult(response);
+        }
+
+        /// <summary>
         /// Loads the dummy data.
         /// </summary>
         private void LoadDummyData()

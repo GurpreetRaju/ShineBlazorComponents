@@ -1,4 +1,5 @@
-﻿@using Shine.Components.Form
+﻿@using Shine.Components.Common
+@using Shine.Components.Form
 @using System.Globalization
 
 @page "/form"
@@ -53,13 +54,41 @@
             </div>
         </div>
     </Example>
+
+    <Example Header="Input Editor" Code="@InputEditorCode">
+        <div class="row mb-3">
+            <div class="col">Number: </div>
+            <div class="col"><InputEditor @bind-Value="_number" /></div>
+            <div class="col"><Text>Current Value: @_number</Text></div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">Text: </div>
+            <div class="col"><InputEditor @bind-Value="_text" /></div>
+            <div class="col"><Text>Current Value: @_text</Text></div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">Decimal: </div>
+            <div class="col"><InputEditor @bind-Value="_float" /></div>
+            <div class="col"><Text>Current Value: @_float</Text></div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">DateTime: </div>
+            <div class="col"><InputEditor @bind-Value="_dateTime" /></div>
+            <div class="col"><Text>Current Value: @_dateTime</Text></div>
+        </div>
+    </Example>
 </Page>
 
 @code {
+    private int _number = 0;
+    private string _text = "Edit text";
+    private double _float = 0;
+    private DateTime? _dateTime;
+
     private FormModel _formModel = new FormModel();
     private string[] RadioOptions = new string[] { "Male", "Female", "X" };
 
-    private string Code => "<EditForm Model=\"@_formModel\">\n"
+    private const string Code = "<EditForm Model=\"@_formModel\">\n"
         + "\t<FormControl Label=\"User Name\" InputType=\"InputType.Text\" Placeholder=\"User name\" @bind-Value=\"@_formModel.UserName\" />\n"
         + "\t<FormControl Label=\"Password\" InputType=\"InputType.Password\" Placeholder=\"Password\" @bind-Value=\"@_formModel.Password\" />\n"
         + "\t<FormControl Label=\"Date Of Birth\" InputType=\"InputType.Date\" @bind-Value=\"@_formModel.DateOfBirth\" />\n"
@@ -67,6 +96,8 @@
         + "\t<CheckboxControl Label=\"Keep logged in\" Switch=\"true\" @bind-Value=\"_formModel.KeepLoggedIn\" Text=\"@(_formModel.KeepLoggedIn ? \"Yes\" : \"No\")\" />\n"
         + "\t<RadioControl Label=\"Gender\" Items=\"RadioOptions\" @bind-Value=\"_formModel.Gender\" />\n"
     + "</EditForm>\n";
+
+    private const string InputEditorCode = "<InputEditor @bind-Value=\"_value\" />\n";
 
     /// <summary>
     /// The form model.

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using System.Linq.Expressions;
 using Shine.Components.Base;
-using Microsoft.VisualBasic;
+using Shine.Components.Common;
 
 namespace Shine.Components.Form
 {
@@ -83,12 +83,6 @@ namespace Shine.Components.Form
         [Parameter]
         public string ControlStyle { get; set; }
 
-        /// <summary>
-        /// The value for format.
-        /// </summary>
-        [Parameter]
-        public string Format { get; set; }
-
         /// <inheritdoc/>
         protected override string ComponentName => "form-control-wrapper";
 
@@ -111,29 +105,10 @@ namespace Shine.Components.Form
             }
         }
 
-        /// <summary>
-        /// The current value as string.
-        /// </summary>
-        protected string ValueAsString { get; set; }
-
         #endregion
 
 
         #region Overrides
-
-        /// <inheritdoc/>
-        public override Task SetParametersAsync(ParameterView parameters)
-        {
-            if (parameters.TryGetValue(nameof(Value), out TValue newValue) && !Equals(Value, newValue))
-            {
-                EnsureDefaults();
-
-                Value = newValue;
-                ValueAsString = Converter.Convert(newValue, Format, CultureInfo);
-            }
-
-            return base.SetParametersAsync(parameters);
-        }
 
         /// <inheritdoc />
         protected override void OnParametersSet()
@@ -186,30 +161,26 @@ namespace Shine.Components.Form
                 _parsingValidationMessages ??= new ValidationMessageStore(EditContext);
                 _parsingValidationMessages.Add(_fieldIdentifier, ValueParsingError);
             }
-            else
-            {
-                ValueAsString = GetDisplayValue(Value);
-            }
 
             EditContext.NotifyFieldChanged(_fieldIdentifier);
+        }
+
+        /// <summary>
+        /// Gets the display value.
+        /// </summary>
+        /// <returns></returns>
+        protected override string GetDisplayValue(TValue value)
+        {
+            if (DisplayFunc == null)
+                return base.GetDisplayValue(value);
+
+            return DisplayFunc.Invoke(value);
         }
 
         #endregion
 
 
         #region Protected and Private Methods
-
-        /// <summary>
-        /// Gets the display value.
-        /// </summary>
-        /// <returns></returns>
-        protected virtual string GetDisplayValue(TValue value)
-        {
-            if (DisplayFunc == null)
-                return Converter.Convert(value, Format, CultureInfo);
-
-            return DisplayFunc.Invoke(value);
-        }
 
         /// <summary>
         /// Unsubscribe the Validation State Changed listener.
