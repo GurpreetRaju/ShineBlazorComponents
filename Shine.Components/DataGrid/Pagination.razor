@@ -1,0 +1,47 @@
+﻿@namespace Shine.Components
+
+@inherits ShineComponentBase
+
+@if (TotalPages > 0)
+{
+    <div class="d-flex justify-content-between align-items-center pagination-wrapper">
+        <span class="items-text">@ItemsText</span>
+        <nav aria-label="Page navigation">
+            <ul class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
+                @if (TotalPages > 1)
+                {
+                    <li class="@GetItemClass(DisablePrevButton, false)">
+                        <a class="page-link" @onclick="@(() => ChangePageNumber(CurrentPage - 1))" aria-label="Previous">
+                            <span aria-hidden="true"><i class="bi bi-chevron-double-left"></i></span>
+                        </a>
+                    </li>
+                }
+                @for (int i = _startPageNumber; i <= _endPageNumber; i++)
+                {
+                    <li class="@GetItemClass(false, CurrentPage == i)">
+                        @{
+                            int pageNumber = i;
+                        }
+                        <button type="button" class="page-link" disabled="@(pageNumber == CurrentPage)"
+                                @onclick="@(() => ChangePageNumber(pageNumber))">
+                            @pageNumber
+                        </button>
+                    </li>
+                }
+                @if (TotalPages > 1)
+                {
+                    <li class="@GetItemClass(DisableNextButton, false)">
+                        <a class="page-link" @onclick="@(() => ChangePageNumber(CurrentPage + 1))" aria-label="Next">
+                            <span aria-hidden="true"><i class="bi bi-chevron-double-right"></i></span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+
+        <InputEditor TValue="int" Class="form-control-sm" Style="width:5rem;"
+                     Value="PageSize" ValueChanged="HandlePageSizeChanged">
+        </InputEditor>
+    </div>
+}
+

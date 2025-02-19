@@ -67,7 +67,7 @@ namespace Shine.Components
         {
             return new FilterData<TValue>
             {
-                ColumnName = ColumnName
+                ColumnName = Name
             };
         }
 
@@ -76,15 +76,27 @@ namespace Shine.Components
         /// </summary>
         private void HandleFilterChanged()
         {
-            FilterCriteria = new FilterCriteria(ColumnName, FilterData?.FilterValue);
+            FilterCriteria = new FilterCriteria(Name, FilterData?.FilterValue);
         }
 
         /// <summary>
-        /// Handles the sort direction changes.
+        /// Toggles the sort direction.
         /// </summary>
-        private void HandleSortChanged(SortDirection direction)
+        private void ToggleSortDirection()
         {
-            SortDirection = direction;
+            if (Parent.IsLoading)
+                return;
+
+            SortDirection = SortDirection switch 
+            { 
+                SortDirection.None => SortDirection.Ascending,
+                SortDirection.Ascending => SortDirection.Descending,
+                SortDirection.Descending => SortDirection.None,
+                _ => SortDirection.None,
+            };
+
+            OnSortDataChanged();
+            InvokeAsync(StateHasChanged);
         }
     }
 }

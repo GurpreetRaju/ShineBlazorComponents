@@ -31,6 +31,19 @@
                     @NoItemTemplate
                 }
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="@ColumnDefinitions.Count">                        
+                        <Pagination TotalPages="_totalPages"
+                                    CurrentPage="_currentPage" CurrentPageChanged="HandleCurrentPageChanged"
+                                    PageSize="_pageSize" PageSizeChanged="HandlePageSizeChanged">
+                            <ItemsText>
+                                <Text>@_totalItems Items</Text>
+                            </ItemsText>
+                        </Pagination>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </CascadingValue>
 }

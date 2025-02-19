@@ -26,7 +26,7 @@
         /// <summary>
         /// The filters.
         /// </summary>
-        public List<FilterCriteria> Filters { get; set; } = new List<FilterCriteria>();
+        public List<FilterCriteria> Filters { get; } = new List<FilterCriteria>();
 
         /// <summary>
         /// The sort data.

@@ -8,14 +8,13 @@ namespace Shine.Components
     /// </summary>
     public abstract class ColumnBase<TItem> : ShineComponentBase
     {
-        private SortDirection _direction = SortDirection.None;
         private FilterCriteria _filter;
 
         /// <summary>
         /// The column Name.
         /// </summary>
         [Parameter]
-        public string ColumnName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// The header.
@@ -62,15 +61,8 @@ namespace Shine.Components
         /// </summary>
         public SortDirection SortDirection 
         { 
-            get => _direction;
-            protected set
-            {
-                if (_direction != value)
-                {
-                    _direction = value;
-                    OnSortDataChanged();
-                }
-            } 
+            get;
+            protected set;
         }
 
         /// <inheritdoc/>
@@ -79,6 +71,30 @@ namespace Shine.Components
             base.OnInitialized();
 
             Parent?.AddColumn(this);
+        }
+
+        /// <summary>
+        /// Reset the sort direction.
+        /// </summary>
+        internal void ResetSort()
+        {
+            SortDirection = SortDirection.None;
+            InvokeAsync(StateHasChanged);
+        }
+
+        /// <summary>
+        /// Renders the cell.
+        /// </summary>
+        protected internal abstract object GetCellValue(TItem item);
+
+        /// <summary>
+        /// Gets the cell css class.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        protected internal virtual string GetCellClass(TItem item)
+        {
+            return CellClassFunc == null ? null : CellClassFunc(item);
         }
 
         /// <summary>
@@ -96,23 +112,7 @@ namespace Shine.Components
         /// </summary>
         protected void OnSortDataChanged()
         {
-            InvokeAsync(StateHasChanged);
-            Parent?.SortDataChanged(ColumnName, SortDirection);
-        }
-
-        /// <summary>
-        /// Renders the cell.
-        /// </summary>
-        protected internal abstract object GetCellValue(TItem item);
-
-        /// <summary>
-        /// Gets the cell css class.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        protected internal virtual string GetCellClass(TItem item)
-        {
-            return CellClassFunc == null ? null : CellClassFunc(item);
+            Parent?.SortDataChanged(Name, SortDirection);
         }
     }
 }

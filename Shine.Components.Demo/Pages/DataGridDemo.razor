@@ -4,10 +4,10 @@
     <Example Header="Data Grid" Code="@DataGridCode" Class="mb-3">
         <DataGrid ItemsProvider="DummyDataProvider.GetFruits">
             <Columns>
-                <DataGridColumn TItem="Data.FruitData" TValue="string" ColumnName="Id" Header="ID" DataExpression="x => x.Id" />
-                <DataGridColumn TItem="Data.FruitData" TValue="string" ColumnName="Name" Header="Name" DataExpression="x => x.Name" />
-                <DataGridColumn TItem="Data.FruitData" TValue="string" ColumnName="Price" Header="Price (CAD)" DataExpression="x => x.Price" />
-                <DataGridColumn TItem="Data.FruitData" TValue="string" ColumnName="Quantity" Header="Quantity" DataExpression="x => x.Quantity" />
+                <DataGridColumn TItem="Data.FruitData" TValue="string" Name="Id" Header="ID" DataExpression="x => x.Id" CanSort="true" />
+                <DataGridColumn TItem="Data.FruitData" TValue="string" Name="Name" Header="Name" DataExpression="x => x.Name" CanSort="true" />
+                <DataGridColumn TItem="Data.FruitData" TValue="string" Name="Price" Header="Price (CAD)" DataExpression="x => x.Price" CanSort="true" />
+                <DataGridColumn TItem="Data.FruitData" TValue="string" Name="Quantity" Header="Quantity" DataExpression="x => x.Quantity" CanSort="true" />
             </Columns>
         </DataGrid>
     </Example>
