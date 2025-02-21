@@ -5,7 +5,7 @@ namespace Shine.Components
     /// <summary>
     /// Input editor.
     /// </summary>
-    public partial class InputEditor<TValue>
+    public partial class InputControl<TValue>
     {
         private static readonly Type _nullableUnderlyingType = Nullable.GetUnderlyingType(typeof(TValue));
 

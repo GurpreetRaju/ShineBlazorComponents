@@ -1,0 +1,17 @@
+
+<div class="@CssClassBuilder.JoinClasses("sh-overlay", Show ? "d-block" : null)" @onclick="() => OnClicked.InvokeAsync()"></div>
+
+@code {
+
+    /// <summary>
+    /// On click callback.
+    /// </summary>
+    [Parameter]
+    public EventCallback OnClicked { get; set; }
+
+    /// <summary>
+    /// Show overlay.
+    /// </summary>
+    [Parameter]
+    public bool Show { get; set; }
+}

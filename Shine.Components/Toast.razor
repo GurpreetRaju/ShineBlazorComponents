@@ -7,12 +7,12 @@
          class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
         @if (!string.IsNullOrEmpty(ToastInfo.Title))
         {
-            <div class="toast-header">
+            <div class="toast-header d-flex justify-content-between">
                 <strong class="me-auto">@ToastInfo.Title</strong>
                 <button type="button" class="btn-close" @onclick="RemoveToast"></button>
             </div>
         }
-        <div class="toast-body">
+        <div class="toast-body d-flex justify-content-between">
             @ToastInfo.Message
             @if (string.IsNullOrEmpty(ToastInfo.Title))
             {
@@ -38,10 +38,22 @@
     private ToastService ToastService { get; set; }
 
     /// <inheritdoc/>
-    protected override string ComponentName => "toast";
+    protected override string ComponentName => "toast show m-2";
 
     /// <inheritdoc/>
-    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithBackground(ToastInfo?.Color ?? Color.None);
+    protected override CssClassBuilder CssBuilder => base.CssBuilder
+        .WithBackground(ToastInfo?.Color ?? Color.None);
+
+    /// <inheritdoc/>
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (firstRender)
+        {
+            ToastInfo.StartTimer(ToastService.RemoveToast);
+        }
+    }
 
     /// <summary>
     /// Remove the toast.

@@ -9,11 +9,6 @@ namespace Shine.Components
     public partial class ToastProvider : IDisposable
     {
         /// <summary>
-        /// The default toast duration.
-        /// </summary>
-        public TimeSpan DefaultToastDuration { get; set; }
-
-        /// <summary>
         /// The toast service.
         /// </summary>
         [Inject]

@@ -29,6 +29,18 @@ namespace Shine.Components
         public RenderFragment Columns { get; set; }
 
         /// <summary>
+        /// The striped rows.
+        /// </summary>
+        [Parameter]
+        public bool Striped { get; set; } = true;
+
+        /// <summary>
+        /// The bordered table.
+        /// </summary>
+        [Parameter]
+        public bool Bordered { get; set; } = true;
+
+        /// <summary>
         /// The function to provide css class for a row.
         /// </summary>
         [Parameter]
@@ -50,7 +62,9 @@ namespace Shine.Components
 
         /// <inheritdoc/>
         protected override CssClassBuilder CssBuilder => base.CssBuilder
-            .WithClass("table");
+            .WithClass("table")
+            .WithClass("table-bordered", Bordered)
+            .WithClass("table-striped", Striped);
 
         /// <summary>
         /// The list of columns.

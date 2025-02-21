@@ -58,22 +58,22 @@
     <Example Header="Input Editor" Code="@InputEditorCode">
         <div class="row mb-3">
             <div class="col">Number: </div>
-            <div class="col"><InputEditor @bind-Value="_number" /></div>
+            <div class="col"><InputControl @bind-Value="_number" /></div>
             <div class="col"><Text>Current Value: @_number</Text></div>
         </div>
         <div class="row mb-3">
             <div class="col">Text: </div>
-            <div class="col"><InputEditor @bind-Value="_text" /></div>
+            <div class="col"><InputControl @bind-Value="_text" /></div>
             <div class="col"><Text>Current Value: @_text</Text></div>
         </div>
         <div class="row mb-3">
             <div class="col">Decimal: </div>
-            <div class="col"><InputEditor @bind-Value="_float" /></div>
+            <div class="col"><InputControl @bind-Value="_float" /></div>
             <div class="col"><Text>Current Value: @_float</Text></div>
         </div>
         <div class="row mb-3">
             <div class="col">DateTime: </div>
-            <div class="col"><InputEditor @bind-Value="_dateTime" /></div>
+            <div class="col"><InputControl @bind-Value="_dateTime" /></div>
             <div class="col"><Text>Current Value: @_dateTime</Text></div>
         </div>
     </Example>
@@ -97,7 +97,7 @@
         + "\t<RadioControl Label=\"Gender\" Items=\"RadioOptions\" @bind-Value=\"_formModel.Gender\" />\n"
     + "</EditForm>\n";
 
-    private const string InputEditorCode = "<InputEditor @bind-Value=\"_value\" />\n";
+    private const string InputEditorCode = "<InputControl @bind-Value=\"_value\" />\n";
 
     /// <summary>
     /// The form model.

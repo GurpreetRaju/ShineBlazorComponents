@@ -1,0 +1,55 @@
+@typeparam TItem
+@inherits SelectControlBase<TItem>
+
+<div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
+    <span class="@CssClassBuilder.JoinClasses("cursor-pointer", TriggerClass)" @onclick="Toggle">
+        @if (TriggerContent != null)
+        {
+            @TriggerContent
+        }
+        else 
+        {
+            <input type="text" value="@GetSelectedItemtext()" readonly
+                   class="@CssClassBuilder.JoinClasses(ControlCss)" />
+        }
+    </span>
+    <ul class="@DropDownClasses">
+        @foreach (var item in Items ?? [])
+        {
+            <li>
+                <a class="@CssClassBuilder.JoinClasses(GetItemClasses(item))"
+                   @onclick="() => HandleItemClicked(item)"
+                   @onclick:stopPropagation="true" @onclick:preventDefault="true">
+                    @(ItemTemplate == null ? GetDisplayText(item) : ItemTemplate(item))
+                </a>
+            </li>
+        }
+    </ul>
+    <Overlay Show="Open" OnClicked="Close"/>
+</div>
+
+@code {
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "dropdown";
+
+    /// <summary>
+    /// The size.
+    /// </summary>
+    [Parameter]
+    public Size Size { get; set; }
+
+    /// <summary>
+    /// Css for input control.
+    /// </summary>
+    private IEnumerable<string> ControlCss 
+    {
+        get
+        {
+            yield return "form-select";
+
+            if (Size != Size.Medium)
+                yield return $"form-control-{Size.ToString().ToLower()}";
+        }
+    }
+}

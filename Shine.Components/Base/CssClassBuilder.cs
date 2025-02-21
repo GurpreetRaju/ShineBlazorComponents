@@ -38,6 +38,16 @@ namespace Shine.Components.Base
         }
 
         /// <summary>
+        /// Joins the css class names.
+        /// </summary>
+        /// <param name="classes"></param>
+        /// <returns></returns>
+        public static string JoinClasses(IEnumerable<string> classes)
+        {
+            return string.Join(" ", classes.Where(c => !string.IsNullOrWhiteSpace(c)));
+        }
+
+        /// <summary>
         /// Adds the css class.
         /// </summary>
         /// <param name="classNames">The class to add.</param>

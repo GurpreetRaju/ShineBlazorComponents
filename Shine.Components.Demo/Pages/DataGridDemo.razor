@@ -2,7 +2,7 @@
 
 <Page PageName="Data Grid">
     <Example Header="Data Grid" Code="@DataGridCode" Class="mb-3">
-        <DataGrid ItemsProvider="DummyDataProvider.GetFruits">
+        <DataGrid ItemsProvider="DummyDataProvider.GetFruits" Class="table-bordered">
             <Columns>
                 <DataGridColumn TItem="Data.FruitData" TValue="string" Name="Id" Header="ID" DataExpression="x => x.Id" CanSort="true" />
                 <DataGridColumn TItem="Data.FruitData" TValue="string" Name="Name" Header="Name" DataExpression="x => x.Name" CanSort="true" />

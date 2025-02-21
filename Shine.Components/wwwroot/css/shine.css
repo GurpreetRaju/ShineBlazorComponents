@@ -30,6 +30,11 @@
         flex-direction: row-reverse;
     }
 
+    .drawer .drawer-content, .drawer .drawer-collapsed-content {
+        flex: 1 1 auto;
+        overflow: auto;
+    }
+    
     .drawer .drawer-content {
         display: block;
         transition: display 0.5s ease-in;
@@ -92,4 +97,38 @@
 
 .modal.show {
     display: block;
+}
+
+/** Drop Down **/
+
+.dropdown-toggle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 10rem;
+}
+
+/** Overlay **/
+
+.sh-overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 990;
+}
+
+    .sh-overlay.dark {
+        background-color: rgba(0,0,0,0.5);
+    }
+
+
+/** Utilities **/
+
+.cursor-pointer {
+    cursor: pointer;
 }

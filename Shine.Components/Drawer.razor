@@ -2,24 +2,20 @@
 @inherits BackgroundComponentBase
 
 <div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
-    <div class="drawer-trigger">
-        <Button ButtonType="ButtonType.Button" Variant="ButtonVariant.Link" Clicked="ToggleCollapse">
-            @if (ShowRightArrow)
-            {
-                <i class="bi bi-arrow-right"></i>
-            }
-            else
-            {
-                <i class="bi bi-arrow-left"></i>
-            }
-        </Button>
-    </div>
+    @if (TriggerPosition == TriggerPosition.Top)
+    {
+        @RenderTrigger
+    }
     <div class="drawer-content">
         @ChildContent
     </div>
     <div class="drawer-collapsed-content">
         @CollapsedContent
     </div>
+    @if (TriggerPosition == TriggerPosition.Bottom)
+    {
+        @RenderTrigger
+    }
 </div>
 
 @code {
@@ -71,6 +67,12 @@
     /// </summary>
     [Parameter]
     public bool HasShadow { get; set; } = true;
+
+    /// <summary>
+    /// The trigger position in drawer. Default: Bottom.
+    /// </summary>
+    [Parameter]
+    public TriggerPosition TriggerPosition { get; set; } = TriggerPosition.Bottom;
 
     /// <summary>
     /// The drawer position in <see cref="DrawerContainer"/>
@@ -125,4 +127,23 @@
     {
         Parent?.DrawerStateChanged(this, Collapsed ? CollapsedWidth : Width);
     }
+
+    /// <summary>
+    /// Renders the trigger.
+    /// </summary>
+    private RenderFragment RenderTrigger => __builder =>
+    {
+        <div class="drawer-trigger">
+            <Button ButtonType="ButtonType.Button" Variant="ButtonVariant.Link" Clicked="ToggleCollapse">
+                @if (ShowRightArrow)
+                {
+                    <i class="bi bi-arrow-right"></i>
+                }
+                else
+                {
+                    <i class="bi bi-arrow-left"></i>
+                }
+            </Button>
+        </div>
+    };
 }

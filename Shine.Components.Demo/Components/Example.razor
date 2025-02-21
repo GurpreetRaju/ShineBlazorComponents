@@ -4,12 +4,13 @@
 
 <div class="@CssClasses">
     <h5 class="my-3">@Header</h5>
-    <div class="border border-dark-subtle rounded">
-        <Content>
-            @ChildContent
-        </Content>
-        @if (Code != null)
-        {
+    <Content Class="mb-1">
+        @ChildContent
+    </Content>
+
+    @if (Code != null)
+    {
+        <div class="border border-dark-subtle rounded">
             <Content Border="Base.BorderEdge.TopAndBottom"
                      Class="d-flex align-items-center justify-content-between border-dark-subtle bg-light">
                 <Text Alignment="Base.Alignment.Start">HTML</Text>
@@ -18,8 +19,8 @@
             <Content Class="bg-light">
                 <pre style="text-wrap: auto;">@Code</pre>
             </Content>
-        }
-    </div>
+        </div>
+    }
 </div>
 @code {
 

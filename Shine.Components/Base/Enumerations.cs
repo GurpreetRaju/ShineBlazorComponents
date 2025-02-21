@@ -232,4 +232,23 @@ namespace Shine.Components.Base
         /// </summary>
         Div
     }
+
+    /// <summary>
+    /// The selection mode.
+    /// </summary>
+    public enum SelectionMode
+    {
+        /// <summary>
+        /// No selection.
+        /// </summary>
+        None,
+        /// <summary>
+        /// Single item selection.
+        /// </summary>
+        Single,
+        /// <summary>
+        /// Multiple items selection.
+        /// </summary>
+        Multiple
+    }
 }

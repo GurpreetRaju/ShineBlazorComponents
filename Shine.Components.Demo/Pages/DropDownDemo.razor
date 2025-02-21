@@ -1,0 +1,76 @@
+﻿@page "/drop-down"
+
+@using Shine.Components.Services
+
+<Page PageName="Drop Down">
+    <Example Header="Drop Down Menu" Code="@MenuCode" Class="mb-3">
+        <DropDown TItem="Data.FruitData" Items="DummyDataProvider.GetFruits(4, 0)"
+        ItemClicked="FruitClicked" ItemToText="f => f.Name">
+            <TriggerContent>
+                <div class="btn btn-info">Menu</div>
+            </TriggerContent>
+        </DropDown>
+    </Example>
+    <Example Header="Single Selection" Code="@SingleSelectionCode" Class="mb-3">
+        <div style="width:12rem">
+            <DropDown TItem="Data.FruitData" Items="DummyDataProvider.GetFruits(4, 0)"
+            SelectionMode="Base.SelectionMode.Single" ItemToText="f => f.Name">
+            </DropDown>
+        </div>
+    </Example>
+    <Example Header="Multi Selection" Code="@MultiSelectionCode" Class="mb-3">
+        <div style="width:16rem">
+            <DropDown TItem="Data.FruitData" Items="DummyDataProvider.GetFruits(4, 0)"
+                      SelectionMode="Base.SelectionMode.Multiple" ItemToText="f => f.Name"
+                      @bind-SelectedItems="@_selectedFruits">
+                <TriggerContent>
+                    <input type="text" value="@(_selectedFruits.Count) Items" class="form-select form-control-small" readonly />
+                </TriggerContent>
+            </DropDown>
+        </div>
+    </Example>
+</Page>
+
+@code {
+    private ICollection<Data.FruitData> _selectedFruits = new HashSet<Data.FruitData>();
+
+    private const string MenuCode = "<DropDown TItem=\"Data.FruitData\" Items=\"Fruits\"\n" 
+        + "\tItemClicked=\"FruitClicked\">\n"
+        + "\t<TriggerContent>\n"
+        + "\t\t<div class=\"btn btn-info\">Menu</div>\n"
+        + "\t</TriggerContent>\n"
+        + "</DropDown>";
+
+    private const string MultiSelectionCode = "<DropDown TItem=\"Data.FruitData\"\n"
+        + "\tSelectionMode=\"Base.SelectionMode.Multiple\" ItemToText=\"f => f.Name\"\n"
+        + "\t@bind-SelectedItems=\"@_selectedFruits\">\n"
+        + "\t<TriggerContent>\n"
+        + "\t\t<input type=\"text\" value=\"@(_selectedFruits.Count) Items\" class=\"form-select form-control-small\" readonly />\n"
+        + "\t</TriggerContent>\n"
+        + "</DropDown>";
+
+    private const string SingleSelectionCode = "<DropDown TItem=\"Data.FruitData\" ItemToText=\"f => f.Name\">\n"
+        + "\tItems=\"Fruits\" SelectionMode=\"Base.SelectionMode.Single\" @bind-SelectedItem=\"Fruit\">\n"
+        + "</DropDown>";
+
+    /// <summary>
+    /// Dummy data provider.
+    /// </summary>
+    [Inject]
+    private DummyDataProvider DummyDataProvider { get; set; }
+
+    /// <summary>
+    /// Toast Service.
+    /// </summary>
+    [Inject]
+    private ToastService Toasts { get; set; }
+
+    /// <summary>
+    /// Fruit clicked.
+    /// </summary>
+    /// <param name="item"></param>
+    private void FruitClicked(Data.FruitData item)
+    {
+        Toasts.AddToast($"{item.Name} clicked.", Base.Color.Info);
+    }
+}
