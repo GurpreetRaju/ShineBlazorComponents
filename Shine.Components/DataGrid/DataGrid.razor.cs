@@ -38,7 +38,7 @@ namespace Shine.Components
         /// The bordered table.
         /// </summary>
         [Parameter]
-        public bool Bordered { get; set; } = true;
+        public bool Bordered { get; set; }
 
         /// <summary>
         /// The function to provide css class for a row.
@@ -62,7 +62,7 @@ namespace Shine.Components
 
         /// <inheritdoc/>
         protected override CssClassBuilder CssBuilder => base.CssBuilder
-            .WithClass("table")
+            .WithClass("table border")
             .WithClass("table-bordered", Bordered)
             .WithClass("table-striped", Striped);
 

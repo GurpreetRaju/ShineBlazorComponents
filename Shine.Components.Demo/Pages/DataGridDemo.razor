@@ -2,7 +2,7 @@
 
 <Page PageName="Data Grid">
     <Example Header="Data Grid" Code="@DataGridCode" Class="mb-3">
-        <DataGrid ItemsProvider="DummyDataProvider.GetFruits" Class="table-bordered">
+        <DataGrid ItemsProvider="DummyDataProvider.GetFruits" Class="shadow-sm">
             <Columns>
                 <DataGridColumn TItem="Data.FruitData" TValue="string" Name="Id" Header="ID" DataExpression="x => x.Id" CanSort="true" />
                 <DataGridColumn TItem="Data.FruitData" TValue="string" Name="Name" Header="Name" DataExpression="x => x.Name" CanSort="true" />
@@ -15,7 +15,14 @@
 
 @code {
 
-    private const string DataGridCode = "";
+    private const string DataGridCode = $"<DataGrid ItemsProvider=\"@Fruits\" Class=\"shadow-sm\">\n"
+        + "\t<Columns>\n"
+        + "\t\t<DataGridColumn TItem=\"Data.FruitData\" TValue=\"string\" Name=\"Id\" Header=\"ID\" DataExpression=\"x => x.Id\" CanSort=\"true\" />\n"
+        + "\t\t<DataGridColumn TItem=\"Data.FruitData\" TValue=\"string\" Name=\"Name\" Header=\"Name\" DataExpression=\"x => x.Name\" CanSort=\"true\" />\n"
+        + "\t\t<DataGridColumn TItem=\"Data.FruitData\" TValue=\"string\" Name=\"Price\" Header=\"Price(CAD)\" DataExpression=\"x => x.Price\" CanSort=\"true\" />\n"
+        + "\t\t<DataGridColumn TItem=\"Data.FruitData\" TValue=\"string\" Name=\"Quantity\" Header=\"Quantity\" DataExpression=\"x => x.Quantity\" CanSort=\"true\" />\n"
+        + "\t</Columns>\n"
+        + "</DataGrid>";
 
     /// <summary>
     /// Dummy data provider.
