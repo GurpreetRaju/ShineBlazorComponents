@@ -1,0 +1,101 @@
+﻿@using Shine.Components.Base
+@using Shine.Components.PropertyGrid
+@using System.Globalization
+
+@page "/property-grid"
+
+<Page PageName="Form">
+    <Example Code="@Code">
+        <div class="row">
+            <div class="col">
+                <PropertyGrid @bind-Value="@_formModel" PropertyChanged="() => InvokeAsync(StateHasChanged)"></PropertyGrid>
+            </div>
+            <div class="col">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">User Name</th>
+                            <td>@_formModel.Name</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Date Of Birth</th>
+                            <td>@(_formModel.DateOfBirth.HasValue ? _formModel.DateOfBirth.Value.ToString(CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern) : string.Empty)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Age</th>
+                            <td>@_formModel.Age</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Gender Enum</th>
+                            <td>@_formModel.Gender.ToString()</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Browsable is false</th>
+                            <td>@_formModel.NotBrowsableValue.ToString()</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Read Only is true</th>
+                            <td>@_formModel.ReadonlyValue</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </Example>
+</Page>
+
+@code {
+    private FormModel _formModel = new FormModel();
+
+    private const string Code = "<PropertyGrid @bind-Value=\"@_model\" PropertyChanged=\"() => InvokeAsync(StateHasChanged)\"></PropertyGrid>";
+
+    /// <summary>
+    /// The form model.
+    /// </summary>
+    private class FormModel
+    {
+        /// <summary>
+        /// The user's name.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The date of birth (DateTime).
+        /// </summary>
+        public DateTime? DateOfBirth { get; set; }
+
+        /// <summary>
+        /// The age integer value.
+        /// </summary>
+        public int? Age { get; set; }
+
+        /// <summary>
+        /// The Gender enum value.
+        /// </summary>
+        public Gender Gender { get; set; }
+
+        /// <summary>
+        /// Browsable attribute set to false.
+        /// </summary>
+        [System.ComponentModel.Browsable(false)]
+        public bool NotBrowsableValue { get; set; }
+
+        /// <summary>
+        /// Readonly value property.
+        /// </summary>
+        [System.ComponentModel.ReadOnly(true)]
+        public int ReadonlyValue { get; set; } = 50;
+    }
+
+    enum Gender
+    {
+        Male,
+        Female,
+        Other
+    }
+}

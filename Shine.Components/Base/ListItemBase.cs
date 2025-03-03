@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Shine.Components.Base;
 
-namespace Shine.Components.Common
+namespace Shine.Components.Base
 {
     /// <summary>
     /// List item inteface.

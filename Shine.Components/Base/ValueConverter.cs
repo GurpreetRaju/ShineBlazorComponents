@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Globalization;
 
-namespace Shine.Components.Common
+namespace Shine.Components.Base
 {
     /// <summary>
     /// The value converter.

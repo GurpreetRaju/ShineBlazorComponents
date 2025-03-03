@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Components;
 using System.Linq.Expressions;
 using Shine.Components.Base;
-using Shine.Components.Common;
 
 namespace Shine.Components.Form
 {
@@ -143,7 +142,7 @@ namespace Shine.Components.Form
         {
             base.EnsureDefaults();
 
-            Format ??= DefaultFormat(InputType);
+            Format ??= InputType.DefaultFormat();
         }
 
         /// <summary>

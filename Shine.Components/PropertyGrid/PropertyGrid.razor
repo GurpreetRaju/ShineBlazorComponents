@@ -1,0 +1,24 @@
+﻿@using System.ComponentModel
+@typeparam TObject where TObject : class, new()
+@inherits ShineComponentBase
+
+<CascadingValue Value="this" IsFixed="true">
+    @if (Value != null && s_propertyDescriptors != null)
+    {
+        <table class="table table-bordered">
+            <tbody>
+                @foreach (PropertyDescriptor propertyDescriptor in s_propertyDescriptors)
+                {
+                    <tr>
+                        <th scope="row">
+                            @propertyDescriptor.DisplayName
+                        </th>
+                        <td>
+                            <PropertyEditor TParent="TObject" PropertyDescriptor="propertyDescriptor" Parent="Value" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</CascadingValue>

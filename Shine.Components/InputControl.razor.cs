@@ -1,4 +1,4 @@
-﻿using Shine.Components.Common;
+﻿using Shine.Components.Base;
 
 namespace Shine.Components
 {
@@ -12,30 +12,7 @@ namespace Shine.Components
         /// <summary>
         /// The input type.
         /// </summary>
-        protected InputType InputType
-        {
-            get
-            {
-                var typeCode = Type.GetTypeCode(_nullableUnderlyingType ?? typeof(TValue));
-
-                switch (typeCode)
-                {
-                    case TypeCode.Int16:
-                    case TypeCode.Int32:
-                    case TypeCode.Int64:
-                    case TypeCode.UInt16:
-                    case TypeCode.UInt32:
-                    case TypeCode.UInt64:
-                    case TypeCode.Decimal:
-                    case TypeCode.Double:
-                    case TypeCode.Single:
-                        return InputType.Number;
-                    case TypeCode.DateTime:
-                        return InputType.DateTime;
-                };
-                return InputType.Text;
-            }
-        }
+        protected InputType InputType => Type.GetTypeCode(_nullableUnderlyingType ?? typeof(TValue)).GetInputType();
 
         /// <inheritdoc/>
         protected override string ComponentName => "form-control";
@@ -45,7 +22,7 @@ namespace Shine.Components
         {
             base.OnInitialized();
 
-            Format ??= DefaultFormat(InputType);
+            Format ??= InputType.DefaultFormat();
         }
     }
 }

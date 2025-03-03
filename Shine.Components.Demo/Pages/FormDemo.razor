@@ -1,4 +1,4 @@
-﻿@using Shine.Components.Common
+﻿@using Shine.Components.Base
 @using Shine.Components.Form
 @using System.Globalization
 
@@ -89,10 +89,10 @@
     private string[] RadioOptions = new string[] { "Male", "Female", "X" };
 
     private const string Code = "<EditForm Model=\"@_formModel\">\n"
-        + "\t<FormControl Label=\"User Name\" InputType=\"InputType.Text\" Placeholder=\"User name\" @bind-Value=\"@_formModel.UserName\" />\n"
-        + "\t<FormControl Label=\"Password\" InputType=\"InputType.Password\" Placeholder=\"Password\" @bind-Value=\"@_formModel.Password\" />\n"
-        + "\t<FormControl Label=\"Date Of Birth\" InputType=\"InputType.Date\" @bind-Value=\"@_formModel.DateOfBirth\" />\n"
-        + "\t<FormControl Label=\"Age\" InputType=\"InputType.Number\" @bind-Value=\"@_formModel.Age\" />\n"
+        + "\t<FormControl Label=\"User Name\" _inputType=\"_inputType.Text\" Placeholder=\"User name\" @bind-Value=\"@_formModel.UserName\" />\n"
+        + "\t<FormControl Label=\"Password\" _inputType=\"_inputType.Password\" Placeholder=\"Password\" @bind-Value=\"@_formModel.Password\" />\n"
+        + "\t<FormControl Label=\"Date Of Birth\" _inputType=\"_inputType.Date\" @bind-Value=\"@_formModel.DateOfBirth\" />\n"
+        + "\t<FormControl Label=\"Age\" _inputType=\"_inputType.Number\" @bind-Value=\"@_formModel.Age\" />\n"
         + "\t<CheckboxControl Label=\"Keep logged in\" Switch=\"true\" @bind-Value=\"_formModel.KeepLoggedIn\" Text=\"@(_formModel.KeepLoggedIn ? \"Yes\" : \"No\")\" />\n"
         + "\t<RadioControl Label=\"Gender\" Items=\"RadioOptions\" @bind-Value=\"_formModel.Gender\" />\n"
     + "</EditForm>\n";

@@ -1,10 +1,11 @@
 @typeparam TValue
 @inherits InputControlBase<TValue>
 
-<input type="@GetInputType(InputType)"
+<input type="@InputType.ConvertToString()"
        value="@ValueAsString"
        required="@Required"
        disabled="@Disabled"
        class="@CssClasses"
        style="@CssStyles"
+       readonly="@ReadOnly"
        @onchange="(args) => HandleValueChanged(args.Value)" />

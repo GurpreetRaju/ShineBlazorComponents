@@ -1,23 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Shine.Components.Base;
 using System.Globalization;
 
-namespace Shine.Components.Common
+namespace Shine.Components.Base
 {
     /// <summary>
     /// Provides base functionality for a control.
     /// </summary>
     public abstract class InputControlBase<TValue> : ShineComponentBase
     {
-        #region Fields
-
-        protected const string DateFormat = "yyyy-MM-dd";                     // Compatible with HTML 'date' inputs
-        protected const string DateTimeLocalFormat = "yyyy-MM-ddTHH:mm:ss";   // Compatible with HTML 'datetime-local' inputs
-        protected const string MonthFormat = "yyyy-MM";                       // Compatible with HTML 'month' inputs
-        protected const string TimeFormat = "HH:mm:ss";
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -48,6 +38,12 @@ namespace Shine.Components.Common
         /// </summary>
         [Parameter]
         public bool Disabled { get; set; }
+
+        /// <summary>
+        /// Whether the input is read only.
+        /// </summary>
+        [Parameter]
+        public bool ReadOnly { get; set; }
 
         /// <summary>
         /// The value converter.
@@ -84,19 +80,26 @@ namespace Shine.Components.Common
         protected string ValueAsString { get; set; }
 
         #endregion
-        
-        
+
+
         #region Overrides
 
         /// <inheritdoc/>
         public override Task SetParametersAsync(ParameterView parameters)
         {
-            if (parameters.TryGetValue(nameof(Value), out TValue newValue) && !Equals(Value, newValue))
+            try
             {
-                EnsureDefaults();
+                if (parameters.TryGetValue(nameof(Value), out TValue newValue) && !Equals(Value, newValue))
+                {
+                    EnsureDefaults();
 
-                Value = newValue;
-                ValueAsString = Converter.Convert(newValue, Format, CultureInfo);
+                    Value = newValue;
+                    ValueAsString = Converter.Convert(newValue, Format, CultureInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                ValueParsingError = ex.Message;
             }
 
             return base.SetParametersAsync(parameters);
@@ -154,27 +157,6 @@ namespace Shine.Components.Common
                 return false;
             }
         }
-
-        /// <summary>
-        /// Default format for input types.
-        /// </summary>
-        /// <param name="inputType"></param>
-        /// <returns></returns>
-        protected virtual string DefaultFormat(InputType inputType) => inputType switch
-        {
-            InputType.Date => DateFormat,
-            InputType.Time => TimeFormat,
-            InputType.DateTime => DateTimeLocalFormat,
-            InputType.Month => MonthFormat,
-            _ => null
-        };
-
-        /// <summary>
-        /// Gets the input type for control.
-        /// </summary>
-        /// <param name="inputType"></param>
-        /// <returns></returns>
-        protected virtual string GetInputType(InputType inputType) => inputType == InputType.DateTime ? "datetime-local" : inputType.ToString().ToLowerInvariant();
 
         /// <summary>
         /// Determine if values are equal of <see cref="TValue"/> type.

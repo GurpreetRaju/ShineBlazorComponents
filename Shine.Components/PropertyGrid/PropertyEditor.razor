@@ -1,0 +1,11 @@
+﻿@typeparam TParent where TParent : class, new()
+@inherits ShineComponentBase
+
+@if (_validOptions != null && _validOptions.Length > 0)
+{
+    <DynamicComponent Type="typeof(DropDown<>).MakeGenericType(PropertyType)" Parameters="DropDownParameters"/>
+}
+else
+{
+    <DynamicComponent Type="typeof(InputControl<>).MakeGenericType(PropertyType)" Parameters="InputControlParameters" />
+}

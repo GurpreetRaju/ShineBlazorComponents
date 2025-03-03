@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Shine.Components.Base;
 
-namespace Shine.Components.Common
+namespace Shine.Components.Base
 {
     /// <summary>
     /// Provides base functionality for select control.
@@ -13,7 +12,7 @@ namespace Shine.Components.Common
         /// </summary>
         [Parameter]
         public SelectionMode SelectionMode { get; set; }
-        
+
         /// <summary>
         /// The selected item.
         /// </summary>
@@ -25,7 +24,7 @@ namespace Shine.Components.Common
         /// </summary>
         [Parameter]
         public EventCallback<TItem> SelectedItemChanged { get; set; }
-        
+
         /// <summary>
         /// The selected items.
         /// </summary>
@@ -115,7 +114,7 @@ namespace Shine.Components.Common
         /// <param name="item"></param>
         /// <returns></returns>
         protected virtual string GetDisplayText(TItem item) => ItemToText == null || item == null ? item?.ToString() : ItemToText(item);
-        
+
         /// <summary>
         /// Get the text to show for a item.
         /// </summary>
@@ -132,7 +131,7 @@ namespace Shine.Components.Common
             }
             return string.Empty;
         }
-        
+
         /// <summary>
         /// Get the css classes for a item.
         /// </summary>
@@ -165,7 +164,7 @@ namespace Shine.Components.Common
                     SelectedItem = item;
                     SelectedItemChanged.InvokeAsync(SelectedItem);
                 }
-                else 
+                else
                 {
                     // Toggle for multi selection.
                     if (SelectedItems?.Contains(item) == true)
