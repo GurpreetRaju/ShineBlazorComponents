@@ -66,24 +66,24 @@ namespace Shine.Components.Base
         /// <summary>
         /// Create typed event callback.
         /// </summary>
-        /// <param name="component"></param>
         /// <param name="type"></param>
+        /// <param name="receiver"></param>
         /// <param name="invokableAction"></param>
         /// <returns></returns>
-        public static object CreateTypedEventCallback(this ComponentBase component, Type type, Action<object> invokableAction)
+        public static object CreateTypedEventCallback(this Type type, object receiver, Action<object> invokableAction)
         {
             var method = typeof(Extensions).GetMethod(nameof(InvokeCallback), System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
             var genericMethod = method?.MakeGenericMethod(type);
 
-            return genericMethod?.Invoke(component, [component, invokableAction]);
+            return genericMethod?.Invoke(receiver, [receiver, invokableAction]);
         }
 
         /// <summary>
         /// The generic EvantCallback factory method.
         /// </summary>
-        private static EventCallback<T> InvokeCallback<T>(ComponentBase component, Action<object> invokableAction)
+        private static EventCallback<T> InvokeCallback<T>(object receiver, Action<object> invokableAction)
         {
-            return EventCallback.Factory.Create<T>(component, (v) => invokableAction(v));
+            return EventCallback.Factory.Create<T>(receiver, (v) => invokableAction(v));
         }
     }
 }

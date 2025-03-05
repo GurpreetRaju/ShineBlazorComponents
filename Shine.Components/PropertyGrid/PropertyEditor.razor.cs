@@ -94,46 +94,6 @@ namespace Shine.Components.PropertyGrid
         public Guid Id => Guid.NewGuid();
 
         /// <summary>
-        /// Provides the parameter values for drop down control.
-        /// </summary>
-        private Dictionary<string, object> DropDownParameters 
-        {
-            get
-            {
-                return new Dictionary<string, object>
-                {
-                    { "TItem", PropertyType },
-                    { "Items", _validOptions },
-                    { "SelectedItem", _propertyValue },
-                    { "SelectedItemChanged", this.CreateTypedEventCallback(PropertyType, SetValue) },
-                    { "SelectionMode", SelectionMode.Single },
-                    { "Class", CssClasses },
-                    { "Style", CssStyles }
-                };
-            }
-        }
-
-        /// <summary>
-        /// Provides the parameter values for input control.
-        /// </summary>
-        private Dictionary<string, object> InputControlParameters 
-        {
-            get
-            {
-                return new Dictionary<string, object>
-                {
-                    { "TValue", PropertyType },
-                    { "Value", _propertyValue },
-                    { "ValueChanged", this.CreateTypedEventCallback(PropertyType, SetValue) },
-                    { "Required", _required },
-                    { "ReadOnly", _readOnly },
-                    { "Class", CssClasses },
-                    { "Style", CssStyles },
-                };
-            }
-        }
-
-        /// <summary>
         /// The current value for property.
         /// </summary>
         protected object PropertyValue => _propertyValue;
@@ -147,17 +107,18 @@ namespace Shine.Components.PropertyGrid
         protected override string ComponentName => "property-editor";
 
         /// <inheritdoc/>
-        public override Task SetParametersAsync(ParameterView parameters)
+        public override async Task SetParametersAsync(ParameterView parameters)
         {
-            if (parameters.TryGetValue(nameof(PropertyDescriptor), out PropertyDescriptor propertyDescriptor)
-                && propertyDescriptor != PropertyDescriptor)
-            {
-                Initialize(propertyDescriptor);
-            }
+            bool isChanged = (parameters.TryGetValue(nameof(PropertyDescriptor), out PropertyDescriptor propertyDescriptor)
+                    && propertyDescriptor != PropertyDescriptor)
+                || (parameters.TryGetValue(nameof(Parent), out TParent parent) && parent != Parent);
 
             CultureInfo ??= CultureInfo.CurrentUICulture;
 
-            return base.SetParametersAsync(parameters);
+            await base.SetParametersAsync(parameters);
+
+            if (isChanged)
+                Initialize(propertyDescriptor);
         }
 
         #endregion
@@ -258,6 +219,40 @@ namespace Shine.Components.PropertyGrid
             }
             
             return null;
+        }
+
+        /// <summary>
+        /// Gets the type of component to render.
+        /// </summary>
+        /// <returns></returns>
+        private (Type ComponentType, Dictionary<string, object> Parameters) GetComponentToRender()
+        {
+            if (_validOptions != null && _validOptions.Length > 0)
+            {
+                return (typeof(DropDown<>).MakeGenericType(PropertyType), new Dictionary<string, object>
+                {
+                    { "TItem", PropertyType },
+                    { "Items", _validOptions },
+                    { "SelectedItem", _propertyValue },
+                    { "SelectedItemChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
+                    { "SelectionMode", SelectionMode.Single },
+                    { "Class", CssClasses },
+                    { "Style", CssStyles }
+                });
+            }
+            else
+            { 
+                return (typeof(InputControl<>).MakeGenericType(PropertyType), new Dictionary<string, object>
+                {
+                    { "TValue", PropertyType },
+                    { "Value", _propertyValue },
+                    { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
+                    { "Required", _required },
+                    { "ReadOnly", _readOnly },
+                    { "Class", CssClasses },
+                    { "Style", CssStyles },
+                });
+            }
         }
 
         #endregion

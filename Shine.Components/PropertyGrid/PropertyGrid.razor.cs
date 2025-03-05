@@ -75,6 +75,23 @@ namespace Shine.Components.PropertyGrid
         protected override CssClassBuilder CssBuilder => base.CssBuilder;
 
         /// <inheritdoc/>
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            bool isChanged = false;
+            if (parameters.TryGetValue(nameof(Value), out TObject value)
+                && value != Value)
+            {
+                Value = value;
+                isChanged = true;
+            }
+
+            await base.SetParametersAsync(parameters);
+
+            if (isChanged)
+                await InvokeAsync(StateHasChanged);
+        }
+
+        /// <inheritdoc/>
         protected override void OnParametersSet()
         {
             base.OnParametersSet();

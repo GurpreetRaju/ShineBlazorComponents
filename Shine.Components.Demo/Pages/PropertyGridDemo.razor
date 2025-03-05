@@ -1,6 +1,7 @@
 ﻿@using Shine.Components.Base
 @using Shine.Components.PropertyGrid
 @using System.Globalization
+@using System.ComponentModel
 
 @page "/property-grid"
 
@@ -24,7 +25,7 @@
                         </tr>
                         <tr>
                             <th scope="row">Date Of Birth</th>
-                            <td>@(_formModel.DateOfBirth.HasValue ? _formModel.DateOfBirth.Value.ToString(CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern) : string.Empty)</td>
+                            <td>@(_formModel.DateOfBirth.HasValue ? _formModel.DateOfBirth.Value.ToString(CultureInfo.CurrentCulture.DateTimeFormat) : string.Empty)</td>
                         </tr>
                         <tr>
                             <th scope="row">Age</th>
