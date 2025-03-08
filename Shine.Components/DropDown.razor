@@ -48,7 +48,7 @@
         {
             yield return "form-select";
 
-            if (Size != Size.Medium)
+            if (Size != Size.Default)
                 yield return $"form-control-{Size.ToString().ToLower()}";
         }
     }

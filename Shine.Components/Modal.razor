@@ -1,6 +1,9 @@
 @inherits BackgroundComponentBase
 
-<Button Clicked="Show" Class="@TriggerClass">@TriggerText</Button>
+<Button Clicked="Show" Class="@TriggerClass">
+    @TriggerContent
+    @TriggerText
+</Button>
 
 @if (_show)
 {
@@ -44,6 +47,12 @@
     public string TriggerText { get; set; }
 
     /// <summary>
+    /// Trigger content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment TriggerContent { get; set; }
+
+    /// <summary>
     /// Trigger class.
     /// </summary>
     [Parameter]
@@ -73,13 +82,21 @@
     [Parameter]
     public RenderFragment Footer { get; set; }
 
+    /// <summary>
+    /// Modal size.
+    /// </summary>
+    [Parameter]
+    public Size Size { get; set; }
+
     /// <inheritdoc/>
     protected override string ComponentName => "modal";
 
     /// <summary>
     /// Css builder.
     /// </summary>
-    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("fade").WithClass("show", _show);
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("fade")
+        .WithClass("show", _show)
+        .WithClass(() => $"modal-{Size.ToString().ToLowerInvariant()}", Size != Size.Default);
 
     /// <summary>
     /// Show the modal.

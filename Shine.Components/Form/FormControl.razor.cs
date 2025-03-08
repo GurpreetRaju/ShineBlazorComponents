@@ -88,8 +88,7 @@ namespace Shine.Components.Form
         /// <inheritdoc/>
         protected virtual CssClassBuilder ControlCssBuilder => CssClassBuilder.Create("form-control")
             .WithClass(ControlClass)
-            .WithClass("form-control-sm", Size == Size.Small)
-            .WithClass("form-control-lg", Size == Size.Large);
+            .WithClass(() => $"form-control-{Size.ToString().ToLowerInvariant()}", Size != Size.Default);
 
         /// <summary>
         /// The validation messages.

@@ -5,13 +5,17 @@
 <CascadingValue Value="this" IsFixed="true">
     @if (Value != null && s_propertyDescriptors != null)
     {
-        <table class="table table-bordered">
+        <table class="table table-borderless">
             <tbody>
                 @foreach (PropertyDescriptor propertyDescriptor in s_propertyDescriptors)
                 {
                     <tr>
-                        <th scope="row">
+                        <th scope="row" class="align-content-center">
                             @propertyDescriptor.DisplayName
+                            @if (!string.IsNullOrEmpty(propertyDescriptor.Description))
+                            {
+                                <i class="bi bi-info-circle-fill icon-sm ms-1" title="@propertyDescriptor.Description"></i>
+                            }
                         </th>
                         <td>
                             <PropertyEditor TParent="TObject" PropertyDescriptor="propertyDescriptor" Parent="Value" />

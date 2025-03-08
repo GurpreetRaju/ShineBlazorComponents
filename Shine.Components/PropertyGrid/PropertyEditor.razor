@@ -4,4 +4,19 @@
 @{
     var component = GetComponentToRender();
 }
-<DynamicComponent Type="component.ComponentType" Parameters="component.Parameters" />
+@if (component.DisplayPopup)
+{
+    <div class="d-flex justify-content-end">
+        <Modal Size="Size.Lg">
+            <TriggerContent><i class="bi bi-three-dots"></i></TriggerContent>
+            <Header>@PropertyDescriptor.Name Editor</Header>
+            <Body>
+                <DynamicComponent Type="component.ComponentType" Parameters="component.Parameters" />
+            </Body>
+        </Modal>
+    </div>
+}
+else
+{
+    <DynamicComponent Type="component.ComponentType" Parameters="component.Parameters" />
+}

@@ -29,7 +29,7 @@
     /// The button size.
     /// </summary>
     [Parameter]
-    public Size Size { get; set; } = Size.Medium;
+    public Size Size { get; set; }
 
     /// <summary>
     /// The button _type.
@@ -71,8 +71,8 @@
     {
         return Size switch
         {
-            Size.Small => "btn-sm",
-            Size.Large => "btn-lg",
+            Size.Sm => "btn-sm",
+            Size.Lg => "btn-lg",
             _ => null
         };
     }

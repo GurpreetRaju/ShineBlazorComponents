@@ -1,0 +1,12 @@
+.collection-editor {
+    height: calc(100vh - 10rem);
+    overflow: hidden;
+}
+
+.collection-editor ::deep .list-group-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+}
+
+

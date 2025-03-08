@@ -31,8 +31,7 @@ namespace Shine.Components.PropertyGrid
 
             foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(typeof(TObject))) 
             {
-                if (propertyDescriptor.IsReadOnly || !propertyDescriptor.IsBrowsable)
-                    continue;
+                if (!propertyDescriptor.IsBrowsable) continue;
 
                 propertyDescriptors.Add(propertyDescriptor);
             }

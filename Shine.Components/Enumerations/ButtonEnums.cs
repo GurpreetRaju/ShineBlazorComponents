@@ -6,17 +6,21 @@
     public enum Size
     {
         /// <summary>
+        /// The default size.
+        /// </summary>
+        Default,
+        /// <summary>
         /// Small.
         /// </summary>
-        Small,
-        /// <summary>
-        /// Medium.
-        /// </summary>
-        Medium,
+        Sm,
         /// <summary>
         /// Large.
         /// </summary>
-        Large
+        Lg,
+        /// <summary>
+        /// Extra large.
+        /// </summary>
+        Xl
     }
 
     /// <summary>

@@ -1,6 +1,9 @@
 @inherits ShineComponentBase
 
-<span class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">@ChildContent</span>
+<span class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
+    @Content
+    @ChildContent
+</span>
 
 @code {
 
@@ -9,6 +12,12 @@
     /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// The text content.
+    /// </summary>
+    [Parameter]
+    public string Content { get; set; }
 
     /// <summary>
     /// The text alignment.

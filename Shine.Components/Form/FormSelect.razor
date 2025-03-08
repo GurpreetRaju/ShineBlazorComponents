@@ -13,8 +13,7 @@
     /// <inheritdoc/>
     protected override CssClassBuilder ControlCssBuilder => CssClassBuilder.Create("form-select")
             .WithClass(ControlClass)
-            .WithClass("form-select-sm", Size == Size.Small)
-            .WithClass("form-select-lg", Size == Size.Large);
+            .WithClass($"form-select-{Size.ToString().ToLowerInvariant()}", Size != Size.Default);
 
     /// <inheritdoc/>h
     protected override RenderFragment RenderControl => __builder =>

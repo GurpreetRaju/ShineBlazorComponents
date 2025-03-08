@@ -126,6 +126,12 @@
         background-color: rgba(0,0,0,0.5);
     }
 
+/** Icons **/
+.bi { vertical-align: text-bottom; }
+.icon-sm { font-size: 0.75rem; }
+.icon-lg { font-size: 1.75rem; }
+.icon-xl { font-size: 2.25rem; }
+
 
 /** Utilities **/
 
