@@ -444,6 +444,17 @@ div.list-view-item > * {
     display: block;
 }
 
+/*********** Modal ***********/
+.navbar-brand {
+    display: flex;
+    font-weight: bold;
+}
+
+    .navbar-brand img {
+        height: 1.75rem;
+        margin: 0 0.25rem;
+    }
+
 /*********** Overlay ***********/
 .sh-overlay {
     position: fixed;
