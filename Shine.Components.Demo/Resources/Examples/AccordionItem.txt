@@ -1,0 +1,10 @@
+<AccordionItem>
+    <HeaderContent>
+        <div class="text-bg-primary flex-grow-1 p-2">Click to Toggle</div>
+    </HeaderContent>
+    <ChildContent>
+        <Content Border="Base.BorderEdge.All" Class="border-dark-subtle" BackgroundColor="Base.Color.Light">
+            Lorem Ipsum Text
+        </Content>
+    </ChildContent>
+</AccordionItem>

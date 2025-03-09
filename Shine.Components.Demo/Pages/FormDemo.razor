@@ -5,7 +5,7 @@
 @page "/form"
 
 <Page PageName="Form">
-    <Example Code="@Code">
+    <Example CodeFile="Form.txt">
         <div class="row">
             <div class="col">
                 <EditForm Model="@_formModel">
@@ -55,7 +55,7 @@
         </div>
     </Example>
 
-    <Example Header="Input Editor" Code="@InputEditorCode">
+    <Example Header="Input Editor" CodeFile="InputControl.txt">
         <div class="row mb-3">
             <div class="col">Number: </div>
             <div class="col"><InputControl @bind-Value="_number" /></div>
@@ -87,17 +87,6 @@
 
     private FormModel _formModel = new FormModel();
     private string[] RadioOptions = new string[] { "Male", "Female", "X" };
-
-    private const string Code = "<EditForm Model=\"@_formModel\">\n"
-        + "\t<FormControl Label=\"User Name\" _inputType=\"_inputType.Text\" Placeholder=\"User name\" @bind-Value=\"@_formModel.UserName\" />\n"
-        + "\t<FormControl Label=\"Password\" _inputType=\"_inputType.Password\" Placeholder=\"Password\" @bind-Value=\"@_formModel.Password\" />\n"
-        + "\t<FormControl Label=\"Date Of Birth\" _inputType=\"_inputType.Date\" @bind-Value=\"@_formModel.DateOfBirth\" />\n"
-        + "\t<FormControl Label=\"Age\" _inputType=\"_inputType.Number\" @bind-Value=\"@_formModel.Age\" />\n"
-        + "\t<CheckboxControl Label=\"Keep logged in\" Switch=\"true\" @bind-Value=\"_formModel.KeepLoggedIn\" Text=\"@(_formModel.KeepLoggedIn ? \"Yes\" : \"No\")\" />\n"
-        + "\t<RadioControl Label=\"Gender\" Items=\"RadioOptions\" @bind-Value=\"_formModel.Gender\" />\n"
-    + "</EditForm>\n";
-
-    private const string InputEditorCode = "<InputControl @bind-Value=\"_value\" />\n";
 
     /// <summary>
     /// The form model.

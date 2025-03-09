@@ -1,0 +1,30 @@
+<PropertyGrid @bind-Value="@_shoppingCart" PropertyChanged="() => InvokeAsync(StateHasChanged)"></PropertyGrid>
+
+@code {
+    private Cart _shoppingCart = new Cart();
+
+    public class Cart
+    {
+        [Description("Items is an array.")]
+        public Item[] Items { get; set; }
+
+        [Description("Coupons is a list.")]
+        public List<Coupon> Coupons { get; set; }
+
+        public int Total => Items?.Sum(s => s.Price) ?? 0;
+    }
+
+    public class Item
+    {
+        public string Name { get; set; }
+
+        public int Price { get; set; }
+    }
+
+    public class Coupon
+    {
+        public string Name { get; set; }
+
+        public int Price { get; set; }
+    }
+}

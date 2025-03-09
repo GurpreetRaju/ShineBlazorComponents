@@ -1,0 +1,18 @@
+<Accordion>
+    <AccordionItem>
+        <HeaderContent>
+            Header Accordion 1
+        </HeaderContent>
+        <ChildContent>
+            Lorem Ipsum Text
+        </ChildContent>
+    </AccordionItem>
+    <AccordionItem>
+        <HeaderContent>
+            Header Accordion 2
+        </HeaderContent>
+        <ChildContent>
+            Lorem Ipsum Text
+        </ChildContent>
+    </AccordionItem>
+</Accordion>

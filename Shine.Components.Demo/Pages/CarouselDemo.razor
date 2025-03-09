@@ -1,7 +1,7 @@
 ﻿@page "/carousel"
 
 <Page PageName="Carousel" ShowTitle="false">
-    <Example Header="Carousel" Code="@CarouselCode">
+    <Example Header="Carousel" CodeFile="CarouselExample.txt">
         <Carousel Interval="3" Class="text-center">
             <CarouselItem>
                 <div class="container text-bg-primary py-5">
@@ -24,27 +24,3 @@
         </Carousel>
     </Example>
 </Page>
-
-@code {
-
-    private const string CarouselCode = "<Carousel Interval=\"3\" Class=\"text-center\">\n"
-        + "\t<CarouselItem>\n"
-        + "\t\t<div class=\"container text-bg-primary py-5\">\n"
-        + "\t\t\t<h1><b>Slide 1</b></h1>\n"
-        + "\t\t\t<h1><i>Lorem ipsum</i></h1>\n"
-        + "\t\t</div>\n"
-        + "\t</CarouselItem>\n"
-        + "\t<CarouselItem>\n"
-        + "\t\t<div class=\"container text-bg-info py-5\">\n"
-        + "\t\t\t<h1><b>Slide 2</b></h1>\n"
-        + "\t\t\t<h1><i>Lorem ipsum</i></h1>\n"
-        + "\t\t</div>\n"
-        + "\t</CarouselItem>\n"
-        + "\t<CarouselItem>\n"
-        + "\t\t<div class=\"container text-bg-warning py-5\">\n"
-        + "\t\t\t<h1><b>Slide 3</b></h1>\n"
-        + "\t\t\t<h1><i>Lorem ipsum</i></h1>\n"
-        + "\t\t</div>\n"
-        + "\t</CarouselItem>\n"
-        +"</Carousel>";
-}

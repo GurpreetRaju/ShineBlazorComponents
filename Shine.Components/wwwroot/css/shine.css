@@ -12,6 +12,12 @@
     --sh-right-drawer-width: 0;
 }
 
+/** Scrollbar **/
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--bs-gray-500) var(--bs-light);
+}
+
 /** Drawer **/
 .drawer {
     padding: 1rem;

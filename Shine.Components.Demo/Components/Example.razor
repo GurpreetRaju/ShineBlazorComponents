@@ -1,4 +1,5 @@
 ﻿@using Shine.Components.Base
+@using System.Reflection
 
 @inherits ShineComponentBase
 
@@ -8,21 +9,22 @@
         @ChildContent
     </Content>
 
-    @if (Code != null)
+    @if (!string.IsNullOrEmpty(_exampleCode))
     {
         <div class="border border-dark-subtle rounded">
             <Content Border="Base.BorderEdge.TopAndBottom"
-                     Class="d-flex align-items-center justify-content-between border-dark-subtle bg-light">
+                     Class="example-header-content border-dark-subtle bg-light">
                 <Text Alignment="Base.Alignment.Start">HTML</Text>
-                <Clipboard Text="@Code" class="align-self-end" />
+                <Clipboard Text="@_exampleCode" class="align-self-end" />
             </Content>
-            <Content Class="bg-light">
-                <pre style="text-wrap: auto;">@Code</pre>
+            <Content Class="example-content bg-light">
+                <pre style="text-wrap: auto;">@_exampleCode</pre>
             </Content>
         </div>
     }
 </div>
 @code {
+    private string _exampleCode;
 
     /// <summary>
     /// The header.
@@ -42,6 +44,44 @@
     [Parameter]
     public string Code { get; set; }
 
+    /// <summary>
+    /// The code resource file.
+    /// </summary>
+    [Parameter]
+    public string CodeFile { get; set; }
+
     /// <inheritdoc/>
     protected override string ComponentName => "example";
+
+    /// <inheritdoc/>
+    protected override void OnInitialized()
+    {
+
+        base.OnInitialized();
+
+        _exampleCode = GetExampleFile() ?? Code;
+    }
+
+    /// <summary>
+    /// Gets the content of code file.
+    /// </summary>
+    /// <returns></returns>
+    private string GetExampleFile()
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(CodeFile))
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                using var stream = assembly.GetManifestResourceStream($"Shine.Components.Demo.Resources.Examples.{CodeFile}");
+                using var reader = new StreamReader(stream);
+                return reader.ReadToEnd();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to load code file: {ex}");
+        }
+        return null;
+    }
 }

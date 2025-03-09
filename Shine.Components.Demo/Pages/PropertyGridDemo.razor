@@ -6,7 +6,7 @@
 @page "/property-grid"
 
 <Page PageName="Form">
-    <Example Code="@Code">
+    <Example CodeFile="PropertyGrid.txt">
         <div class="row">
             <div class="col">
                 <PropertyGrid @bind-Value="@_formModel" PropertyChanged="() => InvokeAsync(StateHasChanged)"></PropertyGrid>
@@ -47,7 +47,8 @@
                 </table>
             </div>
         </div>
-    </Example><Example Code="@CartCode">
+    </Example>
+    <Example CodeFile="PropertyGrid_Collections.txt">
         <div class="row">
             <div class="col">
                 <PropertyGrid @bind-Value="@_shoppingCart" PropertyChanged="() => InvokeAsync(StateHasChanged)"></PropertyGrid>
@@ -73,9 +74,6 @@
 @code {
     private FormModel _formModel = new FormModel();
     private Cart _shoppingCart = new Cart();
-
-    private const string Code = "<PropertyGrid @bind-Value=\"@_model\" PropertyChanged=\"() => InvokeAsync(StateHasChanged)\"></PropertyGrid>";
-    private const string CartCode = "<PropertyGrid @bind-Value=\"@_cart\" PropertyChanged=\"() => InvokeAsync(StateHasChanged)\"></PropertyGrid>";
 
     /// <summary>
     /// The form model.

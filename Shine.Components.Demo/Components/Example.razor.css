@@ -1,0 +1,10 @@
+﻿.example ::deep .example-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.example ::deep .example-content {
+    max-height: 12rem;
+    overflow: auto;
+}

@@ -1,0 +1,50 @@
+<EditForm Model="@_formModel">
+    <FormControl Label="User Name" InputType="InputType.Text" Placeholder="User name" @bind-Value="@_formModel.UserName" />
+    <FormControl Label="Password" InputType="InputType.Password" Placeholder="Password" @bind-Value="@_formModel.Password" />
+    <FormControl Label="Date Of Birth" InputType="InputType.Date" @bind-Value="@_formModel.DateOfBirth" />
+    <FormControl Label="Age" InputType="InputType.Number" @bind-Value="@_formModel.Age" />
+    <CheckboxControl Label="Keep logged in" Switch="true" @bind-Value="_formModel.KeepLoggedIn" Text="@(_formModel.KeepLoggedIn ? "Yes" : "No")" />
+    <RadioControl Label="Gender" Items="RadioOptions" @bind-Value="_formModel.Gender" />
+</EditForm>
+
+
+@code{
+    private FormModel _formModel = new FormModel();
+    private string[] RadioOptions = new string[] { "Male", "Female", "X" };
+
+    /// <summary>
+    /// The form model.
+    /// </summary>
+    private class FormModel {
+
+        /// <summary>
+        /// The user name.
+        /// </summary>
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// The password.
+        /// </summary>
+        public string Password { get; set; }
+
+        /// <summary>
+        /// The date of birth.
+        /// </summary>
+        public DateTime? DateOfBirth { get; set; }
+
+        /// <summary>
+        /// The age.
+        /// </summary>
+        public int? Age { get; set; }
+
+        /// <summary>
+        /// Keep user logged in.
+        /// </summary>
+        public string Gender { get; set; }
+
+        /// <summary>
+        /// Keep user logged in.
+        /// </summary>
+        public bool KeepLoggedIn { get; set; }
+    }
+}

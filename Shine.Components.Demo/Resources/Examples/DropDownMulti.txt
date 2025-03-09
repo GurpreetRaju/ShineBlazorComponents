@@ -1,0 +1,8 @@
+<DropDown TItem="Data.FruitData" Items="GetFruits(4, 0)"
+          SelectionMode="Base.SelectionMode.Multiple" 
+          ItemToText="f => f.Name"
+          @bind-SelectedItems="@_selectedFruits">
+    <TriggerContent>
+        <input type="text" value="@(_selectedFruits.Count) Items" class="form-select form-control-small" readonly />
+    </TriggerContent>
+</DropDown>

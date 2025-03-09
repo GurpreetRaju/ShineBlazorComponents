@@ -1,7 +1,7 @@
 ﻿@page "/collapsable-containers"
 
 <Page PageName="Collapsable Containers">
-    <Example Header="Accordion Item" Code="@AccordionItemCode" Class="mb-3">
+    <Example Header="Accordion Item" CodeFile="AccordionItem.txt" Class="mb-3">
         <AccordionItem>
             <HeaderContent>
                 <div class="text-bg-primary flex-grow-1 p-2">Click to Toggle</div>
@@ -13,8 +13,7 @@
             </ChildContent>
         </AccordionItem>
     </Example>
-
-    <Example Header="Accordion" Code="@AccordionItemCode">
+    <Example Header="Accordion" CodeFile="Accordion.txt">
         <Accordion>
             <AccordionItem>
                 <HeaderContent>
@@ -35,23 +34,3 @@
         </Accordion>
     </Example>
 </Page>
-
-@code {
-
-    private string AccordionItemCode => "<AccordionItem>\n"
-            + "\t<HeaderContent>\n"
-                + "\t\tHeader Accordion\n"
-            + "\t</HeaderContent>\n"
-            + "\t<ChildContent>\n"
-                + "\t\t<Content Border=\"Base.BorderEdge.All\" Class=\"border-dark-subtle\" BackgroundColor=\"Base.Color.Light\">\n"
-                    + $"\t\t\t@Text.\n"
-                + "\t\t</Content>\n"
-            + "\t</ChildContent>\n"
-        + "</AccordionItem>";
-
-    private string AccordionCode => "<Accordion>\n"
-        + AccordionItemCode + "\n"
-        + AccordionItemCode + "\n"
-        + "</Accordion>";
-
-}

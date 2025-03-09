@@ -11,10 +11,37 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Examples\DropDownMenu.txt" />
+    <None Remove="Resources\Examples\DropDownMulti.txt" />
+    <None Remove="Resources\Examples\DropDownSingle.txt" />
+    <None Remove="Resources\Examples\Form.txt" />
+    <None Remove="Resources\Examples\InputControl.txt" />
+    <None Remove="Resources\Examples\ListGroup.txt" />
+    <None Remove="Resources\Examples\ListGroupCustom.txt" />
+    <None Remove="Resources\Examples\Modal.txt" />
+    <None Remove="Resources\Examples\PropertyGrid.txt" />
+    <None Remove="Resources\Examples\PropertyGrid_Collections.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Properties\launchSettings.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Examples\Accordion.txt" />
+    <EmbeddedResource Include="Resources\Examples\AccordionItem.txt" />
+    <EmbeddedResource Include="Resources\Examples\CarouselExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\DataGrid.txt" />
+    <EmbeddedResource Include="Resources\Examples\DropDownMenu.txt" />
+    <EmbeddedResource Include="Resources\Examples\DropDownMulti.txt" />
+    <EmbeddedResource Include="Resources\Examples\DropDownSingle.txt" />
+    <EmbeddedResource Include="Resources\Examples\Form.txt" />
+    <EmbeddedResource Include="Resources\Examples\InputControl.txt" />
+    <EmbeddedResource Include="Resources\Examples\ListGroup.txt" />
+    <EmbeddedResource Include="Resources\Examples\ListGroupCustom.txt" />
+    <EmbeddedResource Include="Resources\Examples\Modal.txt" />
+    <EmbeddedResource Include="Resources\Examples\PropertyGrid.txt" />
+    <EmbeddedResource Include="Resources\Examples\PropertyGrid_Collections.txt" />
     <EmbeddedResource Include="Resources\fruits.json" />
   </ItemGroup>
 
@@ -24,6 +51,10 @@
 
   <ItemGroup>
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Examples\Accordion.txt" />
   </ItemGroup>
 
 </Project>

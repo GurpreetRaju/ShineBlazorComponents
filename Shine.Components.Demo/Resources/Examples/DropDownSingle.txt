@@ -1,0 +1,5 @@
+<DropDown TItem="Data.FruitData" 
+          Items="GetFruits(4, 0)"
+          SelectionMode="Base.SelectionMode.Single" 
+          ItemToText="f => f.Name">
+</DropDown>

@@ -1,0 +1,17 @@
+<DropDown TItem="Data.FruitData" Items="GetFruits(4, 0)"
+        ItemClicked="FruitClicked" ItemToText="f => f.Name">
+    <TriggerContent>
+        <div class="btn btn-info">Menu</div>
+    </TriggerContent>
+</DropDown>
+
+@code {
+    /// <summary>
+    /// Fruit clicked.
+    /// </summary>
+    /// <param name="item"></param>
+    private void FruitClicked(Data.FruitData item)
+    {
+        Toasts.AddToast($"{item.Name} clicked.", Base.Color.Info);
+    }
+}

@@ -1,0 +1,2 @@
+<ListGroup Items="GetFruits(5, 0)" ItemToText="t => t.Name"/>
+

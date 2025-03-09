@@ -1,0 +1,23 @@
+<Button Variant="Variant.Filled" Color="Base.Color.Primary" Clicked="ShowModal">
+    Show Modal
+</Button>
+<Modal @bind-Show="_showModal">
+    <Header>Header content.</Header>
+    <Body>
+        <Content>
+            Lorem Ipsum Text
+        </Content>
+    </Body>
+    <Footer>
+        This is footer.
+    </Footer>
+</Modal>
+
+@code {
+    private bool _showModal;
+
+    private void ShowModal()
+    {
+        _showModal = true;
+    }
+}

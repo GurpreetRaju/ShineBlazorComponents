@@ -1,0 +1,12 @@
+<ListGroup Items="GetFruits(5, 0)">
+    <ItemTemplate>
+        <li class="list-group-item">
+            <div class="d-flex align-items-center" style="gap: 5px;">
+                <span>@context.Name</span>
+                <Badge BackgroundColor="Base.Color.Danger" Value="@context.Quantity" />
+                <div class="flex-grow-1"></div>
+                <span><i class="bi bi-currency-dollar mr-1"></i>@context.Price</span>
+            </div>
+        </li>
+    </ItemTemplate>
+</ListGroup>

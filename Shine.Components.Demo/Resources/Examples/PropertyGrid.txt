@@ -1,0 +1,51 @@
+<PropertyGrid @bind-Value="@_formModel" PropertyChanged="() => InvokeAsync(StateHasChanged)"></PropertyGrid>
+
+@code {
+    private FormModel _formModel = new FormModel();
+    
+    /// <summary>
+    /// The form model.
+    /// </summary>
+    private class FormModel
+    {
+        /// <summary>
+        /// The user's name.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The date of birth (DateTime).
+        /// </summary>
+        [Description("Date of Birth")]
+        public DateTime? DateOfBirth { get; set; }
+
+        /// <summary>
+        /// The age integer value.
+        /// </summary>
+        public int? Age { get; set; }
+
+        /// <summary>
+        /// The Gender enum value.
+        /// </summary>
+        public Gender Gender { get; set; }
+
+        /// <summary>
+        /// Browsable attribute set to false.
+        /// </summary>
+        [System.ComponentModel.Browsable(false)]
+        public bool NotBrowsableValue { get; set; }
+
+        /// <summary>
+        /// Readonly value property.
+        /// </summary>
+        [System.ComponentModel.ReadOnly(true)]
+        public int ReadonlyValue { get; set; } = 50;
+    }
+
+    enum Gender
+    {
+        Male,
+        Female,
+        Other
+    }
+}
