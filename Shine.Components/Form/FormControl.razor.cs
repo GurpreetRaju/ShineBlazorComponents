@@ -53,12 +53,6 @@ namespace Shine.Components.Form
         public Func<TValue, string> DisplayFunc { get; set; }
 
         /// <summary>
-        /// Whether to show the text value only.
-        /// </summary>
-        [Parameter]
-        public bool ReadOnly { get; set; }
-
-        /// <summary>
         /// The placeholder.
         /// </summary>
         [Parameter]

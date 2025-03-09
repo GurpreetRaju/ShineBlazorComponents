@@ -2,7 +2,10 @@
 
 <Page PageName="Modal">
     <Example Header="Modal Dialog" Code="@ModalCode">
-        <Modal TriggerText="Show Modal" TriggerClass="btn-primary">
+        <Button Variant="Variant.Filled" Color="Base.Color.Primary" Clicked="ShowModal">
+            Show Modal
+        </Button>
+        <Modal @bind-Show="_showModal">
             <Header>Header content.</Header>
             <Body>
                 <Content>
@@ -17,7 +20,9 @@
 </Page>
 
 @code{
-    public string ModalCode = "<Modal TriggerText=\"Show Modal\" TriggerClass=\"btn-primary\">\n"
+    private bool _showModal;
+
+    public string ModalCode = "<Modal @bind-Show=\"_showModal\">\n"
         + "\t<Header>Header content.</Header>\n"
         + "\t<Body>\n"
         + "\t\t<Content>\n"
@@ -28,4 +33,9 @@
         + "\t\tThis is footer.\n"
         + "\t</Footer>\n"
         + "</Modal>";
+
+    private void ShowModal()
+    {
+        _showModal = true;
+    }
 }
