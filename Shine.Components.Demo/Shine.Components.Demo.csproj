@@ -18,6 +18,8 @@
     <None Remove="Resources\Examples\InputControl.txt" />
     <None Remove="Resources\Examples\ListGroup.txt" />
     <None Remove="Resources\Examples\ListGroupCustom.txt" />
+    <None Remove="Resources\Examples\ListView.txt" />
+    <None Remove="Resources\Examples\ListViewCustom.txt" />
     <None Remove="Resources\Examples\Modal.txt" />
     <None Remove="Resources\Examples\PropertyGrid.txt" />
     <None Remove="Resources\Examples\PropertyGrid_Collections.txt" />
@@ -39,6 +41,8 @@
     <EmbeddedResource Include="Resources\Examples\InputControl.txt" />
     <EmbeddedResource Include="Resources\Examples\ListGroup.txt" />
     <EmbeddedResource Include="Resources\Examples\ListGroupCustom.txt" />
+    <EmbeddedResource Include="Resources\Examples\ListView.txt" />
+    <EmbeddedResource Include="Resources\Examples\ListViewCustom.txt" />
     <EmbeddedResource Include="Resources\Examples\Modal.txt" />
     <EmbeddedResource Include="Resources\Examples\PropertyGrid.txt" />
     <EmbeddedResource Include="Resources\Examples\PropertyGrid_Collections.txt" />

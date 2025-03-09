@@ -1,3 +1,14 @@
+:root {
+    --sh-body-bg: #f8fbff; 
+}
+:root[data-bs-theme=dark] {
+    --sh-body-bg: var(--bs-body-bg); 
+}
+
+body {
+    background: var(--sh-body-bg);
+}
+
 h1:focus {
     outline: none;
 }

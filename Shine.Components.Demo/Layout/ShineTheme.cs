@@ -26,8 +26,8 @@ namespace Shine.Components.Demo.Layout
         {
             Primary = new ThemeColorSet
             {
-                Color = "#355070",
-                Rgb = "53, 80, 112",
+                Color = "#2081e3",
+                Rgb = "32, 129, 227",
                 BackgroundSubtle = "#386cbc",
                 Border = "#476d99"
             };

@@ -6,8 +6,8 @@
 }
 @if (component.DisplayPopup)
 {
-    <div class="d-flex justify-content-end">
-        <Button Clicked="ShowPopup" Class="form-control">
+    <div class="d-flex justify-content-end form-control">
+        <Button Clicked="ShowPopup" Size="Size.Sm">
             <i class="bi bi-three-dots" />
         </Button>
         <Modal Size="Size.Lg" @bind-Show="_showPopup">
