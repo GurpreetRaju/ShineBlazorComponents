@@ -26,48 +26,24 @@
     /// <summary>
     /// The button variant.
     /// </summary>
-    public enum ButtonVariant
+    public enum Variant
     {
         /// <summary>
-        /// None.
+        /// Filled.
         /// </summary>
-        None,
-        /// <summary>
-        /// Primary.
-        /// </summary>
-        Primary,
-        /// <summary>
-        /// Secondary.
-        /// </summary>
-        Secondary,
-        /// <summary>
-        /// Information.
-        /// </summary>
-        Info,
-        /// <summary>
-        /// Success.
-        /// </summary>
-        Success,
-        /// <summary>
-        /// Warning.
-        /// </summary>
-        Warning,
-        /// <summary>
-        /// Danger.
-        /// </summary>
-        Danger,
-        /// <summary>
-        /// Light.
-        /// </summary>
-        Light,
-        /// <summary>
-        /// Dark.
-        /// </summary>
-        Dark,
+        Filled,
         /// <summary>
         /// Link.
         /// </summary>
-        Link
+        Link,
+        /// <summary>
+        /// Text.
+        /// </summary>
+        Text,
+        /// <summary>
+        /// Outline.
+        /// </summary>
+        Outline
     }
 
     /// <summary>

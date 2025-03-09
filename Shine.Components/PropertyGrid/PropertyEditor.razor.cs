@@ -14,9 +14,9 @@ namespace Shine.Components.PropertyGrid
         #region Fields
 
         /// <summary>
-        /// The valid options.
+        /// The allowed values for the property.
         /// </summary>
-        protected Array _validOptions;
+        protected Array _allowedValues;
 
         /// <summary>
         /// Whether the input is required.
@@ -56,12 +56,22 @@ namespace Shine.Components.PropertyGrid
         /// <summary>
         /// The type converter.
         /// </summary>
-        private TypeConverter _converter;
+        protected TypeConverter _converter;
 
         /// <summary>
         /// Whether the input control is read only.
         /// </summary>
         protected bool _readOnly;
+
+        /// <summary>
+        /// The component control.
+        /// </summary>
+        private ComponentControl _componentControl;
+
+        /// <summary>
+        /// Controls the display of popup if property requires.
+        /// </summary>
+        private bool _showPopup;
 
         #endregion
 
@@ -163,24 +173,36 @@ namespace Shine.Components.PropertyGrid
                 _valueParsingError = ex.Message;
             }
 
+            UpdateAllowedValues();
+
+            var type = _underlyingType ?? PropertyType;
+            UpdateComponentControl(type);
+        }
+
+        /// <summary>
+        /// Updates the allowed values for property.
+        /// </summary>
+        protected virtual void UpdateAllowedValues()
+        {
+            var allowedValuesAttr = PropertyDescriptor.Attributes
+                .OfType<AllowedValuesAttribute>().FirstOrDefault();
+
             if (PropertyType.IsEnum)
             {
-                _validOptions = Enum.GetValues(PropertyDescriptor.PropertyType);
+                _allowedValues = Enum.GetValues(PropertyDescriptor.PropertyType);
+            }
+            else if (allowedValuesAttr != null)
+            {
+                _allowedValues = allowedValuesAttr.Values;
             }
             else if (PropertyType == typeof(bool))
             {
-                if (_isNullableType)
-                {
-                    _validOptions = new bool?[] { null, true, false };
-                }
-                else
-                {
-                    _validOptions = new bool[] { true, false };
-                }
+                _allowedValues = _isNullableType ? new bool?[] { null, true, false }
+                    : new bool[] { true, false };
             }
             else
             {
-                _validOptions = null;
+                _allowedValues = null;
             }
         }
 
@@ -237,130 +259,165 @@ namespace Shine.Components.PropertyGrid
         /// Gets the type of component to render.
         /// </summary>
         /// <returns></returns>
-        private DynamicComponentInfo GetComponentToRender()
+        protected virtual DynamicComponentInfo GetComponentToRender()
         {
-            if (PropertyDescriptor.IsReadOnly)
+            switch (_componentControl)
             {
-                return new DynamicComponentInfo
-                {
-                    ComponentType = typeof(Text),
-                    Parameters = new Dictionary<string, object>
+                case ComponentControl.Text:
+                    return new DynamicComponentInfo
                     {
-                        { "Content", _propertyValue?.ToString() },
-                        { "Class", CssClasses },
-                        { "Style", CssStyles }
-                    }
-                };
-            }
-            else if (PropertyType.IsArray)
-            {
-                return new DynamicComponentInfo
-                {
-                    DisplayPopup = true,
-                    ComponentType = typeof(ArrayEditor<>).MakeGenericType(_elementType),
-                    Parameters = new Dictionary<string, object>
+                        ComponentType = typeof(Text),
+                        Parameters = new Dictionary<string, object>
+                        {
+                            { "Content", _propertyValue?.ToString() },
+                            { "Class", CssClasses },
+                            { "Style", CssStyles }
+                        }
+                    };
+                case ComponentControl.Array:
+                    return new DynamicComponentInfo
                     {
-                        { "TItem", _elementType },
-                        { "Collection", _propertyValue },
-                        { "CollectionChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                        { "Class", CssClasses },
-                        { "Style", CssStyles }
-                    }
-                };
-            }
-            else if (PropertyType.IsGenericType && PropertyType.GetGenericTypeDefinition() == typeof(List<>))
-            {
-                return new DynamicComponentInfo
-                {
-                    DisplayPopup = true,
-                    ComponentType = typeof(ListEditor<>).MakeGenericType(_elementType),
-                    Parameters = new Dictionary<string, object>
+                        DisplayPopup = true,
+                        ComponentType = typeof(ArrayEditor<>).MakeGenericType(_elementType),
+                        Parameters = new Dictionary<string, object>
+                        {
+                            { "TItem", _elementType },
+                            { "Collection", _propertyValue },
+                            { "CollectionChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
+                            { "Class", CssClasses },
+                            { "Style", CssStyles }
+                        }
+                    };
+                case ComponentControl.List:
+                    return new DynamicComponentInfo
                     {
-                        { "TItem", _elementType },
-                        { "Collection", _propertyValue },
-                        { "CollectionChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                        { "Class", CssClasses },
-                        { "Style", CssStyles }
-                    }
-                };
-            }
-            else if (IsComplexType)
-            {
-                return new DynamicComponentInfo
-                {
-                    DisplayPopup = true,
-                    ComponentType = typeof(PropertyGrid<>).MakeGenericType(PropertyType),
-                    Parameters = new Dictionary<string, object>
+                        DisplayPopup = true,
+                        ComponentType = typeof(ListEditor<>).MakeGenericType(_elementType),
+                        Parameters = new Dictionary<string, object>
+                        {
+                            { "TItem", _elementType },
+                            { "Collection", _propertyValue },
+                            { "CollectionChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
+                            { "Class", CssClasses },
+                            { "Style", CssStyles }
+                        }
+                    };
+                case ComponentControl.PropertyGrid:
+                    return new DynamicComponentInfo
                     {
-                        { "TObject", PropertyType },
-                        { "Value", _propertyValue },
-                        { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                        { "Class", CssClasses },
-                        { "Style", CssStyles }
-                    }
-                };
-            }
-            else if (_validOptions != null && _validOptions.Length > 0)
-            {
-                return new DynamicComponentInfo
-                {
-                    ComponentType = typeof(DropDown<>).MakeGenericType(PropertyType), 
-                    Parameters = new Dictionary<string, object>
+                        DisplayPopup = true,
+                        ComponentType = typeof(PropertyGrid<>).MakeGenericType(PropertyType),
+                        Parameters = new Dictionary<string, object>
+                        {
+                            { "TObject", PropertyType },
+                            { "Value", _propertyValue },
+                            { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
+                            { "Class", CssClasses },
+                            { "Style", CssStyles }
+                        }
+                    };
+                case ComponentControl.DropDown:
+                    return new DynamicComponentInfo
                     {
-                        { "TItem", PropertyType },
-                        { "Items", _validOptions },
-                        { "SelectedItem", _propertyValue },
-                        { "SelectedItemChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                        { "SelectionMode", SelectionMode.Single },
-                        { "Class", CssClasses },
-                        { "Style", CssStyles }
-                    }
-                };
+                        ComponentType = typeof(DropDown<>).MakeGenericType(PropertyType),
+                        Parameters = new Dictionary<string, object>
+                        {
+                            { "TItem", PropertyType },
+                            { "Items", _allowedValues },
+                            { "SelectedItem", _propertyValue },
+                            { "SelectedItemChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
+                            { "SelectionMode", SelectionMode.Single },
+                            { "Class", CssClasses },
+                            { "Style", CssStyles }
+                        }
+                    };
+
+                default:
+                    return new DynamicComponentInfo
+                    {
+                        ComponentType = typeof(InputControl<>).MakeGenericType(PropertyType),
+                        Parameters = new Dictionary<string, object>
+                        {
+                            { "TValue", PropertyType },
+                            { "Value", _propertyValue },
+                            { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
+                            { "Required", _required },
+                            { "ReadOnly", _readOnly },
+                            { "Class", CssClasses },
+                            { "Style", CssStyles },
+                        }
+                    };
             }
-            
-            return new DynamicComponentInfo
-            {
-                ComponentType = typeof(InputControl<>).MakeGenericType(PropertyType),
-                Parameters = new Dictionary<string, object>
-                {
-                    { "TValue", PropertyType },
-                    { "Value", _propertyValue },
-                    { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                    { "Required", _required },
-                    { "ReadOnly", _readOnly },
-                    { "Class", CssClasses },
-                    { "Style", CssStyles },
-                }
-            };
         }
 
         /// <summary>
-        /// Determine if type if complex type.
+        /// Udpate the <see cref="_componentControl"/>.
         /// </summary>
         /// <param name="type"></param>
-        /// <returns></returns>
-        private bool IsComplexType
+        private void UpdateComponentControl(Type type)
         {
-            get
+            if (PropertyDescriptor.IsReadOnly)
             {
-                var type = _underlyingType ?? PropertyType;
-
-                return !(type.IsPrimitive ||
-                         type.IsEnum ||
-                         type == typeof(string) ||
-                         type == typeof(decimal) ||
-                         type == typeof(DateTime) ||
-                         type == typeof(DateTime?) ||
-                         type == typeof(TimeSpan) ||
-                         type == typeof(TimeSpan?) ||
-                         type == typeof(Guid)) &&
-                       !type.IsArray &&
-                       !typeof(System.Collections.IEnumerable).IsAssignableFrom(type);
+                _componentControl = ComponentControl.Text;
+            }
+            else if (!(type.IsPrimitive ||
+                    type.IsEnum ||
+                    type == typeof(string) ||
+                    type == typeof(decimal) ||
+                    type == typeof(DateTime) ||
+                    type == typeof(DateTime?) ||
+                    type == typeof(TimeSpan) ||
+                    type == typeof(TimeSpan?) ||
+                    type == typeof(Guid)) &&
+                !type.IsArray &&
+                !typeof(System.Collections.IEnumerable).IsAssignableFrom(type))
+            {
+                _componentControl = ComponentControl.PropertyGrid;
+            }
+            else if (PropertyType.IsArray)
+            {
+                _componentControl = ComponentControl.Array;
+            }
+            else if (PropertyType.IsGenericType && PropertyType.GetGenericTypeDefinition() == typeof(List<>))
+            {
+                _componentControl = ComponentControl.List;
+            }
+            else if (_allowedValues != null && _allowedValues.Length > 0)
+            {
+                _componentControl = ComponentControl.DropDown;
+            }
+            else
+            {
+                _componentControl= ComponentControl.Input;
             }
         }
 
+        /// <summary>
+        /// Shows the popup.
+        /// </summary>
+        private void ShowPopup()
+        {
+            _showPopup = true;
 
-        public static Type GetCollectionElementType(Type collectionType)
+            InvokeAsync(StateHasChanged);
+        }
+
+        /// <summary>
+        /// Hides the popup.
+        /// </summary>
+        private void HidePopup()
+        {
+            _showPopup = false;
+
+            InvokeAsync(StateHasChanged);
+        }
+
+        /// <summary>
+        /// Gets the collection element type.
+        /// </summary>
+        /// <param name="collectionType"></param>
+        /// <returns></returns>
+        private static Type GetCollectionElementType(Type collectionType)
         {
             if (collectionType.IsArray)
             {
@@ -376,5 +433,36 @@ namespace Shine.Components.PropertyGrid
         }
 
         #endregion
+    }
+
+    /// <summary>
+    /// The component control.
+    /// </summary>
+    enum ComponentControl
+    {
+        /// <summary>
+        /// Array Editor.
+        /// </summary>
+        Array,
+        /// <summary>
+        /// Drop down.
+        /// </summary>
+        DropDown,
+        /// <summary>
+        /// Input control.
+        /// </summary>
+        Input,
+        /// <summary>
+        /// List Editor.
+        /// </summary>
+        List,
+        /// <summary>
+        /// Property Grid.
+        /// </summary>
+        PropertyGrid,
+        /// <summary>
+        /// Text control.
+        /// </summary>
+        Text
     }
 }

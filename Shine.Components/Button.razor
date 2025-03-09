@@ -41,13 +41,13 @@
     /// The button variant.
     /// </summary>
     [Parameter]
-    public ButtonVariant Variant { get; set; }
+    public Variant Variant { get; set; }
 
     /// <summary>
-    /// The outline.
+    /// The button color.
     /// </summary>
     [Parameter]
-    public bool Outline { get; set; }
+    public Color Color { get; set; }
 
     /// <summary>
     /// Event callback to invoke on clicked.
@@ -83,13 +83,21 @@
     /// <returns></returns>
     protected string GetButtonVariantClass()
     {
-        if (Variant == ButtonVariant.None) return string.Empty;
-
         string variantClass = "btn-";
-        if (Outline && Variant != ButtonVariant.Link)
-            variantClass += "outline-";
-
-        return variantClass += Variant.ToString().ToLowerInvariant();
+        switch (Variant)
+        {
+            case Variant.Outline:
+                variantClass += "outline-";
+                break;
+            case Variant.Text:
+                variantClass += "text-";
+                break;
+            case Variant.Link:
+                return variantClass += "link";
+            default:
+                break;
+        }
+        return variantClass += Color.ToString().ToLowerInvariant();
     }
 }
 

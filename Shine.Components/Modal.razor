@@ -1,11 +1,6 @@
 @inherits BackgroundComponentBase
 
-<Button Clicked="Show" Class="@TriggerClass">
-    @TriggerContent
-    @TriggerText
-</Button>
-
-@if (_show)
+@if (Show)
 {
     <div id="@Id" class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
         <div class="modal-dialog">
@@ -19,7 +14,14 @@
                     {
                         <h2 class="modal-title">@HeaderText</h2>
                     }
-                    <Button @onclick="Hide" Variant="ButtonVariant.Link" aria-label="Close" Class="btn-close align-self-end"></Button>
+                    @if (CloseButton)
+                    {
+                        <Button @onclick="() => Toggle(false)"
+                                Variant="Variant.Text"
+                                Class="btn-close align-self-end"
+                                aria-label="Close">
+                        </Button>
+                    }
                 </div>
                 <div class="modal-body">
                     @Body
@@ -38,25 +40,6 @@
 @code {
 
     private readonly Guid Id = Guid.NewGuid();
-    private bool _show = false;
-
-    /// <summary>
-    /// Trigger text.
-    /// </summary>
-    [Parameter]
-    public string TriggerText { get; set; }
-
-    /// <summary>
-    /// Trigger content.
-    /// </summary>
-    [Parameter]
-    public RenderFragment TriggerContent { get; set; }
-
-    /// <summary>
-    /// Trigger class.
-    /// </summary>
-    [Parameter]
-    public string TriggerClass { get; set; }
 
     /// <summary>
     /// Header text.
@@ -88,6 +71,24 @@
     [Parameter]
     public Size Size { get; set; }
 
+    /// <summary>
+    /// Event callback for <see cref="Show"/> changes.
+    /// </summary>
+    [Parameter]
+    public EventCallback<bool> ShowChanged { get; set; }
+
+    /// <summary>
+    /// Show modal.
+    /// </summary>
+    [Parameter]
+    public bool Show { get; set; }
+
+    /// <summary>
+    /// Whether to show close button in header. Default: true;
+    /// </summary>
+    [Parameter]
+    public bool CloseButton { get; set; } = true;
+
     /// <inheritdoc/>
     protected override string ComponentName => "modal";
 
@@ -95,26 +96,21 @@
     /// Css builder.
     /// </summary>
     protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("fade")
-        .WithClass("show", _show)
+        .WithClass("show", Show)
         .WithClass(() => $"modal-{Size.ToString().ToLowerInvariant()}", Size != Size.Default);
 
     /// <summary>
-    /// Show the modal.
+    /// Toggle show state.
     /// </summary>
-    protected async Task Show()
+    /// <param name="show"></param>
+    private void Toggle(bool show)
     {
-        _show = true;
+        if (Show != show)
+        {
+            Show = show;
+            ShowChanged.InvokeAsync(Show);
 
-        await InvokeAsync(StateHasChanged);
-    }
-
-    /// <summary>
-    /// Hide the modal.
-    /// </summary>
-    protected async Task Hide()
-    {
-        _show = false;
-
-        await InvokeAsync(StateHasChanged);
+            InvokeAsync(StateHasChanged);
+        }
     }
 }

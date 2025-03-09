@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Shine.Components.Base;
 using System.ComponentModel;
 
 namespace Shine.Components.PropertyGrid
@@ -69,9 +68,6 @@ namespace Shine.Components.PropertyGrid
 
         /// <inheritdoc/>
         protected override string ComponentName => "property-grid";
-
-        /// <inheritdoc/>
-        protected override CssClassBuilder CssBuilder => base.CssBuilder;
 
         /// <inheritdoc/>
         public override async Task SetParametersAsync(ParameterView parameters)
