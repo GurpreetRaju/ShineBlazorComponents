@@ -90,6 +90,26 @@ namespace Shine.Components.Theme
         public virtual string BodyFontSize { get; set; }
 
         /// <summary>
+        /// The body text color.
+        /// </summary>
+        public virtual string BodyColor { get; set; }
+
+        /// <summary>
+        /// The body text color (RGB).
+        /// </summary>
+        public virtual string BodyColorRgb { get; set; }
+
+        /// <summary>
+        /// The body Background Color.
+        /// </summary>
+        public virtual string BodyBgColor { get; set; }
+
+        /// <summary>
+        /// The body background color (RGB).
+        /// </summary>
+        public virtual string BodyBgColorRgb { get; set; }
+
+        /// <summary>
         /// Any additional variables to add.
         /// </summary>
         public virtual List<string> AdditionalVariables { get; set; }
@@ -151,6 +171,18 @@ namespace Shine.Components.Theme
 
             if (!string.IsNullOrWhiteSpace(BodyFontSize))
                 stringBuilder.AppendLine(string.Format(VariableFormat, "body-font-size", BodyFontSize));
+            
+            if (!string.IsNullOrWhiteSpace(BodyColor))
+                stringBuilder.AppendLine(string.Format(VariableFormat, "body-color", BodyColor));
+            
+            if (!string.IsNullOrWhiteSpace(BodyColorRgb))
+                stringBuilder.AppendLine(string.Format(VariableFormat, "body-color-rgb", BodyColorRgb));
+            
+            if (!string.IsNullOrWhiteSpace(BodyBgColor))
+                stringBuilder.AppendLine(string.Format(VariableFormat, "body-bg", BodyBgColor));
+            
+            if (!string.IsNullOrWhiteSpace(BodyBgColorRgb))
+                stringBuilder.AppendLine(string.Format(VariableFormat, "body-bg-rgb", BodyBgColorRgb));
 
             if (AdditionalVariables?.Any() == true)
                 AdditionalVariables.ForEach(v => stringBuilder.AppendLine(v));

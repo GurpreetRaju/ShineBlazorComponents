@@ -1,0 +1,21 @@
+﻿@using System.Text
+@using Microsoft.JSInterop
+
+@inject IJSRuntime JS
+
+<HeadContent>
+    @((MarkupString)Build())
+</HeadContent>
+@if (ShowThemeSwitch)
+{
+    <Button Variant="Variant.Text" Color="SwitchColor" Clicked="Toggle">
+        @if (DarkMode)
+        {
+            <i class="bi bi-moon-stars-fill" />
+        }
+        else
+        {
+            <i class="bi bi-brightness-high-fill" />
+        }
+    </Button>
+}

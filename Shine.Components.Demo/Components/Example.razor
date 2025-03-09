@@ -11,13 +11,13 @@
 
     @if (!string.IsNullOrEmpty(_exampleCode))
     {
-        <div class="border border-dark-subtle rounded">
+        <div class="border border-dark-subtle rounded text-bg-light">
             <Content Border="Base.BorderEdge.TopAndBottom"
-                     Class="example-header-content border-dark-subtle bg-light">
+                     Class="example-header-content border-dark-subtle">
                 <Text Alignment="Base.Alignment.Start">HTML</Text>
                 <Clipboard Text="@_exampleCode" class="align-self-end" />
             </Content>
-            <Content Class="example-content bg-light">
+            <Content Class="example-content">
                 <pre style="text-wrap: auto;">@_exampleCode</pre>
             </Content>
         </div>

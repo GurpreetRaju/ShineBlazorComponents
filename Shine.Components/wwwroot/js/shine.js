@@ -10,3 +10,7 @@ window.clipboardCopy = {
         });
     }
 }
+
+window.setHtmlAttribute = (name, value) => {
+    document.documentElement.setAttribute(name, value);
+};

@@ -1,6 +1,5 @@
 ﻿@inherits LayoutComponentBase
 
-<Shine.Components.Theme.ThemeProvider />
 <ToastProvider />
 
 <div class="layout-wrapper">
@@ -8,6 +7,10 @@
         <BrandContent>
             <Text Transform="Base.Transform.Uppercase" class="text-white">Shine</Text>
         </BrandContent>
+        <ChildContent>
+            <div class="flex-grow-1"/>
+            <Shine.Components.Theme.ThemeSelector Theme="_theme" />
+        </ChildContent>
     </AppBar>
     <DrawerContainer class="flex-grow-1">
         <LeftDrawer>
@@ -26,3 +29,8 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
+
+@code {
+    private readonly ShineTheme _theme = new ShineTheme();
+}
