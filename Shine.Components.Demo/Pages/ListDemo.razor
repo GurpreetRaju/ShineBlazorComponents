@@ -18,9 +18,92 @@
             </ItemTemplate>
         </ListGroup>
     </Example>
+    <Example Header="List View" CodeFile="ListView.txt">
+        <div class="row">
+            <div class="col-4">
+                <ListView Items="DummyDataProvider.GetFruits(5, 0)"
+                          TextVariant="@TextVariant" Size="@Size"
+                          Color="Color" ItemToText="f => f.Name" />
+            </div>
+            <div class="col-8">
+                <Text>Text Variant:</Text>
+                <DropDown TItem="bool" Items="[true, false]"
+                          @bind-SelectedItem="TextVariant" 
+                          SelectionMode="Base.SelectionMode.Single" />
+                <Text Class="mt-2">Color:</Text>
+                <DropDown TItem="Base.Color" Items="_colors"
+                          @bind-SelectedItem="Color" 
+                          SelectionMode="Base.SelectionMode.Single" />
+                <Text Class="mt-2">Size:</Text>
+                <DropDown TItem="Size" Items="_sizes"
+                          @bind-SelectedItem="Size"
+                          SelectionMode="Base.SelectionMode.Single" />
+            </div>
+        </div>
+    </Example>
+    <Example Header="List View - Custom Template" CodeFile="ListViewCustom.txt">
+        <div class="row">
+            <div class="col-4">
+                <ListView Items="DummyDataProvider.GetFruits(5, 0)"
+                          TextVariant="@TextVariant" Color="Color" Size="@Size">
+                    <ItemTemplate>
+                        <a href="#" class="d-flex">
+                            <Text>@context.Name</Text>
+                            <span class="flex-grow-1" />
+                            <Text>@context.Price</Text>
+                        </a>
+                    </ItemTemplate>
+                </ListView>
+            </div>
+        </div>
+    </Example>
 </Page>
 
 @code {
+    private static Base.Color[] _colors = Enum.GetValues<Base.Color>();
+    private static Size[] _sizes = Enum.GetValues<Size>();
+
+    private Base.Color Color
+    {
+        get => _color;
+        set 
+        {
+            if (_color != value)
+            {
+                _color = value;
+                InvokeAsync(StateHasChanged);
+            }
+        }
+    }
+    private Base.Color _color;
+
+    private bool TextVariant
+    {
+        get => _textVariant;
+        set
+        {
+            if (_textVariant != value)
+            {
+                _textVariant = value;
+                InvokeAsync(StateHasChanged);
+            }
+        }
+    }
+    private bool _textVariant;
+
+    private Size Size
+    {
+        get => _size;
+        set
+        {
+            if (_size != value)
+            {
+                _size = value;
+                InvokeAsync(StateHasChanged);
+            }
+        }
+    }
+    private Size _size;
 
     /// <summary>
     /// Dummy Data Provider.

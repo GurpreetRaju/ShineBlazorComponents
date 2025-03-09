@@ -1,17 +1,25 @@
 ﻿<Content><i class="bi bi-menu-button-wide-fill"></i> Components</Content>
-<ListGroup TItem="string" Class="ps-4" Element="Base.Element.Div">
-    <ListGroupItem TItem="string" Href="carousel">Carousel</ListGroupItem>
-    <ListGroupItem TItem="string" Href="collapsable-containers">Collapse</ListGroupItem>
-    <ListGroupItem TItem="string" Href="data-grid">Data Grid</ListGroupItem>
-    <ListGroupItem TItem="string" Href="drop-down">Drop Down</ListGroupItem>
-    <ListGroupItem TItem="string" Href="form">Form</ListGroupItem>
-    <ListGroupItem TItem="string" Href="list-group">List</ListGroupItem>
-    <ListGroupItem TItem="string" Href="modal">Modal</ListGroupItem>
-    <ListGroupItem TItem="string" Href="property-grid">Property Grid</ListGroupItem>
-</ListGroup>
+<ListView TItem="Data.NavConfig" Color="Base.Color.Primary"
+          Class="ps-4" Items="@Navs" TextVariant="true">
+    <ItemTemplate>
+        <a href="@context.Link">@context.Name</a>
+    </ItemTemplate>
+</ListView>
 
 @code {
     private bool collapseNavMenu;
+
+    private Data.NavConfig[] Navs = 
+    [
+        new Data.NavConfig { Name = "Carousel", Link = "carousel", },
+        new Data.NavConfig { Name = "Collapse", Link = "collapsable-containers", },
+        new Data.NavConfig { Name = "Data Grid", Link = "data-grid", },
+        new Data.NavConfig { Name = "Drop Down", Link = "drop-down", },
+        new Data.NavConfig { Name = "Form", Link = "form", },
+        new Data.NavConfig { Name = "List", Link = "list-group", },
+        new Data.NavConfig { Name = "Modal", Link = "modal", },
+        new Data.NavConfig { Name = "Property Grid", Link = "property-grid", },
+    ];
 
     private void ToggleNavMenu()
     {

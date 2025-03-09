@@ -1,0 +1,10 @@
+ <ListView Items="GetFruits(5, 0)"
+            TextVariant="false" Color="Base.Color.Primary">
+    <ItemTemplate>
+        <a href="#" class="d-flex">
+            <Text>@context.Name</Text>
+            <span class="flex-grow-1" />
+            <Text>@context.Price</Text>
+        </a>
+    </ItemTemplate>
+</ListView>

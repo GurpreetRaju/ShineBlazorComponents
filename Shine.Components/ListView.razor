@@ -1,65 +1,51 @@
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 
+@typeparam TItem
 @inherits BackgroundComponentBase
 
-@typeparam TItem
-
-<ul class="@CssClasses" styles="@CssStyles" @attributes="@AdditionalAttributes">
-    <Virtualize Context="listItem" 
-        Items="@Items"
-        ItemsProvider="@ItemsProvider"
-        Placeholder="@Placeholder">
-        <li class="@ItemCssBuilder.Build()">
-        @if (ItemTemplate != null)
-            {
-                @ItemTemplate.Invoke(listItem)
-            }
-            else
-            {
-                @listItem
-            }
-        </li>
-    </Virtualize>
-</ul>
+@if (ItemTemplate == null)
+{
+    <ul class="@CssClasses" styles="@CssStyles" @attributes="@AdditionalAttributes">
+        @RenderItems
+    </ul>
+}
+else
+{
+    <div class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
+        @RenderItems
+    </div>
+}
 
 @code {
+    /// <summary>
+    /// Renders the items.
+    /// </summary>
+    private RenderFragment RenderItems => __builder =>
+    {
+        @foreach (var listItem in Items)
+        {
+            @RenderItem(listItem)
+        }
+    };
 
     /// <summary>
-    /// Items collection.
+    /// Render item.
     /// </summary>
-    [Parameter]
-    public ICollection<TItem> Items { get; set; }
-
-    /// <summary>
-    /// Items provider.
-    /// </summary>
-    [Parameter]
-    public ItemsProviderDelegate<TItem> ItemsProvider { get; set; }
-
-    /// <summary>
-    /// Item template.
-    /// </summary>
-    [Parameter]
-    public RenderFragment<TItem> ItemTemplate { get; set; }
-
-    /// <summary>
-    /// Placeholder template for items that are not yet loaded in memory.
-    /// </summary>
-    [Parameter]
-    public RenderFragment<PlaceholderContext> Placeholder { get; set; }
-
-    /// <summary>
-    /// The css class for items.
-    /// </summary>
-    [Parameter]
-    public string ItemClass { get; set; }
-
-    /// <inheritdoc/>
-    protected override string ComponentName => "list-group";
-
-    /// <summary>
-    /// CSS classes for items.
-    /// </summary>
-    protected CssClassBuilder ItemCssBuilder => CssClassBuilder.Create("list-group-item").WithClass(ItemClass);
-
+    /// <param name="listItem"></param>
+    /// <returns></returns>
+    private RenderFragment RenderItem(TItem listItem) => __builder =>
+    {
+        @if (ItemTemplate == null)
+        {
+            <li class="@ItemCssBuilder.Build()">
+                @(ItemToText == null ? listItem : ItemToText.Invoke(listItem))
+            </li>
+        }
+        else
+        {
+            <div class="@ItemCssBuilder.Build()">
+                @ItemTemplate.Invoke(listItem)
+            </div>
+        }
+    };
 }
