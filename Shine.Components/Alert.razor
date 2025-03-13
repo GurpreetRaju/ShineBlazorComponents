@@ -3,6 +3,10 @@
 
 <div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
     @ChildContent
+    @if (Dismissible)
+    {
+        <button type="button" class="btn-close" aria-label="Close" @onclick="Dismiss"></button>
+    }
 </div>
 
 @code{
@@ -19,14 +23,45 @@
     [Parameter]
     public RenderFragment ChildContent{ get; set; }
 
+    /// <summary>
+    /// Whether the alert is dismissible.
+    /// </summary>
+    [Parameter]
+    public bool Dismissible { get; set; }
+
+    /// <summary>
+    /// Whether to show/hide the alert if <see cref="Dismissible"/> is true.
+    /// </summary>
+    [Parameter]
+    public bool Show { get; set; }
+
+    /// <summary>
+    /// Callback for <see cref="Show"/> changes.
+    /// </summary>
+    [Parameter]
+    public EventCallback<bool> ShowChanged { get; set; }
+
     /// <inheritdoc/>
     protected override string ComponentName => "alert";
 
     /// <summary>
-    /// Alert _type class.
+    /// Alert Type class.
     /// </summary>
     private string AlertTypeClass => $"alert-{Color.ToString().ToLowerInvariant()}";
 
     /// <inheritdoc/>
-    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass(AlertTypeClass);
+    protected override CssClassBuilder CssBuilder => base.CssBuilder
+        .WithClass(AlertTypeClass)
+        .WithClass(() => CssClassBuilder.JoinClasses("alert-dismissible", "fade", Show ? "show" : null), Dismissible);
+
+    /// <summary>
+    /// Dismiss the alert.
+    /// </summary>
+    private void Dismiss()
+    {
+        Show = false;
+        ShowChanged.InvokeAsync(Show);
+
+        InvokeAsync(StateHasChanged);
+    }
 }

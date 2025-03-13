@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Examples\AlertExample.txt" />
     <None Remove="Resources\Examples\DropDownMenu.txt" />
     <None Remove="Resources\Examples\DropDownMulti.txt" />
     <None Remove="Resources\Examples\DropDownSingle.txt" />
@@ -32,6 +33,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Examples\Accordion.txt" />
     <EmbeddedResource Include="Resources\Examples\AccordionItem.txt" />
+    <EmbeddedResource Include="Resources\Examples\AlertExample.txt" />
     <EmbeddedResource Include="Resources\Examples\CarouselExample.txt" />
     <EmbeddedResource Include="Resources\Examples\DataGrid.txt" />
     <EmbeddedResource Include="Resources\Examples\DropDownMenu.txt" />

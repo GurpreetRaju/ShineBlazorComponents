@@ -1,0 +1,51 @@
+﻿@page "/alert"
+
+<Page PageName="Alert" ShowTitle="false">
+    <Example Header="Alert" CodeFile="AlertExample.txt">
+        <div class="row">
+            <div class="col-6">
+                <Alert Color="_color">
+                    <i class="bi bi-exclamation-circle-fill align-text-top"></i>
+                    This is <a class="alert-link">@_color.ToString().ToLower()</a> alert with link.
+                </Alert>
+                <Alert Color="_color" Dismissible="true" @bind-Show="_show">
+                    This is a dismissible @_color.ToString().ToLower() alert.
+                </Alert>
+            </div>
+            <div class="col-6">
+                <div class="d-flex flex-column gap-2">
+                    <DropDown TItem="Base.Color" Items="Colors"
+                              SelectedItem="_color" SelectedItemChanged="ColorChanged"
+                              SelectionMode="Base.SelectionMode.Single">
+                    </DropDown>
+                    <Button Variant="Variant.Filled"
+                            Clicked="ShowAlert"
+                            Disabled="_show"
+                            Color="Base.Color.Primary"
+                            ButtonType="ButtonType.Button">
+                        Show Dismissible Alert
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </Example>
+</Page>
+
+@code{
+    private static Base.Color[] Colors = Enum.GetValues<Base.Color>();
+
+    private bool _show;
+    private Base.Color _color = Base.Color.Primary;
+
+    private void ColorChanged(Base.Color color)
+    {
+        _color = color;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void ShowAlert()
+    {
+        _show = true;
+        InvokeAsync(StateHasChanged);
+    }
+}

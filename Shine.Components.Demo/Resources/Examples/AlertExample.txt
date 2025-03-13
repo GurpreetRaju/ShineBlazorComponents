@@ -1,0 +1,26 @@
+
+<Alert Color="Base.Color.Success" Dismissible="true" @bind-Show="_show">
+    This is a dismissible success alert.
+</Alert>
+<Alert Color="Base.Color.Info">
+    This is <a class="alert-link">information</a> alert with link.
+</Alert>
+<Alert Color="Base.Color.Warning">
+    This is <a class="alert-link">warning</a> alert with link.
+</Alert>
+<Alert Color="Base.Color.Danger">
+    <i class="bi bi-exclamation-circle-fill align-text-top"></i>
+    This is danger alert with icon.
+</Alert>
+<Alert Color="Base.Color.Primary">
+    This is primary alert.
+</Alert>
+<Alert Color="Base.Color.Secondary">
+    This is <a class="alert-link">secondary</a> alert with link.
+</Alert>
+<Alert Color="Base.Color.Light">
+    This is light alert.
+</Alert>
+<Alert Color="Base.Color.Dark">
+    This is dark alert.
+</Alert>
