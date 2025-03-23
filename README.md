@@ -28,6 +28,10 @@ Next, add the following to the default Blazor script at the end of the `body`
 ```razor
 <script src="_content/ShineBlazor.Components/js/shine.js" type="text/javascript"></script>
 ```
+If you want to use infinite scroll component also all the following script
+```razor
+<script src="_content/ShineBlazor.Components/InfiniteScroll.razor.js" type="module"></script>
+```
 
 Add the following to the relevant sections of `Program.cs`
 ```c#

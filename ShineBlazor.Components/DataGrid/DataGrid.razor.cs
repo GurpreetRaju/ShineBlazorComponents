@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using ShineBlazor.Components.Base;
 
 namespace ShineBlazor.Components
 {
@@ -29,18 +28,6 @@ namespace ShineBlazor.Components
         public RenderFragment Columns { get; set; }
 
         /// <summary>
-        /// The striped rows.
-        /// </summary>
-        [Parameter]
-        public bool Striped { get; set; } = true;
-
-        /// <summary>
-        /// The bordered table.
-        /// </summary>
-        [Parameter]
-        public bool Bordered { get; set; }
-
-        /// <summary>
         /// The function to provide css class for a row.
         /// </summary>
         [Parameter]
@@ -59,12 +46,6 @@ namespace ShineBlazor.Components
 
         /// <inheritdoc/>
         protected override string ComponentName => "data-grid";
-
-        /// <inheritdoc/>
-        protected override CssClassBuilder CssBuilder => base.CssBuilder
-            .WithClass("table border")
-            .WithClass("table-bordered", Bordered)
-            .WithClass("table-striped", Striped);
 
         /// <summary>
         /// The list of columns.

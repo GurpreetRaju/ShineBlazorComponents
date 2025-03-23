@@ -14,13 +14,13 @@
     }
     @if (Body != null)
     {
-        <div class="@CssClassBuilder.JoinClasses("card-body", HeaderClass)">
+        <div class="@CssClassBuilder.JoinClasses("card-body", BodyClass)">
             @Body
         </div>
     }
     @if (Footer != null)
     {
-        <footer class="@CssClassBuilder.JoinClasses("card-footer", HeaderClass)">
+        <footer class="@CssClassBuilder.JoinClasses("card-footer", FooterClass)">
             @Footer    
         </footer>
     }

@@ -21,10 +21,12 @@ namespace ShineBlazor.Components
         /// </summary>
         protected readonly List<TItem> _currentItems = new List<TItem>();
 
+        private readonly object _lock = new();
         private string _error;
         private int _totalItems = 0;
         private bool _loadingItems;
         private bool _haveMoreItems = true;
+        private bool _initialized = false;
 
         private ElementReference _lastItemIndicator;
         private IJSObjectReference _module;
@@ -56,6 +58,12 @@ namespace ShineBlazor.Components
         public RenderFragment<TItem> ItemTemplate { get; set; }
 
         /// <summary>
+        /// Callback for items count change.
+        /// </summary>
+        [Parameter]
+        public EventCallback<int> ItemsCountChanged { get; set; }
+
+        /// <summary>
         /// JS Runtime.
         /// </summary>
         [Inject]
@@ -71,9 +79,7 @@ namespace ShineBlazor.Components
 
             if (firstRender)
             {
-                _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/ShineBlazor.Components/InfiniteScroll.razor.js");
-                _currentComponentReference = DotNetObjectReference.Create(this);
-                _instance = await _module.InvokeAsync<IJSObjectReference>("initialize", _lastItemIndicator, _currentComponentReference);
+                await LoadItems();
             }
         }
 
@@ -86,11 +92,11 @@ namespace ShineBlazor.Components
         {
             try
             {
-                Console.WriteLine("Loading Items......");
-                if (_loadingItems)
+                if (!TryLoadingItems())
                     return;
 
-                _loadingItems = true;
+                Console.WriteLine($"Loading Items......{DateTime.Now.ToString("G")}");
+
                 _error = null;
 
                 var response = await ItemsProvider.Invoke(new InfiniteScrollItemsRequest
@@ -103,12 +109,21 @@ namespace ShineBlazor.Components
                 {
                     _currentItems.AddRange(response.Items);
                     _totalItems = response.TotalItems;
+
+                    RaiseItemsCountChanged();
                 }
 
                 _haveMoreItems = _currentItems.Count < _totalItems;
                 if (_haveMoreItems)
                 {
-                    await _instance.InvokeVoidAsync("itemsLoaded");
+                    if (_initialized)
+                    {
+                        await _instance.InvokeVoidAsync("itemsLoaded");
+                    }
+                    else
+                    {
+                        await Initialize();
+                    }
                 }
             }
             catch (Exception ex)
@@ -149,6 +164,45 @@ namespace ShineBlazor.Components
 
                 _currentComponentReference?.Dispose();
             }
+        }
+
+        /// <summary>
+        /// Initialize the last item indicator observer.
+        /// </summary>
+        private async Task Initialize()
+        {
+            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/ShineBlazor.Components/InfiniteScroll.razor.js");
+
+            _currentComponentReference = DotNetObjectReference.Create(this);
+            _instance = await _module.InvokeAsync<IJSObjectReference>("initialize", _lastItemIndicator, _currentComponentReference);
+
+            _initialized = true;
+        }
+
+        /// <summary>
+        /// Determine whether the items can be loaded. If so,
+        /// set <see cref="_loadingItems"/> to true and returns true, otherwise false.
+        /// </summary>
+        /// <returns></returns>
+        private bool TryLoadingItems()
+        {
+            lock (_lock)
+            {
+                if (_loadingItems)
+                    return false;
+
+                _loadingItems = true;
+
+                return _loadingItems;
+            }
+        }
+
+        /// <summary>
+        /// Raise items count changed.
+        /// </summary>
+        private void RaiseItemsCountChanged()
+        {
+            ItemsCountChanged.InvokeAsync(_currentItems.Count);
         }
     }
 

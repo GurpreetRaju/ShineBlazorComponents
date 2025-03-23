@@ -19,6 +19,7 @@ export function initialize(lastItemIndicator, componentInstance) {
     return {
         dispose: () => dispose(observer),
         itemsLoaded: () => {
+            observer.unobserve(lastItemIndicator);
             observer.observe(lastItemIndicator);
         },
     };

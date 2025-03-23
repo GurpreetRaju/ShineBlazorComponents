@@ -1,0 +1,46 @@
+<tr class="@Class" style="@Style">
+    @if (MergeColumns)
+    {
+        <th scrope="row" colspan="2">@Key@ChildContent</th>
+    }
+    else
+    {
+        <th scrope="row">@Key</th>
+        <td>
+            @ChildContent
+        </td>
+    }
+</tr>
+
+@code{
+
+    /// <summary>
+    /// The key.
+    /// </summary>
+    [Parameter]
+    public string Key { get; set; }
+
+    /// <summary>
+    /// Whether to merge columns.
+    /// </summary>
+    [Parameter]
+    public bool MergeColumns { get; set; }
+
+    /// <summary>
+    /// The Css Class.
+    /// </summary>
+    [Parameter]
+    public string Class { get; set; }
+
+    /// <summary>
+    /// The Css Style.
+    /// </summary>
+    [Parameter]
+    public string Style { get; set; }
+
+    /// <summary>
+    /// The child content fragment.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

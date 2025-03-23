@@ -53,6 +53,17 @@ h1:focus {
     text-align: start;
 }
 
+.example .example-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.example .example-content {
+    max-height: 12rem;
+    overflow: auto;
+}
+
 @media (min-width: 767px) {
 
     html, body, .layout-wrapper, .drawer-container .drawer-container-content {

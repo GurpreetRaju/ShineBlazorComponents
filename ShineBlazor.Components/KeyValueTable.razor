@@ -1,0 +1,83 @@
+@typeparam TValue
+@inherits TableBase
+
+<table class="@CssClasses">
+    @if (HeaderContent != null || !string.IsNullOrEmpty(TableTitle))
+    {
+        <thead>
+            @if (!string.IsNullOrEmpty(TableTitle))
+            {
+                <KeyValueTableRow MergeColumns="true" Class="text-center">
+                    <div class="table-title">
+                        @TableTitle
+                    </div>
+                </KeyValueTableRow>
+            }
+            @HeaderContent
+        </thead>
+    }
+    <tbody>
+        @if (KeyValues != null)
+        {
+            @foreach (var keyValue in KeyValues)
+            {
+                <KeyValueTableRow Key="@keyValue.Key" Class="@GetRowClass(keyValue)">
+                    @(ValueTemplate == null ? keyValue.Value : ValueTemplate(keyValue))
+                </KeyValueTableRow>
+            }
+        }
+        @ChildContent
+    </tbody>
+</table>
+
+@code{
+
+    /// <summary>
+    /// The key value dictionary.
+    /// </summary>
+    [Parameter]
+    public Dictionary<string, TValue> KeyValues { get; set; }
+
+    /// <summary>
+    /// The value template.
+    /// </summary>
+    [Parameter]
+    public RenderFragment<KeyValuePair<string, TValue>> ValueTemplate { get; set; }
+
+    /// <summary>
+    /// The function that returns row class.
+    /// </summary>
+    [Parameter]
+    public Func<KeyValuePair<string, TValue>, string> RowClassFunc { get; set; }
+
+    /// <summary>
+    /// The table title.
+    /// </summary>
+    [Parameter]
+    public string TableTitle { get; set; }
+
+    /// <summary>
+    /// Header content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment HeaderContent { get; set; }
+
+    /// <summary>
+    /// The child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "key-value";
+
+    /// <summary>
+    /// Gets the row class.
+    /// </summary>
+    /// <param name="keyValue"></param>
+    /// <returns></returns>
+    private string GetRowClass(KeyValuePair<string, TValue> keyValue)
+    {
+        return RowClassFunc == null ? null : RowClassFunc(keyValue);
+    }
+}
