@@ -1,7 +1,7 @@
 # Shine Blazor
 
 <p align="center">
-  <img src="./Shine.Components.Demo/wwwroot/images/shine.svg" alt="Shine Blazor" width="150" />
+  <img src="./ShineBlazor.Components.Demo/wwwroot/images/shine.svg" alt="Shine Blazor" width="150" />
 </p>
 
 <p align="center">Build responsive and dynamic sites faster with Shine Blazor.</p>
