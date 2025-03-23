@@ -22,11 +22,11 @@ Add the following to the `MainLayout.razor` or `App.razor`
 ```
 Add the following to your HTML `head` section, it's either `index.html` or `_Layout.cshtml`/`_Host.cshtml`/`App.razor` depending on whether you're running WebAssembly or Server
 ```razor
-<link href="_content/Shine.Components/css/shine.css" rel="stylesheet" />
+<link href="_content/ShineBlazor.Components/css/shine.css" rel="stylesheet" />
 ```
 Next, add the following to the default Blazor script at the end of the `body`
 ```razor
-<script src="_content/Shine.Components/js/shine.js" type="text/javascript"></script>
+<script src="_content/ShineBlazor.Components/js/shine.js" type="text/javascript"></script>
 ```
 
 Add the following to the relevant sections of `Program.cs`
