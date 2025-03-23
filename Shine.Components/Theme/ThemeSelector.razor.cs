@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Shine.Components.Base;
+using Shine.Components.Services;
 using System.Text;
 
 namespace Shine.Components.Theme
@@ -47,14 +48,36 @@ namespace Shine.Components.Theme
         /// Adds the theme styles to head. Default: true.
         /// </summary>
         [Parameter]
-        public bool HeadOutlet { get; set; } = true;
+        public bool HeadOutlet { get; set; } = true; 
+
+        /// <summary>
+        /// Js runtime.
+        /// </summary>
+        [Inject]
+        private IJSRuntime JSRuntime { get; set; } 
+
+        /// <summary>
+        /// The toast service.
+        /// </summary>
+        [Inject]
+        private ToastService ToastService { get; set; } 
 
         /// <inheritdoc/>
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            await base.OnAfterRenderAsync(firstRender);
+            try
+            {
+                await base.OnAfterRenderAsync(firstRender);
 
-            await JS.InvokeVoidAsync("setHtmlAttribute", "data-bs-theme", DarkMode ? DarkModeName : LightModeName);
+                if (JSRuntime != null)
+                {
+                    await JSRuntime.InvokeVoidAsync("setHtmlAttribute", "data-bs-theme", DarkMode ? DarkModeName : LightModeName);
+                }
+            }
+            catch (Exception ex) 
+            {
+                ToastService.AddToast($"Failed to load: {ex}", Color.Danger);
+            }
         }
 
         /// <summary>

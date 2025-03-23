@@ -52,11 +52,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shine.Components\Shine.Components.csproj" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\Shine.Components\Shine.Components.csproj" />
   </ItemGroup>
 
   <ItemGroup>

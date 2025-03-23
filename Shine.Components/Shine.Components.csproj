@@ -1,9 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<PackageId>ShineBlazor.Components</PackageId>
+	<Version>0.1.0</Version>
+	<Authors>Gurpreet Raju</Authors>
+	<Company>ShineBlazor</Company>
+	<Description>Shine Blazor library is based on Bootstrap css.</Description>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<RepositoryUrl>https://github.com/GurpreetRaju/ShineBlazorComponents</RepositoryUrl>
+	<PackageOutputPath>bin\Release</PackageOutputPath>
   </PropertyGroup>
 
 
@@ -12,9 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.3" />
   </ItemGroup>
 
 </Project>
