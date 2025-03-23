@@ -198,6 +198,25 @@ namespace Shine.Components.Base
         }
 
         /// <summary>
+        /// Adds the shadow css.
+        /// </summary>
+        /// <param name="shadow">The shadow.</param>
+        /// <returns></returns>
+        public CssClassBuilder WithShadow(Shadow? shadow)
+        {
+            if (shadow.HasValue)
+            {
+                string shadowClass = "shadow";
+                if (shadow != Shadow.Md)
+                    shadowClass += "-" + shadow.ToString().ToLowerInvariant();
+
+                _classes.Add(shadowClass);
+            }
+
+            return this;
+        }
+
+        /// <summary>
         /// BuildStyles the css.
         /// </summary>
         /// <returns></returns>

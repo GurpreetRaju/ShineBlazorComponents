@@ -7,40 +7,7 @@ namespace Shine.Components.Base
     /// The base for a component.
     /// </summary>
     public abstract class ShineComponentBase : ComponentBase, IDisposable
-    {
-        private const string CssClassAttribute = "class";
-        private const string CssStyleAttribute = "style";
-        
-        /// <summary>
-        /// The Border.
-        /// </summary>
-        [Parameter]
-        public BorderEdge Border { get; set; } = BorderEdge.None;
-
-        /// <summary>
-        /// The border color.
-        /// </summary>
-        [Parameter]
-        public Color BorderColor { get; set; } = Color.None;
-
-        /// <summary>
-        /// The border size.
-        /// </summary>
-        [Parameter]
-        public uint? BorderSize { get; set; }
-
-        /// <summary>
-        /// The border radius.
-        /// </summary>
-        [Parameter]
-        public BorderRadius BorderRadius { get; set; } = BorderRadius.None;
-
-        /// <summary>
-        /// The border radius.
-        /// </summary>
-        [Parameter]
-        public uint? RadiusSize { get; set; }
-
+    {   
         /// <summary>
         /// The css classes.
         /// </summary>
@@ -52,6 +19,12 @@ namespace Shine.Components.Base
         /// </summary>
         [Parameter]
         public string Style { get; set; }
+
+        /// <summary>
+        /// Adds the shadow.
+        /// </summary>
+        [Parameter]
+        public Shadow? Shadow { get; set; }
 
         /// <summary>
         /// Captures the unmatched attributes.
@@ -77,9 +50,7 @@ namespace Shine.Components.Base
         /// <summary>
         /// Componenet Css Classes builder.
         /// </summary>
-        protected virtual CssClassBuilder CssBuilder => CssClassBuilder.Create(ComponentName)
-            .WithBorder(Border, BorderColor, BorderSize)
-            .WithBorderRadius(BorderRadius, RadiusSize);
+        protected virtual CssClassBuilder CssBuilder => CssClassBuilder.Create(ComponentName).WithShadow(Shadow);
         
         /// <summary>
         /// Componenet Css Classes builder.

@@ -251,4 +251,27 @@ namespace Shine.Components.Base
         /// </summary>
         Multiple
     }
+
+    /// <summary>
+    /// Shadow.
+    /// </summary>
+    public enum Shadow
+    {
+        /// <summary>
+        /// No shadow.
+        /// </summary>
+        None,
+        /// <summary>
+        /// Small.
+        /// </summary>
+        Sm,
+        /// <summary>
+        /// Medium
+        /// </summary>
+        Md,
+        /// <summary>
+        /// Large.
+        /// </summary>
+        Lg
+    }
 }

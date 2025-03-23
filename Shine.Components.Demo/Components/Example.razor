@@ -12,8 +12,7 @@
     @if (!string.IsNullOrEmpty(_exampleCode))
     {
         <div class="border border-dark-subtle rounded text-bg-light">
-            <Content Border="Base.BorderEdge.TopAndBottom"
-                     Class="example-header-content border-dark-subtle">
+            <Content Class="example-header-content border-dark-subtle border-top border-bottom">
                 <Text Alignment="Base.Alignment.Start">HTML</Text>
                 <Clipboard Text="@_exampleCode" class="align-self-end" />
             </Content>
