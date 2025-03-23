@@ -14,7 +14,7 @@ dotnet add package ShineBlazor.Components --version 0.1.0
 ```
 Add the following to `_Imports.razor`
 ```razor
-@using Shine.Components
+@using ShineBlazor.Components
 ```
 Add the following to the `MainLayout.razor` or `App.razor`
 ```razor
@@ -31,7 +31,7 @@ Next, add the following to the default Blazor script at the end of the `body`
 
 Add the following to the relevant sections of `Program.cs`
 ```c#
-using Shine.Components.Services;
+using ShineBlazor.Components.Services;
 ```
 ```c#
 builder.Services.AddScoped<ToastService>();

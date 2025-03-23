@@ -1,0 +1,34 @@
+@typeparam TItem
+
+@inherits ShineComponentBase
+
+@foreach (var item in _currentItems)
+{
+    @if (ItemTemplate != null)
+    {
+        @ItemTemplate(item)
+    }
+    else
+    {
+        <div>@item</div>
+    }
+}
+
+@if (_loadingItems)
+{
+    <div class="d-flex align-items-center">
+        <Spinner SmallSize="true"></Spinner>
+    </div>
+}
+else if (!string.IsNullOrEmpty(_error))
+{
+    <Alert Color="Color.Danger" Class="d-flex align-items-center">
+        <i class="bi bi-exclamation-circle-fill align-text-top"></i>
+        @_error
+    </Alert>
+}
+
+@if (_haveMoreItems)
+{
+    <div @ref="_lastItemIndicator"></div>
+}

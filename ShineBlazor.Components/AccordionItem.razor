@@ -1,0 +1,104 @@
+@inherits ShineComponentBase
+
+<div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
+    <div class="accordion-header">
+        <Button Class="@ButtonClasses" Clicked="ToggleState">
+            @HeaderContent
+        </Button>
+    </div>
+
+    <div class="@CollapseCssBuilder.Build()">
+        <div class="accordion-body">
+            @ChildContent
+        </div>
+    </div>
+</div>
+
+@code{
+
+    /// <summary>
+    /// The parent accordion.
+    /// </summary>
+    [CascadingParameter]
+    protected Accordion Parent { get; set; }
+
+    /// <summary>
+    /// Trigger content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment HeaderContent { get; set; }
+
+    /// <summary>
+    /// Trigger content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Whether the section is collapsed.
+    /// </summary>
+    [Parameter]
+    public bool Collapsed { get; set; }
+
+    /// <summary>
+    /// The event callback for <see cref="CollapsableSection"/>.
+    /// </summary>
+    [Parameter]
+    public EventCallback<bool> CollapsedChanged { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "accordion-item";
+
+    /// <summary>
+    /// Css classes.
+    /// </summary>
+    protected CssClassBuilder CollapseCssBuilder => CssClassBuilder.Create("accordion-collapse").WithClass("collapse").WithClass("show", !Collapsed);
+
+    /// <summary>
+    /// The button classes.
+    /// </summary>
+    protected virtual string ButtonClasses => CssClassBuilder.JoinClasses("accordion-button", Collapsed ? "collapsed" : string.Empty);
+
+    /// <summary>
+    /// Collapse the accordion item.
+    /// </summary>
+    public void Collapse()
+    {
+        if (!Collapsed)
+        {
+            ToggleState();
+        }
+    }
+
+    /// <summary>
+    /// Toggle the section content display state.
+    /// </summary>
+    private void ToggleState()
+    {
+        Collapsed = !Collapsed;
+        CollapsedChanged.InvokeAsync(Collapsed);
+
+        Parent?.AccordionStateChanged(this, Collapsed);
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    /// <inheritdoc/>
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Parent?.RegisterAccordionItem(this);
+    }
+
+    /// <inheritdoc/>
+    protected override async Task Dispose(bool disposing)
+    {
+        await base.Dispose(disposing);
+
+        if (disposing)
+        {
+            Parent?.UnregisterAccordionItem(this);
+        }
+    }
+}

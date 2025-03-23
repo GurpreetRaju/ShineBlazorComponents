@@ -1,0 +1,40 @@
+<InfiniteScroll TItem="Data.FruitData" ErrorHandler="HandleError"
+                ItemsProvider="GetFruits">
+    <ItemTemplate>
+        <table class="table">
+            <tr>
+                <th scope="row" class="text-bold">ID</th>
+                <td>@context.Id</td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-bold">Name</th>
+                <td>@context.Name</td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-bold">Price</th>
+                <td>@context.Price</td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-bold">Quantity</th>
+                <td>@context.Quantity</td>
+            </tr>
+        </table>                
+    </ItemTemplate>
+</InfiniteScroll>
+
+@code{
+    /// <summary>
+    /// Toast provider.
+    /// </summary>
+    [Inject]
+    private ToastService ToastService { get; set; }
+
+    /// <summary>
+    /// Handles the error.
+    /// </summary>
+    /// <param name="ex"></param>
+    private void HandleError(Exception ex)
+    {
+        ToastService.AddToast("Error: " + ex.Message, Base.Color.Danger);
+    }
+}

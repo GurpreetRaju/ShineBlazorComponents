@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <base href="/" />
+        <link href="@Assets["_content/ShineBlazor.Components/css/shine.css"]" rel="stylesheet" />
+        <link rel="stylesheet" href="@Assets["app.css"]" />
+        <link rel="stylesheet" href="@Assets["ShineBlazor.Components.Demo.styles.css"]" />
+        <ImportMap />
+        <HeadOutlet @rendermode="InteractiveServer" />
+    </head>
+
+    <body>
+        <Routes @rendermode="InteractiveServer" />
+        <script src="_framework/blazor.web.js"></script>
+        <script src="@Assets["_content/ShineBlazor.Components/js/shine.js"]" type="text/javascript"></script>
+        <script src="@Assets["_content/ShineBlazor.Components/InfiniteScroll.razor.js"]" type="module"></script>
+    </body>
+
+</html>

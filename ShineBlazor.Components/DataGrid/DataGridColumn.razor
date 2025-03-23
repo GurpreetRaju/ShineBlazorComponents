@@ -1,0 +1,54 @@
+﻿@namespace ShineBlazor.Components
+
+@typeparam TItem
+@typeparam TValue
+
+@inherits ColumnBase<TItem>
+
+<th scope="col">
+    <div class="d-flex justify-content-between align-items-center mb-1 data-grid-header">
+        @Header
+        @if (CanSort)
+        {
+            <button class="btn btn-link" @onclick="ToggleSortDirection">
+                @if (SortDirection == SortDirection.None)
+                {
+                    <i class="bi bi-sort-alpha-down text-dark"></i>
+                }
+                else if (SortDirection == SortDirection.Ascending)
+                {
+                    <i class="bi bi-sort-alpha-down text-info"></i>
+                }
+                else
+                {
+                    <i class="bi bi-sort-alpha-down-alt text-info"></i>
+                }
+            </button>
+        }
+    </div>
+    @RenderFilter
+</th>
+
+
+@code {
+
+    /// <summary>
+    /// Renders the filter.
+    /// </summary>
+    private RenderFragment RenderFilter => __builder =>
+    {
+        @if (FilterData != null)
+        {
+            <div class="data-grid-filter">
+                @if (FilterTemplate == null)
+                {
+                    <InputControl @bind-Value="FilterData.Value" />
+                }
+                else
+                {
+                    @FilterTemplate(FilterData)
+                }
+            </div>
+        }
+    };
+}
