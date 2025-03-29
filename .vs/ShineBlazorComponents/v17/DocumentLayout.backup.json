@@ -22,8 +22,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -45,7 +49,7 @@
               "RelativeDocumentMoniker": "ShineBlazor.Components.Demo\\Program.cs",
               "ToolTip": "C:\\Users\\gurpr\\source\\repos\\ShineBlazorComponents\\ShineBlazor.Components.Demo\\Program.cs",
               "RelativeToolTip": "ShineBlazor.Components.Demo\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-23T20:23:36.203Z",
               "EditorCaption": ""
