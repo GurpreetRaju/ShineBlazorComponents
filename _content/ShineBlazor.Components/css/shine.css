@@ -12,10 +12,12 @@
     --sh-right-drawer-width: 0;
     --bs-light-bg-subtle: #f5f5f5;
     --bs-body-bg-subtle: var(--bs-light-bg-subtle);
+    --bs-border-color-translucent: rgba(0, 0, 0, 0.08);
 }
 
     :root[data-bs-theme=dark] {
         --bs-body-bg-subtle: var(--bs-dark-bg-subtle);
+        --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
     }
 
     :root[data-bs-theme=dark] .text-bg-light {
@@ -23,6 +25,15 @@
         --bs-light-rgb: 43, 48, 53;
         color: var(--bs-body-color) !important;
     }
+
+
+.code {
+    background: var(--bs-body-bg-subtle);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    line-height: 3;
+    border: 1px solid var(--bs-border-color-translucent);
+}
 
 /*********** Buttons ***********/
 .btn-text-primary, .btn-text-secondary, .btn-text-info, .btn-text-success,
@@ -100,6 +111,11 @@
 
 .btn-text-dark:hover {
     background: var(--bs-dark-bg-subtle)
+}
+
+/*********** Card ***********/
+.card {
+    margin-bottom: 0.5rem;
 }
 
 /*********** Drawer ***********/
