@@ -1,5 +1,5 @@
 ﻿
-namespace ShineBlazor.Components.Base
+namespace ShineBlazor.Components
 {
     /// <summary>
     /// Border Edge.

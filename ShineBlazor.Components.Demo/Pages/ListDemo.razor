@@ -10,7 +10,7 @@
                 <li class="list-group-item">
                     <div class="d-flex align-items-center" style="gap: 5px;">
                         <span>@context.Name</span>
-                        <Badge BackgroundColor="Base.Color.Danger" Value="@context.Quantity" />
+                        <Badge BackgroundColor="Color.Danger" Value="@context.Quantity" />
                         <div class="flex-grow-1"></div>
                         <span><i class="bi bi-currency-dollar mr-1"></i>@context.Price</span>
                     </div>
@@ -29,15 +29,15 @@
                 <Text>Text Variant:</Text>
                 <DropDown TItem="bool" Items="[true, false]"
                           @bind-SelectedItem="TextVariant" 
-                          SelectionMode="Base.SelectionMode.Single" />
+                          SelectionMode="SelectionMode.Single" />
                 <Text Class="mt-2">Color:</Text>
-                <DropDown TItem="Base.Color" Items="_colors"
+                <DropDown TItem="Color" Items="_colors"
                           @bind-SelectedItem="Color" 
-                          SelectionMode="Base.SelectionMode.Single" />
+                          SelectionMode="SelectionMode.Single" />
                 <Text Class="mt-2">Size:</Text>
                 <DropDown TItem="Size" Items="_sizes"
                           @bind-SelectedItem="Size"
-                          SelectionMode="Base.SelectionMode.Single" />
+                          SelectionMode="SelectionMode.Single" />
             </div>
         </div>
     </Example>
@@ -60,10 +60,10 @@
 </Page>
 
 @code {
-    private static Base.Color[] _colors = Enum.GetValues<Base.Color>();
+    private static Color[] _colors = Enum.GetValues<Color>();
     private static Size[] _sizes = Enum.GetValues<Size>();
 
-    private Base.Color Color
+    private Color Color
     {
         get => _color;
         set 
@@ -75,7 +75,7 @@
             }
         }
     }
-    private Base.Color _color;
+    private Color _color;
 
     private bool TextVariant
     {

@@ -1,26 +1,29 @@
-﻿@using ShineBlazor.Components.Base
+﻿@using ShineBlazor.Components
+@using ShineBlazor.Components.Base
 @using System.Reflection
 
 @inherits ShineComponentBase
 
 <div class="@CssClasses">
-    <h5 class="my-3">@Header</h5>
-    <Content Class="card p-3 mb-3">
-        @ChildContent
-    </Content>
-
-    @if (!string.IsNullOrEmpty(_exampleCode))
-    {
-        <div class="border border-dark-subtle rounded text-bg-light">
-            <Content Class="example-header-content border-dark-subtle border-top border-bottom">
-                <Text Alignment="Base.Alignment.Start">HTML</Text>
-                <Clipboard Text="@_exampleCode" class="align-self-end" />
-            </Content>
-            <Content Class="example-content">
-                <pre style="text-wrap: auto;">@_exampleCode</pre>
-            </Content>
-        </div>
-    }
+    <Card Shadow="ShineBlazor.Components.Shadow.Sm">
+        @if (!string.IsNullOrEmpty(Header))
+        {
+            <CardHeader>@Header</CardHeader>
+        }
+        <CardBody>@ChildContent</CardBody>
+        @if (!string.IsNullOrEmpty(_exampleCode))
+        {
+            <CardFooter>
+                <div class="example-header-content border-light-subtle border-bottom">
+                    <Text Alignment="Alignment.Start">HTML</Text>
+                    <Clipboard Text="@_exampleCode" class="align-self-end" />
+                </div>
+                <Content Class="example-content">
+                    <pre style="text-wrap: auto;">@_exampleCode</pre>
+                </Content>
+            </CardFooter>
+        }
+    </Card>
 </div>
 @code {
     private string _exampleCode;
@@ -49,8 +52,18 @@
     [Parameter]
     public string CodeFile { get; set; }
 
+    /// <summary>
+    /// The flex.
+    /// </summary>
+    [Parameter]
+    public Flex Flex { get; set; }
+
+
     /// <inheritdoc/>
     protected override string ComponentName => "example";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithFlex(Flex);
 
     /// <inheritdoc/>
     protected override void OnInitialized()

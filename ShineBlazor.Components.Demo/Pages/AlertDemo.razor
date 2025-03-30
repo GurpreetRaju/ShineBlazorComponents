@@ -14,14 +14,14 @@
             </div>
             <div class="col-6">
                 <div class="d-flex flex-column gap-2">
-                    <DropDown TItem="Base.Color" Items="Colors"
+                    <DropDown TItem="Color" Items="Colors"
                               SelectedItem="_color" SelectedItemChanged="ColorChanged"
-                              SelectionMode="Base.SelectionMode.Single">
+                              SelectionMode="SelectionMode.Single">
                     </DropDown>
                     <Button Variant="Variant.Filled"
                             Clicked="ShowAlert"
                             Disabled="_show"
-                            Color="Base.Color.Primary"
+                            Color="Color.Primary"
                             ButtonType="ButtonType.Button">
                         Show Dismissible Alert
                     </Button>
@@ -32,12 +32,12 @@
 </Page>
 
 @code{
-    private static Base.Color[] Colors = Enum.GetValues<Base.Color>();
+    private static Color[] Colors = Enum.GetValues<Color>();
 
     private bool _show;
-    private Base.Color _color = Base.Color.Primary;
+    private Color _color = Color.Primary;
 
-    private void ColorChanged(Base.Color color)
+    private void ColorChanged(Color color)
     {
         _color = color;
         InvokeAsync(StateHasChanged);

@@ -217,6 +217,52 @@ namespace ShineBlazor.Components.Base
         }
 
         /// <summary>
+        /// Adds the flex css.
+        /// </summary>
+        /// <param name="shadow">The shadow.</param>
+        /// <returns></returns>
+        public CssClassBuilder WithFlex(Flex flex)
+        {
+            if (flex != null)
+            {
+                _classes.Add("d-flex");
+
+                if (flex.Row)
+                    _classes.Add("flex-row");
+                else
+                    _classes.Add("flex-column");
+
+                _classes.Add($"gap-{flex.Gap}");
+
+                if (flex.AlignContent != null)
+                    _classes.Add($"align-content-{flex.AlignContent.ToString()}");
+
+                if (flex.AlignItems != null)
+                    _classes.Add($"align-items-{flex.AlignItems.ToString()}");
+
+                if (flex.AlignSelf != null)
+                    _classes.Add($"align-self-{flex.AlignSelf.ToString()}");
+
+                if (flex.JustifyContent != null)
+                    _classes.Add($"justify-content-{flex.JustifyContent.ToString()}");
+                
+                if (flex.Wrap != null)
+                    _classes.Add($"flex-{flex.Wrap.ToString()}");
+
+                if (flex.FlexFill)
+                    _classes.Add("flex-fill");
+
+                if (flex.FlexGrow.HasValue)
+                    _classes.Add($"flex-grow-{(flex.FlexGrow.Value ? "1" : "0")}");
+
+                if (flex.FlexShrink.HasValue)
+                    _classes.Add($"flex-shrink{(flex.FlexShrink.Value ? "1" : "0")}");
+            }
+
+            return this;
+        }
+
+        /// <summary>
         /// Builds the css.
         /// </summary>
         /// <returns></returns>
