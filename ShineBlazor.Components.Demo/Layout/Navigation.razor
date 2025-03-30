@@ -1,6 +1,15 @@
-﻿<Content><i class="bi bi-menu-button-wide-fill"></i> Components</Content>
+﻿
+<Content><i class="bi bi-book-half"></i> Getting Started</Content>
 <ListView TItem="Data.NavConfig" Color="Color.Primary"
-          Class="ps-4" Items="@Navs" TextVariant="true">
+          Class="ps-4" Items="@IntroductionNavs" TextVariant="true">
+    <ItemTemplate>
+        <a href="@context.Link">@context.Name</a>
+    </ItemTemplate>
+</ListView>
+
+<Content><i class="bi bi-menu-button-wide-fill"></i> Components</Content>
+<ListView TItem="Data.NavConfig" Color="Color.Primary"
+          Class="ps-4" Items="@ComponentsNavs" TextVariant="true">
     <ItemTemplate>
         <a href="@context.Link">@context.Name</a>
     </ItemTemplate>
@@ -9,18 +18,24 @@
 @code {
     private bool collapseNavMenu;
 
-    private Data.NavConfig[] Navs = 
+    private Data.NavConfig[] IntroductionNavs =
     [
-        new Data.NavConfig { Name = "Alert", Link = "alert", },
-        new Data.NavConfig { Name = "Carousel", Link = "carousel", },
-        new Data.NavConfig { Name = "Collapse", Link = "collapsable-containers", },
-        new Data.NavConfig { Name = "Data Grid", Link = "data-grid", },
-        new Data.NavConfig { Name = "Drop Down", Link = "drop-down", },
-        new Data.NavConfig { Name = "Form", Link = "form", },
-        new Data.NavConfig { Name = "Infinite Scroll", Link = "infinite-scroll", },
-        new Data.NavConfig { Name = "List", Link = "list-group", },
-        new Data.NavConfig { Name = "Modal", Link = "modal", },
-        new Data.NavConfig { Name = "Property Grid", Link = "property-grid", },
+    new Data.NavConfig { Name = "Introdcution", Link = "", },
+    new Data.NavConfig { Name = "Miscellaneous", Link = "miscellaneous", },
+    ];
+
+    private Data.NavConfig[] ComponentsNavs =
+    [
+    new Data.NavConfig { Name = "Alert", Link = "alert", },
+    new Data.NavConfig { Name = "Carousel", Link = "carousel", },
+    new Data.NavConfig { Name = "Collapse", Link = "collapsable-containers", },
+    new Data.NavConfig { Name = "Data Grid", Link = "data-grid", },
+    new Data.NavConfig { Name = "Drop Down", Link = "drop-down", },
+    new Data.NavConfig { Name = "Form", Link = "form", },
+    new Data.NavConfig { Name = "Infinite Scroll", Link = "infinite-scroll", },
+    new Data.NavConfig { Name = "List", Link = "list-group", },
+    new Data.NavConfig { Name = "Modal", Link = "modal", },
+    new Data.NavConfig { Name = "Property Grid", Link = "property-grid", }
     ];
 
     private void ToggleNavMenu()

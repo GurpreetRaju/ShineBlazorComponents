@@ -13,6 +13,8 @@
     --bs-light-bg-subtle: #f5f5f5;
     --bs-body-bg-subtle: var(--bs-light-bg-subtle);
     --bs-border-color-translucent: rgba(0, 0, 0, 0.08);
+    --splash-height: 12rem;
+    --splash-width: 12rem;
 }
 
     :root[data-bs-theme=dark] {
@@ -454,6 +456,49 @@ div.list-view-item > * {
 :root[data-bs-theme=light] .list-view-primary .list-view-item:hover {
     --bs-list-group-color: var(--bs-dark);
 }
+
+/*********** Modal ***********/
+
+.splash-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.splash {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+    .splash .logo {
+        max-height: var(--splash-height);
+        max-width: var(--splash-width);
+    }
+
+    .splash .progress {
+        min-width: var(--splash-width);
+        height: 0.25rem;
+    }
+
+    .splash .progress-bar {
+        width: var(--blazor-load-percentage, 0%);
+    }
+
+    .splash .progress-text{
+        position: relative;
+    }
+
+    .splash .progress-text:after {
+        content: var(--blazor-load-percentage-text, "Loading");
+        position: absolute;
+        top: -1rem;
+        left: -1rem;
+    }
+
 
 /*********** Modal ***********/
 .modal.show {

@@ -1,0 +1,5 @@
+<ShineBlazor.Components.Theme.ThemeSelector Theme="_theme" />
+
+@code{
+	private readonly ShineTheme _theme = new ShineTheme();
+}
