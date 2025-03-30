@@ -1,0 +1,20 @@
+﻿@namespace ShineBlazor.Components
+
+<div class="@CssClassBuilder.JoinClasses("card-body", Class)">
+    @ChildContent
+</div>
+
+@code {
+
+    /// <summary>
+    /// Body content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Classes to add to the card body.
+    /// </summary>
+    [Parameter]
+    public string Class { get; set; }
+}

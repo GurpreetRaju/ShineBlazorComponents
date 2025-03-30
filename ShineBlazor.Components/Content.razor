@@ -6,8 +6,17 @@
 
 @code {
 
+    /// <summary>
+    /// Flex.
+    /// </summary>
+    [Parameter]
+    public Flex Flex { get; set; }
+
     /// <inheritdoc/>
     protected override string ComponentName => "sh-content";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithFlex(Flex);
 
     /// <summary>
     /// Child content.

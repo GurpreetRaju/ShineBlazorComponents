@@ -14,14 +14,14 @@
     <Example Header="Single Selection" CodeFile="DropDownSingle.txt" Class="mb-3">
         <div style="width:12rem">
             <DropDown TItem="Data.FruitData" Items="DummyDataProvider.GetFruits(4, 0)"
-                    SelectionMode="Base.SelectionMode.Single" ItemToText="f => f.Name">
+                    SelectionMode="SelectionMode.Single" ItemToText="f => f.Name">
             </DropDown>
         </div>
     </Example>
     <Example Header="Multi Selection" CodeFile="DropDownMulti.txt" Class="mb-3">
         <div style="width:16rem">
             <DropDown TItem="Data.FruitData" Items="DummyDataProvider.GetFruits(4, 0)"
-                      SelectionMode="Base.SelectionMode.Multiple" ItemToText="f => f.Name"
+                      SelectionMode="SelectionMode.Multiple" ItemToText="f => f.Name"
                       @bind-SelectedItems="@_selectedFruits">
                 <TriggerContent>
                     <input type="text" value="@(_selectedFruits.Count) Items" class="form-select form-control-small" readonly />
@@ -52,6 +52,6 @@
     /// <param name="item"></param>
     private void FruitClicked(Data.FruitData item)
     {
-        Toasts.AddToast($"{item.Name} clicked.", Base.Color.Info);
+        Toasts.AddToast($"{item.Name} clicked.", Color.Info);
     }
 }

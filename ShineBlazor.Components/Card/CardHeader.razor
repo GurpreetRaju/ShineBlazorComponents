@@ -1,0 +1,19 @@
+﻿@namespace ShineBlazor.Components
+
+<header class="@CssClassBuilder.JoinClasses("card-header", Class)">
+    @ChildContent
+</header>
+
+@code {
+    /// <summary>
+    /// Header content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Classes to add to the card header.
+    /// </summary>
+    [Parameter]
+    public string Class { get; set; }
+}
