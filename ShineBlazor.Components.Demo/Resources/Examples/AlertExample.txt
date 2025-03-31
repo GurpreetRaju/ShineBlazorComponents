@@ -1,4 +1,3 @@
-
 <Alert Color="Base.Color.Success" Dismissible="true" @bind-Show="_show">
     This is a dismissible success alert.
 </Alert>

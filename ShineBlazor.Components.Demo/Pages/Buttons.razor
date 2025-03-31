@@ -1,0 +1,54 @@
+﻿@page "/buttons"
+
+<Page PageName="Buttons">
+    <Example Header="Button Styles" CodeFile="ButtonStyles.txt">
+        <Content Flex="new(true, 3, AlignItems.Start, AlignContent.Start)">
+            <DropDown TItem="Variant" Items="Variants" @bind-SelectedItem="_variant"
+                      Label="Variant" Variant="InputVariant.Outlined" 
+                      SelectionMode="SelectionMode.Single">
+            </DropDown>
+            <DropDown TItem="Color" Items="Colors" @bind-SelectedItem="_color"
+                      Label="Color" Variant="InputVariant.Outlined" 
+                      SelectionMode="SelectionMode.Single">
+            </DropDown>
+            <DropDown TItem="Size" Items="Sizes" @bind-SelectedItem="_size"
+                      Label="Size" Variant="InputVariant.Outlined" 
+                      SelectionMode="SelectionMode.Single">
+            </DropDown>
+        </Content>
+        <Content Style="height: 3rem;">
+            <Button Variant="_variant" Color="_color" Size="_size">Button</Button>
+        </Content>
+    </Example>
+    <Example Header="Button Action" CodeFile="ButtonActions.txt">
+        <Content Flex="new(false, 3, AlignItems.Start, AlignContent.Start)">
+            <InputControl @bind-Value="@_disable" Label="Disable button"></InputControl>
+
+            <Button Variant="Variant.Filled"
+                    Color="Color.Primary"
+                    Clicked="@(() => ToastService.AddToast("Button Clicked", Color.Info))"
+                    Disabled="@_disable">
+                Click Me!
+            </Button>
+        </Content>
+    </Example>
+</Page>
+
+@code {
+    private static Variant[] Variants = Enum.GetValues<Variant>();
+    private static Color[] Colors = Enum.GetValues<Color>();
+    private static Size[] Sizes = Enum.GetValues<Size>();
+
+    private Variant _variant = Variant.Filled;
+    private Color _color = Color.Primary;
+    private Size _size;
+    private bool _disable;
+
+    private string _text;
+
+    /// <summary>
+    /// The toast service.
+    /// </summary>
+    [Inject]
+    private Services.ToastService ToastService { get; set; }
+}

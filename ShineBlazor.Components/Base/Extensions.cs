@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using ShineBlazor.Components.PropertyGrid;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace ShineBlazor.Components.Base
 {
@@ -59,6 +58,8 @@ namespace ShineBlazor.Components.Base
                     return InputType.Number;
                 case TypeCode.DateTime:
                     return InputType.DateTime;
+                case TypeCode.Boolean:
+                    return InputType.Checkbox;
             };
             return InputType.Text;
         }
@@ -84,6 +85,46 @@ namespace ShineBlazor.Components.Base
         private static EventCallback<T> InvokeCallback<T>(object receiver, Action<object> invokableAction)
         {
             return EventCallback.Factory.Create<T>(receiver, (v) => invokableAction(v));
+        }
+
+        /// <summary>
+        /// Render container.
+        /// </summary>
+        /// <returns></returns>
+        public static RenderFragment RenderFormControlContainer(Guid id, string label, InputVariant variant,
+            RenderFragment control)
+        {
+            return (builder) =>
+            {
+                string classes = CssClassBuilder.JoinClasses("input-wrapper", variant switch
+                {
+                    InputVariant.Floating => "form-floating",
+                    InputVariant.Outlined => "form-outlined",
+                    _ => null
+                });
+                int seq = 0;
+
+                builder.OpenElement(seq++, "div");
+                builder.AddAttribute(seq++, "class", classes);
+
+                if (variant != InputVariant.Default && control != null)
+                {
+                    builder.AddContent(seq++, control);
+                }
+                builder.AddContent(seq++, b =>
+                {
+                    b.OpenElement(0, "label");
+                    b.AddAttribute(1, "class", "form-label");
+                    b.AddAttribute(2, "for", id);
+                    b.AddContent(3, label);
+                    b.CloseElement();
+                });
+
+                if (variant == InputVariant.Default && control != null)
+                    builder.AddContent(seq++, control);
+
+                builder.CloseElement();
+            };
         }
     }
 }

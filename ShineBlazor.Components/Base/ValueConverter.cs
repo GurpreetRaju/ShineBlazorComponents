@@ -76,6 +76,10 @@ namespace ShineBlazor.Components.Base
         /// </summary>
         Color,
         /// <summary>
+        /// Checkbox.
+        /// </summary>
+        Checkbox,
+        /// <summary>
         /// Date input.
         /// </summary>
         Date,

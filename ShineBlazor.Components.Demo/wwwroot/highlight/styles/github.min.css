@@ -1,0 +1,113 @@
+:root {
+    --gh-body-color: #24292e;
+    --gh-keyword-color: #d73a49;
+    --gh-title-color: #6f42c1;
+    --gh-attribute-color: #005cc5;
+    --gh-string-color: #032f62;
+    --gh-symbol-color: #e36209;
+    --gh-code-comment-color: #6a737d;
+    --gh-name-selector-color: #22863a;
+    --gh-subst-color: #24292e;
+    --gh-section-color: #005cc5;
+    --gh-bullet-color: #735c0f;
+    --gh-emphasis-color: #24292e;
+    --gh-strong-color: #24292e;
+    --gh-addition-color: #22863a;
+    --gh-addition-bg-color: #f0fff4;
+    --gh-deletion-color: #b31d28;
+    --gh-deletion-bg-color: #ffeef0;
+}
+    :root [data-bs-theme=dark] {
+        --gh-body-color: #c9d1d9;
+        --gh-keyword-color: #ff7b72;
+        --gh-title-color: #d2a8ff;
+        --gh-attribute-color: #79c0ff;
+        --gh-string-color: #a5d6ff;
+        --gh-symbol-color: #ffa657;
+        --gh-code-comment-color: #8b949e;
+        --gh-name-selector-color: #7ee787;
+        --gh-subst-color: #c9d1d9;
+        --gh-section-color: #1f6feb;
+        --gh-bullet-color: #f2cc60;
+        --gh-emphasis-color: #c9d1d9;
+        --gh-strong-color: #c9d1d9;
+        --gh-addition-color: #aff5b4;
+        --gh-addition-bg-color: #033a16;
+        --gh-deletion-color: #ffdcd7;
+        --gh-deletion-bg-color: #67060c;
+    }
+
+pre code.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 1em
+}
+
+code.hljs {
+    padding: 3px 5px
+}
+
+.hljs {
+    color: var(--gh-body-color);
+}
+
+.hljs-doctag, .hljs-keyword, .hljs-meta .hljs-keyword, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-variable.language_ {
+    color: var(--gh-keyword-color);
+}
+
+.hljs-title, .hljs-title.class_, .hljs-title.class_.inherited__, .hljs-title.function_ {
+    color: var(--gh-title-color);
+}
+
+.hljs-attr, .hljs-attribute, .hljs-literal, .hljs-meta, .hljs-number, .hljs-operator, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-id, .hljs-variable {
+    color: var(--gh-attribute-color);
+}
+
+    .hljs-meta .hljs-string, .hljs-regexp, .hljs-string {
+        color: var(--gh-string-color);
+    }
+
+.hljs-built_in, .hljs-symbol {
+    color: var(--gh-symbol-color);
+}
+
+.hljs-code, .hljs-comment, .hljs-formula {
+    color: var(--gh-code-comment-color);
+}
+
+.hljs-name, .hljs-quote, .hljs-selector-pseudo, .hljs-selector-tag {
+    color: var(--gh-name-selector-color);
+}
+
+.hljs-subst {
+    color: var(--gh-subst-color);
+}
+
+.hljs-section {
+    color: var(--gh-section-color);
+    font-weight: 700;
+}
+
+.hljs-bullet {
+    color: var(--gh-bullet-color);
+}
+
+.hljs-emphasis {
+    color: var(--gh-emphasis-color);
+    font-style: italic;
+}
+
+.hljs-strong {
+    color: var(--gh-strong-color);
+    font-weight: 700;
+}
+
+.hljs-addition {
+    color: var(--gh-addition-color);
+    background-color: var(--gh-addition-bg-color);
+}
+
+.hljs-deletion {
+    color: var(--gh-deletion-color);
+    background-color: var(--gh-deletion-bg-color);
+}

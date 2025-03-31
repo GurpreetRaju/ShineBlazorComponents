@@ -1,4 +1,5 @@
-﻿using ShineBlazor.Components.Base;
+﻿using Microsoft.AspNetCore.Components;
+using ShineBlazor.Components.Base;
 
 namespace ShineBlazor.Components
 {
@@ -10,19 +11,45 @@ namespace ShineBlazor.Components
         private static readonly Type _nullableUnderlyingType = Nullable.GetUnderlyingType(typeof(TValue));
 
         /// <summary>
+        /// Initialize input type.
+        /// </summary>
+        static InputControl()
+        {
+            _inputType = Type.GetTypeCode(_nullableUnderlyingType ?? typeof(TValue)).GetInputType();
+        }
+
+        /// <summary>
         /// The input type.
         /// </summary>
-        protected InputType InputType => Type.GetTypeCode(_nullableUnderlyingType ?? typeof(TValue)).GetInputType();
+        protected static InputType _inputType;
+
+        /// <summary>
+        /// The label.
+        /// </summary>
+        [Parameter]
+        public string Label { get; set; }
+
+        /// <summary>
+        /// The placeholder.
+        /// </summary>
+        [Parameter]
+        public string Placeholder { get; set; }
+
+        /// <summary>
+        /// The input variant.
+        /// </summary>
+        [Parameter]
+        public InputVariant Variant { get; set; }
 
         /// <inheritdoc/>
-        protected override string ComponentName => "form-control";
+        protected override string ComponentName => _inputType == InputType.Checkbox ? "form-check-input" : "form-control";
 
         /// <inheritdoc/>
         protected override void OnInitialized()
         {
             base.OnInitialized();
 
-            Format ??= InputType.DefaultFormat();
+            Format ??= _inputType.DefaultFormat();
         }
     }
 }

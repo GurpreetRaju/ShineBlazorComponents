@@ -1,14 +1,17 @@
 ﻿@using ShineBlazor.Components
 @using ShineBlazor.Components.Base
 @using System.Reflection
+@using System.Web
 
 @inherits ShineComponentBase
+
+@inject IJSRuntime JSRuntime
 
 <div class="@CssClasses">
     <Card Shadow="ShineBlazor.Components.Shadow.Sm">
         @if (!string.IsNullOrEmpty(Header))
         {
-            <CardHeader>@Header</CardHeader>
+            <CardHeader Class="bg-body text-bold">@Header</CardHeader>
         }
         <CardBody>@ChildContent</CardBody>
         @if (!string.IsNullOrEmpty(_exampleCode))
@@ -19,7 +22,11 @@
                     <Clipboard Text="@_exampleCode" class="align-self-end" />
                 </div>
                 <Content Class="example-content">
-                    <pre style="text-wrap: auto;">@_exampleCode</pre>
+                    <pre>
+                        <code id="@CodeId" class="language-html">
+                            @(_exampleCode)
+                        </code>
+                    </pre>
                 </Content>
             </CardFooter>
         }
@@ -27,6 +34,7 @@
 </div>
 @code {
     private string _exampleCode;
+    private string CodeId = $"code-{Guid.NewGuid()}";
 
     /// <summary>
     /// The header.
@@ -41,12 +49,6 @@
     public RenderFragment ChildContent { get; set; }
 
     /// <summary>
-    /// The code content.
-    /// </summary>
-    [Parameter]
-    public string Code { get; set; }
-
-    /// <summary>
     /// The code resource file.
     /// </summary>
     [Parameter]
@@ -57,7 +59,6 @@
     /// </summary>
     [Parameter]
     public Flex Flex { get; set; }
-
 
     /// <inheritdoc/>
     protected override string ComponentName => "example";
@@ -71,21 +72,30 @@
 
         base.OnInitialized();
 
-        _exampleCode = GetExampleFile() ?? Code;
+        if (!string.IsNullOrEmpty(CodeFile))
+            _exampleCode = GetExampleFile(CodeFile);
+    }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!string.IsNullOrEmpty(_exampleCode))
+        {
+            await JSRuntime.InvokeVoidAsync("highlightCode", CodeId);
+        }
     }
 
     /// <summary>
     /// Gets the content of code file.
     /// </summary>
     /// <returns></returns>
-    private string GetExampleFile()
+    private string GetExampleFile(string file)
     {
         try
         {
-            if (!string.IsNullOrEmpty(CodeFile))
+            if (!string.IsNullOrEmpty(file))
             {
                 var assembly = Assembly.GetExecutingAssembly();
-                using var stream = assembly.GetManifestResourceStream($"ShineBlazor.Components.Demo.Resources.Examples.{CodeFile}");
+                using var stream = assembly.GetManifestResourceStream($"ShineBlazor.Components.Demo.Resources.Examples.{file}");
                 using var reader = new StreamReader(stream);
                 return reader.ReadToEnd();
             }

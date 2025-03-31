@@ -274,4 +274,23 @@ namespace ShineBlazor.Components
         /// </summary>
         Lg
     }
+
+    /// <summary>
+    /// Input variant.
+    /// </summary>
+    public enum InputVariant
+    {
+        /// <summary>
+        /// Default.
+        /// </summary>
+        Default,
+        /// <summary>
+        /// Outlined.
+        /// </summary>
+        Outlined,
+        /// <summary>
+        /// Floating label.
+        /// </summary>
+        Floating
+    }
 }

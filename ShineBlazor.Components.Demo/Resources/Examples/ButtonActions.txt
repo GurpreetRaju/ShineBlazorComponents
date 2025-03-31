@@ -1,0 +1,25 @@
+<Button Variant="Variant.Filled"
+        Color="Color.Primary"
+        Clicked="@HandleButtonClicked"
+        Disabled="@_isDisabled">
+    Click Me!
+</Button>
+
+@code{
+    
+    private bool _isDisabled;
+    
+    /// <summary>
+    /// The toast service.
+    /// </summary>
+    [Inject]
+    private Services.ToastService ToastService { get; set; }
+
+    /// <summary>
+    /// Handle button clicked.
+    /// </summary>
+    private void HandleButtonClicked()
+    {
+        ToastService.AddToast("Button Clicked", Color.Info);
+    }
+}

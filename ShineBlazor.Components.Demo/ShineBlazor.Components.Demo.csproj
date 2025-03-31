@@ -18,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Examples\AlertExample.txt" />
+    <None Remove="Resources\Examples\ButtonActions.txt" />
+    <None Remove="Resources\Examples\ButtonStyles.txt" />
     <None Remove="Resources\Examples\DropDownMenu.txt" />
     <None Remove="Resources\Examples\DropDownMulti.txt" />
     <None Remove="Resources\Examples\DropDownSingle.txt" />
@@ -44,6 +45,8 @@
     <EmbeddedResource Include="Resources\Examples\Accordion.txt" />
     <EmbeddedResource Include="Resources\Examples\AccordionItem.txt" />
     <EmbeddedResource Include="Resources\Examples\AlertExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\ButtonActions.txt" />
+    <EmbeddedResource Include="Resources\Examples\ButtonStyles.txt" />
     <EmbeddedResource Include="Resources\Examples\CarouselExample.txt" />
     <EmbeddedResource Include="Resources\Examples\DataGrid.txt" />
     <EmbeddedResource Include="Resources\Examples\DropDownMenu.txt" />
@@ -65,6 +68,7 @@
   </ItemGroup>
 
   <ItemGroup>
+	  <PackageReference Include="Markdig" Version="0.40.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.3" />
 	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.3" PrivateAssets="all" />
   </ItemGroup>

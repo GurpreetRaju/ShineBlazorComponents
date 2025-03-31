@@ -7,10 +7,16 @@
         {
             @TriggerContent
         }
-        else 
+        else
         {
-            <input type="text" value="@GetSelectedItemtext()" readonly
-                   class="@CssClassBuilder.JoinClasses(ControlCss)" />
+            @if (string.IsNullOrEmpty(Label))
+            {
+                @RenderControl
+            }
+            else
+            {
+                @Extensions.RenderFormControlContainer(Id, Label, Variant, RenderControl)
+            }
         }
     </span>
     <ul class="@DropDownClasses">
@@ -25,10 +31,16 @@
             </li>
         }
     </ul>
-    <Overlay Show="Open" OnClicked="Close"/>
+    <Overlay Show="Open" OnClicked="Close" />
 </div>
 
+
+
 @code {
+    /// <summary>
+    /// Identifier.
+    /// </summary>
+    public Guid Id => Guid.NewGuid();
 
     /// <inheritdoc/>
     protected override string ComponentName => "dropdown";
@@ -38,6 +50,24 @@
     /// </summary>
     [Parameter]
     public Size Size { get; set; }
+
+    /// <summary>
+    /// The placeholder.
+    /// </summary>
+    [Parameter]
+    public string Placeholder { get; set; }
+
+    /// <summary>
+    /// The label.
+    /// </summary>
+    [Parameter]
+    public string Label { get; set; }
+
+    /// <summary>
+    /// Input variant.
+    /// </summary>
+    [Parameter]
+    public InputVariant Variant { get; set; }
 
     /// <summary>
     /// Css for input control.
@@ -52,4 +82,14 @@
                 yield return $"form-control-{Size.ToString().ToLower()}";
         }
     }
+
+    /// <summary>
+    /// Renders the control.
+    /// </summary>
+    private RenderFragment RenderControl => __builder =>
+    {
+        <input type="text" value="@GetSelectedItemtext()" readonly
+               class="@CssClassBuilder.JoinClasses(ControlCss)"
+               placeholder="@(Placeholder ?? Label)" />
+    };
 }
