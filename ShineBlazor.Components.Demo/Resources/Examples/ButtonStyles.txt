@@ -1,0 +1,4 @@
+<Button Variant="Variant.Filled" Color="Color.Primary">Filled</Button>
+<Button Variant="Variant.Outline" Color="Color.Primary">Outlined</Button>
+<Button Variant="Variant.Text" Color="Color.Primary">Text</Button>
+<Button Variant="Variant.Link" Color="Color.Primary">Link</Button>

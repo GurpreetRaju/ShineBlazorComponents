@@ -1,11 +1,37 @@
 @typeparam TValue
 @inherits InputControlBase<TValue>
 
-<input type="@InputType.ConvertToString()"
-       value="@ValueAsString"
-       required="@Required"
-       disabled="@Disabled"
-       class="@CssClasses"
-       style="@CssStyles"
-       readonly="@ReadOnly"
-       @onchange="(args) => HandleValueChanged(args.Value)" />
+@if (string.IsNullOrEmpty(Label))
+{
+    @RenderControl
+}
+else if (_inputType == InputType.Checkbox)
+{
+    <div class="@CssClassBuilder.JoinClasses("form-check")">
+        @RenderControl
+        <label for="@Id" class="form-check-label">@Label</label>
+    </div>
+}
+else
+{
+    @Extensions.RenderFormControlContainer(Id, Label, Variant, RenderControl)
+}
+
+@code {
+    /// <summary>
+    /// Renders the input control.
+    /// </summary>
+    protected RenderFragment RenderControl => __builder =>
+    {
+        <input type="@_inputType.ConvertToString()"
+               value="@ValueAsString"
+               required="@Required"
+               disabled="@Disabled"
+               class="@CssClasses"
+               style="@CssStyles"
+               readonly="@ReadOnly"
+               placeholder="@(Placeholder ?? Label)"
+               id="@Id"
+               @onchange="(args) => HandleValueChanged(args.Value)" />
+    };
+}

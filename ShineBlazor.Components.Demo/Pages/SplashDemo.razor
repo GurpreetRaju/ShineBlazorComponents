@@ -1,0 +1,21 @@
+﻿@page "/splash"
+
+<Page PageName="Splash">
+    <Example Header="Splash Screen" CodeFile="Splash.txt">
+        <Text>
+            There is no splash screen component, but css that can be used to create splash screen.
+            Replace the code from this example with the <code>@("<div id=\"app\">")</code> in <i>`index.html`</i>.
+            The <code>--splash-height</code> and <code>--splash-width</code> css variables can be used to adjust 
+            the height and width of logo and progress bar.
+        </Text>
+        <div class="splash-wrapper">
+            <div class="splash">
+                <img src="./images/shine.svg" alt="Shine Blazor" class="logo text-primary" />
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="progress-text"></div>
+            </div>
+        </div>
+    </Example>
+</Page>

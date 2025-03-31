@@ -5,8 +5,8 @@
 
 @page "/property-grid"
 
-<Page PageName="Form">
-    <Example CodeFile="PropertyGrid.txt">
+<Page PageName="Property Grid">
+    <Example Header="Property Grid" CodeFile="PropertyGrid.txt">
         <div class="row">
             <div class="col">
                 <PropertyGrid @bind-Value="@_formModel" PropertyChanged="() => InvokeAsync(StateHasChanged)"></PropertyGrid>
@@ -48,14 +48,14 @@
             </div>
         </div>
     </Example>
-    <Example CodeFile="PropertyGrid_Collections.txt">
+    <Example Header="Property Gird - Edit Collections" CodeFile="PropertyGrid_Collections.txt">
         <div class="row">
             <div class="col">
                 <PropertyGrid @bind-Value="@_shoppingCart" PropertyChanged="() => InvokeAsync(StateHasChanged)"></PropertyGrid>
             </div>
             <div class="col">
                 <Card>
-                    <Body>
+                    <CardBody>
                         <div class="d-flex">
                             <Text Class="ms-1">Items:</Text>
                             <Text>@(_shoppingCart.Items?.Length ?? 0)</Text>
@@ -64,7 +64,7 @@
                             <Text Class="ms-1">Total:</Text>
                             <Text>@_shoppingCart.Total</Text>
                         </div>
-                    </Body>
+                    </CardBody>
                 </Card>
             </div>
         </div>
