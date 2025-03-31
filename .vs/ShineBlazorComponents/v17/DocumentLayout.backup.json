@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\gurpr\\source\\repos\\ShineBlazorComponents\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{214DB40C-69C4-4E3E-92D2-F5FE22E9D065}|ShineBlazor.Components.Demo\\ShineBlazor.Components.Demo.csproj|c:\\users\\gurpr\\source\\repos\\shineblazorcomponents\\shineblazor.components.demo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{214DB40C-69C4-4E3E-92D2-F5FE22E9D065}|ShineBlazor.Components.Demo\\ShineBlazor.Components.Demo.csproj|solutionrelative:shineblazor.components.demo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\gurpr\\source\\repos\\ShineBlazorComponents\\ShineBlazor.Components.Demo\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ShineBlazor.Components.Demo\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{214DB40C-69C4-4E3E-92D2-F5FE22E9D065}|ShineBlazor.Components.Demo\\ShineBlazor.Components.Demo.csproj|c:\\users\\gurpr\\source\\repos\\shineblazorcomponents\\shineblazor.components.demo\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{214DB40C-69C4-4E3E-92D2-F5FE22E9D065}|ShineBlazor.Components.Demo\\ShineBlazor.Components.Demo.csproj|solutionrelative:shineblazor.components.demo\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\gurpr\\source\\repos\\ShineBlazorComponents\\ShineBlazor.Components.Demo\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ShineBlazor.Components.Demo\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{214DB40C-69C4-4E3E-92D2-F5FE22E9D065}|ShineBlazor.Components.Demo\\ShineBlazor.Components.Demo.csproj|c:\\users\\gurpr\\source\\repos\\shineblazorcomponents\\shineblazor.components.demo\\pages\\infinitescrolldemo.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{214DB40C-69C4-4E3E-92D2-F5FE22E9D065}|ShineBlazor.Components.Demo\\ShineBlazor.Components.Demo.csproj|solutionrelative:shineblazor.components.demo\\pages\\infinitescrolldemo.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\gurpr\\source\\repos\\ShineBlazorComponents\\ShineBlazor.Components.Demo\\Pages\\InfiniteScrollDemo.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ShineBlazor.Components.Demo\\Pages\\InfiniteScrollDemo.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,12 +22,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -38,8 +34,7 @@
               "RelativeToolTip": "ShineBlazor.Components.Demo\\wwwroot\\index.html",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-03-23T21:16:10.808Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-23T21:16:10.808Z"
             },
             {
               "$type": "Document",
@@ -49,10 +44,8 @@
               "RelativeDocumentMoniker": "ShineBlazor.Components.Demo\\Program.cs",
               "ToolTip": "C:\\Users\\gurpr\\source\\repos\\ShineBlazorComponents\\ShineBlazor.Components.Demo\\Program.cs",
               "RelativeToolTip": "ShineBlazor.Components.Demo\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T20:23:36.203Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-23T20:23:36.203Z"
             },
             {
               "$type": "Document",
@@ -65,6 +58,10 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-23T03:32:28.611Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }
