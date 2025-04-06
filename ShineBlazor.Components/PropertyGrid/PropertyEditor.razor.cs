@@ -29,17 +29,17 @@ namespace ShineBlazor.Components.PropertyGrid
         protected string _valueParsingError;
 
         /// <summary>
-        /// Whether the type is nullable type.
+        /// Whether the targetType is nullable targetType.
         /// </summary>
         protected bool _isNullableType;
 
         /// <summary>
-        /// The underlying type if property type is nullable type.
+        /// The underlying targetType if property targetType is nullable targetType.
         /// </summary>
         protected Type _underlyingType;
 
         /// <summary>
-        /// The element type if property type is array or list type.
+        /// The element targetType if property targetType is array or list targetType.
         /// </summary>
         protected Type _elementType;
 
@@ -54,7 +54,7 @@ namespace ShineBlazor.Components.PropertyGrid
         protected object _propertyValue;
 
         /// <summary>
-        /// The type converter.
+        /// The targetType converter.
         /// </summary>
         protected TypeConverter _converter;
 
@@ -72,6 +72,11 @@ namespace ShineBlazor.Components.PropertyGrid
         /// Controls the display of popup if property requires.
         /// </summary>
         private bool _showPopup;
+
+        /// <summary>
+        /// Custom editor attribute.
+        /// </summary>
+        private CustomEditorAttribute _editorAttribute;
 
         #endregion
 
@@ -193,7 +198,7 @@ namespace ShineBlazor.Components.PropertyGrid
             }
             else if (allowedValuesAttr != null)
             {
-                _allowedValues = allowedValuesAttr.Values;
+                _allowedValues = CastArray(PropertyType, allowedValuesAttr.Values);
             }
             else if (PropertyType == typeof(bool))
             {
@@ -256,98 +261,105 @@ namespace ShineBlazor.Components.PropertyGrid
         }
 
         /// <summary>
-        /// Gets the type of component to render.
+        /// Gets the targetType of component to render.
         /// </summary>
         /// <returns></returns>
         protected virtual DynamicComponentInfo GetComponentToRender()
         {
-            switch (_componentControl)
+            try
             {
-                case ComponentControl.Text:
-                    return new DynamicComponentInfo
-                    {
-                        ComponentType = typeof(Text),
-                        Parameters = new Dictionary<string, object>
+                switch (_componentControl)
+                {
+                    case ComponentControl.Text:
+                        return new DynamicComponentInfo
                         {
-                            { "Content", _propertyValue?.ToString() },
-                            { "Class", CssClasses },
-                            { "Style", CssStyles }
-                        }
-                    };
-                case ComponentControl.Array:
-                    return new DynamicComponentInfo
-                    {
-                        DisplayPopup = true,
-                        ComponentType = typeof(ArrayEditor<>).MakeGenericType(_elementType),
-                        Parameters = new Dictionary<string, object>
+                            ComponentType = typeof(Text),
+                            Parameters = new Dictionary<string, object>
+                            {
+                                { "Content", _propertyValue?.ToString() }
+                            }
+                        };
+                    case ComponentControl.Array:
+                        return new DynamicComponentInfo
                         {
-                            { "TItem", _elementType },
-                            { "Collection", _propertyValue },
-                            { "CollectionChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                            { "Class", CssClasses },
-                            { "Style", CssStyles }
-                        }
-                    };
-                case ComponentControl.List:
-                    return new DynamicComponentInfo
-                    {
-                        DisplayPopup = true,
-                        ComponentType = typeof(ListEditor<>).MakeGenericType(_elementType),
-                        Parameters = new Dictionary<string, object>
+                            DisplayPopup = true,
+                            ComponentType = typeof(ArrayEditor<>).MakeGenericType(_elementType),
+                            Parameters = new Dictionary<string, object>
+                            {
+                                { "TItem", _elementType },
+                                { "Collection", _propertyValue },
+                                { "CollectionChanged", PropertyType.CreateTypedEventCallback(this, SetValue) }
+                            }
+                        };
+                    case ComponentControl.List:
+                        return new DynamicComponentInfo
                         {
-                            { "TItem", _elementType },
-                            { "Collection", _propertyValue },
-                            { "CollectionChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                            { "Class", CssClasses },
-                            { "Style", CssStyles }
-                        }
-                    };
-                case ComponentControl.PropertyGrid:
-                    return new DynamicComponentInfo
-                    {
-                        DisplayPopup = true,
-                        ComponentType = typeof(PropertyGrid<>).MakeGenericType(PropertyType),
-                        Parameters = new Dictionary<string, object>
+                            DisplayPopup = true,
+                            ComponentType = typeof(ListEditor<>).MakeGenericType(_elementType),
+                            Parameters = new Dictionary<string, object>
+                            {
+                                { "TItem", _elementType },
+                                { "Collection", _propertyValue },
+                                { "CollectionChanged", PropertyType.CreateTypedEventCallback(this, SetValue) }
+                            }
+                        };
+                    case ComponentControl.PropertyGrid:
+                        return new DynamicComponentInfo
                         {
-                            { "TObject", PropertyType },
-                            { "Value", _propertyValue },
-                            { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                            { "Class", CssClasses },
-                            { "Style", CssStyles }
-                        }
-                    };
-                case ComponentControl.DropDown:
-                    return new DynamicComponentInfo
-                    {
-                        ComponentType = typeof(DropDown<>).MakeGenericType(PropertyType),
-                        Parameters = new Dictionary<string, object>
+                            DisplayPopup = true,
+                            ComponentType = typeof(PropertyGrid<>).MakeGenericType(PropertyType),
+                            Parameters = new Dictionary<string, object>
+                            {
+                                { "TObject", PropertyType },
+                                { "Value", _propertyValue },
+                                { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) }
+                            }
+                        };
+                    case ComponentControl.DropDown:
+                        return new DynamicComponentInfo
                         {
-                            { "TItem", PropertyType },
-                            { "Items", _allowedValues },
-                            { "SelectedItem", _propertyValue },
-                            { "SelectedItemChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                            { "SelectionMode", SelectionMode.Single },
-                            { "Class", CssClasses },
-                            { "Style", CssStyles }
-                        }
-                    };
-
-                default:
-                    return new DynamicComponentInfo
-                    {
-                        ComponentType = typeof(InputControl<>).MakeGenericType(PropertyType),
-                        Parameters = new Dictionary<string, object>
+                            ComponentType = typeof(DropDown<>).MakeGenericType(PropertyType),
+                            Parameters = new Dictionary<string, object>
+                            {
+                                { "TItem", PropertyType },
+                                { "Items", _allowedValues },
+                                { "SelectedItem", _propertyValue },
+                                { "SelectedItemChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
+                                { "SelectionMode", SelectionMode.Single }
+                            }
+                        };
+                    case ComponentControl.Custom:
+                        return new DynamicComponentInfo
                         {
-                            { "TValue", PropertyType },
-                            { "Value", _propertyValue },
-                            { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                            { "Required", _required },
-                            { "ReadOnly", _readOnly },
-                            { "Class", CssClasses },
-                            { "Style", CssStyles },
-                        }
-                    };
+                            DisplayPopup = !_editorAttribute.DisplayInline,
+                            ComponentType = _editorAttribute.EditorType,
+                            Parameters = new Dictionary<string, object>
+                            {
+                                { "Value", _propertyValue },
+                                { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) }
+                            }
+                        };
+                    default:
+                        break;
+                }
             }
+            catch
+            {
+                // No-op
+            }
+
+            return new DynamicComponentInfo
+            {
+                ComponentType = typeof(InputControl<>).MakeGenericType(PropertyType),
+                Parameters = new Dictionary<string, object>
+                {
+                    { "TValue", PropertyType },
+                    { "Value", _propertyValue },
+                    { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
+                    { "Required", _required },
+                    { "ReadOnly", _readOnly }
+                }
+            };
         }
 
         /// <summary>
@@ -359,6 +371,11 @@ namespace ShineBlazor.Components.PropertyGrid
             if (PropertyDescriptor.IsReadOnly)
             {
                 _componentControl = ComponentControl.Text;
+            }
+            else if (PropertyDescriptor.Attributes.OfType<CustomEditorAttribute>().FirstOrDefault() is CustomEditorAttribute editorAttribute)
+            {
+                _componentControl = ComponentControl.Custom;
+                _editorAttribute = editorAttribute;
             }
             else if (!(type.IsPrimitive ||
                     type.IsEnum ||
@@ -413,7 +430,27 @@ namespace ShineBlazor.Components.PropertyGrid
         }
 
         /// <summary>
-        /// Gets the collection element type.
+        /// Cast an array to given targetType.
+        /// </summary>
+        private static Array CastArray(Type targetType, ICollection<object> values)
+        {
+            if (values == null)
+                return null;
+
+            var array = Array.CreateInstance(targetType, values.Count);
+            int i = 0;
+
+            foreach (var item in values)
+            {
+                if (item == null || targetType.IsInstanceOfType(item))
+                    array.SetValue(item, i++);
+            }
+
+            return array;
+        }
+
+        /// <summary>
+        /// Gets the collection element targetType.
         /// </summary>
         /// <param name="collectionType"></param>
         /// <returns></returns>
@@ -463,6 +500,10 @@ namespace ShineBlazor.Components.PropertyGrid
         /// <summary>
         /// Text control.
         /// </summary>
-        Text
+        Text, 
+        /// <summary>
+        /// Custom editor.
+        /// </summary>
+        Custom
     }
 }

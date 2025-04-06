@@ -67,8 +67,17 @@ namespace ShineBlazor.Components
 
             if (firstRender)
             {
-                await ReloadData();
+                await LoadData();
             }
+        }
+
+        /// <summary>
+        /// Reloads the data and also reset the page number.
+        /// </summary>
+        /// <returns></returns>
+        public async Task ReloadData()
+        {
+            await LoadData(true);
         }
 
         /// <summary>
@@ -122,14 +131,14 @@ namespace ShineBlazor.Components
                     if (c.Name != columnName) 
                         c.ResetSort();
                 });
-                await ReloadData();
+                await LoadData();
             }
         }
 
         /// <summary>
-        /// Reload data.
+        /// Load data.
         /// </summary>
-        internal async Task ReloadData()
+        internal async Task LoadData(bool resetPage = false)
         {
             if (ItemsProvider == null || IsLoading)
                 return;
@@ -141,6 +150,8 @@ namespace ShineBlazor.Components
 
                 CurrentItems.Clear();
                 _totalItems = 0;
+                if (resetPage)
+                    _currentPage = 1;
 
                 var result = await ItemsProvider.Invoke(CreateDataRequest());
                 if (result != null)
@@ -210,7 +221,7 @@ namespace ShineBlazor.Components
             {
                 _pageSize = pageSize;
 
-                await ReloadData();
+                await LoadData(true);
             }
         }
 
@@ -223,7 +234,7 @@ namespace ShineBlazor.Components
             {
                 _currentPage = pageNumber;
 
-                await ReloadData();
+                await LoadData();
             }
         }
     }

@@ -1,0 +1,38 @@
+<PropertyGrid @bind-Value="@_editorExample" PropertyChanged="() => InvokeAsync(StateHasChanged)"></PropertyGrid>
+
+@code{
+    private EditorExample _editorExample = new();
+
+    public class EditorExample
+    {
+        [CustomEditor(typeof(CustomStringEditor))]
+        public string Name { get; set; }
+
+        [DisplayName("Integer")]
+        public int IntegerValue { get; set; }
+    }
+}
+
+
+** CustomStringEditor.razor
+
+<Content Flex="new(false, 2, AlignItems.Start, AlignContent.Center)">
+    <h3>This is a custom string editor.</h3>
+    <InputControl Value="Value" ValueChanged="ValueChanged" Required="true" />
+    <i class="bi bi-emoji-smile" />
+</Content>
+
+@code {
+
+    /// <summary>
+    /// Value.
+    /// </summary>
+    [Parameter]
+    public string Value { get; set; }
+
+    /// <summary>
+    /// Value changed callback.
+    /// </summary>
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+}

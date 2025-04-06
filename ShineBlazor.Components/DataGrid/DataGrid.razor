@@ -15,9 +15,7 @@
             <tbody>
                 @if (IsLoading)
                 {
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
+                    <Spinner />
                 }
                 else if (CurrentItems.Count > 0)
                 {

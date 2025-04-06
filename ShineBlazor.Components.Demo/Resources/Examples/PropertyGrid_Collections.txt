@@ -23,6 +23,7 @@
 
     public class Coupon
     {
+        [AllowedValues("TenPercentCoupon", "FifteenPercentCoupon", "TwentyPercentCoupon")]
         public string Name { get; set; }
 
         public int Price { get; set; }

@@ -33,6 +33,7 @@
     <None Remove="Resources\Examples\Modal.txt" />
     <None Remove="Resources\Examples\PropertyGrid.txt" />
     <None Remove="Resources\Examples\PropertyGrid_Collections.txt" />
+    <None Remove="Resources\Examples\PropertyGrid_CustomEditor.txt" />
     <None Remove="Resources\Examples\Splash.txt" />
     <None Remove="Resources\Examples\ThemeSelector.txt" />
   </ItemGroup>
@@ -62,6 +63,7 @@
     <EmbeddedResource Include="Resources\Examples\Modal.txt" />
     <EmbeddedResource Include="Resources\Examples\PropertyGrid.txt" />
     <EmbeddedResource Include="Resources\Examples\PropertyGrid_Collections.txt" />
+    <EmbeddedResource Include="Resources\Examples\PropertyGrid_CustomEditor.txt" />
     <EmbeddedResource Include="Resources\Examples\Splash.txt" />
     <EmbeddedResource Include="Resources\Examples\ThemeSelector.txt" />
     <EmbeddedResource Include="Resources\fruits.json" />
