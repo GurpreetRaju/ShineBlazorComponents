@@ -23,6 +23,8 @@
     <None Remove="Resources\Examples\DropDownMenu.txt" />
     <None Remove="Resources\Examples\DropDownMulti.txt" />
     <None Remove="Resources\Examples\DropDownSingle.txt" />
+    <None Remove="Resources\Examples\FlashingComponent.txt" />
+    <None Remove="Resources\Examples\FlashingCss.txt" />
     <None Remove="Resources\Examples\Form.txt" />
     <None Remove="Resources\Examples\InfiniteScroll.txt" />
     <None Remove="Resources\Examples\InputControl.txt" />
@@ -53,6 +55,8 @@
     <EmbeddedResource Include="Resources\Examples\DropDownMenu.txt" />
     <EmbeddedResource Include="Resources\Examples\DropDownMulti.txt" />
     <EmbeddedResource Include="Resources\Examples\DropDownSingle.txt" />
+    <EmbeddedResource Include="Resources\Examples\FlashingComponent.txt" />
+    <EmbeddedResource Include="Resources\Examples\FlashingCss.txt" />
     <EmbeddedResource Include="Resources\Examples\Form.txt" />
     <EmbeddedResource Include="Resources\Examples\InfiniteScroll.txt" />
     <EmbeddedResource Include="Resources\Examples\InputControl.txt" />

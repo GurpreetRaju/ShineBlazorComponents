@@ -1,0 +1,9 @@
+<div class="p-2 mb-2 flash-background" style="--flash-color: var(--bs-danger);--flash-interval: 2s;">
+    Flashing background div
+</div>
+<div class="p-2 mb-2 text-bg-success flash-opacity" style="--flash-interval: 2s;">
+    Flashing opacity div
+</div>
+<div class="p-2 flash-shadow" style="--flash-color: var(--bs-danger);--flash-interval: 2s;">
+    Flashing shadow div
+</div>

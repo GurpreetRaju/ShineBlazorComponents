@@ -1,0 +1,53 @@
+﻿@page "/animations"
+
+<Page PageName="Animations" ShowTitle="false">
+    <Example Header="Flashing Component" CodeFile="FlashingComponent.txt">
+        <Content Flex="new(true, 3, AlignItems.Start, AlignContent.Start)">
+            <DropDown TItem="FlashVariant" Items="FlashVariant.Values" @bind-SelectedItem="_variant"
+                      Label="Variant" Variant="InputVariant.Outlined"
+                      SelectionMode="SelectionMode.Single">
+            </DropDown>
+            <DropDown TItem="Color" Items="Colors" @bind-SelectedItem="_color"
+                      Label="Color" Variant="InputVariant.Outlined"
+                      SelectionMode="SelectionMode.Single">
+            </DropDown>
+            <InputControl TValue="int" @bind-Value="_interval" Required="true"
+                          Label="Interval (sec)" Variant="InputVariant.Outlined">
+            </InputControl>
+        </Content>
+        <Content Style="height: 3rem;">
+            <FlashingComponent Variant="_variant" Color="_color"
+                               Class="p-2" Interval="@($"{_interval}s")">
+                Flashing Div
+            </FlashingComponent>
+        </Content>
+    </Example>
+    <Example Header="Flashing Animation Css" CodeFile="FlashingCss.txt">
+        <Text>
+            The flashing css can also be applied to any element/component. There are three classes form
+            flashing animation - <code>.flash-background</code>, <code>.flash-opacity</code> and <code>.flash-shadow</code>.
+            To change the flashing background or shadow color, use <code>--flash-color</code>. Similarly, to 
+            change the flashing interval, <code>--flash-interval</code> variable can be used.
+        </Text>
+        <Content>
+            <div class="p-2 mb-2 flash-background" style="--flash-color: var(--bs-danger);--flash-interval: 2s;">
+                Flashing background div
+            </div>
+
+            <div class="p-2 mb-2 text-bg-success flash-opacity" style="--flash-interval: 2s;">
+                Flashing opacity div
+            </div>
+            <div class="p-2 mb-2 flash-shadow" style="--flash-color: var(--bs-warning);--flash-interval: 2s;">
+                Flashing shadow div
+            </div>
+        </Content>
+    </Example>
+</Page>
+
+@code {
+    private static Color[] Colors = Enum.GetValues<Color>();
+
+    private Color _color = Color.Primary;
+    private FlashVariant _variant = FlashVariant.Opacity;
+    private int _interval = 1;
+}

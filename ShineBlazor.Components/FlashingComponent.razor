@@ -1,0 +1,43 @@
+@inherits ShineComponentBase
+
+<div class="@CssClasses" style="@CssStyles">
+    @ChildContent
+</div>
+
+@code{
+
+    /// <summary>
+    /// The color.
+    /// </summary>
+    [Parameter]
+    public Color Color { get; set; }
+
+    /// <summary>
+    /// The flash variant.
+    /// </summary>
+    [Parameter]
+    public FlashVariant Variant { get; set; }
+
+    /// <summary>
+    /// The child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// The flashing interval. Default: 1s.
+    /// </summary>
+    [Parameter]
+    public string Interval { get; set; } = "1s";
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "flashing-component";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder
+        .WithClass($"flash-{Variant}");
+
+    protected override CssStyleBuilder StyleBuilder => base.StyleBuilder
+        .AddStyle("--flash-color", $"var(--bs-{Color.ToString().ToLowerInvariant()}-border-subtle)")
+        .AddStyle("--flash-interval", $"{Interval}");
+}

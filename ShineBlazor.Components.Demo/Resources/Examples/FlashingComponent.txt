@@ -1,0 +1,4 @@
+<FlashingComponent Variant="@FlashVariant.Opacity" Color="@Color.Primary" 
+                   Interval="1s" Class="p-2">
+    Flashing Div
+</FlashingComponent>

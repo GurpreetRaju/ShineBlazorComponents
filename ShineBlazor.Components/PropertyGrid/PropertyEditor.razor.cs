@@ -185,33 +185,6 @@ namespace ShineBlazor.Components.PropertyGrid
         }
 
         /// <summary>
-        /// Updates the allowed values for property.
-        /// </summary>
-        protected virtual void UpdateAllowedValues()
-        {
-            var allowedValuesAttr = PropertyDescriptor.Attributes
-                .OfType<AllowedValuesAttribute>().FirstOrDefault();
-
-            if (PropertyType.IsEnum)
-            {
-                _allowedValues = Enum.GetValues(PropertyDescriptor.PropertyType);
-            }
-            else if (allowedValuesAttr != null)
-            {
-                _allowedValues = CastArray(PropertyType, allowedValuesAttr.Values);
-            }
-            else if (PropertyType == typeof(bool))
-            {
-                _allowedValues = _isNullableType ? new bool?[] { null, true, false }
-                    : new bool[] { true, false };
-            }
-            else
-            {
-                _allowedValues = null;
-            }
-        }
-
-        /// <summary>
         /// Parse the value and set to property.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -361,6 +334,39 @@ namespace ShineBlazor.Components.PropertyGrid
                 }
             };
         }
+
+
+        /// <summary>
+        /// Updates the allowed values for property.
+        /// </summary>
+        protected virtual void UpdateAllowedValues()
+        {
+            var allowedValuesAttr = PropertyDescriptor.Attributes
+                .OfType<AllowedValuesAttribute>().FirstOrDefault();
+
+            if (PropertyType.IsEnum)
+            {
+                _allowedValues = Enum.GetValues(PropertyDescriptor.PropertyType);
+            }
+            else if (allowedValuesAttr != null)
+            {
+                _allowedValues = CastArray(PropertyType, allowedValuesAttr.Values);
+            }
+            else if (PropertyType == typeof(bool))
+            {
+                _allowedValues = _isNullableType ? new bool?[] { null, true, false }
+                    : new bool[] { true, false };
+            }
+            else
+            {
+                _allowedValues = null;
+            }
+        }
+
+        #endregion
+
+
+        #region Private Methods
 
         /// <summary>
         /// Udpate the <see cref="_componentControl"/>.

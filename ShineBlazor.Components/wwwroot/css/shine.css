@@ -198,6 +198,10 @@
 
 /*********** Floating Labels ***********/
 
+.form-floating, .form-outlined {
+    position: relative;
+}
+
 .form-floating > label,
 .form-outlined > label {
     position: absolute;
@@ -606,3 +610,55 @@ div.list-view-item > * {
 /*********** Utilities ***********/
 .cursor-pointer { cursor: pointer; }
 .text-bold { font-weight:bold; }
+
+
+/*********** Animations ***********/
+.flash-background {
+    --flash-color: var(--bs-primary-border-subtle);
+    --flash-interval: 1s;
+    animation: flash-bg-color var(--flash-interval) linear infinite;
+}
+
+@keyframes flash-bg-color {
+    0%,100% {
+        background-color: var(--flash-color);
+        color: white;
+    }
+
+    50% {
+        background-color: transparent;
+        color: var(--flash-color);
+    }
+}
+
+.flash-opacity {
+    --flash-interval: 1s;
+    animation: flash-visibility var(--flash-interval) linear infinite;
+}
+
+@keyframes flash-visibility {
+    0%,100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.flash-shadow {
+    --flash-color: var(--bs-primary-border-subtle);
+    --flash-interval: 1s;
+    border: 1px solid var(--flash-color);
+    animation: flash-shadow var(--flash-interval) ease infinite;
+}
+
+@keyframes flash-shadow {
+    0%,100% {
+        box-shadow: 0 0 0 var(--flash-color);
+    }
+
+    50% {
+        box-shadow: 0 0 10px var(--flash-color);
+    }
+}
