@@ -36,6 +36,7 @@
     <None Remove="Resources\Examples\PropertyGrid.txt" />
     <None Remove="Resources\Examples\PropertyGrid_Collections.txt" />
     <None Remove="Resources\Examples\PropertyGrid_CustomEditor.txt" />
+    <None Remove="Resources\Examples\RangeDial.txt" />
     <None Remove="Resources\Examples\Splash.txt" />
     <None Remove="Resources\Examples\ThemeSelector.txt" />
   </ItemGroup>
@@ -68,6 +69,7 @@
     <EmbeddedResource Include="Resources\Examples\PropertyGrid.txt" />
     <EmbeddedResource Include="Resources\Examples\PropertyGrid_Collections.txt" />
     <EmbeddedResource Include="Resources\Examples\PropertyGrid_CustomEditor.txt" />
+    <EmbeddedResource Include="Resources\Examples\RangeDial.txt" />
     <EmbeddedResource Include="Resources\Examples\Splash.txt" />
     <EmbeddedResource Include="Resources\Examples\ThemeSelector.txt" />
     <EmbeddedResource Include="Resources\fruits.json" />
@@ -80,6 +82,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShineBlazor.Advanced\ShineBlazor.Advanced.csproj" />
     <ProjectReference Include="..\ShineBlazor.Components\ShineBlazor.Components.csproj" />
   </ItemGroup>
 

@@ -14,10 +14,6 @@
 	<PackageOutputPath>bin\Release</PackageOutputPath>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="Base\Flex.cs" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />

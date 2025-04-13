@@ -1,26 +1,36 @@
 ﻿
-<Content><i class="bi bi-book-half"></i> Getting Started</Content>
-<ListView TItem="Data.NavConfig" Color="Color.Primary"
-          Class="ps-4" Items="@IntroductionNavs" TextVariant="true">
-    <ItemTemplate>
-        <a href="@context.Link">@context.Name</a>
-    </ItemTemplate>
-</ListView>
+<div class="navigation">
+    <div class="nav-category"><i class="bi bi-book-half"></i> Getting Started</div>
+    <ListView TItem="Data.NavConfig" Color="Color.Primary"
+              Class="ps-4" Items="@IntroductionNavs" TextVariant="true">
+        <ItemTemplate>
+            <a href="@context.Link">@context.Name</a>
+        </ItemTemplate>
+    </ListView>
 
-<Content><i class="bi bi-menu-button-wide-fill"></i> Components</Content>
-<ListView TItem="Data.NavConfig" Color="Color.Primary"
-          Class="ps-4" Items="@ComponentsNavs" TextVariant="true">
-    <ItemTemplate>
-        <a href="@context.Link">@context.Name</a>
-    </ItemTemplate>
-</ListView>
+    <div class="nav-category"><i class="bi bi-menu-button-wide-fill"></i> Components</div>
+    <ListView TItem="Data.NavConfig" Color="Color.Primary"
+              Class="ps-4" Items="@ComponentsNavs" TextVariant="true">
+        <ItemTemplate>
+            <a href="@context.Link">@context.Name</a>
+        </ItemTemplate>
+    </ListView>
+
+    <div class="nav-category"><i class="bi bi-speedometer"></i> Advanced</div>
+    <ListView TItem="Data.NavConfig" Color="Color.Primary"
+              Class="ps-4" Items="@AdvancedNavs" TextVariant="true">
+        <ItemTemplate>
+            <a href="@context.Link">@context.Name</a>
+        </ItemTemplate>
+    </ListView>
+</div>
 
 @code {
     private bool collapseNavMenu;
 
     private Data.NavConfig[] IntroductionNavs =
     [
-    new Data.NavConfig { Name = "Introdcution", Link = "", },
+    new Data.NavConfig { Name = "Introduction", Link = "", },
     new Data.NavConfig { Name = "Splash Screen", Link = "splash", },
     new Data.NavConfig { Name = "Theme", Link = "theme", },
     ];
@@ -39,6 +49,11 @@
     new Data.NavConfig { Name = "List", Link = "list-group", },
     new Data.NavConfig { Name = "Modal", Link = "modal", },
     new Data.NavConfig { Name = "Property Grid", Link = "property-grid", }
+    ];
+
+    private Data.NavConfig[] AdvancedNavs =
+    [
+    new Data.NavConfig { Name = "Range Dial", Link = "range-dial", }
     ];
 
     private void ToggleNavMenu()

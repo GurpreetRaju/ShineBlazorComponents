@@ -1,0 +1,16 @@
+<FlexBox AlignItems="FlexAlign.Center">
+    <div class="pa-3">
+        <RangeDial TValue="int" Size="120" Value="_value" ValueChanged="HandleValueChanged" />
+    </div>
+    <Text>Value: @_value</Text>
+</FlexBox>
+
+@code {
+    private int _value = 10;
+
+    private void HandleValueChanged(int value)
+    {
+        _value = value; 
+        InvokeAsync(StateHasChanged);
+    }
+}

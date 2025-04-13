@@ -2,7 +2,7 @@
 
 <Page PageName="Buttons">
     <Example Header="Button Styles" CodeFile="ButtonStyles.txt">
-        <Content Flex="new(true, 3, AlignItems.Start, AlignContent.Start)">
+        <FlexBox Row="true" AlignItems="FlexAlign.Start">
             <DropDown TItem="Variant" Items="Variants" @bind-SelectedItem="_variant"
                       Label="Variant" Variant="InputVariant.Outlined" 
                       SelectionMode="SelectionMode.Single">
@@ -15,22 +15,21 @@
                       Label="Size" Variant="InputVariant.Outlined" 
                       SelectionMode="SelectionMode.Single">
             </DropDown>
-        </Content>
-        <Content Style="height: 3rem;">
+        </FlexBox>
+        <div class="mt-3">
             <Button Variant="_variant" Color="_color" Size="_size">Button</Button>
-        </Content>
+        </div>
     </Example>
     <Example Header="Button Action" CodeFile="ButtonActions.txt">
-        <Content Flex="new(false, 3, AlignItems.Start, AlignContent.Start)">
-            <InputControl @bind-Value="@_disable" Label="Disable button"></InputControl>
-
+        <FlexBox Row="true" AlignItems="FlexAlign.Start">
             <Button Variant="Variant.Filled"
                     Color="Color.Primary"
                     Clicked="@(() => ToastService.AddToast("Button Clicked", Color.Info))"
                     Disabled="@_disable">
                 Click Me!
             </Button>
-        </Content>
+            <InputControl @bind-Value="@_disable" Label="Disable button"></InputControl>
+        </FlexBox>
     </Example>
 </Page>
 

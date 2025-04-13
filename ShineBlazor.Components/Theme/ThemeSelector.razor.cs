@@ -59,7 +59,7 @@ namespace ShineBlazor.Components.Theme
         /// The toast service.
         /// </summary>
         [Inject]
-        private ToastService ToastService { get; set; } 
+        private ToastService ToastService { get; set; }
 
         /// <inheritdoc/>
         protected override async Task OnAfterRenderAsync(bool firstRender)

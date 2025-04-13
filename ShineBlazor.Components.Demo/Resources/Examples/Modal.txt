@@ -4,9 +4,9 @@
 <Modal @bind-Show="_showModal">
     <Header>Header content.</Header>
     <Body>
-        <Content>
+        <div class="pa-3">
             Lorem Ipsum Text
-        </Content>
+        </div>
     </Body>
     <Footer>
         This is footer.

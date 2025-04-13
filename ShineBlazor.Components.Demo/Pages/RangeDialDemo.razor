@@ -1,0 +1,30 @@
+﻿@using ShineBlazor.Advanced.Components
+
+@page "/range-dial";
+
+<Page PageName="Range Dial">
+    <Example Header="Range Dial" CodeFile="RangeDial.txt">
+        <Text>
+            <code>RangeDial</code> uses javascript and allow input between 0 and 100 inclusive. 
+            To use <code>RangeDial</code> component, include following script in your <code>index.html</code> 
+            in <code>body</code> after the blazor framework js:<br />
+            <code>@("<script src=\"_content/ShineBlazor.Advanced/Components/RangeDial.razor.js\" type=\"module\"></script>")</code>
+        </Text>
+        <FlexBox AlignItems="FlexAlign.Center">
+            <div class="mt-3">
+                <RangeDial TValue="int" Size="150" Value="_value" ValueChanged="HandleValueChanged" />
+            </div>
+            <Text>Value: @_value</Text>
+        </FlexBox>
+    </Example>
+</Page>
+
+@code {
+    private int _value = 10;
+
+    private void HandleValueChanged(int value)
+    {
+        _value = value; 
+        InvokeAsync(StateHasChanged);
+    }
+}

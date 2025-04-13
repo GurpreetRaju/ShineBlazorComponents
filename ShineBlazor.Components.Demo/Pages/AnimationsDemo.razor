@@ -2,7 +2,7 @@
 
 <Page PageName="Animations" ShowTitle="false">
     <Example Header="Flashing Component" CodeFile="FlashingComponent.txt">
-        <Content Flex="new(true, 3, AlignItems.Start, AlignContent.Start)">
+        <FlexBox Row="true" AlignItems="FlexAlign.Start">
             <DropDown TItem="FlashVariant" Items="FlashVariant.Values" @bind-SelectedItem="_variant"
                       Label="Variant" Variant="InputVariant.Outlined"
                       SelectionMode="SelectionMode.Single">
@@ -14,13 +14,11 @@
             <InputControl TValue="int" @bind-Value="_interval" Required="true"
                           Label="Interval (sec)" Variant="InputVariant.Outlined">
             </InputControl>
-        </Content>
-        <Content Style="height: 3rem;">
-            <FlashingComponent Variant="_variant" Color="_color"
-                               Class="p-2" Interval="@($"{_interval}s")">
-                Flashing Div
-            </FlashingComponent>
-        </Content>
+        </FlexBox>
+        <FlashingComponent Variant="_variant" Color="_color"
+                            Class="p-2" Interval="@($"{_interval}s")">
+            Flashing Div
+        </FlashingComponent>
     </Example>
     <Example Header="Flashing Animation Css" CodeFile="FlashingCss.txt">
         <Text>
@@ -29,7 +27,7 @@
             To change the flashing background or shadow color, use <code>--flash-color</code>. Similarly, to 
             change the flashing interval, <code>--flash-interval</code> variable can be used.
         </Text>
-        <Content>
+        <FlexBox Row="true">
             <div class="p-2 mb-2 flash-background" style="--flash-color: var(--bs-danger);--flash-interval: 2s;">
                 Flashing background div
             </div>
@@ -40,7 +38,7 @@
             <div class="p-2 mb-2 flash-shadow" style="--flash-color: var(--bs-warning);--flash-interval: 2s;">
                 Flashing shadow div
             </div>
-        </Content>
+        </FlexBox>
     </Example>
 </Page>
 

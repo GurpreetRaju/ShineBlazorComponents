@@ -21,13 +21,13 @@
                     <Text Alignment="Alignment.Start">HTML</Text>
                     <Clipboard Text="@_exampleCode" class="align-self-end" />
                 </div>
-                <Content Class="example-content">
+                <div class="example-content">
                     <pre>
                         <code id="@CodeId" class="language-html">
                             @(_exampleCode)
                         </code>
                     </pre>
-                </Content>
+                </div>
             </CardFooter>
         }
     </Card>
@@ -54,17 +54,8 @@
     [Parameter]
     public string CodeFile { get; set; }
 
-    /// <summary>
-    /// The flex.
-    /// </summary>
-    [Parameter]
-    public Flex Flex { get; set; }
-
     /// <inheritdoc/>
     protected override string ComponentName => "example";
-
-    /// <inheritdoc/>
-    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithFlex(Flex);
 
     /// <inheritdoc/>
     protected override void OnInitialized()
