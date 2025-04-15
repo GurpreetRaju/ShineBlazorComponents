@@ -12,10 +12,11 @@
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<RepositoryUrl>https://github.com/GurpreetRaju/ShineBlazorComponents</RepositoryUrl>
 	<PackageOutputPath>bin\Release</PackageOutputPath>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="RangeDial.razor.js" />
+	<None Include="../README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 
