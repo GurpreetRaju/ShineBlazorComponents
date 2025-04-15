@@ -6,12 +6,7 @@ export class RangeDial {
         this.rangeInput = rangeInput;
 
         document.addEventListener("mousedown", this.startMouseEvents);
-
-        this.wrapper.style.setProperty('--dial-progress', this.rangeInput.value);
-
-        let rotationAngle = (this.rangeInput.value / 100) * 270 ;
-
-        this.wrapper.style.setProperty('--dial-pointer-angle', `${rotationAngle - 45}deg`);
+        this.updateValue(this.rangeInput.value);
     }
 
     startMouseEvents = (e) => {
@@ -49,6 +44,12 @@ export class RangeDial {
 
         document.removeEventListener("mousemove", this.rotateKnob);
         document.removeEventListener("mouseup", this.stopRotate);
+    }
+
+    updateValue(value) {
+        this.wrapper.style.setProperty('--dial-progress', value);
+        let rotationAngle = (value / 100) * 270;
+        this.wrapper.style.setProperty('--dial-pointer-angle', `${rotationAngle - 45}deg`);
     }
 
     dispose() {

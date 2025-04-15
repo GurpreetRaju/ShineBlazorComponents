@@ -63,6 +63,20 @@ namespace ShineBlazor.Components
             .AddStyle("--progress-color", $"var(--bs-{Color})", Variant == ProgressVariant.Color);
 
         /// <inheritdoc/>
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            bool changed = parameters.TryGetValue(nameof(Value), out TValue value) && !Equals(Value, value);
+
+            await base.SetParametersAsync(parameters);
+
+            if (changed && _dialInstance != null)
+            {
+                await _dialInstance.InvokeVoidAsync("updateValue", Value);                
+            }
+        }
+
+
+        /// <inheritdoc/>
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);

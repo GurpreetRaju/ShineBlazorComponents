@@ -161,14 +161,14 @@ namespace ShineBlazor.Components.Base
         /// <summary>
         /// Determine if values are equal of <see cref="TValue"/> type.
         /// </summary>
-        /// <param name="other"></param>
+        /// <param name="value"></param>
         /// <param name="otherValue"></param>
         /// <returns></returns>
-        protected virtual bool Equals(TValue other, TValue otherValue)
+        protected virtual bool Equals(TValue value, TValue otherValue)
         {
             EqualityComparer ??= EqualityComparer<TValue>.Default;
 
-            return EqualityComparer.Equals(Value, otherValue);
+            return EqualityComparer.Equals(value, otherValue);
         }
 
         /// <summary>
