@@ -115,9 +115,9 @@ namespace ShineBlazor.Components.Base
                 }
                 _classes.Add(cssClass);
 
-                if (color != Color.None)
+                if (color != null)
                 {
-                   _classes.Add("border-" + ToString(color));
+                   _classes.Add("border-" + color);
                 }
             }
 
@@ -155,9 +155,9 @@ namespace ShineBlazor.Components.Base
         /// <returns></returns>
         public CssClassBuilder WithBackground(Color color)
         {
-            if (color != Color.None) 
+            if (color != null) 
             {
-                _classes.Add("text-bg-" + ToString(color));
+                _classes.Add("text-bg-" + color);
             }
             return this;
         }
@@ -269,28 +269,6 @@ namespace ShineBlazor.Components.Base
             var classs = JoinClasses(_classes.ToArray());
 
             return classs;
-        }
-
-        /// <summary>
-        /// <see cref="Color"/> enum to string color.
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
-        private string ToString(Color color)
-        {
-            return color switch
-            {
-               Color.Body => "body",
-               Color.Primary => "primary",
-               Color.Secondary => "secondary",
-               Color.Info => "info",
-               Color.Danger => "danger",
-               Color.Warning => "warning",
-               Color.Success => "success",
-               Color.Light => "light",
-               Color.Dark => "dark",
-               _ => string.Empty
-            };
         }
     }
 }

@@ -43,10 +43,10 @@ else
     public RenderFragment ChildContent { get; set; }
 
     /// <summary>
-    /// Variant.
+    /// Variant. Default: Primary.
     /// </summary>
     [Parameter]
-    public Color Color { get; set; }
+    public Color Color { get; set; } = Color.Primary;
 
     /// <inheritdoc/>
     protected override string ComponentName => "list-group-item";
@@ -54,7 +54,7 @@ else
     /// <inheritdoc/>
     protected override CssClassBuilder CssBuilder => base.CssBuilder
         .WithClass("list-group-item-action", Href != null)
-        .WithClass(() => $"list-group-item-{Color.ToString().ToLowerInvariant()}", Href != null);
+        .WithClass(() => $"list-group-item-{Color ?? Color.Primary}", Href != null);
 
     /// <summary>
     /// The item text.

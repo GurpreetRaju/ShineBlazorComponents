@@ -41,53 +41,6 @@ namespace ShineBlazor.Components
     }
 
     /// <summary>
-    /// The standard colors.
-    /// </summary>
-    public enum Color
-    {
-        /// <summary>
-        /// Default body color.
-        /// </summary>
-        Body,
-        /// <summary>
-        /// Main theme color.
-        /// </summary>
-        Primary,
-        /// <summary>
-        /// The seconday theme color.
-        /// </summary>
-        Secondary,
-        /// <summary>
-        /// Information.
-        /// </summary>
-        Info,
-        /// <summary>
-        /// Success.
-        /// </summary>
-        Success,
-        /// <summary>
-        /// Warning.
-        /// </summary>
-        Warning,
-        /// <summary>
-        /// Danger.
-        /// </summary>
-        Danger,
-        /// <summary>
-        /// Less contrasting colors.
-        /// </summary>
-        Light,
-        /// <summary>
-        /// Higher contrasting colors.
-        /// </summary>
-        Dark,
-        /// <summary>
-        /// A custom color.
-        /// </summary>
-        None
-    }
-
-    /// <summary>
     /// The border radius.
     /// </summary>
     public enum BorderRadius

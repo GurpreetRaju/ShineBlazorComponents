@@ -12,6 +12,6 @@
     /// <param name="item"></param>
     private void FruitClicked(Data.FruitData item)
     {
-        Toasts.AddToast($"{item.Name} clicked.", Base.Color.Info);
+        Toasts.AddToast($"{item.Name} clicked.", Color.Info);
     }
 }

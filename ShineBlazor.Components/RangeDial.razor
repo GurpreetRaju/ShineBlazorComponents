@@ -7,7 +7,10 @@
     <div class="slider">
         <div @ref="_knob" class="knob">
             <div class="rotator">
-                <div class="text"></div>
+                @if (ShowValue)
+                {
+                    <div class="text"></div>
+                }
             </div>
             <div class="pointer">
                 <i class="bi bi-play-fill" />
@@ -17,14 +20,16 @@
         <svg viewBox="0 0 160 160" class="progress-dial">
             <circle class="progress-circle-bg" cx="80" cy="80" r="75" fill="none" />
             <circle class="progress-circle-fg" cx="80" cy="80" r="75" fill="none" />
-            
-            <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color: red" />
-                    <stop offset="50%" style="stop-color: orange" />
-                    <stop offset="100%" style="stop-color: rgb(29, 209, 94)" />
-                </linearGradient>
-            </defs>
+            @if (Variant == ProgressVariant.Gradient)
+            {
+                <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color: red" />
+                        <stop offset="50%" style="stop-color: orange" />
+                        <stop offset="100%" style="stop-color: rgb(29, 209, 94)" />
+                    </linearGradient>
+                </defs>
+            }
         </svg>
     </div>
     <input @ref="_input" type="range"
@@ -32,4 +37,6 @@
            value="@ValueAsString"
            @onchange="(args) => HandleValueChanged(args.Value)"
            hidden/>
+
+    @ChildContent
 </div>

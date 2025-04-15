@@ -6,15 +6,15 @@
             <div class="col-6">
                 <Alert Color="_color">
                     <i class="bi bi-exclamation-circle-fill align-text-top"></i>
-                    This is <a class="alert-link">@_color.ToString().ToLower()</a> alert with link.
+                    This is <a class="alert-link">@_color</a> alert with link.
                 </Alert>
                 <Alert Color="_color" Dismissible="true" @bind-Show="_show">
-                    This is a dismissible @_color.ToString().ToLower() alert.
+                    This is a dismissible @_color alert.
                 </Alert>
             </div>
             <div class="col-6">
                 <div class="d-flex flex-column gap-2">
-                    <DropDown TItem="Color" Items="Colors"
+                    <DropDown TItem="Color" Items="Color.Values"
                               SelectedItem="_color" SelectedItemChanged="ColorChanged"
                               SelectionMode="SelectionMode.Single">
                     </DropDown>
@@ -32,8 +32,6 @@
 </Page>
 
 @code{
-    private static Color[] Colors = Enum.GetValues<Color>();
-
     private bool _show;
     private Color _color = Color.Primary;
 

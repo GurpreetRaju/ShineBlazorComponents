@@ -1,8 +1,6 @@
 <FlexBox AlignItems="FlexAlign.Center">
-    <div class="pa-3">
-        <RangeDial TValue="int" Size="120" Value="_value" ValueChanged="HandleValueChanged" />
-    </div>
-    <Text>Value: @_value</Text>
+    <RangeDial TValue="int" Variant="ProgressVariant.Color" Size="150"
+                Value="_value" ValueChanged="HandleValueChanged" />
 </FlexBox>
 
 @code {

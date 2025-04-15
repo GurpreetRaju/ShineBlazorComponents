@@ -4,6 +4,7 @@
     --dial-progress: 0;
     --dial-size-px: 100px;
     --dial-size: 100;
+    --progress-color: url(#gradient);
     width: 100%;
     height: 100%;
     display: flex;
@@ -96,8 +97,7 @@
     }
 
     .progress-dial .progress-circle-fg {
-        stroke: #4caf50;
-        stroke: url(#gradient);
+        stroke: var(--progress-color);
         stroke-dasharray: 471.24;
         stroke-dashoffset: calc(471.24 - (var(--dial-progress) * 3.5343));
         transition: stroke-dashoffset 0.1s linear;

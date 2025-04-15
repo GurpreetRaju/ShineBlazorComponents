@@ -2,12 +2,12 @@
 
 <Page PageName="Animations" ShowTitle="false">
     <Example Header="Flashing Component" CodeFile="FlashingComponent.txt">
-        <FlexBox Row="true" AlignItems="FlexAlign.Start">
+        <FlexBox Row="true" AlignItems="FlexAlign.Start" Class="mb-3">
             <DropDown TItem="FlashVariant" Items="FlashVariant.Values" @bind-SelectedItem="_variant"
                       Label="Variant" Variant="InputVariant.Outlined"
                       SelectionMode="SelectionMode.Single">
             </DropDown>
-            <DropDown TItem="Color" Items="Colors" @bind-SelectedItem="_color"
+            <DropDown TItem="Color" Items="Color.Values" @bind-SelectedItem="_color"
                       Label="Color" Variant="InputVariant.Outlined"
                       SelectionMode="SelectionMode.Single">
             </DropDown>
@@ -43,8 +43,6 @@
 </Page>
 
 @code {
-    private static Color[] Colors = Enum.GetValues<Color>();
-
     private Color _color = Color.Primary;
     private FlashVariant _variant = FlashVariant.Opacity;
     private int _interval = 1;

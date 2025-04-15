@@ -31,7 +31,7 @@
                           @bind-SelectedItem="TextVariant" 
                           SelectionMode="SelectionMode.Single" />
                 <Text Class="mt-2">Color:</Text>
-                <DropDown TItem="Color" Items="_colors"
+                <DropDown TItem="Color" Items="Color.Values"
                           @bind-SelectedItem="Color" 
                           SelectionMode="SelectionMode.Single" />
                 <Text Class="mt-2">Size:</Text>
@@ -60,7 +60,6 @@
 </Page>
 
 @code {
-    private static Color[] _colors = Enum.GetValues<Color>();
     private static Size[] _sizes = Enum.GetValues<Size>();
 
     private Color Color

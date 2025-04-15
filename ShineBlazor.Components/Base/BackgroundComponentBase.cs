@@ -12,7 +12,7 @@ namespace ShineBlazor.Components.Base
         /// The background color. Default: None.
         /// </summary>
         [Parameter]
-        public Color BackgroundColor { get; set; } = Color.None;
+        public Color BackgroundColor { get; set; }
 
         /// <inheritdoc/>
         protected override CssClassBuilder CssBuilder => base.CssBuilder.WithBackground(BackgroundColor);

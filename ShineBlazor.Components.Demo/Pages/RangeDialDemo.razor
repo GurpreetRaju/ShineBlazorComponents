@@ -1,4 +1,4 @@
-﻿@using ShineBlazor.Advanced.Components
+﻿@using ShineBlazor.Components
 
 @page "/range-dial";
 
@@ -8,23 +8,40 @@
             <code>RangeDial</code> uses javascript and allow input between 0 and 100 inclusive. 
             To use <code>RangeDial</code> component, include following script in your <code>index.html</code> 
             in <code>body</code> after the blazor framework js:<br />
-            <code>@("<script src=\"_content/ShineBlazor.Advanced/Components/RangeDial.razor.js\" type=\"module\"></script>")</code>
+            <code>@("<script src=\"_content/ShineBlazor.Components/RangeDial.razor.js\" type=\"module\"></script>")</code>
         </Text>
-        <FlexBox AlignItems="FlexAlign.Center">
-            <div class="mt-3">
-                <RangeDial TValue="int" Size="150" Value="_value" ValueChanged="HandleValueChanged" />
+        <div class="row mt-3">
+            <div class="col">
+                <FlexBox AlignItems="FlexAlign.Center">
+                    <Text Class="text-bold">Example: <code>Variant=ProgressVariant.Color</code></Text>
+                    <Text>Current Value: @_valueColor</Text>
+                    <RangeDial TValue="int" Variant="ProgressVariant.Color" Size="150"
+                               Value="_valueColor" ValueChanged="(v) => HandleValueChanged(v, false)" />
+                </FlexBox>
             </div>
-            <Text>Value: @_value</Text>
-        </FlexBox>
+            <div class="col">
+                <FlexBox AlignItems="FlexAlign.Center">
+                    <Text Class="text-bold">Example: <code>Variant=ProgressVariant.Gradient</code></Text>
+                    <Text>CurrentValue: @_valueGradient</Text>
+                    <RangeDial TValue="int" Variant="ProgressVariant.Gradient" Size="150"
+                               Value="_valueGradient" ValueChanged="(v) => HandleValueChanged(v, true)" />
+                </FlexBox>
+            </div>
+        </div>
     </Example>
 </Page>
 
 @code {
-    private int _value = 10;
+    private int _valueColor = 10;
+    private int _valueGradient = 50;
 
-    private void HandleValueChanged(int value)
+    private void HandleValueChanged(int value, bool grad)
     {
-        _value = value; 
+        if (grad)
+            _valueGradient = value;
+        else
+            _valueColor = value; 
+
         InvokeAsync(StateHasChanged);
     }
 }

@@ -7,7 +7,7 @@
                       Label="Variant" Variant="InputVariant.Outlined" 
                       SelectionMode="SelectionMode.Single">
             </DropDown>
-            <DropDown TItem="Color" Items="Colors" @bind-SelectedItem="_color"
+            <DropDown TItem="Color" Items="Color.Values" @bind-SelectedItem="_color"
                       Label="Color" Variant="InputVariant.Outlined" 
                       SelectionMode="SelectionMode.Single">
             </DropDown>
@@ -35,7 +35,6 @@
 
 @code {
     private static Variant[] Variants = Enum.GetValues<Variant>();
-    private static Color[] Colors = Enum.GetValues<Color>();
     private static Size[] Sizes = Enum.GetValues<Size>();
 
     private Variant _variant = Variant.Filled;

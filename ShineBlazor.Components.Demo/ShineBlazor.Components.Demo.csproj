@@ -82,7 +82,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShineBlazor.Advanced\ShineBlazor.Advanced.csproj" />
     <ProjectReference Include="..\ShineBlazor.Components\ShineBlazor.Components.csproj" />
   </ItemGroup>
 

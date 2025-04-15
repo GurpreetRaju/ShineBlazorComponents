@@ -1,5 +1,5 @@
  <ListView Items="GetFruits(5, 0)"
-            TextVariant="false" Color="Base.Color.Primary">
+            TextVariant="false" Color="Color.Primary">
     <ItemTemplate>
         <a href="#" class="d-flex">
             <Text>@context.Name</Text>

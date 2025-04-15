@@ -14,6 +14,10 @@
 	<PackageOutputPath>bin\Release</PackageOutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="RangeDial.razor.js" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
