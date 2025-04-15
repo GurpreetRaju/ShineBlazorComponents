@@ -5,7 +5,7 @@
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	<PackageId>ShineBlazor.Components</PackageId>
-	<Version>0.2.2</Version>
+	<Version>0.2.3</Version>
 	<Authors>Gurpreet Raju</Authors>
 	<Company>ShineBlazor</Company>
 	<Description>Shine Blazor library is based on Bootstrap css.</Description>
