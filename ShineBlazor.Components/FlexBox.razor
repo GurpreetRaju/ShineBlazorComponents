@@ -1,0 +1,82 @@
+@inherits BackgroundComponentBase
+
+<div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
+    @ChildContent
+</div>
+
+@code {
+
+    /// <summary>
+    /// Row if true otherwise column.
+    /// </summary>
+    [Parameter]
+    public bool Row { get; set; }
+
+    /// <summary>
+    /// Gap (0-5). Default: 3.
+    /// </summary>
+    [Parameter]
+    public ushort Gap { get; set; } = 3;
+
+    /// <summary>
+    /// Align items.
+    /// </summary>
+    [Parameter]
+    public FlexAlign AlignItems { get; set; }
+
+    /// <summary>
+    /// Align self.
+    /// </summary>
+    [Parameter]
+    public FlexAlign AlignSelf { get; set; }
+
+    /// <summary>
+    /// Align Content.
+    /// </summary>
+    [Parameter]
+    public FlexContent AlignContent { get; set; }
+
+    /// <summary>
+    /// Justify content.
+    /// </summary>
+    [Parameter]
+    public FlexContent JustifyContent { get; set; }
+
+    /// <summary>
+    /// Flex wrap.
+    /// </summary>
+    [Parameter]
+    public FlexWrap Wrap { get; set; }
+
+    /// <summary>
+    /// Flex fill.
+    /// </summary>
+    [Parameter]
+    public bool FlexFill { get; set; }
+
+    /// <summary>
+    /// Flex grow.
+    /// </summary>
+    [Parameter]
+    public bool? FlexGrow { get; set; }
+
+    /// <summary>
+    /// Flex shrink.
+    /// </summary>
+    [Parameter]
+    public bool? FlexShrink { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "flexbox";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithFlex(Row, Gap,
+        AlignItems, AlignSelf, AlignContent, JustifyContent, Wrap, FlexFill, 
+        FlexGrow, FlexShrink);
+
+    /// <summary>
+    /// Child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

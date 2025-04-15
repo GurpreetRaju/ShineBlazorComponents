@@ -10,12 +10,11 @@
 </div>
 
 @code{
-
     /// <summary>
     /// Alert color.
     /// </summary>
     [Parameter]
-    public Color Color { get; set; }
+    public Color Color { get; set; } = Color.Primary;
 
     /// <summary>
     /// Child content.
@@ -47,7 +46,7 @@
     /// <summary>
     /// Alert Type class.
     /// </summary>
-    private string AlertTypeClass => $"alert-{Color.ToString().ToLowerInvariant()}";
+    private string AlertTypeClass => $"alert-{Color ?? Color.Primary}";
 
     /// <inheritdoc/>
     protected override CssClassBuilder CssBuilder => base.CssBuilder

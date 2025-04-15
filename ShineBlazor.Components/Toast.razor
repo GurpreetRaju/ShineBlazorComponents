@@ -42,7 +42,7 @@
 
     /// <inheritdoc/>
     protected override CssClassBuilder CssBuilder => base.CssBuilder
-        .WithBackground(ToastInfo?.Color ?? Color.None);
+        .WithBackground(ToastInfo?.Color ?? Color.Primary);
 
     /// <inheritdoc/>
     protected override void OnAfterRender(bool firstRender)

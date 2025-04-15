@@ -32,6 +32,7 @@ else
                readonly="@ReadOnly"
                placeholder="@(Placeholder ?? Label)"
                id="@Id"
-               @onchange="(args) => HandleValueChanged(args.Value)" />
+               @onchange="(args) => HandleValueChanged(args.Value)"
+               @attributes="AdditionalAttributes" />
     };
 }

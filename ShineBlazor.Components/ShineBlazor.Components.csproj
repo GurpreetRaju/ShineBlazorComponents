@@ -5,7 +5,7 @@
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	<PackageId>ShineBlazor.Components</PackageId>
-	<Version>0.2.2</Version>
+	<Version>0.2.3</Version>
 	<Authors>Gurpreet Raju</Authors>
 	<Company>ShineBlazor</Company>
 	<Description>Shine Blazor library is based on Bootstrap css.</Description>
@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Base\Flex.cs" />
+    <Content Include="RangeDial.razor.js" />
   </ItemGroup>
 
 
@@ -27,6 +27,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.3" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shine.Generator\Shine.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>

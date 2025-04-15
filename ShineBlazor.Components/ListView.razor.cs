@@ -33,7 +33,7 @@ namespace ShineBlazor.Components
         public string ItemClass { get; set; }
 
         /// <summary>
-        /// The list color.
+        /// The list color. Default: Color.Body.
         /// </summary>
         [Parameter]
         public Color Color { get; set; } = Color.Body;
@@ -59,7 +59,7 @@ namespace ShineBlazor.Components
             {
                 string variant = "list-view-";
                 if (TextVariant) variant = variant + "text-";
-                return variant + Color.ToString().ToLowerInvariant();
+                return variant + (Color ?? Color.Body);
             })
             .WithClass(() => $"list-view-{Size.ToString().ToLowerInvariant()}");
 

@@ -42,7 +42,7 @@
     /// <param name="ex"></param>
     private void HandleError(Exception ex)
     {
-        ToastService.AddToast("Error: " + ex.Message, Base.Color.Danger);
+        ToastService.AddToast("Error: " + ex.Message, Color.Danger);
     }
 
     /// <summary>

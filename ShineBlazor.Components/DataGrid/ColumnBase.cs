@@ -104,7 +104,7 @@ namespace ShineBlazor.Components
         {
             InvokeAsync(StateHasChanged);
 
-            Parent?.ReloadData();
+            Parent?.LoadData(true);
         }
 
         /// <summary>

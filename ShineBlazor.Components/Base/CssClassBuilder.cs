@@ -115,9 +115,9 @@ namespace ShineBlazor.Components.Base
                 }
                 _classes.Add(cssClass);
 
-                if (color != Color.None)
+                if (color != null)
                 {
-                   _classes.Add("border-" + ToString(color));
+                   _classes.Add("border-" + color);
                 }
             }
 
@@ -155,9 +155,9 @@ namespace ShineBlazor.Components.Base
         /// <returns></returns>
         public CssClassBuilder WithBackground(Color color)
         {
-            if (color != Color.None) 
+            if (color != null) 
             {
-                _classes.Add("text-bg-" + ToString(color));
+                _classes.Add("text-bg-" + color);
             }
             return this;
         }
@@ -219,45 +219,43 @@ namespace ShineBlazor.Components.Base
         /// <summary>
         /// Adds the flex css.
         /// </summary>
-        /// <param name="shadow">The shadow.</param>
         /// <returns></returns>
-        public CssClassBuilder WithFlex(Flex flex)
+        public CssClassBuilder WithFlex(bool row, uint gap, FlexAlign alignItems, FlexAlign alignSelf, 
+            FlexContent alignContent, FlexContent justifyContent, FlexWrap wrap, bool flexFill, 
+            bool? flexGrow, bool? flexShrink)
         {
-            if (flex != null)
-            {
                 _classes.Add("d-flex");
 
-                if (flex.Row)
+                if (row)
                     _classes.Add("flex-row");
                 else
                     _classes.Add("flex-column");
 
-                _classes.Add($"gap-{flex.Gap}");
+                _classes.Add($"gap-{gap}");
 
-                if (flex.AlignContent != null)
-                    _classes.Add($"align-content-{flex.AlignContent.ToString()}");
+                if (alignContent != null)
+                    _classes.Add($"align-content-{alignContent}");
 
-                if (flex.AlignItems != null)
-                    _classes.Add($"align-items-{flex.AlignItems.ToString()}");
+                if (alignItems != null)
+                    _classes.Add($"align-items-{alignItems}");
 
-                if (flex.AlignSelf != null)
-                    _classes.Add($"align-self-{flex.AlignSelf.ToString()}");
+                if (alignSelf != null)
+                    _classes.Add($"align-self-{alignSelf}");
 
-                if (flex.JustifyContent != null)
-                    _classes.Add($"justify-content-{flex.JustifyContent.ToString()}");
+                if (justifyContent != null)
+                    _classes.Add($"justify-content-{justifyContent}");
                 
-                if (flex.Wrap != null)
-                    _classes.Add($"flex-{flex.Wrap.ToString()}");
+                if (wrap != null)
+                    _classes.Add($"flex-{wrap}");
 
-                if (flex.FlexFill)
+                if (flexFill)
                     _classes.Add("flex-fill");
 
-                if (flex.FlexGrow.HasValue)
-                    _classes.Add($"flex-grow-{(flex.FlexGrow.Value ? "1" : "0")}");
+                if (flexGrow.HasValue)
+                    _classes.Add($"flex-grow-{(flexGrow.Value ? "1" : "0")}");
 
-                if (flex.FlexShrink.HasValue)
-                    _classes.Add($"flex-shrink{(flex.FlexShrink.Value ? "1" : "0")}");
-            }
+                if (flexShrink.HasValue)
+                    _classes.Add($"flex-shrink{(flexShrink.Value ? "1" : "0")}");
 
             return this;
         }
@@ -271,28 +269,6 @@ namespace ShineBlazor.Components.Base
             var classs = JoinClasses(_classes.ToArray());
 
             return classs;
-        }
-
-        /// <summary>
-        /// <see cref="Color"/> enum to string color.
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
-        private string ToString(Color color)
-        {
-            return color switch
-            {
-               Color.Body => "body",
-               Color.Primary => "primary",
-               Color.Secondary => "secondary",
-               Color.Info => "info",
-               Color.Danger => "danger",
-               Color.Warning => "warning",
-               Color.Success => "success",
-               Color.Light => "light",
-               Color.Dark => "dark",
-               _ => string.Empty
-            };
         }
     }
 }

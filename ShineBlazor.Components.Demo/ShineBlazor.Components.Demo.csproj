@@ -23,6 +23,8 @@
     <None Remove="Resources\Examples\DropDownMenu.txt" />
     <None Remove="Resources\Examples\DropDownMulti.txt" />
     <None Remove="Resources\Examples\DropDownSingle.txt" />
+    <None Remove="Resources\Examples\FlashingComponent.txt" />
+    <None Remove="Resources\Examples\FlashingCss.txt" />
     <None Remove="Resources\Examples\Form.txt" />
     <None Remove="Resources\Examples\InfiniteScroll.txt" />
     <None Remove="Resources\Examples\InputControl.txt" />
@@ -33,6 +35,8 @@
     <None Remove="Resources\Examples\Modal.txt" />
     <None Remove="Resources\Examples\PropertyGrid.txt" />
     <None Remove="Resources\Examples\PropertyGrid_Collections.txt" />
+    <None Remove="Resources\Examples\PropertyGrid_CustomEditor.txt" />
+    <None Remove="Resources\Examples\RangeDial.txt" />
     <None Remove="Resources\Examples\Splash.txt" />
     <None Remove="Resources\Examples\ThemeSelector.txt" />
   </ItemGroup>
@@ -52,6 +56,8 @@
     <EmbeddedResource Include="Resources\Examples\DropDownMenu.txt" />
     <EmbeddedResource Include="Resources\Examples\DropDownMulti.txt" />
     <EmbeddedResource Include="Resources\Examples\DropDownSingle.txt" />
+    <EmbeddedResource Include="Resources\Examples\FlashingComponent.txt" />
+    <EmbeddedResource Include="Resources\Examples\FlashingCss.txt" />
     <EmbeddedResource Include="Resources\Examples\Form.txt" />
     <EmbeddedResource Include="Resources\Examples\InfiniteScroll.txt" />
     <EmbeddedResource Include="Resources\Examples\InputControl.txt" />
@@ -62,6 +68,8 @@
     <EmbeddedResource Include="Resources\Examples\Modal.txt" />
     <EmbeddedResource Include="Resources\Examples\PropertyGrid.txt" />
     <EmbeddedResource Include="Resources\Examples\PropertyGrid_Collections.txt" />
+    <EmbeddedResource Include="Resources\Examples\PropertyGrid_CustomEditor.txt" />
+    <EmbeddedResource Include="Resources\Examples\RangeDial.txt" />
     <EmbeddedResource Include="Resources\Examples\Splash.txt" />
     <EmbeddedResource Include="Resources\Examples\ThemeSelector.txt" />
     <EmbeddedResource Include="Resources\fruits.json" />

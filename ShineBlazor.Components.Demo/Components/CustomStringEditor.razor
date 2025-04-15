@@ -1,0 +1,21 @@
+﻿
+<FlexBox Gap="2" AlignItems="FlexAlign.Start">
+    <h3>This is a custom string editor.</h3>
+    <InputControl Value="Value" ValueChanged="ValueChanged" Required="true" />
+    <i class="bi bi-emoji-smile" />
+</FlexBox>
+
+@code {
+
+    /// <summary>
+    /// Value.
+    /// </summary>
+    [Parameter]
+    public string Value { get; set; }
+
+    /// <summary>
+    /// Value changed callback.
+    /// </summary>
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+}
