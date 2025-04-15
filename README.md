@@ -1,11 +1,9 @@
 # Shine Blazor
+![](https://github.com/GurpreetRaju/ShineBlazorComponents/blob/main/ShineBlazor.Components.Demo/wwwroot/images/shine.png)
 
-<p align="center">
-  <img src="./ShineBlazor.Components.Demo/wwwroot/images/shine.svg" alt="Shine Blazor" width="150" />
-</p>
+Build responsive and dynamic sites faster with Shine Blazor.
 
-<p align="center">Build responsive and dynamic sites faster with Shine Blazor.</p>
-<p align="center">Shine Blazor library is based on [Bootstrap](https://getbootstrap.com/) css. It uses very little javascript.</p>
+Shine Blazor library is based on [Bootstrap](https://getbootstrap.com/) css. It uses very little javascript.
 
 ### Quick Installation Guide
 Install Package
