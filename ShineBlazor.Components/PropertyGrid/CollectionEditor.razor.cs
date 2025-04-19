@@ -19,7 +19,7 @@ namespace ShineBlazor.Components.PropertyGrid
         public TCollection Collection { get; set; }
 
         /// <summary>
-        /// Collection cahnged callback.
+        /// Collection changed callback.
         /// </summary>
         [Parameter]
         public EventCallback<TCollection> CollectionChanged { get; set; }

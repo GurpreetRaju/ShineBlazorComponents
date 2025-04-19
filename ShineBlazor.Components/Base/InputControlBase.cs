@@ -8,12 +8,14 @@ namespace ShineBlazor.Components.Base
     /// </summary>
     public abstract class InputControlBase<TValue> : ShineComponentBase
     {
-        #region Properties
+        #region Fields
 
-        /// <summary>
-        /// Identifier.
-        /// </summary>
-        public Guid Id => Guid.NewGuid();
+        protected readonly Guid Id = Guid.NewGuid();
+
+        #endregion
+
+
+        #region Properties
 
         /// <summary>
         /// The value.

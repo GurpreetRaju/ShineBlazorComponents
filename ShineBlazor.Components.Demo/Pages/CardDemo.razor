@@ -1,0 +1,75 @@
+﻿@page "/card"
+
+<Page PageName="Cards">
+    <Example Header="Card" CodeFile="AlertExample.txt">
+        <div class="row">
+            <div class="col-6">
+                <Card>
+                    <svg class="card-img-top" width="100%" height="180">
+                        <rect width="100%" height="100%" fill="#868e96"></rect>
+                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
+                    </svg>
+                    <CardBody>
+                        <Text Typo="Typography.h5" Class="card-title">Card title</Text>
+                        <Text Class="card-text">
+                            It is a long established fact that a reader will be 
+                            distracted by the readable content of a page when looking at its layout.
+                        </Text>
+                    </CardBody>
+                </Card>
+            </div>
+            <div class="col-6">
+                <Card>
+                    <CardHeader>
+                        Featured
+                    </CardHeader>
+                    <CardBody>
+                        <Text Typo="Typography.h5" Class="card-title">Card title</Text>
+                        <Text Class="card-text">
+                            It is a long established fact that a reader will be
+                            distracted by the readable content of a page when looking at its layout.
+                        </Text>
+                    </CardBody>
+                    <CardFooter>
+                        <Button Variant="Variant.Filled" Color="Color.Primary">Click</Button>
+                    </CardFooter>
+                </Card>
+            </div>
+        </div>
+    </Example>
+    <Example Header="Glass Variant" CodeFile="AlertExample.txt">
+        <div class="row p-3" style="background: url(/images/demo_bg.jpg) center;">
+            <div class="col-6">
+                <Card GlassVariant="true">
+                    <CardBody>
+                        <Text Typo="Typography.h5" Class="card-title">Card title</Text>
+                        <Text Class="card-text">
+                            It is a long established fact that a reader will be
+                            distracted by the readable content of a page when looking at its layout.
+                        </Text>
+                    </CardBody>
+                </Card>
+            </div>
+            <div class="col-6">
+                <Card GlassVariant="true">
+                    <CardHeader>
+                        Featured
+                    </CardHeader>
+                    <CardBody>
+                        <Text Typo="Typography.h5" Class="card-title">Card title</Text>
+                        <Text Class="card-text">
+                            It is a long established fact that a reader will be
+                            distracted by the readable content of a page when looking at its layout.
+                        </Text>
+                    </CardBody>
+                    <CardFooter>
+                        <Button Variant="Variant.Filled" Color="Color.Primary">Click</Button>
+                    </CardFooter>
+                </Card>
+            </div>
+        </div>
+    </Example>
+</Page>
+
+@code {
+}

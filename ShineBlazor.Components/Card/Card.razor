@@ -13,6 +13,15 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
+    /// Whether to use glass variant.
+    /// </summary>
+    [Parameter]
+    public bool GlassVariant { get; set; }
+
     /// <inheritdoc/>
     protected override string ComponentName => "card";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("glass", GlassVariant);
 }

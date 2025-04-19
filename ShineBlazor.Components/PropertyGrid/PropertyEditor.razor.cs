@@ -249,7 +249,8 @@ namespace ShineBlazor.Components.PropertyGrid
                             ComponentType = typeof(Text),
                             Parameters = new Dictionary<string, object>
                             {
-                                { "Content", _propertyValue?.ToString() }
+                                { nameof(Text.Content), _propertyValue?.ToString() },
+                                { nameof(Text.Typo), Typography.span },
                             }
                         };
                     case ComponentControl.Array:
@@ -260,8 +261,8 @@ namespace ShineBlazor.Components.PropertyGrid
                             Parameters = new Dictionary<string, object>
                             {
                                 { "TItem", _elementType },
-                                { "Collection", _propertyValue },
-                                { "CollectionChanged", PropertyType.CreateTypedEventCallback(this, SetValue) }
+                                { nameof(ArrayEditor<TParent>.Collection), _propertyValue },
+                                { nameof(ArrayEditor<TParent>.CollectionChanged), PropertyType.CreateTypedEventCallback(this, SetValue) }
                             }
                         };
                     case ComponentControl.List:
@@ -272,8 +273,8 @@ namespace ShineBlazor.Components.PropertyGrid
                             Parameters = new Dictionary<string, object>
                             {
                                 { "TItem", _elementType },
-                                { "Collection", _propertyValue },
-                                { "CollectionChanged", PropertyType.CreateTypedEventCallback(this, SetValue) }
+                                { nameof(ListEditor<TParent>.Collection), _propertyValue },
+                                { nameof(ListEditor<TParent>.CollectionChanged), PropertyType.CreateTypedEventCallback(this, SetValue) }
                             }
                         };
                     case ComponentControl.PropertyGrid:
@@ -284,8 +285,8 @@ namespace ShineBlazor.Components.PropertyGrid
                             Parameters = new Dictionary<string, object>
                             {
                                 { "TObject", PropertyType },
-                                { "Value", _propertyValue },
-                                { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) }
+                                { nameof(PropertyGrid<TParent>.Value), _propertyValue },
+                                { nameof(PropertyGrid<TParent>.ValueChanged), PropertyType.CreateTypedEventCallback(this, SetValue) }
                             }
                         };
                     case ComponentControl.DropDown:
@@ -295,10 +296,10 @@ namespace ShineBlazor.Components.PropertyGrid
                             Parameters = new Dictionary<string, object>
                             {
                                 { "TItem", PropertyType },
-                                { "Items", _allowedValues },
-                                { "SelectedItem", _propertyValue },
-                                { "SelectedItemChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                                { "SelectionMode", SelectionMode.Single }
+                                { nameof(DropDown<TParent>.Items), _allowedValues },
+                                { nameof(DropDown<TParent>.SelectedItem), _propertyValue },
+                                { nameof(DropDown<TParent>.SelectedItemChanged), PropertyType.CreateTypedEventCallback(this, SetValue) },
+                                { nameof(DropDown<TParent>.SelectionMode), SelectionMode.Single }
                             }
                         };
                     case ComponentControl.Custom:
@@ -327,10 +328,10 @@ namespace ShineBlazor.Components.PropertyGrid
                 Parameters = new Dictionary<string, object>
                 {
                     { "TValue", PropertyType },
-                    { "Value", _propertyValue },
-                    { "ValueChanged", PropertyType.CreateTypedEventCallback(this, SetValue) },
-                    { "Required", _required },
-                    { "ReadOnly", _readOnly }
+                    { nameof(InputControl<TParent>.Value), _propertyValue },
+                    { nameof(InputControl<TParent>.ValueChanged), PropertyType.CreateTypedEventCallback(this, SetValue) },
+                    { nameof(InputControl<TParent>.Required), _required },
+                    { nameof(InputControl<TParent>.ReadOnly), _readOnly }
                 }
             };
         }
