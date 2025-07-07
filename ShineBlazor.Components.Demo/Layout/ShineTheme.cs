@@ -40,7 +40,7 @@ namespace ShineBlazor.Components.Demo.Layout
     }
 
     /// <summary>
-    /// The light palette.
+    /// The dark palette.
     /// </summary>
     public class DarkPalette : Theme.Palette
     {
