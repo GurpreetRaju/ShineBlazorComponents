@@ -255,7 +255,7 @@ namespace ShineBlazor.Components.Base
                     _classes.Add($"flex-grow-{(flexGrow.Value ? "1" : "0")}");
 
                 if (flexShrink.HasValue)
-                    _classes.Add($"flex-shrink{(flexShrink.Value ? "1" : "0")}");
+                    _classes.Add($"flex-shrink-{(flexShrink.Value ? "1" : "0")}");
 
             return this;
         }
