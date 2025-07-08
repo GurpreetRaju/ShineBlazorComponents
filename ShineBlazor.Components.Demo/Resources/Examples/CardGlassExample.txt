@@ -1,0 +1,15 @@
+<Card GlassVariant="true">
+    <CardHeader>
+        Featured
+    </CardHeader>
+    <CardBody>
+        <Text Typo="Typography.h5" Class="card-title">Card title</Text>
+        <Text Class="card-text">
+            It is a long established fact that a reader will be
+            distracted by the readable content of a page when looking at its layout.
+        </Text>
+    </CardBody>
+    <CardFooter>
+        <Button Variant="Variant.Filled" Color="Color.Primary">Click</Button>
+    </CardFooter>
+</Card>

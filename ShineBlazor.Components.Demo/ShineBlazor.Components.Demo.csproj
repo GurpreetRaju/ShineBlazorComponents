@@ -24,6 +24,9 @@
     <None Remove="Resources\Examples\BadgePillsExample.txt" />
     <None Remove="Resources\Examples\ButtonActions.txt" />
     <None Remove="Resources\Examples\ButtonStyles.txt" />
+    <None Remove="Resources\Examples\CardExample.txt" />
+    <None Remove="Resources\Examples\CardGlassExample.txt" />
+    <None Remove="Resources\Examples\CardUtilitiesExample.txt" />
     <None Remove="Resources\Examples\DropDownMenu.txt" />
     <None Remove="Resources\Examples\DropDownMulti.txt" />
     <None Remove="Resources\Examples\DropDownSingle.txt" />
@@ -59,6 +62,9 @@
     <EmbeddedResource Include="Resources\Examples\BadgePillsExample.txt" />
     <EmbeddedResource Include="Resources\Examples\ButtonActions.txt" />
     <EmbeddedResource Include="Resources\Examples\ButtonStyles.txt" />
+    <EmbeddedResource Include="Resources\Examples\CardExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\CardGlassExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\CardUtilitiesExample.txt" />
     <EmbeddedResource Include="Resources\Examples\CarouselExample.txt" />
     <EmbeddedResource Include="Resources\Examples\DataGrid.txt" />
     <EmbeddedResource Include="Resources\Examples\DropDownMenu.txt" />
