@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Examples\AppBarExample.txt" />
+    <None Remove="Resources\Examples\BadgeBackgroundExample.txt" />
+    <None Remove="Resources\Examples\BadgeHeadingsExample.txt" />
+    <None Remove="Resources\Examples\BadgePillsExample.txt" />
     <None Remove="Resources\Examples\ButtonActions.txt" />
     <None Remove="Resources\Examples\ButtonStyles.txt" />
     <None Remove="Resources\Examples\DropDownMenu.txt" />
@@ -49,6 +53,10 @@
     <EmbeddedResource Include="Resources\Examples\Accordion.txt" />
     <EmbeddedResource Include="Resources\Examples\AccordionItem.txt" />
     <EmbeddedResource Include="Resources\Examples\AlertExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\AppBarExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\BadgeBackgroundExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\BadgeHeadingsExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\BadgePillsExample.txt" />
     <EmbeddedResource Include="Resources\Examples\ButtonActions.txt" />
     <EmbeddedResource Include="Resources\Examples\ButtonStyles.txt" />
     <EmbeddedResource Include="Resources\Examples\CarouselExample.txt" />

@@ -30,6 +30,7 @@
                 </a>
             </li>
         }
+        @ChildContent
     </ul>
     <Overlay Show="Open" OnClicked="Close" />
 </div>
@@ -68,6 +69,12 @@
     /// </summary>
     [Parameter]
     public InputVariant Variant { get; set; }
+
+    /// <summary>
+    /// The child content for drop down.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Css for input control.

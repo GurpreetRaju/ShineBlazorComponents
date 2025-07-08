@@ -1,0 +1,46 @@
+﻿@page "/badge"
+
+<Page PageName="Badge">
+    <Example Header="Headings" CodeFile="BadgeHeadingsExample.txt">
+        <Text>
+            The <code>Badge</code> component can be used alongside headings to highlight new or important content.
+            Use the <code>Value</code> parameter to set the badge text.
+        </Text>
+        <h1>Example heading <Badge Value="New" /></h1>
+        <h2>Example heading <Badge Value="New" /></h2>
+        <h3>Example heading <Badge Value="New" /></h3>
+        <h4>Example heading <Badge Value="New" /></h4>
+        <h5>Example heading <Badge Value="New" /></h5>
+        <h6>Example heading <Badge Value="New" /></h6>
+    </Example>
+
+    <Example Header="Background Colors" CodeFile="BadgeBackgroundExample.txt">
+        <Text>
+            Use the <code>Background</code> parameter to set the badge color using the <code>Color</code> enum.
+            Available options include <code>Primary</code>, <code>Secondary</code>, <code>Success</code>, <code>Danger</code>, <code>Warning</code>, <code>Info</code>, <code>Light</code>, and <code>Dark</code>.
+        </Text>
+        <Badge Value="Primary" Background="Color.Primary" class="me-1" />
+        <Badge Value="Secondary" Background="Color.Secondary" class="me-1" />
+        <Badge Value="Success" Background="Color.Success" class="me-1" />
+        <Badge Value="Danger" Background="Color.Danger" class="me-1" />
+        <Badge Value="Warning" Background="Color.Warning" class="me-1" />
+        <Badge Value="Info" Background="Color.Info" class="me-1" />
+        <Badge Value="Light" Background="Color.Light" class="me-1" />
+        <Badge Value="Dark" Background="Color.Dark" class="me-1" />
+    </Example>
+
+    <Example Header="Pill Badges" CodeFile="BadgePillsExample.txt">
+        <Text>
+            To create pill-shaped badges, add the <code>rounded-pill</code> CSS class using the <code>class</code> parameter.
+            You can combine this with the <code>Background</code> parameter for different colors.
+        </Text>
+        <Badge Value="Primary" Background="Color.Primary" class="rounded-pill me-1" />
+        <Badge Value="Success" Background="Color.Success" class="rounded-pill me-1" />
+        <Badge Value="Danger" Background="Color.Danger" class="rounded-pill me-1" />
+        <Badge Value="Warning" Background="Color.Warning" class="rounded-pill me-1" />
+        <Badge Value="Info" Background="Color.Info" class="rounded-pill me-1" />
+    </Example>
+</Page>
+
+@code {
+}

@@ -1,7 +1,9 @@
-
 @inherits BackgroundComponentBase
 
-<span class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">@Value</span>
+<span class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
+    @Value
+    @ChildContent
+</span>
 
 @code {
 
@@ -11,6 +13,31 @@
     [Parameter]
     public string Value { get; set; }
 
+    /// <summary>
+    /// The child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// The background color for the badge (Bootstrap color).
+    /// </summary>
+    [Parameter]
+    public Color Background { get; set; } = Color.Primary;
+
+    /// <summary>
+    /// The rounder pill style.
+    /// </summary>
+    [Parameter]
+    public bool RoundedPill { get; set; }
+
     /// <inheritdoc/>
     protected override string ComponentName => "badge";
+
+    /// <summary>
+    /// Builds the CSS classes for the badge, including background.
+    /// </summary>
+    protected override CssClassBuilder CssBuilder => base.CssBuilder
+        .WithBackground(Background)
+        .WithClass("rounded-pill", RoundedPill);
 }

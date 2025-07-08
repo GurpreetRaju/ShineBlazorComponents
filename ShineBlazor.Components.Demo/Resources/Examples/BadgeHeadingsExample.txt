@@ -1,0 +1,6 @@
+<h1>Example heading <Badge Value="New" /></h1>
+<h2>Example heading <Badge Value="New" /></h2>
+<h3>Example heading <Badge Value="New" /></h3>
+<h4>Example heading <Badge Value="New" /></h4>
+<h5>Example heading <Badge Value="New" /></h5>
+<h6>Example heading <Badge Value="New" /></h6>

@@ -2,11 +2,20 @@
 @inherits BackgroundComponentBase
 
 <nav class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
-    <div class="container-fluid">
-        <a href="" class="navbar-brand">
-            @BrandContent
-        </a>
-        @ChildContent
+    <div class="@ContainerCss">
+        @if (BrandContent != null)
+        {
+            <a class="navbar-brand" href="@BrandHref">@BrandContent</a>
+        }
+        @if (ShowToggler)
+        {
+            <button class="navbar-toggler" type="button" @onclick="ToggleNavbar" aria-controls="@CollapseId" aria-expanded="@IsExpanded" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        }
+        <div class="@CollapseCss" id="@CollapseId">
+            @ChildContent
+        </div>
     </div>
 </nav>
 
@@ -25,15 +34,77 @@
     public RenderFragment ChildContent { get; set; }
 
     /// <summary>
+    /// The href for the brand link.
+    /// </summary>
+    [Parameter]
+    public string BrandHref { get; set; } = "#";
+
+    /// <summary>
+    /// The container type: "container", "container-fluid", or custom.
+    /// </summary>
+    [Parameter]
+    public string ContainerCss { get; set; } = "container-fluid";
+
+    /// <summary>
+    /// The expand breakpoint: "navbar-expand", "navbar-expand-sm", "navbar-expand-md", etc.
+    /// </summary>
+    [Parameter]
+    public string Expand { get; set; } = "navbar-expand";
+
+    /// <summary>
+    /// If true, shows the toggler button for responsive collapse.
+    /// </summary>
+    [Parameter]
+    public bool ShowToggler { get; set; } = true;
+
+    /// <summary>
+    /// If true, the navbar is expanded (not collapsed).
+    /// </summary>
+    [Parameter]
+    public bool IsExpanded { get; set; } = false;
+
+    /// <summary>
+    /// Callback when the toggler is clicked.
+    /// </summary>
+    [Parameter]
+    public EventCallback<bool> IsExpandedChanged { get; set; }
+
+    /// <summary>
     /// Whether to drop shadow. Default: true.
     /// </summary>
     [Parameter]
     public bool HasShadow { get; set; } = true;
 
+    /// <summary>
+    /// The placement: "fixed-top", "fixed-bottom", "sticky-top", or empty.
+    /// </summary>
+    [Parameter]
+    public string Placement { get; set; } = "";
+
     /// <inheritdoc/>
     protected override string ComponentName => "navbar";
 
     /// <inheritdoc/>
-    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("shadow", HasShadow);
+    protected override CssClassBuilder CssBuilder => base.CssBuilder
+        .WithClass("shadow", HasShadow).WithClass(Placement).WithClass(Expand);
 
+    /// <summary>
+    /// The collapse Id.
+    /// </summary>
+    private string CollapseId => $"navbarSupportedContent_{Guid.NewGuid():N}";
+
+    /// <summary>
+    /// Gets the collapse css.
+    /// </summary>
+    private string CollapseCss => CssClassBuilder.JoinClasses("collapse", "navbar-collapse", IsExpanded ? "show" : null);
+
+    /// <summary>
+    /// Toggles the navbar.
+    /// </summary>
+    /// <returns></returns>
+    private async Task ToggleNavbar()
+    {
+        IsExpanded = !IsExpanded;
+        await IsExpandedChanged.InvokeAsync(IsExpanded);
+    }
 }

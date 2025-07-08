@@ -1,0 +1,8 @@
+<Badge Value="Primary" Background="Color.Primary" class="me-1" />
+<Badge Value="Secondary" Background="Color.Secondary" class="me-1" />
+<Badge Value="Success" Background="Color.Success" class="me-1" />
+<Badge Value="Danger" Background="Color.Danger" class="me-1" />
+<Badge Value="Warning" Background="Color.Warning" class="me-1" />
+<Badge Value="Info" Background="Color.Info" class="me-1" />
+<Badge Value="Light" Background="Color.Light" class="me-1" />
+<Badge Value="Dark" Background="Color.Dark" class="me-1" />

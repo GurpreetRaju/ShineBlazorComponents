@@ -1,0 +1,5 @@
+<Badge Value="Primary" Background="Color.Primary" class="rounded-pill me-1" />
+<Badge Value="Success" Background="Color.Success" class="rounded-pill me-1" />
+<Badge Value="Danger" Background="Color.Danger" class="rounded-pill me-1" />
+<Badge Value="Warning" Background="Color.Warning" class="rounded-pill me-1" />
+<Badge Value="Info" Background="Color.Info" class="rounded-pill me-1" />

@@ -1,0 +1,63 @@
+﻿@page "/appbar"
+
+<Page PageName="AppBar">
+    <Example Header="Basic Navbar" CodeFile="AppBarExample.txt">
+        <AppBar BrandHref="/"
+                BrandContent="BrandContent"
+                Class="mb-3 text-bg-info"
+                Expand="navbar-expand-lg"
+                Placement="sticky-top">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <DropDown TItem="string" SelectionMode="SelectionMode.None">
+                        <TriggerContent>
+                            <span class="nav-link">More</span>
+                        </TriggerContent>
+                        <ChildContent>
+                            <li><a class="dropdown-item">Settings</a></li>
+                            <li><a class="dropdown-item">Profile</a></li>
+                        </ChildContent>
+                    </DropDown>
+                </li>
+            </ul>
+            <Badge Value="20" BackgroundColor="Color.Danger"></Badge>
+        </AppBar>
+
+        <ul>
+            <li>
+                <b>BrandContent</b>: Set the <code>BrandContent</code> parameter to display your logo or app name. You can use plain text or any Blazor <code>RenderFragment</code>.
+            </li>
+            <li>
+                <b>BrandHref</b>: Set the <code>BrandHref</code> parameter to specify the link for your brand.
+            </li>
+            <li>
+                <b>Class</b>: Use Bootstrap background classes like <code>bg-light</code>, <code>bg-dark</code>, <code>bg-primary</code>, etc or text classes to style the appbar.
+            </li>
+            <li>
+                <b>Expand</b>: Use <code>navbar-expand</code>, <code>navbar-expand-sm</code>, <code>navbar-expand-md</code>, etc. for responsive behavior.
+            </li>
+            <li>
+                <b>Placement</b>: Use <code>fixed-top</code>, <code>fixed-bottom</code>, <code>sticky-top</code>, or leave empty for default.
+            </li>
+            <li>
+                <b>ChildContent</b>: Place your navigation links, forms, or other content inside the <code>&lt;Navbar&gt;</code> tags.
+            </li>
+        </ul>
+    </Example>
+</Page>
+
+@code {
+
+
+    private RenderFragment BrandContent => __builder =>
+    {
+        <span>Shine Blazor</span>
+    };
+
+}
