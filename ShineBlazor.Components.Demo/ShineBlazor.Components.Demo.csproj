@@ -43,6 +43,10 @@
     <None Remove="Resources\Examples\ListView.txt" />
     <None Remove="Resources\Examples\ListViewCustom.txt" />
     <None Remove="Resources\Examples\Modal.txt" />
+    <None Remove="Resources\Examples\ProgressBarAnimatedExample.txt" />
+    <None Remove="Resources\Examples\ProgressBarBackgroundsExample.txt" />
+    <None Remove="Resources\Examples\ProgressBarHeightExample.txt" />
+    <None Remove="Resources\Examples\ProgressBarStripedExample.txt" />
     <None Remove="Resources\Examples\PropertyGrid.txt" />
     <None Remove="Resources\Examples\PropertyGrid_Collections.txt" />
     <None Remove="Resources\Examples\PropertyGrid_CustomEditor.txt" />
@@ -86,6 +90,10 @@
     <EmbeddedResource Include="Resources\Examples\ListView.txt" />
     <EmbeddedResource Include="Resources\Examples\ListViewCustom.txt" />
     <EmbeddedResource Include="Resources\Examples\Modal.txt" />
+    <EmbeddedResource Include="Resources\Examples\ProgressBarAnimatedExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\ProgressBarBackgroundsExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\ProgressBarHeightExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\ProgressBarStripedExample.txt" />
     <EmbeddedResource Include="Resources\Examples\PropertyGrid.txt" />
     <EmbeddedResource Include="Resources\Examples\PropertyGrid_Collections.txt" />
     <EmbeddedResource Include="Resources\Examples\PropertyGrid_CustomEditor.txt" />

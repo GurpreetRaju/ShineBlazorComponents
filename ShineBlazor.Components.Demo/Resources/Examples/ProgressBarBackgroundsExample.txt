@@ -1,0 +1,7 @@
+<FlexBox Gap="2">
+    <ProgressBar ProgressValue="25" Color="Color.Primary" />
+    <ProgressBar ProgressValue="50" Color="Color.Success" />
+    <ProgressBar ProgressValue="75" Color="Color.Info" />
+    <ProgressBar ProgressValue="100" Color="Color.Warning" ShowProgress="true" />
+    <ProgressBar ProgressValue="60" Color="Color.Danger" />
+</FlexBox>

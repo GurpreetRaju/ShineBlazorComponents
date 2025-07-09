@@ -1,0 +1,1 @@
+<ProgressBar ProgressValue="75" Color="Color.Primary" IsStriped="true" Animated="true" />
