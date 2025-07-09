@@ -35,6 +35,12 @@
     <None Remove="Resources\Examples\DropDownSingle.txt" />
     <None Remove="Resources\Examples\FlashingComponent.txt" />
     <None Remove="Resources\Examples\FlashingCss.txt" />
+    <None Remove="Resources\Examples\FlexBoxAlignmentExample.txt" />
+    <None Remove="Resources\Examples\FlexBoxColumnExample.txt" />
+    <None Remove="Resources\Examples\FlexBoxFillGrowShrinkExample.txt" />
+    <None Remove="Resources\Examples\FlexBoxGapExample.txt" />
+    <None Remove="Resources\Examples\FlexBoxRowExample.txt" />
+    <None Remove="Resources\Examples\FlexBoxWrapExample.txt" />
     <None Remove="Resources\Examples\Form.txt" />
     <None Remove="Resources\Examples\InfiniteScroll.txt" />
     <None Remove="Resources\Examples\InputControl.txt" />
@@ -82,6 +88,12 @@
     <EmbeddedResource Include="Resources\Examples\DropDownSingle.txt" />
     <EmbeddedResource Include="Resources\Examples\FlashingComponent.txt" />
     <EmbeddedResource Include="Resources\Examples\FlashingCss.txt" />
+    <EmbeddedResource Include="Resources\Examples\FlexBoxAlignmentExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\FlexBoxColumnExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\FlexBoxFillGrowShrinkExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\FlexBoxGapExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\FlexBoxRowExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\FlexBoxWrapExample.txt" />
     <EmbeddedResource Include="Resources\Examples\Form.txt" />
     <EmbeddedResource Include="Resources\Examples\InfiniteScroll.txt" />
     <EmbeddedResource Include="Resources\Examples\InputControl.txt" />
