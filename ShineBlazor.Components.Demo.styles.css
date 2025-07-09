@@ -1,7 +1,7 @@
-@import '_content/ShineBlazor.Components/ShineBlazor.Components.122c2r6mf3.bundle.scp.css';
+@import '_content/ShineBlazor.Components/ShineBlazor.Components.ev3s0r9jmq.bundle.scp.css';
 
 /* /Layout/MainLayout.razor.rz.scp.css */
-#blazor-error-ui[b-p1pcsrvgzt] {
+#blazor-error-ui[b-pg0p90udhr] {
     color-scheme: light only;
     background: lightyellow;
     bottom: 0;
@@ -15,7 +15,7 @@
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss[b-p1pcsrvgzt] {
+    #blazor-error-ui .dismiss[b-pg0p90udhr] {
         cursor: pointer;
         position: absolute;
         right: 0.75rem;
@@ -24,31 +24,63 @@
 /* /Layout/Navigation.razor.rz.scp.css */
 
 
-.navigation[b-f5bjh01dqk] {
+.navigation[b-q4ncvj8tpi] {
 }
 
 
-    .navigation[b-f5bjh01dqk]  .nav-category {
+    .navigation[b-q4ncvj8tpi]  .nav-category {
         display: flex;
         align-items: center;
         padding: 0.25rem;
     }
 
-    .navigation[b-f5bjh01dqk]  .nav-category .bi {
+    .navigation[b-q4ncvj8tpi]  .nav-category .bi {
         padding: 0 0.5rem;
     }
 
-    .navigation[b-f5bjh01dqk]  .list-view-item a {
+    .navigation[b-q4ncvj8tpi]  .list-view-item a {
         --list-view-item-padding: 0.1rem 1rem;
     }
+/* /Pages/DrawerDemo.razor.rz.scp.css */
+
+.drawer-demo[b-l2j5wcnoyq] {
+    height: 100%;
+}
+
+.drawer-demo[b-l2j5wcnoyq]  .drawer-container {
+    height: 16rem;
+}
+
+    .drawer-demo[b-l2j5wcnoyq]  .nav-item:hover a {
+        color: var(--bs-info);
+        cursor: pointer;
+    }
+
+    .drawer-demo[b-l2j5wcnoyq]  .nav-item.active {
+        background: var(--bs-info);
+        border-radius: 5px;
+    }
+
+    .drawer-demo[b-l2j5wcnoyq]  .nav-item.active a{
+        color: var(--bs-white) !important;
+    }
+
+    .drawer-demo[b-l2j5wcnoyq]  .drawer-collapse .menu-text {
+        display: none;
+    }
+
+    .drawer-demo[b-l2j5wcnoyq]  .toggle-icon-dark {
+        color: var(--bs-white);
+        font-size: 1.25rem;
+    }
 /* /Pages/InfiniteScrollDemo.razor.rz.scp.css */
-.scroll-view[b-owwb480fvd] {
+.scroll-view[b-tofzzzc580] {
     height: 100vh;
     overflow: auto;
 }
 /* /Pages/RangeDialDemo.razor.rz.scp.css */
 
-.range-label[b-9l31nzj111] {
+.range-label[b-6uw1q946l1] {
     padding: 0.25rem 1rem;
     border: 1px solid var(--bs-border-color);
 }

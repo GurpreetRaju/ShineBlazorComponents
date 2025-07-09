@@ -19,11 +19,11 @@
     :root[data-bs-theme=dark] {
         --bs-body-bg-subtle: var(--bs-dark-bg-subtle);
         --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
+        --bs-light: #2b3035;
+        --bs-light-rgb: 43, 48, 53;
     }
 
     :root[data-bs-theme=dark] .text-bg-light {
-        --bs-light: #2b3035;
-        --bs-light-rgb: 43, 48, 53;
         color: var(--bs-body-color) !important;
     }
 
@@ -137,29 +137,10 @@
         flex-direction: row-reverse;
     }
 
-    .drawer .drawer-content, .drawer .drawer-collapsed-content {
+    .drawer .drawer-content-wrapper {
         flex: 1 1 auto;
         overflow: auto;
     }
-    
-    .drawer .drawer-content {
-        display: block;
-        transition: display 0.5s ease-in;
-    }
-
-    .drawer .drawer-collapsed-content {
-        display: none;
-    }
-
-    .drawer.drawer-collapse .drawer-content {
-        display: none;
-        transition: display 0.5s ease-in;
-    }
-
-        .drawer.drawer-collapse .drawer-collapsed-content {
-            display: block;
-        }
-
 
 /*********** Drawer Container ***********/
 .drawer-container {
@@ -514,54 +495,11 @@ div.list-view-item > * {
 }
 
 /*********** Modal ***********/
-
-.splash-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.splash {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
-}
-
-    .splash .logo {
-        max-height: var(--splash-height);
-        max-width: var(--splash-width);
-    }
-
-    .splash .progress {
-        min-width: var(--splash-width);
-        height: 0.25rem;
-    }
-
-    .splash .progress-bar {
-        width: var(--blazor-load-percentage, 0%);
-    }
-
-    .splash .progress-text{
-        position: relative;
-    }
-
-    .splash .progress-text:after {
-        content: var(--blazor-load-percentage-text, "Loading");
-        position: absolute;
-        top: -1rem;
-        left: -1rem;
-    }
-
-
-/*********** Modal ***********/
 .modal.show {
     display: block;
 }
 
-/*********** Modal ***********/
+/*********** Navbar ***********/
 .navbar-brand {
     display: flex;
     font-weight: bold;
@@ -596,16 +534,81 @@ div.list-view-item > * {
     height: 100%;
 }
 
+/***********  Pagination  ***********/
+.pagination .bi {
+    font-size: small;
+}
+
+/***********  Property Editor  ***********/
+.property-editor {
+    display: flex;
+    justify-content: end;
+}
+
+.property-editor .btn {
+    padding: 0 0.25rem;
+}
+
 /*********** Scrollbar ***********/
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--bs-gray-500) var(--bs-light);
 }
 
+/*********** Splash ***********/
+
+.splash-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.splash {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+    .splash .logo {
+        max-height: var(--splash-height);
+        max-width: var(--splash-width);
+    }
+
+    .splash .progress {
+        min-width: var(--splash-width);
+        height: 0.25rem;
+    }
+
+    .splash .progress-bar {
+        width: var(--blazor-load-percentage, 0%);
+    }
+
+    .splash .progress-text {
+        position: relative;
+    }
+
+        .splash .progress-text:after {
+            content: var(--blazor-load-percentage-text, "Loading");
+            position: absolute;
+            top: -1rem;
+            left: -1rem;
+        }
+
 /*********** Utilities ***********/
 .cursor-pointer { cursor: pointer; }
 .text-bold { font-weight:bold; }
-
+.glass {
+    --bs-body-color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
 
 /*********** Animations ***********/
 .flash-background {
