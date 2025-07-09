@@ -6,11 +6,25 @@
     {
         @RenderTrigger
     }
-    <div class="drawer-content">
-        @ChildContent
-    </div>
-    <div class="drawer-collapsed-content">
-        @CollapsedContent
+    <div class="drawer-content-wrapper">
+        @if (ChildContent != null)
+        {
+            <div class="drawer-content">
+                @ChildContent
+            </div>
+        }
+        @if (Collapsed)
+        {
+            <div class="drawer-collapsed-content">
+                @CollapsedContent
+            </div>
+        }
+        else
+        {
+            <div class="drawer-expanded-content">
+                @ExpandedContent
+            </div>
+        }
     </div>
     @if (TriggerPosition == TriggerPosition.Bottom)
     {
@@ -37,6 +51,12 @@
     /// </summary>
     [Parameter]
     public RenderFragment CollapsedContent { get; set; }
+
+    /// <summary>
+    /// The drawer expanded content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ExpandedContent { get; set; }
 
     /// <summary>
     /// Whether the drawer is collapsed.

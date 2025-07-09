@@ -27,6 +27,9 @@
     <None Remove="Resources\Examples\CardExample.txt" />
     <None Remove="Resources\Examples\CardGlassExample.txt" />
     <None Remove="Resources\Examples\CardUtilitiesExample.txt" />
+    <None Remove="Resources\Examples\DrawerBasicExample.txt" />
+    <None Remove="Resources\Examples\DrawerCustomExample.txt" />
+    <None Remove="Resources\Examples\DrawerRightExample.txt" />
     <None Remove="Resources\Examples\DropDownMenu.txt" />
     <None Remove="Resources\Examples\DropDownMulti.txt" />
     <None Remove="Resources\Examples\DropDownSingle.txt" />
@@ -67,6 +70,9 @@
     <EmbeddedResource Include="Resources\Examples\CardUtilitiesExample.txt" />
     <EmbeddedResource Include="Resources\Examples\CarouselExample.txt" />
     <EmbeddedResource Include="Resources\Examples\DataGrid.txt" />
+    <EmbeddedResource Include="Resources\Examples\DrawerBasicExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\DrawerCustomExample.txt" />
+    <EmbeddedResource Include="Resources\Examples\DrawerRightExample.txt" />
     <EmbeddedResource Include="Resources\Examples\DropDownMenu.txt" />
     <EmbeddedResource Include="Resources\Examples\DropDownMulti.txt" />
     <EmbeddedResource Include="Resources\Examples\DropDownSingle.txt" />

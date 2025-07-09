@@ -1,0 +1,36 @@
+<DrawerContainer Class="border">
+    <LeftDrawer>
+        <Drawer Position="DrawerPosition.Left"
+                Width="18rem"
+                CollapsedWidth="5rem"
+                HasShadow="true"
+                TriggerPosition="TriggerPosition.Top">
+            <ChildContent>
+                <NavMenu IsVertical="true" Class="pa-2">
+                    <NavigationItems>
+                        <NavigationItem Class="active">
+                            <i class="bi bi-house-door" />
+                            <span class="menu-text">Home</span>
+                        </NavigationItem>
+                        <NavigationItem>
+                            <i class="bi bi-person" />
+                            <span class="menu-text">Profile</span>
+                        </NavigationItem>
+                        <NavigationItem>
+                            <i class="bi bi-gear" />
+                            <span class="menu-text">Settings</span>
+                        </NavigationItem>
+                    </NavigationItems>
+                </NavMenu>
+            </ChildContent>
+        </Drawer>
+    </LeftDrawer>
+    <Content>
+        <div class="p-4">
+            <h4>Main Content Area</h4>
+            <p>
+                This is the main content area. The drawer on the left can be collapsed or expanded using the trigger button.
+            </p>
+        </div>
+    </Content>
+</DrawerContainer>

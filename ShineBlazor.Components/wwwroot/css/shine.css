@@ -137,29 +137,10 @@
         flex-direction: row-reverse;
     }
 
-    .drawer .drawer-content, .drawer .drawer-collapsed-content {
+    .drawer .drawer-content-wrapper {
         flex: 1 1 auto;
         overflow: auto;
     }
-    
-    .drawer .drawer-content {
-        display: block;
-        transition: display 0.5s ease-in;
-    }
-
-    .drawer .drawer-collapsed-content {
-        display: none;
-    }
-
-    .drawer.drawer-collapse .drawer-content {
-        display: none;
-        transition: display 0.5s ease-in;
-    }
-
-        .drawer.drawer-collapse .drawer-collapsed-content {
-            display: block;
-        }
-
 
 /*********** Drawer Container ***********/
 .drawer-container {

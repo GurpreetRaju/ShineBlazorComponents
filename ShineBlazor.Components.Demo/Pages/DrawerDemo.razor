@@ -1,0 +1,144 @@
+﻿@page "/drawer"
+@using ShineBlazor.Components.Enumerations
+
+<div class="drawer-demo">
+    <Page PageName="Drawer">
+        <Card>
+            <CardHeader>Drawer</CardHeader>
+            <CardBody>
+                <Text>
+                    <b>Position</b>: <code>DrawerPosition.Left</code> or <code>DrawerPosition.Right</code> to set the drawer side.
+                </Text>
+                <Text>
+                    <b>Collapsed</b>: <code>bool</code> to control if the drawer is collapsed.
+                </Text>
+                <Text>
+                    <b>CollapsedChanged</b>: <code>EventCallback&lt;bool&gt;</code> for two-way binding of collapsed state.
+                </Text>
+                <Text>
+                    <b>Width</b>: <code>string</code> for expanded width (e.g., <code>16rem</code>).
+                </Text>
+                <Text>
+                    <b>CollapsedWidth</b>: <code>string</code> for collapsed width (e.g., <code>4.5rem</code>).
+                </Text>
+                <Text>
+                    <b>HasShadow</b>: <code>bool</code> to enable or disable shadow.
+                </Text>
+                <Text>
+                    <b>TriggerPosition</b>: <code>TriggerPosition.Top</code>, <code>Bottom</code>, or <code>None</code> to control trigger button placement.
+                </Text>
+                <Text>
+                    <b>ChildContent</b>: Drawer content.
+                </Text>
+                <Text>
+                    <b>ExpandedContent</b>: Drawer content when expanded.
+                </Text>
+                <Text>
+                    <b>CollapsedContent</b>: Drawer content when collapsed.
+                </Text>
+            </CardBody>
+        </Card>
+
+
+        <Example Header="Basic Drawer" CodeFile="DrawerBasicExample.txt">
+            <DrawerContainer Class="border">
+                <LeftDrawer>
+                    <Drawer Position="DrawerPosition.Left"
+                            Width="18rem"
+                            CollapsedWidth="5rem"
+                            HasShadow="true"
+                            TriggerPosition="TriggerPosition.Top">
+                        <ChildContent>
+                            <NavMenu IsVertical="true" Class="pa-2">
+                                <NavigationItems>
+                                    <NavigationItem Class="active">
+                                        <i class="bi bi-house-door" />
+                                        <span class="menu-text">Home</span>
+                                    </NavigationItem>
+                                    <NavigationItem>
+                                        <i class="bi bi-person" />
+                                        <span class="menu-text">Profile</span>
+                                    </NavigationItem>
+                                    <NavigationItem>
+                                        <i class="bi bi-gear" />
+                                        <span class="menu-text">Settings</span>
+                                    </NavigationItem>
+                                </NavigationItems>
+                            </NavMenu>
+                        </ChildContent>
+                    </Drawer>
+                </LeftDrawer>
+                <Content>
+                    <div class="p-4">
+                        <h4>Main Content Area</h4>
+                        <p>
+                            This is the main content area. The drawer on the left can be collapsed or expanded using the trigger button.
+                        </p>
+                    </div>
+                </Content>
+            </DrawerContainer>
+        </Example>
+
+        <Example Header="Drawer on Right" CodeFile="DrawerRightExample.txt">
+            <DrawerContainer Class="border">
+                <Content>
+                    <div class="p-4">
+                        <h4>Main Content Area</h4>
+                        <p>
+                            The drawer appears on the right side in this example.
+                        </p>
+                    </div>
+                </Content>
+                <RightDrawer>
+                    <Drawer Position="DrawerPosition.Right"
+                            @bind-Collapsed="_rightCollapsed"
+                            Width="16rem"
+                            CollapsedWidth="3.5rem"
+                            Class="text-bg-dark"
+                            TriggerPosition="TriggerPosition.None">
+                        <ExpandedContent>
+                            <i class="bi bi-chevron-right toggle-icon-dark"
+                               @onclick="() => _rightCollapsed = true"></i>
+                            <FlexBox AlignItems="FlexAlign.Center" JustifyContent="FlexContent.Center">
+                                <h5>Quick Actions</h5>
+                                <Button Variant="Variant.Filled" Color="Color.Primary" class="mb-2 w-100">New</Button>
+                                <Button Variant="Variant.Outline" Color="Color.Secondary" class="w-100">Settings</Button>
+                            </FlexBox>
+                        </ExpandedContent>
+                        <CollapsedContent>
+                            <i class="bi bi-chevron-left toggle-icon-dark align-self-start"
+                               @onclick="() => _rightCollapsed = false"></i>
+                        </CollapsedContent>
+                    </Drawer>
+                </RightDrawer>
+            </DrawerContainer>
+        </Example>
+
+        <Example Header="Custom Width, No Shadow, No Trigger" CodeFile="DrawerCustomExample.txt">
+            <DrawerContainer Class="border">
+                <LeftDrawer>
+                    <Drawer Position="DrawerPosition.Left"
+                            Collapsed="false"
+                            Width="16rem"
+                            HasShadow="false"
+                            Class="text-bg-primary"
+                            TriggerPosition="TriggerPosition.None">
+                        <div class="p-3">
+                            <h6>Always Open Drawer</h6>
+                            <p class="mb-0">This drawer does not have a trigger and is always expanded.</p>
+                        </div>
+                    </Drawer>
+                </LeftDrawer>
+                <Content>
+                    <div class="p-4">
+                        <h4>Main Content Area</h4>
+                    </div>
+                </Content>
+            </DrawerContainer>
+        </Example>
+    </Page>
+</div>
+
+@code {
+    private bool _rightCollapsed = true;
+}
