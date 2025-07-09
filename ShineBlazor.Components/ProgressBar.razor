@@ -1,7 +1,7 @@
 @inherits BackgroundComponentBase
 
-<div class="progress" role="progressbar" aria-valuenow="@_progress" aria-valuemin="0" aria-valuemax="100">
-    <div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
+<div class="@CssClasses" style="@CssStyles" role="progressbar" aria-valuenow="@_progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="@ProgressBarCssBuilder.Build()" style="@ProgressBarStyleBuilder.Build()" @attributes="AdditionalAttributes">
         @if (ShowProgress)
         {
             @ProgressValue
@@ -39,26 +39,58 @@
     public bool IsStriped { get; set; }
 
     /// <summary>
+    /// Whether to animate the stripes.
+    /// </summary>
+    [Parameter]
+    public bool Animated { get; set; }
+
+    /// <summary>
+    /// The background color of the progress bar.
+    /// </summary>
+    [Parameter]
+    public Color Color { get; set; } = Color.Primary;
+
+    /// <summary>
+    /// The height of the progress bar (e.g., "1rem", "20px").
+    /// </summary>
+    [Parameter]
+    public string Height { get; set; }
+
+    /// <summary>
     /// The child content.
     /// </summary>
     [Parameter]
     public RenderFragment ChildContent{ get; set; }
 
     /// <inheritdoc/>
-    protected override string ComponentName => "progress-bar";
+    protected override string ComponentName => "progress";
 
     /// <inheritdoc/>
-    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("progress-bar-striped", IsStriped);
+    protected override CssStyleBuilder StyleBuilder => base.StyleBuilder
+            .AddStyle("height", Height, !string.IsNullOrWhiteSpace(Height));
 
-    /// <inheritdoc/>
-    protected override CssStyleBuilder StyleBuilder => base.StyleBuilder.AddStyle($"width:{_progress}%");
+    /// <summary>
+    /// Builds the progress bar css.
+    /// </summary>
+    protected virtual CssClassBuilder ProgressBarCssBuilder => CssClassBuilder.Create("progress-bar")
+        .WithClass("progress-bar")
+        .WithClass("progress-bar-striped", IsStriped || Animated)
+        .WithClass("progress-bar-animated", Animated)
+        .WithBackground(Color);
+
+    /// <summary>
+    /// Builds the progress bar styles.
+    /// </summary>
+    protected virtual CssStyleBuilder ProgressBarStyleBuilder => CssStyleBuilder.Create()
+            .AddStyle("width", $"{_progress}%");
 
     /// <inheritdoc/>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        var max = Math.Max(MaxValue, ProgressValue);
-        _progress = (max / MaxValue) * 100;
+        // Clamp ProgressValue between 0 and MaxValue, then calculate percent
+        var value = Math.Clamp(ProgressValue, 0, MaxValue);
+        _progress = (int)(MaxValue > 0 ? (value * 100.0 / MaxValue) : 0);
     }
 }

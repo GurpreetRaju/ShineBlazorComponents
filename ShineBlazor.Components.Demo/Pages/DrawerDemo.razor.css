@@ -1,0 +1,31 @@
+﻿
+.drawer-demo {
+    height: 100%;
+}
+
+.drawer-demo ::deep .drawer-container {
+    height: 16rem;
+}
+
+    .drawer-demo ::deep .nav-item:hover a {
+        color: var(--bs-info);
+        cursor: pointer;
+    }
+
+    .drawer-demo ::deep .nav-item.active {
+        background: var(--bs-info);
+        border-radius: 5px;
+    }
+
+    .drawer-demo ::deep .nav-item.active a{
+        color: var(--bs-white) !important;
+    }
+
+    .drawer-demo ::deep .drawer-collapse .menu-text {
+        display: none;
+    }
+
+    .drawer-demo ::deep .toggle-icon-dark {
+        color: var(--bs-white);
+        font-size: 1.25rem;
+    }

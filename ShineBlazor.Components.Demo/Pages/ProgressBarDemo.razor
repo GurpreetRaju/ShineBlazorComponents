@@ -1,0 +1,46 @@
+﻿@page "/progressbar"
+
+<Page PageName="ProgressBar">
+    <Example Header="Backgrounds" CodeFile="ProgressBarBackgroundsExample.txt">
+        <Text>
+            Use the <code>Color</code> parameter to set the background color of the progress bar. Available options include <code>Primary</code>, <code>Success</code>, <code>Info</code>, <code>Warning</code>, and <code>Danger</code>.
+        </Text>
+        <FlexBox Gap="2">
+            <ProgressBar ProgressValue="25" Color="Color.Primary" />
+            <ProgressBar ProgressValue="50" Color="Color.Success" />
+            <ProgressBar ProgressValue="75" Color="Color.Info" />
+            <ProgressBar ProgressValue="100" Color="Color.Warning" ShowProgress="true" />
+            <ProgressBar ProgressValue="60" Color="Color.Danger" />
+        </FlexBox>
+    </Example>
+
+    <Example Header="Striped" CodeFile="ProgressBarStripedExample.txt">
+        <Text>
+            Add the <code>Striped="true"</code> parameter to give the progress bar a striped appearance.
+        </Text>
+        <FlexBox Gap="2">
+            <ProgressBar ProgressValue="10" Color="Color.Primary" IsStriped="true" />
+            <ProgressBar ProgressValue="25" Color="Color.Success" IsStriped="true" />
+            <ProgressBar ProgressValue="50" Color="Color.Info" IsStriped="true" />
+            <ProgressBar ProgressValue="75" Color="Color.Warning" IsStriped="true" />
+            <ProgressBar ProgressValue="100" Color="Color.Danger" IsStriped="true" />
+        </FlexBox>
+    </Example>
+
+    <Example Header="Animated Striped" CodeFile="ProgressBarAnimatedExample.txt">
+        <Text>
+            Add both <code>Striped="true"</code> and <code>Animated="true"</code> parameters to animate the stripes.
+        </Text>
+        <ProgressBar ProgressValue="75" Color="Color.Primary" IsStriped="true" Animated="true" />
+    </Example>
+
+    <Example Header="Height" CodeFile="ProgressBarHeightExample.txt">
+        <Text>
+            Use the <code>Height</code> parameter to set a custom height for the progress bar (e.g., <code>Height="2rem"</code>).
+        </Text>
+        <FlexBox Gap="2">
+            <ProgressBar ProgressValue="25" Color="Color.Success" ShowProgress="true" Height="2rem" />
+            <ProgressBar ProgressValue="75" Color="Color.Danger" Height="2px" />
+        </FlexBox>
+    </Example>
+</Page>

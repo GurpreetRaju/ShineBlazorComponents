@@ -1,0 +1,20 @@
+<DrawerContainer Class="border">
+    <LeftDrawer>
+        <Drawer Position="DrawerPosition.Left"
+                Collapsed="false"
+                Width="16rem"
+                HasShadow="false"
+                Class="text-bg-primary"
+                TriggerPosition="TriggerPosition.None">
+            <div class="p-3">
+                <h6>Always Open Drawer</h6>
+                <p class="mb-0">This drawer does not have a trigger and is always expanded.</p>
+            </div>
+        </Drawer>
+    </LeftDrawer>
+    <Content>
+        <div class="p-4">
+            <h4>Main Content Area</h4>
+        </div>
+    </Content>
+</DrawerContainer>

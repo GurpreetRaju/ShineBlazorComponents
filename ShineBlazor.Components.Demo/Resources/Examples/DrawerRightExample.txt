@@ -1,0 +1,32 @@
+<DrawerContainer Class="border">
+    <Content>
+        <div class="p-4">
+            <h4>Main Content Area</h4>
+            <p>
+                The drawer appears on the right side in this example.
+            </p>
+        </div>
+    </Content>
+    <RightDrawer>
+        <Drawer Position="DrawerPosition.Right"
+                @bind-Collapsed="_rightCollapsed"
+                Width="16rem"
+                CollapsedWidth="3.5rem"
+                Class="text-bg-dark"
+                TriggerPosition="TriggerPosition.None">
+            <ExpandedContent>
+                <i class="bi bi-chevron-right toggle-icon-dark"
+                    @onclick="() => _rightCollapsed = true"></i>
+                <FlexBox AlignItems="FlexAlign.Center" JustifyContent="FlexContent.Center">
+                    <h5>Quick Actions</h5>
+                    <Button Variant="Variant.Filled" Color="Color.Primary" class="mb-2 w-100">New</Button>
+                    <Button Variant="Variant.Outline" Color="Color.Secondary" class="w-100">Settings</Button>
+                </FlexBox>
+            </ExpandedContent>
+            <CollapsedContent>
+                <i class="bi bi-chevron-left toggle-icon-dark align-self-start"
+                    @onclick="() => _rightCollapsed = false"></i>
+            </CollapsedContent>
+        </Drawer>
+    </RightDrawer>
+</DrawerContainer>

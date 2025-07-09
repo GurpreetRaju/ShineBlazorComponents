@@ -1,0 +1,31 @@
+name: Deploy Blazor to GitHub Pages
+
+on:
+  push:
+    tags:
+      - 'v*'  # matches v1, v1.0.0, v2.1.5, etc.
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Build and Deploy
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+
+    - name: Publish ShineBlazor.Components.Demo
+      run: dotnet publish ShineBlazor.Components.Demo/ShineBlazor.Components.Demo.csproj -c Release -o release
+
+    - name: Copy index.html to 404.html
+      run: cp release/wwwroot/index.html release/wwwroot/404.html
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: release/wwwroot

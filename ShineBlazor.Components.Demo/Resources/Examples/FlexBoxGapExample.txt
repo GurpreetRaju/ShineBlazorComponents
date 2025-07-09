@@ -1,0 +1,5 @@
+<FlexBox Row="true" Gap="4">
+    <div class="p-3 bg-info text-white rounded">Gap 4</div>
+    <div class="p-3 bg-warning text-dark rounded">Gap 4</div>
+    <div class="p-3 bg-danger text-white rounded">Gap 4</div>
+</FlexBox>
