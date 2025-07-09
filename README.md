@@ -5,10 +5,12 @@ Build responsive and dynamic sites faster with Shine Blazor.
 
 Shine Blazor library is based on [Bootstrap](https://getbootstrap.com/) css. It uses very little javascript.
 
+Demo: https://gurpreetraju.github.io/ShineBlazorComponents/
+
 ### Quick Installation Guide
 Install Package
 ```
-dotnet add package ShineBlazor.Components --version 0.1.0
+dotnet add package ShineBlazor.Components --version 0.2.4
 ```
 Add the following to `_Imports.razor`
 ```razor
