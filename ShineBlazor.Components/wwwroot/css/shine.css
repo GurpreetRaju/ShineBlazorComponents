@@ -660,3 +660,48 @@ div.list-view-item > * {
         box-shadow: 0 0 10px var(--flash-color);
     }
 }
+
+.animate-horizontal {
+    --sh-animate-value: 1rem;
+    --sh-animate-duration: 0.5s;
+    --sh-animate-timing-function: ease;
+    transition: transform var(--sh-animate-duration) var(--sh-animate-timing-function);
+}
+
+    .animate-horizontal:hover {
+        transform: translateX(var(--sh-animate-value));
+    }
+
+.animate-vertical {
+    --sh-animate-value: 1rem;
+    --sh-animate-duration: 0.5s;
+    --sh-animate-timing-function: ease;
+    transition: transform var(--sh-animate-duration) var(--sh-animate-timing-function);
+}
+
+    .animate-vertical:hover {
+        transform: translateY(var(--sh-animate-value));
+    }
+
+.animate-scale {
+    --sh-animate-x-value: 1.25;
+    --sh-animate-y-value: 1.25;
+    --sh-animate-duration: 0.5s;
+    --sh-animate-timing-function: ease;
+    transition: transform var(--sh-animate-duration) var(--sh-animate-timing-function);
+}
+
+    .animate-scale:hover {
+        transform: scale(var(--sh-animate-x-value), var(--sh-animate-y-value));
+    }
+
+.animate-rotate {
+    --sh-animate-angle-value: 90deg;
+    --sh-animate-duration: 0.5s;
+    --sh-animate-timing-function: ease;
+    transition: transform var(--sh-animate-duration) var(--sh-animate-timing-function);
+}
+
+    .animate-rotate:hover {
+        transform: rotate(var(--sh-animate-angle-value));
+    }

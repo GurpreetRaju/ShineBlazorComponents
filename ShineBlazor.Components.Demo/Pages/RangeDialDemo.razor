@@ -13,14 +13,14 @@
         <table class="table table-borderless">
             <tr>
                 <td>
-                    <FlexBox AlignItems="FlexAlign.Center">
+                    <FlexBox AlignItems="FlexAlign.ItemsCenter">
                         <RangeDial TValue="int" Variant="ProgressVariant.Color" Size="150"
                                    Value="_valueColor" ValueChanged="(v) => HandleValueChanged(v, false)">
                         </RangeDial>
                     </FlexBox>
                 </td>
                 <td>
-                    <FlexBox AlignItems="FlexAlign.Center">
+                    <FlexBox AlignItems="FlexAlign.ItemsCenter">
                         <RangeDial TValue="int" Variant="ProgressVariant.Gradient" Size="150" ShowValue="false"
                                    Value="_valueGradient" ValueChanged="(v) => HandleValueChanged(v, true)">
                             <Alert Color="@GetColor()" Style="padding: 0.25rem 1rem;">
@@ -36,10 +36,10 @@
                         <span class="text-bold">Example 1:</span> Range Dial with <code>Variant=ProgressVariant.Color</code>.
                         The actual value of the bound variable updates on the mouse up event:
                     </Text>
-                    <FlexBox Row="true" AlignItems="FlexAlign.Center" JustifyContent="FlexContent.Center">
+                    <FlexBox Row="true" AlignItems="FlexAlign.ItemsCenter" JustifyContent="FlexJustify.Center">
                         <Text Typo="Typography.span">Current Value: @_valueColor</Text>
-                        <Button Size="Size.Sm" Clicked="DecreaseValue" Style="width:2rem;">-</Button>
-                        <Button Size="Size.Sm" Clicked="IncreaseValue" Style="width:2rem;">+</Button>
+                        <Button Size="BtnSize.Sm" Clicked="DecreaseValue" Style="width:2rem;">-</Button>
+                        <Button Size="BtnSize.Sm" Clicked="IncreaseValue" Style="width:2rem;">+</Button>
                     </FlexBox>
                 </td>
                 <td class="align-top">

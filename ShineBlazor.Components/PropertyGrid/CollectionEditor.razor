@@ -14,14 +14,12 @@
                         <div class="flex-grow-1" />
                         <Button Color="Color.Primary"
                                 Clicked="AddNewItem"
-                                Size="Size.Lg" 
-                                Variant="Variant.Text">
+                                Variant="BtnVariant.Text">
                             <i class="bi bi-plus" />
                         </Button>
                         <Button Color="Color.Danger"
-                                Variant="Variant.Text"
+                                Variant="BtnVariant.Text"
                                 Clicked="RemoveItem"
-                                Size="Size.Lg"
                                 Disabled="@(_selectedItem == null)">
                             <i class="bi bi-dash" />
                         </Button>

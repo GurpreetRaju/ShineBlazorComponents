@@ -5,7 +5,7 @@
         <Text>
             By default, <code>FlexBox</code> arranges its children in a column. Set <code>Row="true"</code> to arrange them in a row.
         </Text>
-        <FlexBox Row="true" Gap="2">
+        <FlexBox Row="true" Gap="FlexGap.Gap_2">
             <div class="p-3 bg-primary text-white rounded">Item 1</div>
             <div class="p-3 bg-secondary text-white rounded">Item 2</div>
             <div class="p-3 bg-success text-white rounded">Item 3</div>
@@ -16,7 +16,7 @@
         <Text>
             Use the <code>Gap</code> parameter (0-5) to control the spacing between flex items.
         </Text>
-        <FlexBox Row="true" Gap="4">
+        <FlexBox Row="true" Gap="FlexGap.Gap_4">
             <div class="p-3 bg-info text-white rounded">Gap 4</div>
             <div class="p-3 bg-warning text-dark rounded">Gap 4</div>
             <div class="p-3 bg-danger text-white rounded">Gap 4</div>
@@ -27,7 +27,7 @@
         <Text>
             Use <code>AlignItems</code> and <code>JustifyContent</code> to control alignment. For example, <code>AlignItems="FlexAlign.Center"</code> and <code>JustifyContent="FlexContent.Between"</code>.
         </Text>
-        <FlexBox Row="true" Gap="3" AlignItems="FlexAlign.Center" JustifyContent="FlexContent.Between" style="height: 100px;">
+        <FlexBox Row="true" Gap="FlexGap.Gap_3" AlignItems="FlexAlign.ItemsCenter" JustifyContent="FlexJustify.Between" style="height: 100px;">
             <div class="p-2 bg-primary text-white rounded">Start</div>
             <div class="p-2 bg-success text-white rounded">Center</div>
             <div class="p-2 bg-danger text-white rounded">End</div>
@@ -38,7 +38,7 @@
         <Text>
             Use <code>Wrap="FlexWrap.Wrap"</code> to allow items to wrap onto multiple lines.
         </Text>
-        <FlexBox Row="true" Gap="2" Wrap="FlexWrap.Wrap" style="max-width: 400px;">
+        <FlexBox Row="true" Gap="FlexGap.Gap_2" Wrap="FlexWrap.Wrap" style="max-width: 400px;">
             <div class="p-2 bg-primary text-white rounded" style="width: 180px;">Wide 1</div>
             <div class="p-2 bg-secondary text-white rounded" style="width: 180px;">Wide 2</div>
             <div class="p-2 bg-success text-white rounded" style="width: 180px;">Wide 3</div>
@@ -49,7 +49,7 @@
         <Text>
             <code>FlexFill</code> makes all children fill the available space. <code>FlexGrow</code> and <code>FlexShrink</code> control how items grow or shrink.
         </Text>
-        <FlexBox Row="true" Gap="2" FlexFill="true">
+        <FlexBox Row="true" Gap="FlexGap.Gap_2" FlexFill="true">
             <div class="p-2 bg-info text-white rounded">Fill 1</div>
             <div class="p-2 bg-warning text-dark rounded">Fill 2</div>
             <div class="p-2 bg-danger text-white rounded">Fill 3</div>
@@ -60,7 +60,7 @@
         <Text>
             By default, <code>FlexBox</code> arranges items in a column. You can use all alignment and gap utilities in column mode as well.
         </Text>
-        <FlexBox Gap="3" AlignItems="FlexAlign.Center">
+        <FlexBox Gap="FlexGap.Gap_3" AlignItems="FlexAlign.ItemsCenter">
             <div class="p-2 bg-primary text-white rounded">Column 1</div>
             <div class="p-2 bg-success text-white rounded">Column 2</div>
             <div class="p-2 bg-danger text-white rounded">Column 3</div>

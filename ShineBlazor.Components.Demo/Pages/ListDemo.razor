@@ -1,4 +1,5 @@
 ﻿@page "/list-group"
+@using ShineBlazor.Components.Base.Enumerations
 
 <Page PageName="List Group">
     <Example Header="List Group - Simple" CodeFile="ListGroup.txt">
@@ -22,8 +23,8 @@
         <div class="row">
             <div class="col-4">
                 <ListView Items="DummyDataProvider.GetFruits(5, 0)"
-                          TextVariant="@TextVariant" Size="@Size"
-                          Color="Color" ItemToText="f => f.Name" />
+                          TextVariant="@TextVariant" Size="@Size.Value"
+                          Color="SelectedColor.Value" ItemToText="f => f.Name" />
             </div>
             <div class="col-8">
                 <Text>Text Variant:</Text>
@@ -31,12 +32,12 @@
                           @bind-SelectedItem="TextVariant" 
                           SelectionMode="SelectionMode.Single" />
                 <Text Class="mt-2">Color:</Text>
-                <DropDown TItem="Color" Items="Color.Values"
-                          @bind-SelectedItem="Color" 
+                <DropDown TItem="KeyValuePair<string, Color>" Items="Color.Values"
+                          @bind-SelectedItem="SelectedColor" ItemToText="k => k.Key"
                           SelectionMode="SelectionMode.Single" />
                 <Text Class="mt-2">Size:</Text>
-                <DropDown TItem="Size" Items="_sizes"
-                          @bind-SelectedItem="Size"
+                <DropDown TItem="KeyValuePair<string, ListViewSize>" Items="ListViewSize.Values"
+                          @bind-SelectedItem="Size" ItemToText="k => k.Key"
                           SelectionMode="SelectionMode.Single" />
             </div>
         </div>
@@ -45,7 +46,7 @@
         <div class="row">
             <div class="col-4">
                 <ListView Items="DummyDataProvider.GetFruits(5, 0)"
-                          TextVariant="@TextVariant" Color="Color" Size="@Size">
+                          TextVariant="@TextVariant" Color="SelectedColor.Value" Size="@Size.Value">
                     <ItemTemplate>
                         <a href="#" class="d-flex">
                             <Text>@context.Name</Text>
@@ -60,21 +61,16 @@
 </Page>
 
 @code {
-    private static Size[] _sizes = Enum.GetValues<Size>();
-
-    private Color Color
+    private KeyValuePair<string, Color> SelectedColor
     {
-        get => _color;
+        get => _selectedColor;
         set 
         {
-            if (_color != value)
-            {
-                _color = value;
-                InvokeAsync(StateHasChanged);
-            }
+            _selectedColor = value;
+            InvokeAsync(StateHasChanged);
         }
     }
-    private Color _color;
+    private KeyValuePair<string, Color> _selectedColor;
 
     private bool TextVariant
     {
@@ -90,19 +86,16 @@
     }
     private bool _textVariant;
 
-    private Size Size
+    private KeyValuePair<string, ListViewSize> Size
     {
         get => _size;
         set
         {
-            if (_size != value)
-            {
-                _size = value;
-                InvokeAsync(StateHasChanged);
-            }
+            _size = value;
+            InvokeAsync(StateHasChanged);
         }
     }
-    private Size _size;
+    private KeyValuePair<string, ListViewSize> _size;
 
     /// <summary>
     /// Dummy Data Provider.

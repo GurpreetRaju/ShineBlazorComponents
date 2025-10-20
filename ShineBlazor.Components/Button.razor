@@ -1,7 +1,7 @@
 
 @inherits ShineComponentBase
 
-<button type="@ButtonType.ToString().ToLower()"
+<button type="@ButtonType"
         class="@CssClasses"
         style="@CssStyles"
         @onclick="Clicked"
@@ -29,19 +29,19 @@
     /// The button size.
     /// </summary>
     [Parameter]
-    public Size Size { get; set; }
+    public BtnSize Size { get; set; }
 
     /// <summary>
-    /// The button _type.
+    /// The button type.
     /// </summary>
     [Parameter]
-    public ButtonType ButtonType { get; set; }
+    public BtnType ButtonType { get; set; }
 
     /// <summary>
     /// The button variant.
     /// </summary>
     [Parameter]
-    public Variant Variant { get; set; }
+    public BtnVariant Variant { get; set; }
 
     /// <summary>
     /// The button color. Default: Color.Primary.
@@ -61,21 +61,7 @@
     /// <inheritdoc/>
     protected override CssClassBuilder CssBuilder => base.CssBuilder
         .WithClass(GetButtonVariantClass())
-        .WithClass(GetButtonSizeClass());
-
-    /// <summary>
-    /// Gets the button size class.
-    /// </summary>
-    /// <returns></returns>
-    protected string GetButtonSizeClass()
-    {
-        return Size switch
-        {
-            Size.Sm => "btn-sm",
-            Size.Lg => "btn-lg",
-            _ => null
-        };
-    }
+        .WithClass(Size);
 
     /// <summary>
     /// Gets the button variant class.
@@ -83,21 +69,10 @@
     /// <returns></returns>
     protected string GetButtonVariantClass()
     {
-        string variantClass = "btn-";
-        switch (Variant)
-        {
-            case Variant.Outline:
-                variantClass += "outline-";
-                break;
-            case Variant.Text:
-                variantClass += "text-";
-                break;
-            case Variant.Link:
-                return variantClass += "link";
-            default:
-                break;
-        }
-        return variantClass += (Color ?? Color.Primary);
+        if (Variant == BtnVariant.Link)
+            return Variant;
+        
+        return string.Join("-", Variant, (Color ?? Color.Primary));
     }
 }
 

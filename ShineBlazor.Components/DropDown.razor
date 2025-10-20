@@ -50,7 +50,7 @@
     /// The size.
     /// </summary>
     [Parameter]
-    public Size Size { get; set; }
+    public ControlSize Size { get; set; }
 
     /// <summary>
     /// The placeholder.
@@ -77,18 +77,9 @@
     public RenderFragment ChildContent { get; set; }
 
     /// <summary>
-    /// Css for input control.
+    /// Css classes for input control.
     /// </summary>
-    private IEnumerable<string> ControlCss 
-    {
-        get
-        {
-            yield return "form-select";
-
-            if (Size != Size.Default)
-                yield return $"form-control-{Size.ToString().ToLower()}";
-        }
-    }
+    protected virtual IEnumerable<string> ControlCssClass => ["form-select", Size];
 
     /// <summary>
     /// Renders the control.
@@ -96,7 +87,7 @@
     private RenderFragment RenderControl => __builder =>
     {
         <input type="text" value="@GetSelectedItemtext()" readonly
-               class="@CssClassBuilder.JoinClasses(ControlCss)"
+               class="@CssClassBuilder.JoinClasses(ControlCssClass)"
                placeholder="@(Placeholder ?? Label)" />
     };
 }

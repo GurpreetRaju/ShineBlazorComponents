@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Examples\AnimationUtilities.txt" />
     <None Remove="Resources\Examples\AppBarExample.txt" />
     <None Remove="Resources\Examples\BadgeBackgroundExample.txt" />
     <None Remove="Resources\Examples\BadgeHeadingsExample.txt" />
@@ -127,6 +128,7 @@
 
   <ItemGroup>
     <Resource Include="Resources\Examples\Accordion.txt" />
+    <EmbeddedResource Include="Resources\Examples\AnimationUtilities.txt" />
   </ItemGroup>
 
 </Project>

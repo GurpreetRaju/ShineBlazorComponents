@@ -7,16 +7,16 @@
 @if (component.DisplayPopup)
 {
     <div class="property-editor form-control">
-        <Button Clicked="ShowPopup" Size="Size.Sm">
+        <Button Clicked="ShowPopup" Size="BtnSize.Sm">
             <i class="bi bi-three-dots" />
         </Button>
-        <Modal Size="Size.Lg" @bind-Show="_showPopup">
+        <Modal Size="ModalSize.Lg" @bind-Show="_showPopup">
             <Header>@PropertyDescriptor.Name Editor</Header>
             <Body>
                 <DynamicComponent Type="component.ComponentType" Parameters="component.Parameters" />
             </Body>
             <Footer>
-                <Button Color="Color.Primary" Variant="Variant.Filled" Clicked="HidePopup">Ok</Button>
+                <Button Color="Color.Primary" Variant="BtnVariant.Default" Clicked="HidePopup">Ok</Button>
             </Footer>
         </Modal>
     </div>

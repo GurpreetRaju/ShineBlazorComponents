@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShineBlazor.Components.Demo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shine.Generator", "Shine.Generator\Shine.Generator.csproj", "{7DE840A6-F534-484C-82FD-3342A36581DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShineBlazor.Components.Base", "ShineBlazor.Components.Base\ShineBlazor.Components.Base.csproj", "{DD01B51F-B678-4615-8828-AA5B5B293632}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{7DE840A6-F534-484C-82FD-3342A36581DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DE840A6-F534-484C-82FD-3342A36581DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DE840A6-F534-484C-82FD-3342A36581DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD01B51F-B678-4615-8828-AA5B5B293632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD01B51F-B678-4615-8828-AA5B5B293632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD01B51F-B678-4615-8828-AA5B5B293632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD01B51F-B678-4615-8828-AA5B5B293632}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

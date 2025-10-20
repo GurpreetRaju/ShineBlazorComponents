@@ -1,0 +1,4 @@
+<div class="@CssClassBuilder.Create("border p-2").WithBackground(Color.Primary).WithAnimation(Animation.Horizontal).Build()"
+    style="@CssStyleBuilder.Create().WithHorizontalTransform("-1rem", "1s", AnimationTimingFunction.EaseInOut).Build()">
+    Animate Horizontal (transform: translateX(-1rem) 1s ease-in-out)
+</div>

@@ -17,7 +17,7 @@
                     @if (CloseButton)
                     {
                         <Button @onclick="() => Toggle(false)"
-                                Variant="Variant.Text"
+                                Variant="BtnVariant.Text"
                                 Class="btn-close align-self-end"
                                 aria-label="Close">
                         </Button>
@@ -69,7 +69,7 @@
     /// Modal size.
     /// </summary>
     [Parameter]
-    public Size Size { get; set; }
+    public ModalSize Size { get; set; }
 
     /// <summary>
     /// Event callback for <see cref="Show"/> changes.
@@ -97,7 +97,7 @@
     /// </summary>
     protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("fade")
         .WithClass("show", Show)
-        .WithClass(() => $"modal-{Size.ToString().ToLowerInvariant()}", Size != Size.Default);
+        .WithClass(Size);
 
     /// <summary>
     /// Toggle show state.

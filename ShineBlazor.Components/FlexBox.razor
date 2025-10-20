@@ -16,7 +16,7 @@
     /// Gap (0-5). Default: 3.
     /// </summary>
     [Parameter]
-    public ushort Gap { get; set; } = 3;
+    public FlexGap Gap { get; set; } = FlexGap.Gap_3;
 
     /// <summary>
     /// Align items.
@@ -28,19 +28,13 @@
     /// Align self.
     /// </summary>
     [Parameter]
-    public FlexAlign AlignSelf { get; set; }
-
-    /// <summary>
-    /// Align Content.
-    /// </summary>
-    [Parameter]
-    public FlexContent AlignContent { get; set; }
+    public FlexAlignSelf AlignSelf { get; set; }
 
     /// <summary>
     /// Justify content.
     /// </summary>
     [Parameter]
-    public FlexContent JustifyContent { get; set; }
+    public FlexJustify JustifyContent { get; set; }
 
     /// <summary>
     /// Flex wrap.
@@ -71,8 +65,7 @@
 
     /// <inheritdoc/>
     protected override CssClassBuilder CssBuilder => base.CssBuilder.WithFlex(Row, Gap,
-        AlignItems, AlignSelf, AlignContent, JustifyContent, Wrap, FlexFill, 
-        FlexGrow, FlexShrink);
+        AlignSelf, AlignItems, JustifyContent, Wrap, FlexFill, FlexGrow, FlexShrink);
 
     /// <summary>
     /// Child content.

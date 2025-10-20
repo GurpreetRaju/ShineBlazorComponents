@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -13,6 +12,10 @@ namespace Shine.Generator
     [Generator]
     public class EnumStaticPropertyGenerator : IIncrementalGenerator
     {
+        public const string DefaultValueAttrName = "DefaultStringValueAttribute";
+        private const string ClassNamespaceAttrName = "ClassNamespaceAttribute";
+        private const string StringValueAttrName = "StringValueAttribute";
+
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // Find all enum declarations with the ClassNamespace attribute
@@ -46,9 +49,9 @@ namespace Shine.Generator
                 {
                     continue;
                 }
-
+                var enumAttributes = enumSymbol.GetAttributes();
                 // Now perform semantic checks here, like looking for the attribute
-                if (!enumSymbol.GetAttributes().Any(a => a.AttributeClass?.Name == "ClassNamespaceAttribute"))
+                if (!enumAttributes.Any(a => a.AttributeClass?.Name == ClassNamespaceAttrName))
                 {
                     continue; // Skip enums without the attribute
                 }
@@ -58,8 +61,7 @@ namespace Shine.Generator
                 List<string> enumValues = [];
 
                 // Get the specified namespace from the attribute
-                var namespaceAttribute = enumSymbol.GetAttributes()
-                    .FirstOrDefault(a => a.AttributeClass?.Name == "ClassNamespaceAttribute");
+                var namespaceAttribute = enumAttributes.FirstOrDefault(a => a.AttributeClass?.Name == ClassNamespaceAttrName);
                 if (namespaceAttribute?.ConstructorArguments.Length == 1 && namespaceAttribute.ConstructorArguments[0].Value is string specifiedNamespace)
                 {
                     generatedNamespace = specifiedNamespace;
@@ -79,12 +81,23 @@ namespace Shine.Generator
 
                 sourceBuilder.AppendLine($"    public sealed record {generatedClassName}");
                 sourceBuilder.AppendLine("    {");
-                sourceBuilder.AppendLine($"        public string Value {{ get; }}");
+                sourceBuilder.AppendLine($"        private readonly string _value;");
                 sourceBuilder.AppendLine();
                 sourceBuilder.AppendLine($"        public {generatedClassName}(string value)");
                 sourceBuilder.AppendLine("        {");
-                sourceBuilder.AppendLine("            Value = value;");
+                sourceBuilder.AppendLine("            _value = value ?? Default;");
                 sourceBuilder.AppendLine("        }");
+                sourceBuilder.AppendLine();
+
+                var defaultValue = GetAttributeValue(
+                    enumAttributes.FirstOrDefault(a => a.AttributeClass?.Name == DefaultValueAttrName), 
+                    string.Empty);
+
+                sourceBuilder.AppendLine($"        public static implicit operator string({generatedClassName} s) => s?._value ?? Default;");
+                sourceBuilder.AppendLine($"        public static implicit operator {generatedClassName}(string? s) => new(s);");
+                sourceBuilder.AppendLine();
+
+                sourceBuilder.AppendLine($"        public static readonly {generatedClassName} Default = new {generatedClassName}(\"{defaultValue}\");");
                 sourceBuilder.AppendLine();
 
                 foreach (var member in enumSymbol.GetMembers().OfType<IFieldSymbol>())
@@ -93,23 +106,20 @@ namespace Shine.Generator
                     {
                         string fieldName = member.Name;
                         string stringValue = member.Name; // Default to enum member name
-                        enumValues.Add($"{generatedClassName}.{fieldName}");
 
                         // Try to get the StringValue attribute
                         var stringValueAttribute = member.GetAttributes()
-                            .FirstOrDefault(a => a.AttributeClass?.Name == "StringValueAttribute");
-                        if (stringValueAttribute?.ConstructorArguments.Length == 1 && stringValueAttribute.ConstructorArguments[0].Value is string specifiedStringValue)
-                        {
-                            stringValue = specifiedStringValue;
-                        }
+                            .FirstOrDefault(a => a.AttributeClass?.Name == StringValueAttrName);
 
-                        sourceBuilder.AppendLine($"        public static {generatedClassName} {fieldName} {{ get; }} = new {generatedClassName}(\"{stringValue}\");");
+                        stringValue = GetAttributeValue(stringValueAttribute, stringValue);
+                        enumValues.Add($"{{{fieldName}, {generatedClassName}.{fieldName}}}");
+
+                        sourceBuilder.AppendLine($"        public static readonly {generatedClassName} {fieldName} = new {generatedClassName}(\"{stringValue}\");");
                     }
                 }
 
-                sourceBuilder.AppendLine($"        public static readonly {generatedClassName}[] Values = [{string.Join(",", enumValues)}];");
-
-                sourceBuilder.AppendLine("        public override string ToString() { return Value; }");
+                sourceBuilder.AppendLine($"        public static readonly Dictionary<string, {generatedClassName}> Values = new(){{{{\"Default\", Default}}, {string.Join(", ", enumValues)}}};");
+                sourceBuilder.AppendLine("        public override string ToString() => _value;");
                 sourceBuilder.AppendLine("    }");
 
                 if (!string.IsNullOrEmpty(generatedNamespace))
@@ -119,6 +129,20 @@ namespace Shine.Generator
 
                 context.AddSource($"{generatedClassName}.g.cs", SourceText.From(sourceBuilder.ToString(), Encoding.UTF8));
             }
+        }
+
+        /// <summary>
+        /// Get attribute value.
+        /// </summary>
+        /// <param name="attribute"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        private static string GetAttributeValue(AttributeData attribute, string defaultValue)
+        {
+            if (attribute?.ConstructorArguments.Length == 1 && attribute.ConstructorArguments[0].Value is string specifiedStringValue)
+                return specifiedStringValue;
+
+            return default;
         }
     }
 }

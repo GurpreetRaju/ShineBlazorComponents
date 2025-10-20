@@ -62,7 +62,7 @@ namespace ShineBlazor.Components.Form
         /// The size.
         /// </summary>
         [Parameter]
-        public Size Size { get; set; }
+        public ControlSize Size { get; set; }
 
         /// <summary>
         /// The css class for the control.
@@ -82,7 +82,7 @@ namespace ShineBlazor.Components.Form
         /// <inheritdoc/>
         protected virtual CssClassBuilder ControlCssBuilder => CssClassBuilder.Create("form-control")
             .WithClass(ControlClass)
-            .WithClass(() => $"form-control-{Size.ToString().ToLowerInvariant()}", Size != Size.Default);
+            .WithClass(Size);
 
         /// <summary>
         /// The validation messages.

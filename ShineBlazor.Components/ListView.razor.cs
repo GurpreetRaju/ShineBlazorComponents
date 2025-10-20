@@ -36,13 +36,13 @@ namespace ShineBlazor.Components
         /// The list color. Default: Color.Body.
         /// </summary>
         [Parameter]
-        public Color Color { get; set; } = Color.Body;
+        public Color Color { get; set; }
 
         /// <summary>
         /// The list size.
         /// </summary>
         [Parameter]
-        public Size Size { get; set; }
+        public ListViewSize Size { get; set; }
 
         /// <summary>
         /// The list text variant.
@@ -61,7 +61,7 @@ namespace ShineBlazor.Components
                 if (TextVariant) variant = variant + "text-";
                 return variant + (Color ?? Color.Body);
             })
-            .WithClass(() => $"list-view-{Size.ToString().ToLowerInvariant()}");
+            .WithClass(Size);
 
         /// <summary>
         /// CSS classes for items.

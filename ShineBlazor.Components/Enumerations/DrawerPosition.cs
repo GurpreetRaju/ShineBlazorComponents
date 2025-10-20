@@ -1,5 +1,8 @@
 ﻿namespace ShineBlazor.Components.Enumerations
 {
+    /// <summary>
+    /// The drawer position.
+    /// </summary>
     public enum DrawerPosition
     {
         /// <summary>

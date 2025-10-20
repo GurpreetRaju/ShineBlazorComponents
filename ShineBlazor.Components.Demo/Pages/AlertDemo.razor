@@ -4,25 +4,28 @@
     <Example Header="Alert" CodeFile="AlertExample.txt">
         <div class="row">
             <div class="col-6">
-                <Alert Color="_color">
+                <Alert Color="_color.Value">
                     <i class="bi bi-exclamation-circle-fill align-text-top"></i>
                     This is <a class="alert-link">@_color</a> alert with link.
                 </Alert>
-                <Alert Color="_color" Dismissible="true" @bind-Show="_show">
+                <Alert Color="_color.Value" Dismissible="true" @bind-Show="_show">
                     This is a dismissible @_color alert.
                 </Alert>
             </div>
             <div class="col-6">
                 <div class="d-flex flex-column gap-2">
-                    <DropDown TItem="Color" Items="Color.Values"
-                              SelectedItem="_color" SelectedItemChanged="ColorChanged"
-                              SelectionMode="SelectionMode.Single">
+                    <DropDown TItem="KeyValuePair<string, Color>"
+                              Items="Color.Values"
+                              SelectedItem="_color" 
+                              SelectedItemChanged="ColorChanged"
+                              SelectionMode="SelectionMode.Single" 
+                              ItemToText="t => t.Key">
                     </DropDown>
-                    <Button Variant="Variant.Filled"
+                    <Button Variant="BtnVariant.Default"
                             Clicked="ShowAlert"
                             Disabled="_show"
                             Color="Color.Primary"
-                            ButtonType="ButtonType.Button">
+                            ButtonType="BtnType.Button">
                         Show Dismissible Alert
                     </Button>
                 </div>
@@ -33,9 +36,9 @@
 
 @code{
     private bool _show;
-    private Color _color = Color.Primary;
+    private KeyValuePair<string, Color> _color;
 
-    private void ColorChanged(Color color)
+    private void ColorChanged(KeyValuePair<string, Color> color)
     {
         _color = color;
         InvokeAsync(StateHasChanged);

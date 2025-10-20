@@ -2,20 +2,25 @@
 
 <Page PageName="Animations" ShowTitle="false">
     <Example Header="Flashing Component" CodeFile="FlashingComponent.txt">
-        <FlexBox Row="true" AlignItems="FlexAlign.Start" Class="mb-3">
-            <DropDown TItem="FlashVariant" Items="FlashVariant.Values" @bind-SelectedItem="_variant"
+        <FlexBox Row="true" AlignItems="FlexAlign.ItemsStart" Class="mb-3">
+            <DropDown TItem="KeyValuePair<string, FlashVariant>"
+                      Items="FlashVariant.Values"
+                      @bind-SelectedItem="_variant"
                       Label="Variant" Variant="InputVariant.Outlined"
-                      SelectionMode="SelectionMode.Single">
+                      SelectionMode="SelectionMode.Single" 
+                      ItemToText="t => t.Key">
             </DropDown>
-            <DropDown TItem="Color" Items="Color.Values" @bind-SelectedItem="_color"
+            <DropDown TItem="KeyValuePair<string, Color>" Items="Color.Values"
+                      @bind-SelectedItem="_color"
                       Label="Color" Variant="InputVariant.Outlined"
-                      SelectionMode="SelectionMode.Single">
+                      SelectionMode="SelectionMode.Single"
+                      ItemToText="t => t.Key">
             </DropDown>
             <InputControl TValue="int" @bind-Value="_interval" Required="true"
                           Label="Interval (sec)" Variant="InputVariant.Outlined">
             </InputControl>
         </FlexBox>
-        <FlashingComponent Variant="_variant" Color="_color"
+        <FlashingComponent Variant="_variant.Value" Color="_color.Value"
                             Class="p-2" Interval="@($"{_interval}s")">
             Flashing Div
         </FlashingComponent>
@@ -40,10 +45,47 @@
             </div>
         </FlexBox>
     </Example>
+    <Example Header="Animation Classes and Styles" CodeFile="AnimationUtilities.txt">
+        <Text>
+            There are some animation classes available to be used with <code>@ClassBuilder</code> and <code>@StyleBuilder</code>.
+            The UseAnimation method on <code>@ClassBuilder</code> adds the required animation class with default values like timing
+            function, duration translate, angle or scale. If you like to provide custom values for these, use
+            <code>@StyleBuilder</code> method like <code>@VerticalTransform</code>, <code>@HorizontalTransform</code>, <code>@ScaleTransform</code> etc.
+        </Text>
+        <FlexBox AlignItems="FlexAlign.ItemsCenter" JustifyContent="FlexJustify.Center" Gap="FlexGap.Gap_2">
+            <div class="@GetAnimationCss(Animation.Horizontal)"
+                 style="@CssStyleBuilder.Create().WithHorizontalTransform("-1rem", "1s", AnimationTimingFunction.EaseInOut).Build()">
+                Animate Horizontal (transform: translateX(-1rem) 1s ease-in-out)
+            </div>
+            <div class="@GetAnimationCss(Animation.Vertical)"
+                 style="@CssStyleBuilder.Create().WithVerticalTransform("-1rem", "0.5s", AnimationTimingFunction.EaseIn).Build()">
+                Animate Vertical (transform: translateY(-1rem) 0.5s ease-in)
+            </div>
+            <div class="@GetAnimationCss(Animation.Scale)"
+                 style="@CssStyleBuilder.Create().WithScaleTransform("1.25", "1.25", "0.5s", AnimationTimingFunction.EaseIn).Build()">
+                Animate Scale (transform: scale(1.25, 1.25) 0.5s ease-in)
+            </div>
+            <div class="@GetAnimationCss(Animation.Rotate)"
+                 style="@CssStyleBuilder.Create().WithRotateTransform("30deg", "1s", AnimationTimingFunction.EaseIn).Build()">
+                Animate Rotate (transform: rotate(30deg) 1s ease-in)
+            </div>
+        </FlexBox>
+    </Example>
 </Page>
 
 @code {
-    private Color _color = Color.Primary;
-    private FlashVariant _variant = FlashVariant.Opacity;
+    private static readonly string ClassBuilder = nameof(CssClassBuilder);
+    private static readonly string StyleBuilder = nameof(CssStyleBuilder);
+    private static readonly string HorizontalTransform = nameof(CssStyleBuilder.WithHorizontalTransform);
+    private static readonly string VerticalTransform = nameof(CssStyleBuilder.WithVerticalTransform);
+    private static readonly string ScaleTransform = nameof(CssStyleBuilder.WithScaleTransform);
+
+    private KeyValuePair<string, Color> _color;
+    private KeyValuePair<string, FlashVariant> _variant;
     private int _interval = 1;
+
+    private string GetAnimationCss(Animation animation) => CssClassBuilder.Create("border p-2")
+        .WithBackground(Color.Primary)
+        .WithAnimation(animation)
+        .Build();
 }

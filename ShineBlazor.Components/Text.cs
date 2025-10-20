@@ -37,19 +37,19 @@ namespace ShineBlazor.Components
         /// The viewport size.
         /// </summary>
         [Parameter]
-        public ViewportSize? ViewportSize { get; set; }
+        public ViewportSize ViewportSize { get; set; }
 
         /// <summary>
         /// The text wrap.
         /// </summary>
         [Parameter]
-        public Wrap Wrap { get; set; }
+        public TextWrap Wrap { get; set; }
 
         /// <summary>
         /// The text transform.
         /// </summary>
         [Parameter]
-        public Transform Transform { get; set; }
+        public TextTransform Transform { get; set; }
 
         /// <inheritdoc/>
         protected override string ComponentName => "text";
