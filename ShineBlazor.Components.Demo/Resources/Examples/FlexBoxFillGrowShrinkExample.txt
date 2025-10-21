@@ -1,4 +1,4 @@
-<FlexBox Row="true" Gap="2" FlexFill="true">
+<FlexBox Row="true" Gap="FlexGap.Gap_2" FlexFill="true">
     <div class="p-2 bg-info text-white rounded">Fill 1</div>
     <div class="p-2 bg-warning text-dark rounded">Fill 2</div>
     <div class="p-2 bg-danger text-white rounded">Fill 3</div>

@@ -1,4 +1,4 @@
-<Button Variant="Variant.Filled"
+<Button Variant="BtnVariant.Default"
         Color="Color.Primary"
         Clicked="@HandleButtonClicked"
         Disabled="@_isDisabled">

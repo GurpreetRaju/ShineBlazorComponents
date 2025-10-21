@@ -112,7 +112,7 @@ namespace Shine.Generator
                             .FirstOrDefault(a => a.AttributeClass?.Name == StringValueAttrName);
 
                         stringValue = GetAttributeValue(stringValueAttribute, stringValue);
-                        enumValues.Add($"{{{fieldName}, {generatedClassName}.{fieldName}}}");
+                        enumValues.Add($"{{\"{fieldName}\", {generatedClassName}.{fieldName}}}");
 
                         sourceBuilder.AppendLine($"        public static readonly {generatedClassName} {fieldName} = new {generatedClassName}(\"{stringValue}\");");
                     }

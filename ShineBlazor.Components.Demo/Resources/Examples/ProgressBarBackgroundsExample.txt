@@ -1,4 +1,4 @@
-<FlexBox Gap="2">
+<FlexBox Gap="FlexGap.Gap_2">
     <ProgressBar ProgressValue="25" Color="Color.Primary" />
     <ProgressBar ProgressValue="50" Color="Color.Success" />
     <ProgressBar ProgressValue="75" Color="Color.Info" />

@@ -10,6 +10,6 @@
         </Text>
     </CardBody>
     <CardFooter>
-        <Button Variant="Variant.Filled" Color="Color.Primary">Click</Button>
+        <Button Variant="BtnVariant.Default" Color="Color.Primary">Click</Button>
     </CardFooter>
 </Card>

@@ -1,4 +1,4 @@
-<FlexBox Row="true" Gap="2" Wrap="FlexWrap.Wrap" style="max-width: 400px;">
+<FlexBox Row="true" Gap="FlexGap.Gap_2" Wrap="FlexWrap.Wrap" style="max-width: 400px;">
     <div class="p-2 bg-primary text-white rounded" style="width: 180px;">Wide 1</div>
     <div class="p-2 bg-secondary text-white rounded" style="width: 180px;">Wide 2</div>
     <div class="p-2 bg-success text-white rounded" style="width: 180px;">Wide 3</div>
