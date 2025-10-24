@@ -14,7 +14,7 @@
 }
 
 .slider {
-    --dial-slider-size: calc(var(--dial-size-px) + 25px);
+    --dial-slider-size: calc(var(--dial-size-px) + 2rem);
     width: var(--dial-slider-size);
     height: var(--dial-slider-size);
     display: flex;
@@ -39,7 +39,7 @@
 }
 
     .knob .rotator {
-        --dial-rotator-size: calc(var(--dial-size-px) - 20px);
+        --dial-rotator-size: calc(var(--dial-size-px) - 1.5rem);
         width: var(--dial-rotator-size);
         height: var(--dial-rotator-size);
         background: var(--bs-body-bg);
@@ -51,7 +51,7 @@
         z-index: 1;
     }
 
-    .knob .text {
+    .knob .text, .knob .label {
         flex: 1;
         text-align: center;
     }
@@ -62,10 +62,15 @@
             color: var(--bs-body-color);
         }
 
+    .knob .label {
+        padding: 1rem;
+    }
+
 .pointer {
+    --dial-pointer-size: 1.5rem;
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: var(--dial-pointer-size);
+    height: var(--dial-pointer-size);
     top: calc(50% - 10px);
     left: 0;
     display: flex;
@@ -76,7 +81,8 @@
 }
 
     .pointer i {
-        font-size: 2rem;
+        --dial-pointer-icon-size: 2rem;
+        font-size: var(--dial-pointer-icon-size);
         color: var(--bs-dark);
         transform: rotate(180deg) translateX(0.25rem);
     }
@@ -102,4 +108,22 @@
         stroke-dasharray: 471.24;
         stroke-dashoffset: calc(471.24 - (var(--dial-progress) * 3.5343));
         transition: stroke-dashoffset 0.1s linear;
+    }
+
+.flat.range-dial ::deep .slider {
+    --dial-slider-size: var(--dial-size-px);
+}
+
+.flat.range-dial ::deep .knob {
+    background: none;
+}
+
+.flat.range-dial ::deep .pointer {
+    --dial-pointer-size: 1rem;
+    border-radius: 50%;
+    z-index: 99;
+}
+
+    .flat.range-dial ::deep .pointer i {
+        --dial-pointer-icon-size: 1rem;
     }

@@ -15,16 +15,16 @@
                 <td>
                     <FlexBox AlignItems="FlexAlign.ItemsCenter">
                         <RangeDial TValue="int" Variant="ProgressVariant.Color" Size="150"
-                                   Value="_valueColor" ValueChanged="(v) => HandleValueChanged(v, false)">
+                                   @bind-Value="_valueColor">
                         </RangeDial>
                     </FlexBox>
                 </td>
                 <td>
                     <FlexBox AlignItems="FlexAlign.ItemsCenter">
-                        <RangeDial TValue="int" Variant="ProgressVariant.Gradient" Size="150" ShowValue="false"
-                                   Value="_valueGradient" ValueChanged="(v) => HandleValueChanged(v, true)">
-                            <Alert Color="@GetColor()" Style="padding: 0.25rem 1rem;">
-                                Current Value: @_valueGradient
+                        <RangeDial TValue="int" Variant="ProgressVariant.Gradient" Size="150"
+                                   ShowValue="false" @bind-Value="_valueGradient">
+                            <Alert Color="@GetColor(_valueGradient)" Class="p-2">
+                                @_valueGradient
                             </Alert>
                         </RangeDial>
                     </FlexBox>
@@ -36,16 +36,38 @@
                         <span class="text-bold">Example 1:</span> Range Dial with <code>Variant=ProgressVariant.Color</code>.
                         The actual value of the bound variable updates on the mouse up event:
                     </Text>
-                    <FlexBox Row="true" AlignItems="FlexAlign.ItemsCenter" JustifyContent="FlexJustify.Center">
-                        <Text Typo="Typography.span">Current Value: @_valueColor</Text>
-                        <Button Size="BtnSize.Sm" Clicked="DecreaseValue" Style="width:2rem;">-</Button>
-                        <Button Size="BtnSize.Sm" Clicked="IncreaseValue" Style="width:2rem;">+</Button>
-                    </FlexBox>
                 </td>
                 <td class="align-top">
                     <Text>
                         <span class="text-bold">Example 2:</span> Range Dial with <code>Variant=ProgressVariant.Gradient</code> and
                         <code>ShowValue=false</code>. The custom value label is provided through <code>ChildContent</code>.
+                    </Text>
+                </td>
+            </tr>
+            <tr>
+                <td class="align-top">
+                    <FlexBox AlignItems="FlexAlign.ItemsCenter">
+                        <RangeDial TValue="int" Variant="ProgressVariant.Color"
+                                   Size="150" Flat="true" @bind-Value="@_valueFlat">
+                        </RangeDial>
+                    </FlexBox>
+                </td>
+                <td class="align-top">
+                    <FlexBox AlignItems="FlexAlign.ItemsCenter">
+                        <RangeDial TValue="int" Variant="ProgressVariant.Gradient"
+                                   Size="150" ShowValue="false" Flat="true"
+                                   @bind-Value="@_valueGradientFlat">
+                            <Text Class="@CssClassBuilder.Create("p-2").WithTextColor(GetColor(_valueGradientFlat)).Build()">
+                                Value: @_valueGradientFlat
+                            </Text>
+                        </RangeDial>
+                    </FlexBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="align-top" colspan="2">
+                    <Text Alignment="Alignment.Center">
+                        <span class="text-bold">Example 3:</span> Range Dials with <code>Flat=true</code>.
                     </Text>
                 </td>
             </tr>
@@ -56,33 +78,11 @@
 @code {
     private int _valueColor = 10;
     private int _valueGradient = 50;
+    private int _valueFlat = 30;
+    private int _valueGradientFlat = 30;
 
-    private void HandleValueChanged(int value, bool grad)
+    private Color GetColor(int value)
     {
-        if (grad)
-            _valueGradient = value;
-        else
-            _valueColor = value;
-
-        InvokeAsync(StateHasChanged);
-    }
-
-    private void IncreaseValue()
-    {
-        _valueColor++;
-
-        InvokeAsync(StateHasChanged);
-    }
-
-    private void DecreaseValue()
-    {
-        _valueColor--;
-
-        InvokeAsync(StateHasChanged);
-    }
-
-    private Color GetColor()
-    {
-        return _valueGradient > 66 ? Color.Danger : (_valueGradient < 33 ? Color.Success : Color.Warning);
+        return value > 66 ? Color.Danger : (value < 33 ? Color.Success : Color.Warning);
     }
 }

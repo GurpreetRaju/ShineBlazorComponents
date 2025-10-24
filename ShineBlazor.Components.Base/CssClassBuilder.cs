@@ -125,6 +125,20 @@ public class CssClassBuilder
     }
 
     /// <summary>
+    /// Adds the text color class.
+    /// </summary>
+    /// <param name="color"></param>
+    /// <returns></returns>
+    public CssClassBuilder WithTextColor(Color color)
+    {
+        if (color != null) 
+        {
+            _classes.Add("text-" + color);
+        }
+        return this;
+    }
+
+    /// <summary>
     /// Adds the text css.
     /// </summary>
     /// <param name="alignment">The text alignment.</param>

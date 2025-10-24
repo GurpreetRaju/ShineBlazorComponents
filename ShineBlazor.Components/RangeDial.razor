@@ -5,18 +5,44 @@
 
 <div @ref="_wrapper" class="@CssClasses" style="@CssStyles">
     <div class="slider">
-        <div @ref="_knob" class="knob">
-            <div class="rotator">
+        @if (Flat)
+        {
+            <div @ref="_knob" class="knob">
                 @if (ShowValue)
                 {
                     <div class="text"></div>
                 }
+                else
+                {
+                    <div class="label">
+                        @ChildContent
+                    </div>
+                }
             </div>
             <div class="pointer">
-                <i class="bi bi-play-fill" />
+                <i class="@PointerIconCss.Build()" />
             </div>
-        </div>
-
+        }
+        else
+        {
+            <div @ref="_knob" class="knob">
+                <div class="rotator">
+                    @if (ShowValue)
+                    {
+                        <div class="text"></div>
+                    }
+                    else
+                    {
+                        <div class="label">
+                            @ChildContent
+                        </div>
+                    }
+                </div>
+                <div class="pointer">
+                    <i class="@PointerIconCss.Build()" />
+                </div>
+            </div>
+        }
         <svg viewBox="0 0 160 160" class="progress-dial">
             <circle class="progress-circle-bg" cx="80" cy="80" r="75" fill="none" />
             <circle class="progress-circle-fg" cx="80" cy="80" r="75" fill="none" />
@@ -37,6 +63,4 @@
            value="@ValueAsString"
            @onchange="(args) => HandleValueChanged(args.Value)"
            hidden/>
-
-    @ChildContent
 </div>

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using ShineBlazor.Components.Base;
 
 namespace ShineBlazor.Components
 {
@@ -51,16 +50,40 @@ namespace ShineBlazor.Components
         public RenderFragment ChildContent { get; set; }
 
         /// <summary>
+        /// The flat mode.
+        /// </summary>
+        [Parameter]
+        public bool Flat { get; set; }
+
+        /// <summary>
+        /// The color of the pointer.
+        /// </summary>
+        [Parameter]
+        public Color PointerColor { get; set; } = Color.Primary;
+
+        /// <summary>
         /// JS Runtime.
         /// </summary>
         [Inject]
         private IJSRuntime JsRuntime { get; set; }
+
+        /// <summary>
+        /// Creates the pointer css.
+        /// </summary>
+        protected virtual CssClassBuilder PointerIconCss => CssClassBuilder.Create("bi")
+            .WithClass("bi-circle-fill", Flat)
+            .WithClass("bi bi-play-fill", !Flat)
+            .WithTextColor(PointerColor);
 
         /// <inheritdoc/>
         protected override CssStyleBuilder StyleBuilder => base.StyleBuilder
             .AddStyle("--dial-size-px", $"{Size}px", Size > 0)
             .AddStyle("--dial-size", Size.ToString(), Size > 0)
             .AddStyle("--progress-color", $"var(--bs-{Color})", Variant == ProgressVariant.Color);
+
+        /// <inheritdoc/>
+        protected override CssClassBuilder CssBuilder => base.CssBuilder
+            .WithClass("flat", Flat);
 
         /// <inheritdoc/>
         public override async Task SetParametersAsync(ParameterView parameters)
