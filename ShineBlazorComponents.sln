@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.8.34330.188
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11620.152
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{352571FA-26EB-47E8-B64F-3D5DE4648327}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,6 +15,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shine.Generator", "Shine.Generator\Shine.Generator.csproj", "{7DE840A6-F534-484C-82FD-3342A36581DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShineBlazor.Components.Base", "ShineBlazor.Components.Base\ShineBlazor.Components.Base.csproj", "{DD01B51F-B678-4615-8828-AA5B5B293632}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShineBlazor.Developer.Local", "ShineBlazor.Developer.Local\ShineBlazor.Developer.Local.csproj", "{CD80815C-5153-403D-92AF-2A6F5236144A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShineBlazor.Developer.Remote", "ShineBlazor.Developer.Remote\ShineBlazor.Developer.Remote.csproj", "{C3C1ACEA-1155-4169-A29E-8336DD36833A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShineBlazor.Developer", "ShineBlazor.Developer\ShineBlazor.Developer.csproj", "{14C5DDB7-6A12-4E28-BF30-B4848B70A33E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +44,18 @@ Global
 		{DD01B51F-B678-4615-8828-AA5B5B293632}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD01B51F-B678-4615-8828-AA5B5B293632}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD01B51F-B678-4615-8828-AA5B5B293632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD80815C-5153-403D-92AF-2A6F5236144A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD80815C-5153-403D-92AF-2A6F5236144A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD80815C-5153-403D-92AF-2A6F5236144A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD80815C-5153-403D-92AF-2A6F5236144A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3C1ACEA-1155-4169-A29E-8336DD36833A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3C1ACEA-1155-4169-A29E-8336DD36833A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3C1ACEA-1155-4169-A29E-8336DD36833A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3C1ACEA-1155-4169-A29E-8336DD36833A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14C5DDB7-6A12-4E28-BF30-B4848B70A33E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14C5DDB7-6A12-4E28-BF30-B4848B70A33E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14C5DDB7-6A12-4E28-BF30-B4848B70A33E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14C5DDB7-6A12-4E28-BF30-B4848B70A33E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

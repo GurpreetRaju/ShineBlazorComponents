@@ -1,0 +1,39 @@
+﻿@page "/spinner"
+
+<Page PageName="Spinner">
+    <Example Header="Spinner" CodeFile="SpinnerExample.txt">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex flex-column gap-4">
+                    <div>
+                        <h5>Spinner Variants</h5>
+                        <div class="d-flex gap-3">
+                            <Spinner />
+                            <Spinner SmallSize="true" />
+                        </div>
+                    </div>
+                    <div>
+                        <h5>Spinner Colors</h5>
+                        <div class="d-flex gap-3">
+                            <Spinner Color="Color.Primary" />
+                            <Spinner Color="Color.Success" />
+                            <Spinner Color="Color.Danger" />
+                            <Spinner Color="Color.Warning" />
+                            <Spinner Color="Color.Info" />
+                        </div>
+                    </div>
+                    <div>
+                        <h5>Spinner with Text</h5>
+                        <Spinner Color="Color.Primary">
+                            Loading...
+                        </Spinner>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Example>
+</Page>
+
+@code {
+
+}

@@ -1,10 +1,8 @@
 @inherits ShineComponentBase
 
 <div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
-    <div class="accordion-header">
-        <Button Class="@ButtonClasses" Clicked="ToggleState">
-            @HeaderContent
-        </Button>
+    <div class="@ButtonClasses" @onclick="ToggleState">
+        @HeaderContent
     </div>
 
     <div class="@CollapseCssBuilder.Build()">
@@ -57,7 +55,7 @@
     /// <summary>
     /// The button classes.
     /// </summary>
-    protected virtual string ButtonClasses => CssClassBuilder.JoinClasses("accordion-button", Collapsed ? "collapsed" : string.Empty);
+    protected virtual string ButtonClasses => CssClassBuilder.JoinClasses("accordion-header", "accordion-button", Collapsed ? "collapsed" : string.Empty);
 
     /// <summary>
     /// Collapse the accordion item.

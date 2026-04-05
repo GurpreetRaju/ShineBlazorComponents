@@ -1,8 +1,17 @@
 ﻿@inherits ShineComponentBase
 
 <div class="@CssClasses" style="@CssStyles" role="status" @attributes="AdditionalAttributes">
-    <span class="visually-hidden">Loading...</span>
+    @if (ChildContent != null)
+    {
+        <div class="@(GetComponentClass(CssClassBuilder.Create("spinner")).Build())" aria-hidden="true"></div>        
+        <strong>@ChildContent</strong>
+    }
+    else
+    {
+        <span class="visually-hidden">Loading...</span>
+    }
 </div>
+
 
 @code {
 
@@ -12,9 +21,34 @@
     [Parameter]
     public bool SmallSize { get; set; }
 
-    /// <inheritdoc/>
-    protected override string ComponentName => "spinner-border";
+    /// <summary>
+    /// The color.
+    /// </summary>
+    [Parameter]
+    public Color Color { get; set; }
+
+    /// <summary>
+    /// The variant.
+    /// </summary>
+    [Parameter]
+    public SpinnerVariant Variant { get; set; } = SpinnerVariant.Default;
+
+    /// <summary>
+    /// The child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
     /// <inheritdoc/>
-    protected override CssClassBuilder CssBuilder => base.CssBuilder.WithClass("spinner-border-sm", SmallSize);
+    protected override string ComponentName => "spinner";
+
+    /// <inheritdoc/>
+    protected override CssClassBuilder CssBuilder => ChildContent != null 
+        ? base.CssBuilder.WithClass("d-flex align-items-center gap-2") 
+        : GetComponentClass(base.CssBuilder);
+
+    private CssClassBuilder GetComponentClass(CssClassBuilder builder) => builder    
+        .WithClass($"spinner-{Variant}")
+        .WithClass($"spinner-{Variant}-sm", SmallSize)
+        .WithTextColor(Color);
 }

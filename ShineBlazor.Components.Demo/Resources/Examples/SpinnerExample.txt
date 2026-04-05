@@ -1,0 +1,10 @@
+<Spinner />
+<Spinner SmallSize="true" />
+<Spinner Color="Color.Primary" />
+<Spinner Color="Color.Success" />
+<Spinner Color="Color.Danger" />
+<Spinner Color="Color.Warning" />
+<Spinner Color="Color.Info" />
+<Spinner Color="Color.Primary">
+    Loading...
+</Spinner>

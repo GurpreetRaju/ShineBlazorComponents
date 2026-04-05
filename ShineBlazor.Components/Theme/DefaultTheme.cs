@@ -10,8 +10,20 @@
         /// </summary>
         public DefaultTheme() 
         {
-            Light = new Palette();
-            Dark = new Palette();
+            Light = new Palette()
+            {
+                AdditionalVariables = 
+                [
+                    "--bs-accordion-active-color: #fff;"
+                ]
+            };
+            Dark = new Palette()
+            {
+                AdditionalVariables =
+                [
+                    "--bs-accordion-active-color: #fff;"
+                ]
+            };
         }
     }
 }

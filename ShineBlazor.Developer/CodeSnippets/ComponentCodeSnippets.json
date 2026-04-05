@@ -1,0 +1,315 @@
+{
+  "componentSnippets": [
+    {
+      "id": "alert",
+      "name": "Alert",
+      "description": "Display contextual feedback messages for typical user actions.",
+      "snippets": [
+        {
+          "title": "Basic Alert",
+          "code": "<Alert Color=\"Color.Primary\">\n    <i class=\"bi bi-exclamation-circle-fill\"></i>\n    This is a primary alert.\n</Alert>"
+        },
+        {
+          "title": "Dismissible Alert",
+          "code": "<Alert Color=\"Color.Danger\" Dismissible=\"true\" @bind-Show=\"_show\">\n    This alert can be dismissed by the user.\n</Alert>\n\n@code {\n    private bool _show = true;\n}"
+        },
+        {
+          "title": "Alert with Link",
+          "code": "<Alert Color=\"_color.Value\">\n    <i class=\"bi bi-exclamation-circle-fill align-text-top\"></i>\n    This is <a class=\"alert-link\">@_color</a> alert with link.\n</Alert>"
+        }
+      ]
+    },
+    {
+      "id": "appbar",
+      "name": "AppBar",
+      "description": "Navigation bar component for top-level navigation.",
+      "snippets": [
+        {
+          "title": "Basic AppBar",
+          "code": "<AppBar BrandHref=\"/\"\n        BrandContent=\"BrandContent\"\n        Class=\"mb-3 text-bg-info\"\n        Expand=\"navbar-expand-lg\"\n        Placement=\"sticky-top\">\n    <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">\n        <li class=\"nav-item\">\n            <a class=\"nav-link active\" href=\"#\">Home</a>\n        </li>\n        <li class=\"nav-item\">\n            <a class=\"nav-link\" href=\"#\">About</a>\n        </li>\n    </ul>\n</AppBar>\n\n@code {\n    private RenderFragment BrandContent => __builder =>\n    {\n        <span>Shine Blazor</span>\n    };\n}"
+        }
+      ]
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "description": "Small count and labeling component.",
+      "snippets": [
+        {
+          "title": "Basic Badge",
+          "code": "<Badge Value=\"Primary\" Background=\"Color.Primary\" class=\"me-1\" />\n<Badge Value=\"Success\" Background=\"Color.Success\" class=\"me-1\" />\n<Badge Value=\"Danger\" Background=\"Color.Danger\" class=\"me-1\" />"
+        },
+        {
+          "title": "Pill Badge",
+          "code": "<Badge Value=\"Primary\" Background=\"Color.Primary\" class=\"rounded-pill me-1\" />\n<Badge Value=\"Success\" Background=\"Color.Success\" class=\"rounded-pill me-1\" />\n<Badge Value=\"Danger\" Background=\"Color.Danger\" class=\"rounded-pill me-1\" />"
+        },
+        {
+          "title": "Badge with Heading",
+          "code": "<h1>Example heading <Badge Value=\"New\" /></h1>\n<h2>Example heading <Badge Value=\"New\" /></h2>"
+        }
+      ]
+    },
+    {
+      "id": "button",
+      "name": "Button",
+      "description": "Interactive button component with multiple variants and colors.",
+      "snippets": [
+        {
+          "title": "Button Variants",
+          "code": "<Button Variant=\"BtnVariant.Default\" Color=\"Color.Primary\">Default</Button>\n<Button Variant=\"BtnVariant.Outlined\" Color=\"Color.Success\">Outlined</Button>\n<Button Variant=\"BtnVariant.Text\" Color=\"Color.Danger\">Text</Button>"
+        },
+        {
+          "title": "Button Sizes",
+          "code": "<Button Variant=\"BtnVariant.Default\" Color=\"Color.Primary\" Size=\"BtnSize.Small\">Small</Button>\n<Button Variant=\"BtnVariant.Default\" Color=\"Color.Primary\" Size=\"BtnSize.Medium\">Medium</Button>\n<Button Variant=\"BtnVariant.Default\" Color=\"Color.Primary\" Size=\"BtnSize.Large\">Large</Button>"
+        },
+        {
+          "title": "Button with Click Handler",
+          "code": "<Button Variant=\"BtnVariant.Default\"\n        Color=\"Color.Primary\"\n        Clicked=\"@(() => ShowNotification())\"\n        Disabled=\"@_disable\">\n    Click Me!\n</Button>\n\n@code {\n    private bool _disable = false;\n    \n    private void ShowNotification() {\n        // Handle click\n    }\n}"
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "name": "Card",
+      "description": "Container component for building cards.",
+      "snippets": [
+        {
+          "title": "Basic Card",
+          "code": "<Card>\n    <CardBody>\n        <Text Typo=\"Typography.h5\" Class=\"card-title\">Card Title</Text>\n        <Text Class=\"card-text\">\n            It is a long established fact that a reader will be distracted.\n        </Text>\n    </CardBody>\n</Card>"
+        },
+        {
+          "title": "Card with Header and Footer",
+          "code": "<Card>\n    <CardHeader>Featured</CardHeader>\n    <CardBody>\n        <Text Typo=\"Typography.h5\" Class=\"card-title\">Card Title</Text>\n        <Text Class=\"card-text\">Card content here</Text>\n    </CardBody>\n    <CardFooter>\n        <Button Variant=\"BtnVariant.Default\" Color=\"Color.Primary\">Click</Button>\n    </CardFooter>\n</Card>"
+        },
+        {
+          "title": "Glass Variant Card",
+          "code": "<Card GlassVariant=\"true\">\n    <CardBody>\n        <Text Typo=\"Typography.h5\" Class=\"card-title\">Glass Card</Text>\n        <Text Class=\"card-text\">This card uses glass morphism effect.</Text>\n    </CardBody>\n</Card>"
+        }
+      ]
+    },
+    {
+      "id": "carousel",
+      "name": "Carousel",
+      "description": "Slideshow component for displaying content.",
+      "snippets": [
+        {
+          "title": "Basic Carousel",
+          "code": "<Carousel Interval=\"3\" Class=\"text-center\">\n    <CarouselItem>\n        <div class=\"container text-bg-primary py-5\">\n            <h1><b>Slide 1</b></h1>\n        </div>\n    </CarouselItem>\n    <CarouselItem>\n        <div class=\"container text-bg-info py-5\">\n            <h1><b>Slide 2</b></h1>\n        </div>\n    </CarouselItem>\n    <CarouselItem>\n        <div class=\"container text-bg-warning py-5\">\n            <h1><b>Slide 3</b></h1>\n        </div>\n    </CarouselItem>\n</Carousel>"
+        }
+      ]
+    },
+    {
+      "id": "accordion",
+      "name": "Accordion",
+      "description": "Collapsible container for grouping content.",
+      "snippets": [
+        {
+          "title": "Accordion Item",
+          "code": "<AccordionItem>\n    <HeaderContent>\n        <div class=\"text-bg-primary flex-grow-1 p-2\">Click to Toggle</div>\n    </HeaderContent>\n    <ChildContent>\n        <div class=\"border border-dark-subtle p-3\">Content here</div>\n    </ChildContent>\n</AccordionItem>"
+        },
+        {
+          "title": "Multiple Accordion Items",
+          "code": "<Accordion>\n    <AccordionItem>\n        <HeaderContent>Section 1</HeaderContent>\n        <ChildContent>Content 1</ChildContent>\n    </AccordionItem>\n    <AccordionItem>\n        <HeaderContent>Section 2</HeaderContent>\n        <ChildContent>Content 2</ChildContent>\n    </AccordionItem>\n</Accordion>"
+        }
+      ]
+    },
+    {
+      "id": "datagrid",
+      "name": "DataGrid",
+      "description": "Display tabular data with sorting and pagination.",
+      "snippets": [
+        {
+          "title": "Basic DataGrid",
+          "code": "<DataGrid ItemsProvider=\"DummyDataProvider.GetFruits\" Class=\"shadow-sm\">\n    <Columns>\n        <DataGridColumn TItem=\"Data.FruitData\" TValue=\"string\" Name=\"Id\" Header=\"ID\" DataExpression=\"x => x.Id\" CanSort=\"true\" />\n        <DataGridColumn TItem=\"Data.FruitData\" TValue=\"string\" Name=\"Name\" Header=\"Name\" DataExpression=\"x => x.Name\" CanSort=\"true\" />\n        <DataGridColumn TItem=\"Data.FruitData\" TValue=\"string\" Name=\"Price\" Header=\"Price\" DataExpression=\"x => x.Price\" CanSort=\"true\" />\n    </Columns>\n</DataGrid>\n\n@code {\n    [Inject]\n    private DummyDataProvider DummyDataProvider { get; set; }\n}"
+        }
+      ]
+    },
+    {
+      "id": "drawer",
+      "name": "Drawer",
+      "description": "Side drawer component for navigation.",
+      "snippets": [
+        {
+          "title": "Left Drawer",
+          "code": "<DrawerContainer Class=\"border\">\n    <LeftDrawer>\n        <Drawer Position=\"DrawerPosition.Left\"\n                Width=\"18rem\"\n                CollapsedWidth=\"5rem\"\n                HasShadow=\"true\">\n            <NavMenu IsVertical=\"true\" Class=\"pa-2\">\n                <NavigationItems>\n                    <NavigationItem Class=\"active\">\n                        <i class=\"bi bi-house-door\" />\n                        <span>Home</span>\n                    </NavigationItem>\n                </NavigationItems>\n            </NavMenu>\n        </Drawer>\n    </LeftDrawer>\n    <Content>\n        <div class=\"p-4\">Main Content</div>\n    </Content>\n</DrawerContainer>"
+        }
+      ]
+    },
+    {
+      "id": "dropdown",
+      "name": "DropDown",
+      "description": "Dropdown selection component.",
+      "snippets": [
+        {
+          "title": "Single Selection",
+          "code": "<div style=\"width:12rem\">\n    <DropDown TItem=\"string\" \n              Items=\"new[] { 'Option1', 'Option2', 'Option3' }\"\n              SelectionMode=\"SelectionMode.Single\">\n    </DropDown>\n</div>"
+        },
+        {
+          "title": "Multi Selection",
+          "code": "<DropDown TItem=\"string\" \n          Items=\"new[] { 'Option1', 'Option2', 'Option3' }\"\n          SelectionMode=\"SelectionMode.Multiple\"\n          @bind-SelectedItems=\"@_selected\">\n</DropDown>\n\n@code {\n    private ICollection<string> _selected = new HashSet<string>();\n}"
+        }
+      ]
+    },
+    {
+      "id": "flexbox",
+      "name": "FlexBox",
+      "description": "Flexible box layout component.",
+      "snippets": [
+        {
+          "title": "Row Layout",
+          "code": "<FlexBox Row=\"true\" Gap=\"FlexGap.Gap_2\">\n    <div class=\"p-3 bg-primary text-white rounded\">Item 1</div>\n    <div class=\"p-3 bg-secondary text-white rounded\">Item 2</div>\n    <div class=\"p-3 bg-success text-white rounded\">Item 3</div>\n</FlexBox>"
+        },
+        {
+          "title": "With Alignment",
+          "code": "<FlexBox Row=\"true\" \n         Gap=\"FlexGap.Gap_3\" \n         AlignItems=\"FlexAlign.ItemsCenter\" \n         JustifyContent=\"FlexJustify.Between\" \n         style=\"height: 100px;\">\n    <div class=\"p-2 bg-primary text-white rounded\">Start</div>\n    <div class=\"p-2 bg-success text-white rounded\">Center</div>\n    <div class=\"p-2 bg-danger text-white rounded\">End</div>\n</FlexBox>"
+        }
+      ]
+    },
+    {
+      "id": "form",
+      "name": "Form Controls",
+      "description": "Form input and validation components.",
+      "snippets": [
+        {
+          "title": "Basic Form",
+          "code": "<EditForm Model=\"@_formModel\">\n    <FormControl Label=\"User Name\" InputType=\"InputType.Text\" @bind-Value=\"@_formModel.UserName\" />\n    <FormControl Label=\"Password\" InputType=\"InputType.Password\" @bind-Value=\"@_formModel.Password\" />\n    <FormControl Label=\"Date\" InputType=\"InputType.Date\" @bind-Value=\"@_formModel.Date\" />\n</EditForm>\n\n@code {\n    private FormModel _formModel = new FormModel();\n    private class FormModel {\n        public string UserName { get; set; }\n        public string Password { get; set; }\n        public DateTime? Date { get; set; }\n    }\n}"
+        },
+        {
+          "title": "Checkbox and Radio",
+          "code": "<CheckboxControl Label=\"Accept Terms\" @bind-Value=\"@_accepted\" />\n<RadioControl Label=\"Gender\" Items=\"new[] { 'Male', 'Female' }\" @bind-Value=\"@_gender\" />"
+        }
+      ]
+    },
+    {
+      "id": "infinitescroll",
+      "name": "InfiniteScroll",
+      "description": "Infinite scrolling component for loading data.",
+      "snippets": [
+        {
+          "title": "Infinite Scroll",
+          "code": "<InfiniteScroll TItem=\"Data.FruitData\" \n                ItemsProvider=\"DummyDataProvider.GetFruits\">\n    <ItemTemplate>\n        <div class=\"col-4\">\n            <div>@context.Name</div>\n            <div>@context.Price</div>\n        </div>\n    </ItemTemplate>\n</InfiniteScroll>\n\n@code {\n    [Inject]\n    private DummyDataProvider DummyDataProvider { get; set; }\n}"
+        }
+      ]
+    },
+    {
+      "id": "listgroup",
+      "name": "ListGroup",
+      "description": "List group component for displaying lists.",
+      "snippets": [
+        {
+          "title": "Simple List Group",
+          "code": "<ListGroup Items=\"Items\" ItemToText=\"t => t.Name\" />"
+        },
+        {
+          "title": "Custom Template",
+          "code": "<ListGroup Items=\"Items\">\n    <ItemTemplate>\n        <li class=\"list-group-item\">\n            <span>@context.Name</span>\n            <Badge Value=\"@context.Count\" />\n        </li>\n    </ItemTemplate>\n</ListGroup>"
+        }
+      ]
+    },
+    {
+      "id": "modal",
+      "name": "Modal",
+      "description": "Modal dialog component.",
+      "snippets": [
+        {
+          "title": "Basic Modal",
+          "code": "<Button Clicked=\"ShowModal\" Color=\"Color.Primary\">Show Modal</Button>\n\n<Modal @bind-Show=\"_showModal\">\n    <Header>Modal Title</Header>\n    <Body>Modal content goes here</Body>\n    <Footer>Modal footer</Footer>\n</Modal>\n\n@code {\n    private bool _showModal = false;\n    \n    private void ShowModal() {\n        _showModal = true;\n    }\n}"
+        }
+      ]
+    },
+    {
+      "id": "progressbar",
+      "name": "ProgressBar",
+      "description": "Progress indication component.",
+      "snippets": [
+        {
+          "title": "Basic Progress Bar",
+          "code": "<ProgressBar ProgressValue=\"25\" Color=\"Color.Primary\" />\n<ProgressBar ProgressValue=\"50\" Color=\"Color.Success\" />\n<ProgressBar ProgressValue=\"75\" Color=\"Color.Warning\" />"
+        },
+        {
+          "title": "Striped Progress Bar",
+          "code": "<ProgressBar ProgressValue=\"50\" Color=\"Color.Info\" IsStriped=\"true\" />"
+        },
+        {
+          "title": "Animated Progress Bar",
+          "code": "<ProgressBar ProgressValue=\"75\" Color=\"Color.Primary\" IsStriped=\"true\" Animated=\"true\" />"
+        }
+      ]
+    },
+    {
+      "id": "rangedial",
+      "name": "RangeDial",
+      "description": "Circular range dial input component.",
+      "snippets": [
+        {
+          "title": "Color Variant",
+          "code": "<RangeDial TValue=\"int\" Variant=\"ProgressVariant.Color\" Size=\"150\"\n           @bind-Value=\"_value\">\n</RangeDial>\n\n@code {\n    private int _value = 50;\n}"
+        },
+        {
+          "title": "Gradient Variant",
+          "code": "<RangeDial TValue=\"int\" Variant=\"ProgressVariant.Gradient\" Size=\"150\"\n           ShowValue=\"false\" @bind-Value=\"_value\">\n    <Alert Color=\"GetColor(_value)\" Class=\"p-2\">\n        @_value\n    </Alert>\n</RangeDial>"
+        }
+      ]
+    },
+    {
+      "id": "propertygrid",
+      "name": "PropertyGrid",
+      "description": "Property editor component for complex objects.",
+      "snippets": [
+        {
+          "title": "Basic PropertyGrid",
+          "code": "<PropertyGrid @bind-Value=\"@_object\" \n             PropertyChanged=\"@OnPropertyChanged\">\n</PropertyGrid>\n\n@code {\n    private MyObject _object = new();\n    \n    private void OnPropertyChanged() {\n        InvokeAsync(StateHasChanged);\n    }\n}"
+        }
+      ]
+    },
+    {
+      "id": "animations",
+      "name": "Animations",
+      "description": "Animation and transition effects.",
+      "snippets": [
+        {
+          "title": "Flashing Component",
+          "code": "<FlashingComponent Variant=\"FlashVariant.Background\"\n                   Color=\"Color.Primary\"\n                   Interval=\"1s\"\n                   Class=\"p-2\">\n    Flashing Content\n</FlashingComponent>"
+        },
+        {
+          "title": "Flash CSS Classes",
+          "code": "<div class=\"p-2 flash-background\" style=\"--flash-color: var(--bs-primary); --flash-interval: 2s;\">\n    Flashing background\n</div>\n<div class=\"p-2 text-bg-success flash-opacity\" style=\"--flash-interval: 2s;\">\n    Flashing opacity\n</div>"
+        }
+      ]
+    },
+    {
+      "id": "theme",
+      "name": "CustomTheme",
+      "description": "Custom theme.",
+      "snippets": [
+        {
+          "title": "Custom Theme C# file",
+          "code": "public class CustomTheme : ThemeBase\n {\n\tpublic CustomTheme()\n\t{ \n\t\tLight = new LightPalette();\n\t\tDark = new DarkPalette();\n\t} \n}"
+        },
+        {
+          "title": "Light palette C# code",
+          "code": "public class LightPalette : Theme.Palette\n{\n    public LightPalette()\n    {\n        Primary = new ThemeColorSet\n        {\n            Color = \"#2081e3\",\n            Rgb = \"32, 129, 227\",\n            BackgroundSubtle = \"#386cbc\",\n            Border = \"#476d99\"\n        };\n        Secondary = new ThemeColorSet\n        {\n            Color = \"#E56B6F\",\n            Rgb = \"229, 107, 111\",\n        };\n    }\n}"
+        },
+        {
+          "title": "Dark palette C# code",
+          "code": "public class DarkPalette : Theme.Palette\n{\n    public DarkPalette()\n    {\n        Primary = new ThemeColorSet\n        {\n            Color = \"#2081e3\",\n            Rgb = \"32, 129, 227\",\n            BackgroundSubtle = \"#08539e\"\n        };\n        Secondary = new ThemeColorSet\n        {\n            Color = \"#B56576\",\n            Rgb = \"181, 101, 118\",\n        };\n    }\n}"
+        },
+        {
+          "title": "Using Custom Theme in razor component.",
+          "code": "<ShineBlazor.Components.Theme.ThemeSelector Theme=\"@(new CustomTheme())\" />"
+        }
+      ]
+    },
+    {
+      "id": "splash-screen",
+      "name": "Splash Screen",
+      "description": "Adds a custom splash screen when the web app is loaded. The code can be added to index.html file.",
+      "snippets": [
+        {
+          "title": "HTML code for splash screen",
+          "code": "<div id=\"app\"><div class=\"splash-wrapper\"> <div class=\"splash\"> <img src=\"./images/splash_logo.svg\" alt=\"Shine Blazor\" class=\"logo text-primary\" /><div class=\"progress\"><div class=\"progress-bar\"></div> </div><div class=\"progress-text\"></div></div></div></div>"
+        }
+      ]
+    }
+  ]
+}

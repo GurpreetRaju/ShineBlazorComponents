@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "ShineBlazor.Developer": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "ShineBlazor.Developer.csproj"
+      ]
+    }
+  }
+}

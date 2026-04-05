@@ -13,7 +13,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddSingleton<DummyDataProvider>();
 builder.Services.AddScoped<ToastService>();
 
-await builder.Build().RunAsync();
+var app = builder.Build();
+await app.RunAsync();
 
 
 
