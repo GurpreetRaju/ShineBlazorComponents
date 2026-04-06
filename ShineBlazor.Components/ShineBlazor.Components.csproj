@@ -33,4 +33,8 @@
     <ProjectReference Include="..\ShineBlazor.Components.Base\ShineBlazor.Components.Base.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enumerations\" />
+  </ItemGroup>
+
 </Project>

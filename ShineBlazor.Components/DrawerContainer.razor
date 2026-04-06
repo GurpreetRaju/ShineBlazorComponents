@@ -46,7 +46,7 @@
     internal void DrawerStateChanged(Drawer drawer, string width)
     {
         bool changed = false;
-        if (drawer.Position == Enumerations.DrawerPosition.Left)
+        if (drawer.Position == DrawerPosition.Left)
         {
             changed = _leftDrawer != width;
             _leftDrawer = width;

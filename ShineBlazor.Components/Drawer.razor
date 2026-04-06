@@ -1,4 +1,3 @@
-@using ShineBlazor.Components.Enumerations
 @inherits BackgroundComponentBase
 
 <div class="@CssClasses" style="@CssStyles" @attributes="AdditionalAttributes">
@@ -107,7 +106,7 @@
     protected override CssClassBuilder CssBuilder => base.CssBuilder
         .WithClass("drawer-collapse", Collapsed)
         .WithClass("shadow", HasShadow)
-        .WithClass(Position.ToString().ToLowerInvariant());
+        .WithClass(Position);
 
     /// <inheritdoc/>
     protected override CssStyleBuilder StyleBuilder => base.StyleBuilder

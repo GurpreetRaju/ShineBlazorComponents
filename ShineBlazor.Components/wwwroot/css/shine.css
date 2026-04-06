@@ -5,7 +5,7 @@
 @import url("../lib/bootstrap/css/font/bootstrap-icons.css");
 
 /***********  Custom variables  ***********/
-:root {
+:root, .light {
     --sh-page-padding: 1rem;
     --sh-left-drawer-width: 0;
     --sh-right-drawer-width: 0;
@@ -14,18 +14,20 @@
     --bs-border-color-translucent: rgba(0, 0, 0, 0.08);
     --splash-height: 12rem;
     --splash-width: 12rem;
+    --glass-background: rgba(255, 255, 255, 0.2);
 }
 
-    :root[data-bs-theme=dark] {
+    :root[data-bs-theme=dark], [data-bs-theme=dark], .dark {
         --bs-body-bg-subtle: var(--bs-dark-bg-subtle);
         --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
         --bs-light: #2b3035;
         --bs-light-rgb: 43, 48, 53;
+        --glass-background: rgba(0, 0, 0, 0.5);
     }
 
-    :root[data-bs-theme=dark] .text-bg-light {
-        color: var(--bs-body-color) !important;
-    }
+        :root[data-bs-theme=dark] .text-bg-light, [data-bs-theme=dark] .text-bg-light, .dark .text-bg-light {
+            color: var(--bs-body-color) !important;
+        }
 
 
 .code {
@@ -34,6 +36,20 @@
     border-radius: 0.25rem;
     line-height: 3;
     border: 1px solid var(--bs-border-color-translucent);
+}
+
+/********** Font Size **********/
+.font-s {
+    font-size: 0.75rem !important;
+}
+.font-l {
+    font-size: 1.5rem !important;
+}
+.font-xl {
+    font-size: 2rem !important;
+}
+.font-xxl {
+    font-size: 4rem !important;
 }
 
 /*********** Buttons ***********/
@@ -602,7 +618,7 @@ div.list-view-item > * {
 .text-bold { font-weight:bold; }
 .glass {
     --bs-body-color: #fff;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--glass-background);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(1.5px);
     -webkit-backdrop-filter: blur(1.5px);
@@ -705,3 +721,21 @@ div.list-view-item > * {
     .animate-rotate:hover {
         transform: rotate(var(--sh-animate-angle-value));
     }
+
+/* key-value-pair */
+
+.key-value-pair .key {
+    font-weight: lighter;
+    font-size: 0.85rem;
+}
+
+.key-value-pair .value {
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+.key-value-pair .unit {
+    font-weight: lighter;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}

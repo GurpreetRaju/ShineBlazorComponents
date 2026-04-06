@@ -1,0 +1,72 @@
+﻿@page "/dashboard-glass"
+@layout Layout.SampleLayout
+
+<FlexBox Row="true" Class="border h-100 overflow-hidden" Style="background: url('images/bg.png')" data-bs-theme="dark">
+    <Card Class="h-100 overflow-hidden rounded-0">
+        <NavMenu IsVertical="true" Class="pa-3">
+            <NavigationItems>
+                <NavigationItem Class="active">
+                    <i class="bi bi-house-door" />
+                </NavigationItem>
+                <NavigationItem>
+                    <i class="bi bi-speedometer2" />
+                </NavigationItem>
+            </NavigationItems>
+        </NavMenu>
+    </Card>
+    
+    <!-- Main Content -->
+    <div Class="h-100 flex-fill">
+        <div class="h-50 p-2">
+            <Card GlassVariant="true" Class="h-100 m-0">
+                <CardBody Class="overflow-hidden">
+                    <FlexBox Class="h-100" Row="true" AlignItems="FlexAlign.ItemsCenter" JustifyContent="FlexJustify.Around">
+                        <KeyValuePair Key="Speed" Value="125" Units="km/h" ValueSize="FontSize.ExtraExtraLarge"/>
+                        <Image Source="images/mazda-3.png" Alt="Mazda 3" Class="h-100" />
+                        <KeyValuePair Key="Mileage" Value="62,010" Units="kms" ValueSize="FontSize.ExtraExtraLarge" />
+                    </FlexBox>
+                </CardBody>
+            </Card>
+        </div>
+       <div class="h-50 p-2">
+            <FlexBox Row="true" Gap="FlexGap.Gap_3" Class="h-100 w-100">
+                <Card GlassVariant="true" Class="m-0 h-100 w-50">
+                    <CardHeader Class="border-bottom-0">Battery Status</CardHeader>
+                    <CardBody Class="overflow-hidden">
+                        <FlexBox Row="true" AlignItems="FlexAlign.ItemsCenter" JustifyContent="FlexJustify.Around" Class="overflow-hidden">
+                            <Image Source="images/battery.png" Alt="Battery_Status" Class="h-100" />
+                            <FlexBox Gap="FlexGap.Gap_2">
+                                <KeyValuePair Key="Battery Charge" Value="85" Units="%"/>
+                                <KeyValuePair Key="Distance Left" Value="240" Units="km"/>
+                                <KeyValuePair Key="Current Trip" Value="120" Units="km"/>
+                            </FlexBox>
+                        </FlexBox>
+                    </CardBody>
+                </Card>
+
+                <Card GlassVariant="true" Class="m=0 h-100 w-50">
+                    <CardHeader Class="border-bottom-0">Weather</CardHeader>
+                    <CardBody Class="overflow-hidden">
+                        <FlexBox AlignItems="FlexAlign.ItemsCenter" Gap="FlexGap.Gap_2" Class="overflow-hidden">
+                            <Text Typo="Typography.Heading1" Class="text-info">28°C</Text>
+                            <Text Typo="Typography.Para"><i class="bi bi-brightness-high"></i> Sunny</Text>
+                            <FlexBox Row="true" AlignItems="FlexAlign.ItemsCenter" JustifyContent="FlexJustify.Around">
+                                <KeyValuePair Value="65" Units="%">
+                                    <KeyContent>
+                                        <i class="bi bi-moisture ms-2"></i> Humidity
+                                    </KeyContent>
+                                </KeyValuePair>
+
+                                <KeyValuePair Value="6125" Units="km/h">
+                                    <KeyContent>
+                                        <i class="bi bi-brightness-high ms-2"></i> Wind
+                                    </KeyContent>
+                                </KeyValuePair>
+                            </FlexBox>
+                        </FlexBox>
+                    </CardBody>
+                </Card>
+            </FlexBox>
+        </div>
+    </div>
+</FlexBox>

@@ -250,7 +250,7 @@ namespace ShineBlazor.Components.PropertyGrid
                             Parameters = new Dictionary<string, object>
                             {
                                 { nameof(Text.Content), _propertyValue?.ToString() },
-                                { nameof(Text.Typo), Typography.span },
+                                { nameof(Text.Typo), Typography.Span },
                             }
                         };
                     case ComponentControl.Array:

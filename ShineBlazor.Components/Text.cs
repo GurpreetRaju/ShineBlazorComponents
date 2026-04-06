@@ -13,7 +13,7 @@ namespace ShineBlazor.Components
         /// The typography.
         /// </summary>
         [Parameter]
-        public Typography Typo { get; set; }
+        public Typography Typo { get; set; } = Typography.Para;
 
         /// <summary>
         /// The child content.

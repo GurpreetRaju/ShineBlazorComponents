@@ -1,0 +1,67 @@
+@inherits ShineComponentBase
+
+<FlexBox Row="Horizontal" Class="@CssClasses" Style="@CssStyles" Gap="@(Horizontal ? FlexGap.Gap_3 : FlexGap.Gap_0)"
+         AdditionalAttributes="@AdditionalAttributes">
+    <span class="key">
+        @Key
+        @KeyContent
+    </span>
+    <span class="content">
+        <span class="@(CssClassBuilder.JoinClasses("value", ValueSize))">
+            @Value
+        </span>
+        @if (!string.IsNullOrEmpty(Units))
+        {
+            <span class="unit">@Units</span>
+        }
+        @ChildContent
+    </span>
+</FlexBox>
+
+@code {
+
+    /// <summary>
+    /// The key.
+    /// </summary>
+    [Parameter]
+    public string Key { get; set; }
+
+    /// <summary>
+    /// The key content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment KeyContent { get; set; }
+
+    /// <summary>
+    /// The value.
+    /// </summary>
+    [Parameter]
+    public string Value { get; set; }
+
+    /// <summary>
+    /// The units.
+    /// </summary>
+    [Parameter]
+    public string Units { get; set; }
+
+    /// <summary>
+    /// Horizontal Layout.
+    /// </summary>
+    [Parameter]
+    public bool Horizontal { get; set; }
+
+    //// <summary>
+    /// The value size.
+    /// </summary>
+    [Parameter]
+    public FontSize ValueSize { get; set; } = FontSize.Default;
+
+    /// <summary>
+    /// The child content fragment.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <inheritdoc/>
+    protected override string ComponentName => "key-value-pair";
+}

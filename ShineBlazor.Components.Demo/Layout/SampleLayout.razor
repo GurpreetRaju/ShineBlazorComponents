@@ -1,0 +1,14 @@
+﻿@using ShineBlazor.Components.Theme
+@inherits LayoutComponentBase
+
+<ToastProvider />
+<ThemeSelector Theme="@_theme" ShowThemeSwitch="false" />
+
+<div class="layout-wrapper">
+    @Body
+</div>
+
+
+@code {
+    private readonly GlassTheme _theme = new GlassTheme();
+}

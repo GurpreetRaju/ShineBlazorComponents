@@ -6,6 +6,24 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="CodeSnippets\ComponentCodeSnippets.json" />
+    <None Remove="CodeSnippets\ComponentCodeSnippets.md" />
+    <None Remove="CodeSnippets\QUICK_REFERENCE.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="CodeSnippets\ComponentCodeSnippets.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CodeSnippets\ComponentCodeSnippets.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CodeSnippets\QUICK_REFERENCE.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="ModelContextProtocol" Version="1.2.0" />
 	</ItemGroup>
