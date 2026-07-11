@@ -76,6 +76,12 @@ namespace ShineBlazor.Components.Form
         [Parameter]
         public string ControlStyle { get; set; }
 
+        /// <summary>
+        /// The input variant.
+        /// </summary>
+        [Parameter]
+        public InputVariant Variant { get; set; } = InputVariant.Default;
+
         /// <inheritdoc/>
         protected override string ComponentName => "form-control-wrapper";
 

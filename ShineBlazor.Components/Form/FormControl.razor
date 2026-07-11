@@ -11,14 +11,14 @@
     protected virtual RenderFragment RenderBase => __builder => 
     {
         <div class="@CssClasses" style="@CssStyles">
-            <label for="@Id" class="form-label">@Label</label>
             @if (ReadOnly)
             {
+                <label for="@Id" class="form-label">@Label</label>
                 <ShineBlazor.Components.Text>@ValueAsString</ShineBlazor.Components.Text>
             }
             else
             {
-                @RenderControl
+                @Extensions.RenderFormControlContainer(Id, Label, Variant, RenderControl)
             }
         </div>
 

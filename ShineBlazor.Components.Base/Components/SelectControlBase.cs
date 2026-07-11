@@ -80,6 +80,12 @@ public abstract class SelectControlBase<TItem> : ShineComponentBase
     public string DropDownClass { get; set; }
 
     /// <summary>
+    /// Whether the select control is disabled.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    /// <summary>
     /// The equality comparer.
     /// </summary>
     [Parameter]
@@ -193,6 +199,9 @@ public abstract class SelectControlBase<TItem> : ShineComponentBase
     /// </summary>
     protected void Toggle()
     {
+        if (Disabled)
+            return;
+
         Open = !Open;
         InvokeAsync(StateHasChanged);
     }

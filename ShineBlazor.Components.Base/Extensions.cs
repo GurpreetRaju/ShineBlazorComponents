@@ -91,11 +91,12 @@ public static class Extensions
         {
             string classes = CssClassBuilder.JoinClasses("input-wrapper", variant);
             int seq = 0;
+            bool defaultVariant = (variant == null || variant == InputVariant.Default) && control != null;
 
             builder.OpenElement(seq++, "div");
             builder.AddAttribute(seq++, "class", classes);
 
-            if (variant != InputVariant.Default && control != null)
+            if (!defaultVariant)
             {
                 builder.AddContent(seq++, control);
             }
@@ -108,7 +109,7 @@ public static class Extensions
                 b.CloseElement();
             });
 
-            if ((variant == null || variant == InputVariant.Default) && control != null)
+            if (defaultVariant)
                 builder.AddContent(seq++, control);
 
             builder.CloseElement();
