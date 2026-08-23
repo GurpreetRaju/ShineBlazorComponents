@@ -85,9 +85,17 @@ namespace ShineBlazor.Components.Form
         /// <inheritdoc/>
         protected override string ComponentName => "form-control-wrapper";
 
+        /// <summary>
+        /// The css classes for the form control.
+        /// </summary>
+        protected override CssClassBuilder CssBuilder => base.CssBuilder
+            .WithClass("required", Required);
+
         /// <inheritdoc/>
         protected virtual CssClassBuilder ControlCssBuilder => CssClassBuilder.Create("form-control")
             .WithClass(ControlClass)
+            .WithClass("is-valid", ValidationState == ValidationState.Valid)
+            .WithClass("is-invalid", ValidationState == ValidationState.Invalid)
             .WithClass(Size);
 
         /// <summary>
@@ -102,6 +110,11 @@ namespace ShineBlazor.Components.Form
                 return EditContext.GetValidationMessages(_fieldIdentifier);
             }
         }
+
+        /// <summary>
+        /// The current validation state.
+        /// </summary>
+        protected ValidationState ValidationState { get; set; } = ValidationState.None;
 
         #endregion
 
@@ -198,9 +211,44 @@ namespace ShineBlazor.Components.Form
         /// <param name="args">The <see cref="ValidationStateChangedEventArgs"/> args.</param>
         private async void OnValidationStateChanged(object sender, ValidationStateChangedEventArgs args)
         {
+            if (EditContext.IsModified(_fieldIdentifier))
+            {
+                if (EditContext.IsValid(_fieldIdentifier))
+                {
+                    ValidationState = ValidationState.Valid;
+                }
+                else
+                {
+                    ValidationState = ValidationState.Invalid;
+                }
+            }
+            else
+            {
+                ValidationState = ValidationState.None;
+            }
+
             await InvokeAsync(StateHasChanged);
         }
 
         #endregion
+    }
+
+    /// <summary>
+    /// Validation state for a field.
+    /// </summary>
+    public enum ValidationState
+    {
+        /// <summary>
+        /// No state.
+        /// </summary>
+        None,
+        /// <summary>
+        /// Whether the field is valid.
+        /// </summary>
+        Valid,
+        /// <summary>
+        /// Whether the field is invalid.
+        /// </summary>
+        Invalid
     }
 }

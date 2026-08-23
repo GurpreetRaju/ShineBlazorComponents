@@ -254,6 +254,19 @@
         border-radius: var(--bs-border-radius);
     }
 
+.required label {
+    position: relative;
+}
+
+    .required label::after {
+        display: block;
+        content: "*";
+        position: absolute;
+        color: var(--bs-danger);
+        top: -0.25rem;
+        right: -0.5rem;
+    }
+
 /*********** Icons ***********/
 .bi {
     vertical-align: text-bottom;

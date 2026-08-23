@@ -18,17 +18,9 @@
             }
             else
             {
-                @Extensions.RenderFormControlContainer(Id, Label, Variant, RenderControl)
-            }
+                @Extensions.RenderFormControlContainer(Id, Label, Variant, RenderControl)                
+            }            
         </div>
-
-        @if (ValidationMessages.Any())
-        {
-            foreach (var message in ValidationMessages)
-            {
-                <span class="form-text text-danger">@message</span>
-            }
-        }
     };
 
     /// <summary>
@@ -44,5 +36,15 @@
                style="@ControlStyle"
                id="@Id"
                @onchange="(args) => HandleValueChanged(args.Value)" />
+
+        @if (ValidationMessages.Any())
+        {
+            <div class="invalid-feedback">
+                @foreach (var message in ValidationMessages)
+                {
+                    <span class="form-text text-danger">@message</span>
+                }
+            </div>
+        }
     };
 }
