@@ -8,7 +8,7 @@
         /// <summary>
         /// The filter criteria.
         /// </summary>
-        public FilterCriteria(string columnName, object value) 
+        public FilterCriteria(string columnName, object? value) 
         {
             ColumnName = columnName;
             FilterValue = value;
@@ -22,7 +22,7 @@
         /// <summary>
         /// The filter value.
         /// </summary>
-        public object FilterValue { get; init; }
+        public object? FilterValue { get; init; }
     }
 
     /// <summary>
@@ -30,14 +30,14 @@
     /// </summary>
     public class FilterData<TValue>
     {
-        private TValue _value;
+        private TValue? _value;
         private EqualityComparer<TValue> _comparer;
 
         /// <summary>
         /// Initializes the filter data.
         /// </summary>
         /// <param name="comparer"></param>
-        public FilterData(EqualityComparer<TValue> comparer = null)
+        public FilterData(EqualityComparer<TValue>? comparer = null)
         {
             _comparer = comparer ?? EqualityComparer<TValue>.Default;
         }
@@ -45,12 +45,12 @@
         /// <summary>
         /// The column name.
         /// </summary>
-        public string ColumnName { get; set; }
+        public required string ColumnName { get; set; }
 
         /// <summary>
         /// The filter value.
         /// </summary>
-        public TValue Value 
+        public TValue? Value 
         {
             get => _value;
             set
@@ -66,7 +66,7 @@
         /// <summary>
         /// The filter value.
         /// </summary>
-        public object FilterValue => Value;
+        public object? FilterValue => Value;
 
         /// <summary>
         /// The filter type.
@@ -76,6 +76,6 @@
         /// <summary>
         /// Event raised when filter value changes.
         /// </summary>
-        public event Action FilterChanged;
+        public event Action? FilterChanged;
     }
 }

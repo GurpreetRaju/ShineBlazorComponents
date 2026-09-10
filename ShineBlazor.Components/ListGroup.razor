@@ -1,22 +1,13 @@
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 
 @typeparam TItem
-@inherits BackgroundComponentBase
+@inherits ItemsSelectionBase<TItem>
 
 <CascadingValue Value="this" IsFixed="true">
     <CascadingValue Value="ItemToText" IsFixed="true">
-        @if (Element == Element.Ul)
-        {
-            <ul class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
-                @RenderItems
-            </ul>
-        }
-        else
-        {
-            <div class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
-                @RenderItems
-            </div>
-        }
+        <ul class="@CssClasses" style="@CssStyles" @attributes="@AdditionalAttributes">
+            @RenderItems
+        </ul>
     </CascadingValue>
 </CascadingValue>
 
@@ -26,25 +17,19 @@
     /// The child content.
     /// </summary>
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
-    /// <summary>
-    /// Items to display.
-    /// </summary>
-    [Parameter]
-    public ICollection<TItem> Items { get; set; }
+    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// The function to convert item to text.
     /// </summary>
     [Parameter]
-    public Func<TItem, string> ItemToText { get; set; }
+    public Func<TItem, string>? ItemToText { get; set; }
 
     /// <summary>
     /// The item template.
     /// </summary>
     [Parameter]
-    public RenderFragment<TItem> ItemTemplate { get; set; }
+    public RenderFragment<TItem>? ItemTemplate { get; set; }
 
     /// <summary>
     /// Whether to virtualize the items.
@@ -59,7 +44,20 @@
     public Element Element { get; set; } = Element.Ul;
 
     /// <inheritdoc/>
-    protected override string ComponentName => "list-group";
+    protected override string ComponentName => "list-group";    
+
+    /// <summary>
+    /// BtnVariant. Default: Primary.
+    /// </summary>
+    [Parameter]
+    public Color Color { get; set; } = Color.Primary;
+
+    /// <inheritdoc/>
+    protected virtual string GetItemCssClasses(TItem item) => CssClassBuilder.Create("list-group-item")
+        .WithClass("list-group-item-action", SelectionMode != SelectionMode.None || ItemClicked.HasDelegate)
+        .WithClass($"list-group-item-{Color ?? Color.Primary}")
+        .WithClass("active", IsItemSelected(item))
+        .Build();
 
     /// <summary>
     /// Render the items.
@@ -68,7 +66,7 @@
     {
         @if (Virtualize)
         {
-            <Virtualize TItem="TItem" Items="Items">
+            <Virtualize TItem="TItem" Items="Items?.ToList()">
                 <ItemContent>
                     @RenderItem(context)
                 </ItemContent>
@@ -91,13 +89,19 @@
     /// <returns></returns>
     protected virtual RenderFragment RenderItem(TItem item) => __builder =>
     {
-        @if (ItemTemplate != null)
-        {
-            @ItemTemplate(item)
-        }
-        else 
-        {
-            <ListGroupItem Item="@item" />
-        }
+        <li class="@GetItemCssClasses(item)" @onclick="() => HandleItemClicked(item)">
+            @if (ItemTemplate != null)
+            {
+                @ItemTemplate(item)
+            }
+            else if (ItemToText != null)
+            {
+                @ItemToText(item)
+            }
+            else
+            {
+                @item?.ToString()
+            }
+        </li>
     };
 }

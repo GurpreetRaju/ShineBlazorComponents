@@ -1,6 +1,6 @@
 ﻿@namespace ShineBlazor.Components
 
-@typeparam TItem
+@typeparam TItem where TItem : class
 @typeparam TValue
 
 @inherits ColumnBase<TItem>
@@ -33,9 +33,19 @@
 @code {
 
     /// <summary>
+    /// Renders the cell.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    protected internal override RenderFragment RenderCell(TItem item) => __builder =>
+    {
+        @item?.ToString()
+    };
+
+    /// <summary>
     /// Renders the filter.
     /// </summary>
-    private RenderFragment RenderFilter => __builder =>
+    protected virtual RenderFragment RenderFilter => __builder =>
     {
         @if (FilterData != null)
         {
