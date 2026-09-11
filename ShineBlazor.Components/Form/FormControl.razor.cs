@@ -13,9 +13,9 @@ namespace ShineBlazor.Components.Form
     {
         #region Fields
 
-        private EditContext _oldEditContext;
+        private EditContext? _oldEditContext;
         private FieldIdentifier _fieldIdentifier;
-        private ValidationMessageStore _parsingValidationMessages;
+        private ValidationMessageStore? _parsingValidationMessages;
 
         #endregion
 
@@ -26,55 +26,55 @@ namespace ShineBlazor.Components.Form
         /// Current edit context.
         /// </summary>
         [CascadingParameter]
-        protected EditContext EditContext { get; set; }
+        protected EditContext? EditContext { get; set; }
 
         /// <summary>
         /// The input type.
         /// </summary>
         [Parameter]
-        public InputType InputType { get; set; }
+        public InputType InputType { get; set; } = InputType.Text;
 
         /// <summary>
         /// Label text.
         /// </summary>
         [Parameter]
-        public string Label { get; set; }
+        public string? Label { get; set; }
 
         /// <summary>
         /// For expression used for validation message.
         /// </summary>
         [Parameter]
-        public Expression<Func<TValue>> ValueExpression { get; set; }
+        public Expression<Func<TValue>>? ValueExpression { get; set; }
 
         /// <summary>
         /// Function to convert an item to display text.
         /// </summary>
         [Parameter]
-        public Func<TValue, string> DisplayFunc { get; set; }
+        public Func<TValue, string>? DisplayFunc { get; set; }
 
         /// <summary>
         /// The placeholder.
         /// </summary>
         [Parameter]
-        public string Placeholder { get; set; }
+        public string? Placeholder { get; set; }
 
         /// <summary>
         /// The size.
         /// </summary>
         [Parameter]
-        public ControlSize Size { get; set; }
+        public ControlSize Size { get; set; } = ControlSize.Default;
 
         /// <summary>
         /// The css class for the control.
         /// </summary>
         [Parameter]
-        public string ControlClass { get; set; }
+        public string? ControlClass { get; set; }
 
         /// <summary>
         /// The css style for the control.
         /// </summary>
         [Parameter]
-        public string ControlStyle { get; set; }
+        public string? ControlStyle { get; set; }
 
         /// <summary>
         /// The input variant.
@@ -107,7 +107,7 @@ namespace ShineBlazor.Components.Form
             {
                 if (ValueExpression == null && EditContext == null) return Enumerable.Empty<string>();
 
-                return EditContext.GetValidationMessages(_fieldIdentifier);
+                return EditContext?.GetValidationMessages(_fieldIdentifier) ?? [];
             }
         }
 
@@ -169,11 +169,11 @@ namespace ShineBlazor.Components.Form
             {
                 _parsingValidationMessages?.Clear();
 
-                _parsingValidationMessages ??= new ValidationMessageStore(EditContext);
+                _parsingValidationMessages ??= new ValidationMessageStore(EditContext!);
                 _parsingValidationMessages.Add(_fieldIdentifier, ValueParsingError);
             }
 
-            EditContext.NotifyFieldChanged(_fieldIdentifier);
+            EditContext?.NotifyFieldChanged(_fieldIdentifier);
         }
 
         /// <summary>
@@ -209,9 +209,9 @@ namespace ShineBlazor.Components.Form
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="args">The <see cref="ValidationStateChangedEventArgs"/> args.</param>
-        private async void OnValidationStateChanged(object sender, ValidationStateChangedEventArgs args)
+        private async void OnValidationStateChanged(object? sender, ValidationStateChangedEventArgs args)
         {
-            if (EditContext.IsModified(_fieldIdentifier))
+            if (EditContext?.IsModified(_fieldIdentifier) == true)
             {
                 if (EditContext.IsValid(_fieldIdentifier))
                 {
