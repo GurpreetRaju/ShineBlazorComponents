@@ -1,0 +1,13 @@
+﻿<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Packages.props" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="Shine.Generator/Shine.Generator.csproj" />
+  <Project Path="ShineBlazor.Components/ShineBlazor.Components.csproj" />
+  <Project Path="ShineBlazor.Components.Base/ShineBlazor.Components.Base.csproj" />
+  <Project Path="ShineBlazor.Components.Demo/ShineBlazor.Components.Demo.csproj" />
+  <Project Path="ShineBlazor.Developer.Local/ShineBlazor.Developer.Local.csproj" />
+  <Project Path="ShineBlazor.Developer.Remote/ShineBlazor.Developer.Remote.csproj" />
+  <Project Path="ShineBlazor.Developer/ShineBlazor.Developer.csproj" />
+</Solution>

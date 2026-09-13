@@ -1,0 +1,18 @@
+<Project>
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageVersion Include="Markdig" Version="1.1.2" />
+		<PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" />
+		<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces " Version="4.12.0" />		
+		<PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="9.0.9" />
+		<PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.5" />
+		<PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.5" />
+		<PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.3" />
+		<PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+		<PackageVersion Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.3" />
+		<PackageVersion Include="ModelContextProtocol" Version="1.2.0" />
+		<PackageVersion Include="ModelContextProtocol.AspNetCore" Version="1.2.0" />
+	</ItemGroup>
+</Project>
