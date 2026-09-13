@@ -5,55 +5,13 @@ namespace ShineBlazor.Components.Base;
 /// <summary>
 /// Provides base functionality for select control.
 /// </summary>
-public abstract class SelectControlBase<TItem> : ShineComponentBase
+public abstract class SelectControlBase<TItem> : ItemsSelectionBase<TItem>
 {
-    /// <summary>
-    /// The selection mode.
-    /// </summary>
-    [Parameter]
-    public SelectionMode SelectionMode { get; set; }
-
-    /// <summary>
-    /// The selected item.
-    /// </summary>
-    [Parameter]
-    public TItem SelectedItem { get; set; }
-
-    /// <summary>
-    /// The selected item changed.
-    /// </summary>
-    [Parameter]
-    public EventCallback<TItem> SelectedItemChanged { get; set; }
-
-    /// <summary>
-    /// The selected items.
-    /// </summary>
-    [Parameter]
-    public ICollection<TItem> SelectedItems { get; set; }
-
-    /// <summary>
-    /// The selected items changed.
-    /// </summary>
-    [Parameter]
-    public EventCallback<ICollection<TItem>> SelectedItemsChanged { get; set; }
-
-    /// <summary>
-    /// Items.
-    /// </summary>
-    [Parameter]
-    public IEnumerable<TItem> Items { get; set; } = [];
-
     /// <summary>
     /// Item to text.
     /// </summary>
     [Parameter]
     public Func<TItem, string> ItemToText { get; set; }
-
-    /// <summary>
-    /// Item clicked callback.
-    /// </summary>
-    [Parameter]
-    public EventCallback<TItem> ItemClicked { get; set; }
 
     /// <summary>
     /// Item Template.
@@ -80,18 +38,6 @@ public abstract class SelectControlBase<TItem> : ShineComponentBase
     public string DropDownClass { get; set; }
 
     /// <summary>
-    /// Whether the select control is disabled.
-    /// </summary>
-    [Parameter]
-    public bool Disabled { get; set; }
-
-    /// <summary>
-    /// The equality comparer.
-    /// </summary>
-    [Parameter]
-    public IEqualityComparer<TItem> EqualityComparer { get; set; }
-
-    /// <summary>
     /// Open the drop down.
     /// </summary>
     protected bool Open { get; set; }
@@ -105,14 +51,6 @@ public abstract class SelectControlBase<TItem> : ShineComponentBase
     /// The compiled css classes for drop down.
     /// </summary>
     protected string DropDownClasses => CssClassBuilder.JoinClasses(DropDownContainerClass, DropDownClass, Open ? "show" : null);
-
-    /// <inheritdoc/>
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        EqualityComparer ??= EqualityComparer<TItem>.Default;
-    }
 
     /// <summary>
     /// Get the text to show for a item.
@@ -161,36 +99,9 @@ public abstract class SelectControlBase<TItem> : ShineComponentBase
     /// Handles the item clicked.
     /// </summary>
     /// <param name="item"></param>
-    protected virtual void HandleItemClicked(TItem item)
+    protected override void HandleItemClicked(TItem item)
     {
-        if (SelectionMode != SelectionMode.None)
-        {
-            if (SelectionMode == SelectionMode.Single)
-            {
-                SelectedItem = item;
-                SelectedItemChanged.InvokeAsync(SelectedItem);
-            }
-            else
-            {
-                // Toggle for multi selection.
-                if (SelectedItems?.Contains(item) == true)
-                {
-                    SelectedItems.Remove(item);
-                }
-                else
-                {
-                    SelectedItems ??= new HashSet<TItem>();
-                    SelectedItems.Add(item);
-                }
-                SelectedItemsChanged.InvokeAsync(SelectedItems);
-            }
-            InvokeAsync(StateHasChanged);
-        }
-
-        if (ItemClicked.HasDelegate)
-        {
-            ItemClicked.InvokeAsync(item);
-        }
+        base.HandleItemClicked(item);
         Close();
     }
 

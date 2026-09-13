@@ -6,7 +6,7 @@
     /// <typeparam name="TItem">The type of item.</typeparam>
     /// <param name="request">The request for fetching items.</param>
     /// <returns></returns>
-    public delegate Task<DataResponse<TItem>> DataGridItemsProvider<TItem>(DataRequest request);
+    public delegate Task<DataResponse<TItem>> DataGridItemsProvider<TItem>(DataRequest request) where TItem : class;
 
     /// <summary>
     /// The data grid items request.
@@ -31,7 +31,7 @@
         /// <summary>
         /// The sort data.
         /// </summary>
-        public SortData SortData { get; set; }
+        public SortData? SortData { get; set; }
     }
 
     /// <summary>
@@ -39,6 +39,31 @@
     /// </summary>
     public record DataResponse<TItem>
     {
+        /// <summary>
+        /// Empty response.
+        /// </summary>
+        public static DataResponse<TItem> Empty = new DataResponse<TItem>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataResponse{TItem}"/> class.
+        /// </summary>
+        public DataResponse()
+        {
+            Items = new List<TItem>();
+            TotalCount = 0;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataResponse{TItem}"/> class.
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="totalCount"></param>
+        public DataResponse(TItem[] items, int totalCount)
+        {
+            Items.AddRange(items);
+            TotalCount = totalCount;
+        }
+
         /// <summary>
         /// The list of items.
         /// </summary>

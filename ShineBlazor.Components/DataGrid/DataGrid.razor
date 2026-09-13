@@ -1,7 +1,7 @@
 @namespace ShineBlazor.Components
 
 @typeparam TItem
-@inherits TableBase
+@inherits ItemsSelectionBase<TItem>
 
 @if (Columns != null)
 {
@@ -31,7 +31,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="@ColumnDefinitions.Count">                        
+                    <td colspan="@(SelectionMode != SelectionMode.None ? ColumnDefinitions.Count + 1 : ColumnDefinitions.Count)">
                         <Pagination TotalPages="_totalPages"
                                     CurrentPage="_currentPage" CurrentPageChanged="HandleCurrentPageChanged"
                                     PageSize="_pageSize" PageSizeChanged="HandlePageSizeChanged">
@@ -55,11 +55,39 @@
     /// <returns></returns>
     protected virtual RenderFragment RenderRow(TItem item) => __builder =>
     {
+        @if (SelectionMode == SelectionMode.None && ItemClicked.HasDelegate)
+        {
+            <tr class="@GetRowClass(item)" @onclick="() => ItemClicked.InvokeAsync(item)">
+                @RenderCells(item)
+            </tr>
+        }
         <tr class="@GetRowClass(item)">
-            @foreach (var column in ColumnDefinitions)
+            @if (SelectionMode == SelectionMode.Multiple)
             {
-                <td class="@column.GetCellClass(item)">@column.GetCellValue(item)</td>
+                <td>
+                    <input type="checkbox" @onclick="() => HandleItemClicked(item)" checked="@IsItemSelected(item)" />
+                </td>
             }
+            else if (SelectionMode == SelectionMode.Single)
+            {
+                <td>
+                    <input type="radio" @onclick="() => HandleItemClicked(item)" checked="@IsItemSelected(item)" />
+                </td>
+            }
+            @RenderCells(item)
         </tr>
+    };
+
+    /// <summary>
+    /// Renders the cells for item.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    protected virtual RenderFragment RenderCells(TItem item) => __builder =>
+    {   
+        @foreach (var column in ColumnDefinitions)
+        {
+            <td class="@column.GetCellClass(item)">@column.RenderCell(item)</td>
+        }
     };
 }

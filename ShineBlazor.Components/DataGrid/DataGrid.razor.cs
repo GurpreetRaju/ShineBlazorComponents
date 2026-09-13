@@ -5,11 +5,11 @@ namespace ShineBlazor.Components
     /// <summary>
     /// The data grid.
     /// </summary>
-    public partial class DataGrid<TItem>
+    public partial class DataGrid<TItem> where TItem : class
     {
         private readonly List<TItem> _currentItems = new List<TItem>();
-        private SortData _currentSortData;
 
+        private SortData? _currentSortData;
         private int _pageSize = 10;
         private int _totalPages;
         private int _currentPage = 1;
@@ -19,30 +19,53 @@ namespace ShineBlazor.Components
         /// Items provider.
         /// </summary>
         [Parameter]
-        public DataGridItemsProvider<TItem> ItemsProvider { get; set; }
+        public DataGridItemsProvider<TItem>? ItemsProvider { get; set; }
 
         /// <summary>
         /// The column definitions.
         /// </summary>
         [Parameter]
-        public RenderFragment Columns { get; set; }
+        public RenderFragment? Columns { get; set; }
 
         /// <summary>
         /// The function to provide css class for a row.
         /// </summary>
         [Parameter]
-        public Func<TItem, string> RowClassFunc { get; set; }
+        public Func<TItem, string>? RowClassFunc { get; set; }
 
         /// <summary>
         /// The template to display for no items.
         /// </summary>
         [Parameter]
-        public RenderFragment NoItemTemplate { get; set; }
+        public RenderFragment? NoItemTemplate { get; set; }
+
+        /// <summary>
+        /// The striped rows.
+        /// </summary>
+        [Parameter]
+        public bool Striped { get; set; } = true;
+
+        /// <summary>
+        /// The bordered table.
+        /// </summary>
+        [Parameter]
+        public bool Bordered { get; set; }
 
         /// <summary>
         /// The current items.
         /// </summary>
         public List<TItem> CurrentItems => _currentItems;
+
+        /// <summary>
+        /// Whether the data is being loaded.
+        /// </summary>
+        public bool IsLoading { get; protected set; } = false;
+
+        /// <inheritdoc/>
+        protected override CssClassBuilder CssBuilder => base.CssBuilder
+            .WithClass("table border")
+            .WithClass("table-bordered", Bordered)
+            .WithClass("table-striped", Striped);
 
         /// <inheritdoc/>
         protected override string ComponentName => "data-grid";
@@ -51,11 +74,6 @@ namespace ShineBlazor.Components
         /// The list of columns.
         /// </summary>
         protected List<ColumnBase<TItem>> ColumnDefinitions { get; } = new List<ColumnBase<TItem>>();
-
-        /// <summary>
-        /// Whether the data is being loaded.
-        /// </summary>
-        public bool IsLoading { get; protected set; } = false;
 
         /// <summary>
         /// Load the data.
@@ -191,7 +209,7 @@ namespace ShineBlazor.Components
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected virtual string GetRowClass(TItem item)
+        protected virtual string? GetRowClass(TItem item)
         {
             return RowClassFunc == null ? null : RowClassFunc(item);
         }
@@ -236,6 +254,6 @@ namespace ShineBlazor.Components
 
                 await LoadData();
             }
-        }
+        }     
     }
 }

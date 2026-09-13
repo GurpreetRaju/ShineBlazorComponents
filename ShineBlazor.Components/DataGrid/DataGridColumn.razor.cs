@@ -8,19 +8,11 @@ namespace ShineBlazor.Components
     /// <typeparam name="TItem"></typeparam>
     public partial class DataGridColumn<TItem, TValue>
     {
-        private static readonly SortDirection[] SortOptions = Enum.GetValues<SortDirection>();
-
         /// <summary>
-        /// The expression for data property.
+        /// The template for filter.
         /// </summary>
         [Parameter]
-        public Func<TItem, TValue> DataExpression { get; set; }
-
-        /// <summary>
-        /// The template for filter..
-        /// </summary>
-        [Parameter]
-        public RenderFragment<FilterData<TValue>> FilterTemplate { get; set; }
+        public RenderFragment<FilterData<TValue>>? FilterTemplate { get; set; }
 
         /// <inheritdoc/>
         protected override string ComponentName => "data-grid-column";
@@ -28,7 +20,7 @@ namespace ShineBlazor.Components
         /// <summary>
         /// The filter data.
         /// </summary>
-        protected FilterData<TValue> FilterData { get; private set; }
+        protected FilterData<TValue>? FilterData { get; private set; }
 
         /// <inheritdoc/>
         protected override void OnInitialized()
@@ -43,9 +35,11 @@ namespace ShineBlazor.Components
         }
 
         /// <inheritdoc/>
-        protected internal override object GetCellValue(TItem item)
+        protected override void OnParametersSet()
         {
-            return DataExpression(item);
+            base.OnParametersSet();
+
+            Name ??= Header ?? throw new InvalidOperationException("The Name parameter is required for DataGridColumn.");
         }
 
         /// <inheritdoc/>
@@ -53,7 +47,7 @@ namespace ShineBlazor.Components
         {
             await base.Dispose(disposing);
 
-            if (disposing)
+            if (disposing && FilterData != null)
             {
                 FilterData.FilterChanged -= HandleFilterChanged;
             }
@@ -84,7 +78,7 @@ namespace ShineBlazor.Components
         /// </summary>
         private void ToggleSortDirection()
         {
-            if (Parent.IsLoading)
+            if (Parent?.IsLoading == true)
                 return;
 
             SortDirection = SortDirection switch 

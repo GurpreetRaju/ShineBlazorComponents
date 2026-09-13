@@ -6,21 +6,21 @@ namespace ShineBlazor.Components
     /// <summary>
     /// The data grid column.
     /// </summary>
-    public abstract class ColumnBase<TItem> : ShineComponentBase
+    public abstract class ColumnBase<TItem> : ShineComponentBase where TItem : class
     {
-        private FilterCriteria _filter;
+        private FilterCriteria? _filter;
 
         /// <summary>
         /// The column Name.
         /// </summary>
         [Parameter]
-        public string Name { get; set; }
+        public string Name { get; set; } = default!;
 
         /// <summary>
         /// The header.
         /// </summary>
         [Parameter]
-        public string Header { get; set; }
+        public string? Header { get; set; }
 
         /// <summary>
         /// Whether user can sort by this column.
@@ -32,18 +32,18 @@ namespace ShineBlazor.Components
         /// A function to provide css class for a cell.
         /// </summary>
         [Parameter]
-        public Func<TItem, string> CellClassFunc { get; set; }
+        public Func<TItem, string>? CellClassFunc { get; set; }
 
         /// <summary>
         /// The parent data grid.
         /// </summary>
         [CascadingParameter]
-        protected DataGrid<TItem> Parent { get; set; }
+        protected DataGrid<TItem>? Parent { get; set; }
 
         /// <summary>
         /// The filter criteria provided by this column.
         /// </summary>
-        public FilterCriteria FilterCriteria 
+        public FilterCriteria? FilterCriteria 
         {
             get => _filter;
             protected set
@@ -83,19 +83,21 @@ namespace ShineBlazor.Components
         }
 
         /// <summary>
-        /// Renders the cell.
-        /// </summary>
-        protected internal abstract object GetCellValue(TItem item);
-
-        /// <summary>
         /// Gets the cell css class.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected internal virtual string GetCellClass(TItem item)
+        protected internal virtual string? GetCellClass(TItem item)
         {
             return CellClassFunc == null ? null : CellClassFunc(item);
         }
+
+        /// <summary>
+        /// Render the cell for an item.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        protected internal abstract RenderFragment RenderCell(TItem item);
 
         /// <summary>
         /// Called when the filter criteria changes.
@@ -112,6 +114,9 @@ namespace ShineBlazor.Components
         /// </summary>
         protected void OnSortDataChanged()
         {
+            if (Name == null)
+                return;
+
             Parent?.SortDataChanged(Name, SortDirection);
         }
     }
