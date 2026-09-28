@@ -16,6 +16,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Enumerations\**" />
+    <Content Remove="Enumerations\**" />
+    <EmbeddedResource Remove="Enumerations\**" />
+    <None Remove="Enumerations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<None Include="../README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
@@ -31,10 +38,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShineBlazor.Components.Base\ShineBlazor.Components.Base.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Enumerations\" />
   </ItemGroup>
 
 </Project>

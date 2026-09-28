@@ -17,7 +17,7 @@
     /// The child content.
     /// </summary>
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// Whether the button is disabled.
@@ -29,19 +29,19 @@
     /// The button size.
     /// </summary>
     [Parameter]
-    public BtnSize Size { get; set; }
+    public BtnSize Size { get; set; } = BtnSize.Default;
 
     /// <summary>
     /// The button type.
     /// </summary>
     [Parameter]
-    public BtnType ButtonType { get; set; }
+    public BtnType ButtonType { get; set; } = BtnType.Button;
 
     /// <summary>
     /// The button variant.
     /// </summary>
     [Parameter]
-    public BtnVariant Variant { get; set; }
+    public BtnVariant Variant { get; set; } = BtnVariant.Default;
 
     /// <summary>
     /// The button color. Default: Color.Primary.
