@@ -246,11 +246,11 @@ namespace ShineBlazor.Components.PropertyGrid
                     case ComponentControl.Text:
                         return new DynamicComponentInfo
                         {
-                            ComponentType = typeof(Text),
+                            ComponentType = typeof(TextField),
                             Parameters = new Dictionary<string, object>
                             {
-                                { nameof(Text.Content), _propertyValue?.ToString() },
-                                { nameof(Text.Typo), Typography.Span },
+                                { nameof(TextField.Text), _propertyValue?.ToString() },
+                                { nameof(TextField.Typo), Typography.Span },
                             }
                         };
                     case ComponentControl.Array:

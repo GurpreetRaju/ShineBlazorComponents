@@ -50,7 +50,7 @@
     /// BtnVariant. Default: Primary.
     /// </summary>
     [Parameter]
-    public Color Color { get; set; } = Color.Primary;
+    public Color Color { get; set; } = Color.Default;
 
     /// <inheritdoc/>
     protected virtual string GetItemCssClasses(TItem item) => CssClassBuilder.Create("list-group-item")

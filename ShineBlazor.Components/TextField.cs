@@ -7,7 +7,7 @@ namespace ShineBlazor.Components
     /// <summary>
     /// Text Typography.
     /// </summary>
-    public class Text : ShineComponentBase
+    public class TextField : ShineComponentBase
     {
         /// <summary>
         /// The typography.
@@ -19,37 +19,37 @@ namespace ShineBlazor.Components
         /// The child content.
         /// </summary>
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        public RenderFragment? ChildContent { get; set; }
 
         /// <summary>
         /// The text content.
         /// </summary>
         [Parameter]
-        public string Content { get; set; }
+        public string? Text { get; set; }
 
         /// <summary>
         /// The text alignment.
         /// </summary>
         [Parameter]
-        public Alignment Alignment { get; set; }
+        public Alignment? Alignment { get; set; }
 
         /// <summary>
         /// The viewport size.
         /// </summary>
         [Parameter]
-        public ViewportSize ViewportSize { get; set; }
+        public ViewportSize? ViewportSize { get; set; }
 
         /// <summary>
         /// The text wrap.
         /// </summary>
         [Parameter]
-        public TextWrap Wrap { get; set; }
+        public TextWrap? Wrap { get; set; }
 
         /// <summary>
         /// The text transform.
         /// </summary>
         [Parameter]
-        public TextTransform Transform { get; set; }
+        public TextTransform? Transform { get; set; }
 
         /// <inheritdoc/>
         protected override string ComponentName => "text";
@@ -73,8 +73,8 @@ namespace ShineBlazor.Components
             if (AdditionalAttributes?.Any() == true)
                 builder.AddMultipleAttributes(3, AdditionalAttributes);
 
-            if (Content != null)
-                builder.AddContent(4, Content);
+            if (Text != null)
+                builder.AddContent(4, Text);
 
             if (ChildContent != null)
                 builder.AddContent(5, ChildContent);

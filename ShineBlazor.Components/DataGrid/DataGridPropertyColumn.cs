@@ -7,13 +7,13 @@ namespace ShineBlazor.Components
     /// </summary>
     /// <typeparam name="TItem"></typeparam>
     /// <typeparam name="TValue"></typeparam>
-    public class DataGridPropertyColumn<TItem, TValue> : DataGridColumn<TItem, TValue> where TItem : class
+    public class DataGridPropertyColumn<TItem> : DataGridColumn<TItem, string> where TItem : class
     {
         /// <summary>
         /// The expression for data property.
         /// </summary>
         [Parameter]
-        public Func<TItem, TValue>? DataExpression { get; set; }
+        public Func<TItem, string>? DataExpression { get; set; }
 
         /// <inheritdoc/>
         protected internal override RenderFragment RenderCell(TItem item) => __builder =>
@@ -22,7 +22,7 @@ namespace ShineBlazor.Components
         };
 
         /// <inheritdoc/>
-        protected internal virtual TValue? GetCellValue(TItem item)
+        protected internal virtual string? GetCellValue(TItem item)
         {
             return DataExpression == null ? default : DataExpression(item);
         }
